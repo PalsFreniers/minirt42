@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dstring.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/01 04:50:00 by tdelage           #+#    #+#             */
+/*   Updated: 2024/08/01 05:57:06 by tdelage          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DSTRING_H
 # define DSTRING_H
 
@@ -8,9 +20,11 @@ typedef enum e_string_error
 {
 	STRING_MALLOC_ERROR,
 	STRING_NO_FREE_UNOWNED,
-        STRING_NO_MODIFY_UNOWNED,
+	STRING_NO_MODIFY_UNOWNED,
 	STRING_CORRUPTED,
 	STRING_EMPTY,
+	STRING_NEEDLE_TOO_LONG,
+	STRING_NEEDLE_NOT_FOUNDED,
 	STRING_SUCCESS,
 }					t_string_error;
 
@@ -43,5 +57,10 @@ void				string_push(struct s_string *self, char c);
 char				string_pop(struct s_string *self);
 void				string_push_front(struct s_string *self, char c);
 char				string_pop_front(struct s_string *self);
+struct s_string		*string_split(struct s_string hay, struct s_string needle,
+						size_t *count);
+size_t				string_search(struct s_string hay, struct s_string needle);
+void				string_trim(struct s_string *self, struct s_string chars);
+bool				string_contain(char c, struct s_string chars);
 
 #endif // DARRAY_H

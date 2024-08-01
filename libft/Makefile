@@ -55,14 +55,7 @@ SRC = ft_arena.c \
       ft_llist_pop.c \
       ft_llist_append.c \
       ft_llist_truncate.c \
-      ft_llist_get.c \
-      ft_re_compile.c \
-      ft_re_compile_p2.c \
-      ft_re_match.c \
-      ft_re_nc_match.c \
-      ft_match_p1.c \
-      ft_match_p2.c \
-      ft_match_utils.c
+      ft_llist_get.c
 MAIN = ft_free.c
 
 ##========== NAMES ==========##

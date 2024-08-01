@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dstring_new.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/01 04:49:45 by tdelage           #+#    #+#             */
+/*   Updated: 2024/08/01 04:50:08 by tdelage          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dstring.h"
 #include "dstring_utils.h"
 
@@ -28,6 +40,7 @@ struct s_string	string_new_with_capacity(size_t capa)
 {
 	char	*ptr;
 
+	string_error(true, STRING_SUCCESS);
 	ptr = ft_realloc(NULL, 0, capa);
 	if (!ptr)
 	{

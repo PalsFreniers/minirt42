@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dstring_charp_manip.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/01 04:50:04 by tdelage           #+#    #+#             */
+/*   Updated: 2024/08/01 04:56:29 by tdelage          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dstring.h"
 #include "dstring_utils.h"
 
@@ -22,7 +34,7 @@ void	string_append(struct s_string *self, struct s_string str)
 		string_error(true, STRING_NO_MODIFY_UNOWNED);
 		return ;
 	}
-	if (!string_check(*self))
+	if (!string_check(*self) || !string_check(str))
 		return ;
 	while (self->len + str.len > self->capacity && !string_grow(self))
 		;
@@ -39,7 +51,7 @@ void	string_insert(struct s_string *self, struct s_string str, size_t start)
 		string_error(true, STRING_NO_MODIFY_UNOWNED);
 		return ;
 	}
-	if (!string_check(*self))
+	if (!string_check(*self) || !string_check(str))
 		return ;
 	while (self->len + str.len > self->capacity && !string_grow(self))
 		;
@@ -49,4 +61,26 @@ void	string_insert(struct s_string *self, struct s_string str, size_t start)
 		- start);
 	ft_memmove(self->ptr + start, str.ptr, str.len);
 	self->len += str.len;
+}
+
+void	string_trim(struct s_string *self, struct s_string chars)
+{
+	char	*new_start;
+
+	if (self->unowned)
+	{
+		string_error(true, STRING_NO_MODIFY_UNOWNED);
+		return ;
+	}
+	if (!string_check(*self) || !string_check(chars))
+		return ;
+	new_start = calculate_trim(*self, chars);
+	if (new_start == self->ptr + self->len)
+	{
+		self->len = 0;
+		return ;
+	}
+	self->len -= new_start - self->ptr;
+	ft_memmove(self->ptr, new_start, self->len);
+	self->len = calculate_trim_len(*self, chars);
 }

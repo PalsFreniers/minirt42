@@ -3,6 +3,8 @@
 SRC = src/strings/dstring.c \
       src/strings/dstring_new.c \
       src/strings/dstring_char.c \
+      src/strings/dstring_split.c \
+      src/strings/dstring_trim_utils.c \
       src/strings/dstring_charp_manip.c
 MAIN = src/main.c
 

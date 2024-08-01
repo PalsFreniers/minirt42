@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dstring.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/01 04:49:57 by tdelage           #+#    #+#             */
+/*   Updated: 2024/08/01 04:49:57 by tdelage          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dstring.h"
 #include <stdlib.h>
 
@@ -40,6 +52,7 @@ void	string_destroy(struct s_string *s)
 
 bool	string_check(struct s_string self)
 {
+	string_error(true, STRING_SUCCESS);
 	if (!self.ptr || self.capacity == 0)
 	{
 		string_error(true, STRING_EMPTY);
