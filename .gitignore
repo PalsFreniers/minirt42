@@ -1,0 +1,5 @@
+.*.swp
+compile_commands.json
+minirt
+OBJ
+libft/OBJ

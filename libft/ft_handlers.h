@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:24:45 by tdelage           #+#    #+#             */
-/*   Updated: 2024/05/13 18:47:43 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/01 02:16:44 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ int	ft_printf_putptr(int fd, void *s, size_t *index);
 int	ft_printf_putint(int fd, int i, size_t *index);
 int	ft_printf_putuint(int fd, unsigned int i, size_t *index);
 int	ft_printf_puthex(int fd, unsigned int i, int up, size_t *index);
-int	ft_printf_putsv(int fd, struct s_string s, size_t *index);
 
 #endif // FT_HANDLERS_H

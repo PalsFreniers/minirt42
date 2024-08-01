@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 00:06:34 by tdelage           #+#    #+#             */
-/*   Updated: 2024/05/13 18:48:15 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/01 02:16:21 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ int	print_printf_specials_next(int fd, const char *fmt, va_list lst,
 		return (ft_printf_puthex(fd, (int)va_arg(lst, int), 0, index));
 	if (fmt[1] == 'X')
 		return (ft_printf_puthex(fd, (int)va_arg(lst, int), 1, index));
-	if (fmt[1] == 'S')
-		return (ft_printf_putsv(fd, (struct s_string)va_arg(lst,
-					struct s_string), index));
 	return (ft_putchar_fd(fmt[*index], fd));
 }
 
@@ -37,9 +34,6 @@ int	print_printf_specials(int fd, const char *fmt, va_list lst, size_t *index)
 		return (ft_printf_putchar(fd, (char)va_arg(lst, int), index));
 	if (fmt[1] == 's')
 		return (ft_printf_putstr(fd, (char *)va_arg(lst, char *), index));
-	if (fmt[1] == 'v')
-		return (ft_printf_putsv(fd, (struct s_string)va_arg(lst,
-					struct s_string), index));
 	if (fmt[1] == 'p')
 		return (ft_printf_putptr(fd, (void *)va_arg(lst, void *), index));
 	if (fmt[1] == 'd' || fmt[1] == 'i')

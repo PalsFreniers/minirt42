@@ -17,7 +17,6 @@ SRC = ft_arena.c \
       ft_memcpy.c \
       ft_printf_special_handlers_p2.c \
       ft_putstr_fd.c \
-      ft_string.c \
       ft_strlen.c \
       ft_strrchr.c \
       ft_toupper.c \
@@ -96,7 +95,7 @@ LD = ar
 
 ##========== FLAGS ==========##
 
-CFLAGS = -Wall -Wextra -Werror -fPIE -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fPIE
 LDFLAGS = $(LIBS) rcs 
 LIBS = 
 
@@ -131,6 +130,7 @@ fclean : clean
 re : fclean all
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
+ifndef NOPRINT
 	@sleep $(TIMER)
 	@clear
 	@echo "$(GREEN)Compiling $(NAME)$(BASE_COLOR)"
@@ -147,7 +147,12 @@ $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@echo "╚==============================================╝"
 	@$(eval INDEX=$(shell expr $(INDEX) + 1))
 	@echo "Compiling : $<"
+endif
 	@mkdir -p $(dir $@)
+ifdef NOPRINT
+	@$(CC) $(CFLAGS) -c $< -o $@
+else
 	$(CC) $(CFLAGS) -c $< -o $@
+endif
 
 .PHONY : all bonus clean fclean re

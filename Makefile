@@ -1,11 +1,10 @@
 ##========== SOURCES ==========##
 
-SRCS_DIR = ./src/
-
-SRCs = 
-MAINs = main.c
-SRC = $(addprefix $(SRC_DIR),$(SRCs))
-MAIN = $(addprefix $(OBJS_DIR),$(SRCs))
+SRC = src/strings/dstring.c \
+      src/strings/dstring_new.c \
+      src/strings/dstring_char.c \
+      src/strings/dstring_charp_manip.c
+MAIN = src/main.c
 
 ##========== NAMES ==========##
 
@@ -36,13 +35,14 @@ CC = cc
 
 ##========== LIBFT ==========##
 
-LIBFT = $(LIBFT_SRC)/libft.a
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
 
 ##========== FLAGS ==========##
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I $(LIBFT_DIR)
 LDFLAGS = $(LIBS) 
-LIBS = 
+LIBS = -L $(LIBFT_DIR) -lft
 
 ##========== MODES ==========##
 
@@ -65,16 +65,26 @@ $(NAME) : $(OBJS) $(LIBFT) $(MAIN_OBJ)
 	@$(CC) -o $(NAME) $(CFLAGS) $(MAIN_OBJ) $(OBJS) $(LDFLAGS)
 	@echo "$(GREEN)-= $(NAME) compiled =-$(BASE_COLOR)"
 
+$(LIBFT) :
+ifdef DEBUG
+	@make -C $(LIBFT_DIR) -j16 NOPRINT=1 DEBUG=1
+else
+	@make -C $(LIBFT_DIR) -j16 NOPRINT=1
+endif
+	@echo "$(GREEN)-= libft compiled =-$(BASE_COLOR)"
+
 clean :
+	@make -C $(LIBFT_DIR) clean
 	@rm -rf $(OBJS_DIR)
 
 fclean : clean
+	@make -C $(LIBFT_DIR) fclean
 	@rm -rf $(NAME)
 	@echo "$(CYAN)Files cleaned$(BASE_COLOR)"
 
 re : fclean all
 
-$(OBJS_DIR)%.o : $(SRCS_DIR)%.c
+$(OBJS_DIR)%.o : %.c
 	@sleep $(TIMER)
 	@clear
 	@echo "$(GREEN)Compiling $(NAME)$(BASE_COLOR)"

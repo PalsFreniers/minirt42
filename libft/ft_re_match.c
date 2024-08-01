@@ -6,19 +6,19 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:50:26 by tdelage           #+#    #+#             */
-/*   Updated: 2024/05/14 04:22:04 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/01 02:21:48 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_match.h"
 #include "ft_regex.h"
 
-struct s_string	match_string(int condition, char *ptr, size_t len)
+struct s_stringv	match_string(int condition, char *ptr, size_t len)
 {
 	if (condition)
-		return (ft_string_create(ptr, len));
+		return ((struct s_stringv){.ptr = ptr, .len = len});
 	else
-		return ((struct s_string){0});
+		return ((struct s_stringv){0});
 }
 
 void	inc_re_text(char **text, struct s_regex **re)
@@ -54,14 +54,14 @@ int	match_patern(struct s_regex *re, char *text, size_t *len)
 	return (0);
 }
 
-struct s_string	ft_re_match_exit(char *text, char *def, size_t len, int idx)
+struct s_stringv	ft_re_match_exit(char *text, char *def, size_t len, int idx)
 {
 	if (text[0] == 0)
-		return ((struct s_string){0});
-	return (ft_string_create(idx + def, len));
+		return ((struct s_stringv){0});
+	return ((struct s_stringv){.ptr = idx + def, .len = len});
 }
 
-struct s_string	ft_re_match(struct s_regex *re, char *text)
+struct s_stringv	ft_re_match(struct s_regex *re, char *text)
 {
 	size_t	len;
 	int		idx;
@@ -70,7 +70,7 @@ struct s_string	ft_re_match(struct s_regex *re, char *text)
 	def = text;
 	len = 0;
 	if (!re)
-		return ((struct s_string){0});
+		return ((struct s_stringv){0});
 	if (re[0].type == BEGIN)
 		return (match_string(match_patern(&re[1], text, &len), text, len));
 	idx = -1;
@@ -84,5 +84,5 @@ struct s_string	ft_re_match(struct s_regex *re, char *text)
 		else
 			len = 0;
 	}
-	return ((struct s_string){0});
+	return ((struct s_stringv){0});
 }

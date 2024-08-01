@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:57:08 by tdelage           #+#    #+#             */
-/*   Updated: 2024/05/13 20:18:54 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/01 01:11:49 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 
 # include "ft_types.h"
 # include <stddef.h>
-
-struct					s_string
-{
-	char				*ptr;
-	size_t				len;
-};
 
 struct					s_arena
 {

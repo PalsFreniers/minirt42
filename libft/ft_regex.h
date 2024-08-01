@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:28:27 by tdelage           #+#    #+#             */
-/*   Updated: 2024/05/14 02:17:50 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/01 02:19:02 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FT_REGEX_H
@@ -54,8 +54,14 @@ struct					s_regex
 	};
 };
 
+struct					s_stringv
+{
+	char				*ptr;
+	size_t				len;
+};
+
 struct s_regex			*ft_re_compile(const char *pattern);
-struct s_string			ft_re_match(struct s_regex *re, char *text);
-struct s_string			ft_re_nc_match(const char *pattern, char *text);
+struct s_stringv		ft_re_match(struct s_regex *re, char *text);
+struct s_stringv		ft_re_nc_match(const char *pattern, char *text);
 
 #endif // FT_REGEX_H

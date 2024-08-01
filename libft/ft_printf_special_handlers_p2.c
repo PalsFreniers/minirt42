@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:38:11 by tdelage           #+#    #+#             */
-/*   Updated: 2024/01/25 23:09:06 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/01 02:16:28 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,4 @@ int	ft_printf_putptr(int fd, void *s, size_t *index)
 		return (ft_putstr_fd("(nil)", fd));
 	ret = ft_putstr_fd("0x", fd);
 	return (ft_putunbr_fd((unsigned long long)s, fd, 16, 0) + ret);
-}
-
-int	ft_printf_putsv(int fd, struct s_string s, size_t *index)
-{
-	(*index)++;
-	if (!s.ptr)
-		return (ft_putstr_fd("(null)", fd));
-	return (write(fd, s.ptr, s.len));
 }
