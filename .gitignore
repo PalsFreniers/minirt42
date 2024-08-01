@@ -1,5 +1,8 @@
 .*.swp
+#*.o
+#*.a
 compile_commands.json
 minirt
 OBJ
 libft/OBJ
+mlx

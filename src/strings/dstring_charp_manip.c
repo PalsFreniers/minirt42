@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:04 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/01 04:56:29 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/01 19:35:53 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	string_append(struct s_string *self, struct s_string str)
 	}
 	if (!string_check(*self) || !string_check(str))
 		return ;
-	while (self->len + str.len > self->capacity && !string_grow(self))
+	while (self->len + str.len >= self->capacity && string_grow(self))
 		;
 	if (string_error(false, 0) != STRING_SUCCESS)
 		return ;
@@ -53,7 +53,7 @@ void	string_insert(struct s_string *self, struct s_string str, size_t start)
 	}
 	if (!string_check(*self) || !string_check(str))
 		return ;
-	while (self->len + str.len > self->capacity && !string_grow(self))
+	while (self->len + str.len > self->capacity && string_grow(self))
 		;
 	if (string_error(false, 0) != STRING_SUCCESS)
 		return ;

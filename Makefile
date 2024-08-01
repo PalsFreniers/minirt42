@@ -3,6 +3,11 @@
 SRC = src/strings/dstring.c \
       src/strings/dstring_new.c \
       src/strings/dstring_char.c \
+	  src/strings/dstring_conv1.c \
+	  src/strings/dstring_conv2.c \
+	  src/strings/dstring_conv3.c \
+	  src/strings/dstring_conv4.c \
+	  src/strings/dstring_conv5.c \
       src/strings/dstring_split.c \
       src/strings/dstring_trim_utils.c \
       src/strings/dstring_charp_manip.c
@@ -51,7 +56,7 @@ LIBS = -L $(LIBFT_DIR) -lft
 TIMER = 0.1
 
 ifdef DEBUG
-	CFLAGS += -g -fsanitize=thread #(address, memory, thread)
+	CFLAGS += -g -fsanitize=address #(address, memory, thread)
 	DEBUG_MODE = 1
 endif
 
