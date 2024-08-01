@@ -1,6 +1,6 @@
 .*.swp
-#*.o
-#*.a
+*.o
+*.a
 compile_commands.json
 minirt
 OBJ
