@@ -1,13 +1,14 @@
 ##========== SOURCES ==========##
 
-SRC = src/strings/dstring.c \
+SRC = src/files/fmap.c
+SRC += src/strings/dstring.c \
       src/strings/dstring_new.c \
       src/strings/dstring_char.c \
-	  src/strings/dstring_conv1.c \
-	  src/strings/dstring_conv2.c \
-	  src/strings/dstring_conv3.c \
-	  src/strings/dstring_conv4.c \
-	  src/strings/dstring_conv5.c \
+      src/strings/dstring_conv1.c \
+      src/strings/dstring_conv2.c \
+      src/strings/dstring_conv3.c \
+      src/strings/dstring_conv4.c \
+      src/strings/dstring_conv5.c \
       src/strings/dstring_split.c \
       src/strings/dstring_trim_utils.c \
       src/strings/dstring_charp_manip.c
@@ -45,11 +46,23 @@ CC = cc
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
+##========== MLX ==========##
+
+MLX_DIR = mlx
+MLX = $(MLX_DIR)/libmlx.a
+
+MLX_SRCS		=  $(wildcard $(addsuffix /*.cpp, ./mlx/src/core))
+MLX_SRCS		+= $(wildcard $(addsuffix /*.cpp, ./mlx/src/platform))
+MLX_SRCS		+= $(wildcard $(addsuffix /*.cpp, ./mlx/src/renderer))
+MLX_SRCS		+= $(wildcard $(addsuffix /*.cpp, ./mlx/src/renderer/**))
+MLX_OBJ_DIR		= $(MLX_DIR)/objs/makefile
+MLX_OBJS		= $(addprefix $(MLX_OBJ_DIR)/, $(SRCS:.cpp=.o))
+
 ##========== FLAGS ==========##
 
-CFLAGS = -Wall -Wextra -Werror -I $(LIBFT_DIR)
+CFLAGS = -Wall -Wextra -Werror -I $(LIBFT_DIR) -I ./src/
 LDFLAGS = $(LIBS) 
-LIBS = -L $(LIBFT_DIR) -lft
+LIBS = -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -lSDL2
 
 ##========== MODES ==========##
 
@@ -68,7 +81,7 @@ NUM_LINES_TO_CLEAR = 1
 
 all : $(CLEAR) $(NAME)
 
-$(NAME) : $(OBJS) $(LIBFT) $(MAIN_OBJ)
+$(NAME) : $(OBJS) $(LIBFT) $(MLX) $(MAIN_OBJ)
 	@$(CC) -o $(NAME) $(CFLAGS) $(MAIN_OBJ) $(OBJS) $(LDFLAGS)
 	@echo "$(GREEN)-= $(NAME) compiled =-$(BASE_COLOR)"
 
@@ -80,8 +93,18 @@ else
 endif
 	@echo "$(GREEN)-= libft compiled =-$(BASE_COLOR)"
 
+$(MLX_DIR):
+	@git clone https://github.com/seekrs/MacroLibX.git $(MLX_DIR)
+
+$(MLX) : $(MLX_DIR)
+	@make -C $(MLX_DIR) -j16
+	@rm -rf $(MLX_DIR)/libmlx.so
+	@ar rcs $(MLX) $(MLX_OBJS)
+	@echo "$(GREEN)-= libft compiled =-$(BASE_COLOR)"
+
 clean :
 	@make -C $(LIBFT_DIR) clean
+	@rm -rf $(MLX_DIR)
 	@rm -rf $(OBJS_DIR)
 
 fclean : clean

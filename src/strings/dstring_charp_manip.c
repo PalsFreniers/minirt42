@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:04 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/01 19:35:53 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/04 22:22:22 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,9 @@ void	string_trim(struct s_string *self, struct s_string chars)
 	self->len -= new_start - self->ptr;
 	ft_memmove(self->ptr, new_start, self->len);
 	self->len = calculate_trim_len(*self, chars);
+}
+
+struct s_string	string_zero(void)
+{
+	return ((struct s_string){0});
 }

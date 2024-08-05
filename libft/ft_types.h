@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 23:23:05 by tdelage           #+#    #+#             */
-/*   Updated: 2024/05/10 19:47:47 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/04 22:06:06 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef double				t_f64;
 typedef long double			t_f128;
 
 typedef t_u8				t_bool;
+
+typedef int					t_fd;
 
 typedef void				(*t_lstdel_f)(void *);
 

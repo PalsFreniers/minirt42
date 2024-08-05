@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:00 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/01 19:07:08 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/04 22:21:41 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ typedef enum e_string_error
 	STRING_EMPTY,
 	STRING_NEEDLE_TOO_LONG,
 	STRING_NEEDLE_NOT_FOUNDED,
-    STRING_SUBSTR_OUT_OF_BOUND,
-    STRING_CONVERSION_OVERFLOW,
-    STRING_NOT_CONVERTIBLE,
+	STRING_SUBSTR_OUT_OF_BOUND,
+	STRING_CONVERSION_OVERFLOW,
+	STRING_NOT_CONVERTIBLE,
 	STRING_SUCCESS,
 }					t_string_error;
 
@@ -42,6 +42,8 @@ typedef struct s_string
 	size_t			capacity;
 	bool			unowned;
 }					t_string;
+
+struct s_string		string_zero(void);
 
 struct s_string		string_new_from_cstr(char *s);
 struct s_string		string_new(char *s, size_t len);

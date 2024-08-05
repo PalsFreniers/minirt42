@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:49:57 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/01 04:49:57 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/04 22:46:43 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@ char	*ft_realloc(char *ptr, size_t last, size_t new)
 
 	ret = ft_calloc(new, sizeof(char));
 	if (!ret)
+	{
+		free(ptr);
 		return (NULL);
+	}
 	if (ptr)
 	{
-		while (--last > 0)
+		while (last > 0 && --last)
 			ret[last] = ptr[last];
 		ret[0] = ptr[0];
 		free(ptr);
