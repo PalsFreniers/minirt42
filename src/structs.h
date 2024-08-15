@@ -31,7 +31,7 @@ struct					s_camera
 {
 	struct s_vec3		position;
 	struct s_vec3		orientation;
-	int					fov;
+	float				fov;
 };
 
 enum					e_object_type
@@ -42,22 +42,24 @@ enum					e_object_type
 struct					s_object
 {
 	int					type;
+	struct s_vec3		position;
+	union u_color		color;
 };
 
 struct					s_light
 {
 	int					type;
 	struct s_vec3		position;
-	float				ratio;
 	union u_color		color;
+	float				ratio;
 };
 
 struct					s_sphere
 {
 	int					type;
 	struct s_vec3		position;
-	float				diameter;
 	union u_color		color;
+	float				diameter;
 };
 
 typedef struct s_scene

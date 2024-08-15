@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 23:23:50 by tdelage           #+#    #+#             */
-/*   Updated: 2024/05/08 21:22:26 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/15 08:27:11 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 #include <malloc.h>
 #include <stdarg.h>
 
-static void	ft_free_impl(char code, t_free_function f, const char *fmt, va_list ap)
+static void	ft_free_impl(char code, t_free_function f, const char *fmt,
+		va_list ap)
 {
-	int		i;
-	int		c;
+	int						i;
+	int						c;
+	static t_free_function	funcs[256] = {0};
 
-	static t_free_function funcs[256] = {0};
 	if (fmt == NULL)
 	{
 		funcs[(int)code] = f;
@@ -37,11 +38,11 @@ static void	ft_free_impl(char code, t_free_function f, const char *fmt, va_list 
 void	ft_free(const char *fmt, ...)
 {
 	va_list	ap;
+
 	va_start(ap, fmt);
-        ft_free_impl(0, NULL, fmt, ap);
+	ft_free_impl(0, NULL, fmt, ap);
 	va_end(ap);
 }
-
 
 void	ft_free_register(char c, t_free_function f)
 {

@@ -6,43 +6,20 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/05 01:25:48 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/08/15 13:12:33 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <files/files.h>
 #include <libft.h>
+#include <logger/logger.h>
+#include <parsing/obey.h>
+#include <parsing/parse.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings/dstring.h>
 #include <structs.h>
-
-bool	float_obey(char c)
-{
-	return (ft_isdigit(c) || c == '.');
-}
-
-bool	parse_ambient_light(struct s_string *parts, size_t count,
-		struct s_ambient *light)
-{
-	if (count != 3)
-	{
-		printf("[ERROR] => unable to parse ambient light\n");
-		ft_free("p", parts);
-		return (false);
-	}
-	if (!string_obey(parts[1], float_obey) || string_count_of(parts[1],
-			'.') > 1)
-	{
-		printf("[ERROR] => unable to parse ambient light brightness ratio\n");
-		ft_free("p", parts);
-		return (false);
-	}
-	light->ratio = string_to_float(parts[1]);
-	ft_free("p", parts);
-	return (true);
-}
 
 bool	parse_line(struct s_string line, struct s_scene *scene)
 {
@@ -50,11 +27,18 @@ bool	parse_line(struct s_string line, struct s_scene *scene)
 	struct s_string	*parts;
 
 	parts = string_split(line, string_new_u_from_cstr(" "), &count);
-	if (string_error(false, 0) != STRING_SUCCESS)
+	if (string_error(false, 0) != STRING_SUCCESS || count <= 0)
+	{
+		logger_error("malloc error");
 		return (false);
+	}
 	if (string_equal(parts[0], string_new_u_from_cstr("A")))
 		return (parse_ambient_light(parts, count, &(scene->ambient)));
-	return (true);
+	if (string_equal(parts[0], string_new_u_from_cstr("C")))
+		return (parse_camera(parts, count, &(scene->camera)));
+	logger_error("unable to find object type");
+	ft_free("p", parts);
+	return (false);
 }
 
 bool	get_file(struct s_string *file, const char *arg)
@@ -73,9 +57,16 @@ void	print_scene(struct s_scene scene)
 {
 	printf("struct scene => {\n");
 	printf("\tambient light => {\n");
-	printf("\t\tbritness => %.10f;\n", scene.ambient.ratio);
+	printf("\t\tbritness => %f;\n", scene.ambient.ratio);
 	printf("\t\tcolor => 0x%x {%d, %d, %d};\n", scene.ambient.color.rgb,
 		scene.ambient.color.r, scene.ambient.color.g, scene.ambient.color.b);
+	printf("\t}\n");
+	printf("\tcamera => {\n");
+	printf("\t\tfov => %f;\n", scene.camera.fov);
+	printf("\t\tposition => {%f, %f, %f};\n", scene.camera.position.x,
+		scene.camera.position.y, scene.camera.position.z);
+	printf("\t\torientation => {%f, %f, %f};\n", scene.camera.orientation.x,
+		scene.camera.orientation.y, scene.camera.orientation.z);
 	printf("\t}\n");
 	printf("}\n");
 }
