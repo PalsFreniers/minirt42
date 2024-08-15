@@ -1,19 +1,29 @@
 ##========== SOURCES ==========##
 
-SRC = src/files/fmap.c
+SRC =  src/files/fmap.c
+SRC += src/logger/logger.c \
+       src/logger/logger_v.c \
+       src/logger/logger_impl.c
+SRC += src/parsing/obey.c \
+       src/parsing/parse_color.c \
+       src/parsing/parse_range.c \
+       src/parsing/parse_camera.c \
+       src/parsing/parse_position.c \
+       src/parsing/parse_ranged_vector.c \
+       src/parsing/parse_ambient_light.c
 SRC += src/strings/dstring.c \
-      src/strings/dstring_new.c \
-      src/strings/dstring_char.c \
-      src/strings/dstring_conv1.c \
-      src/strings/dstring_conv2.c \
-      src/strings/dstring_conv3.c \
-      src/strings/dstring_conv4.c \
-      src/strings/dstring_conv5.c \
-      src/strings/dstring_conv6.c \
-      src/strings/dstring_split.c \
-	  src/strings/dstring_equals.c \
-      src/strings/dstring_trim_utils.c \
-      src/strings/dstring_charp_manip.c
+       src/strings/dstring_new.c \
+       src/strings/dstring_char.c \
+       src/strings/dstring_conv1.c \
+       src/strings/dstring_conv2.c \
+       src/strings/dstring_conv3.c \
+       src/strings/dstring_conv4.c \
+       src/strings/dstring_conv5.c \
+       src/strings/dstring_conv6.c \
+       src/strings/dstring_split.c \
+	   src/strings/dstring_equals.c \
+       src/strings/dstring_trim_utils.c \
+       src/strings/dstring_charp_manip.c
 MAIN = src/main.c
 
 ##========== NAMES ==========##
