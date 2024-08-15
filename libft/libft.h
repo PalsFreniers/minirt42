@@ -14,7 +14,6 @@
 # define LIBFT_H
 
 # include "ft_iodef.h"
-# include "ft_printf.h"
 # include "ft_structs.h"
 # include "ft_types.h"
 # include <stddef.h>
@@ -48,6 +47,7 @@ struct s_complex	ft_complex_div(struct s_complex a, struct s_complex b);
 // ft_memory
 void				*ft_calloc(size_t nmemb, size_t size);
 void				ft_free(const char *free_pattern, ...);
+void				ft_free_register(char c, t_free_function f);
 void				*ft_memset(void *s, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);

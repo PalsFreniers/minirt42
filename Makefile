@@ -9,7 +9,9 @@ SRC += src/strings/dstring.c \
       src/strings/dstring_conv3.c \
       src/strings/dstring_conv4.c \
       src/strings/dstring_conv5.c \
+      src/strings/dstring_conv6.c \
       src/strings/dstring_split.c \
+	  src/strings/dstring_equals.c \
       src/strings/dstring_trim_utils.c \
       src/strings/dstring_charp_manip.c
 MAIN = src/main.c
@@ -62,7 +64,7 @@ MLX_OBJS		= $(addprefix $(MLX_OBJ_DIR)/, $(SRCS:.cpp=.o))
 
 CFLAGS = -Wall -Wextra -Werror -I $(LIBFT_DIR) -I ./src/
 LDFLAGS = $(LIBS) 
-LIBS = -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -lSDL2
+LIBS = -lm -L $(LIBFT_DIR) -lft #-L $(MLX_DIR) -lmlx -lSDL2
 
 ##========== MODES ==========##
 
@@ -81,7 +83,7 @@ NUM_LINES_TO_CLEAR = 1
 
 all : $(CLEAR) $(NAME)
 
-$(NAME) : $(OBJS) $(LIBFT) $(MLX) $(MAIN_OBJ)
+$(NAME) : $(OBJS) $(LIBFT) $(MAIN_OBJ) #$(MLX)
 	@$(CC) -o $(NAME) $(CFLAGS) $(MAIN_OBJ) $(OBJS) $(LDFLAGS)
 	@echo "$(GREEN)-= $(NAME) compiled =-$(BASE_COLOR)"
 

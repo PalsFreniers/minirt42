@@ -7,14 +7,14 @@ int64_t	string_to_sqword(struct s_string self)
 	bool		negative;
 	uint64_t	ret;
 
-	if (!string_check(self))
+if (!string_check(self))
 		return (0);
 	off = string_conv_trimspaces(self);
 	negative = string_is_negative(self, &off);
 	ret = string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off), 0);
 	if (string_error(false, 0) == STRING_CONVERSION_OVERFLOW)
 		return (ret);
-	if (ret > MAX_I64 + negative)
+	if (ret > (size_t)MAX_I64 + negative)
 	{
 		string_error(true, STRING_CONVERSION_OVERFLOW);
 		return (ret);

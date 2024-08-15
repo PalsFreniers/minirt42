@@ -7,7 +7,7 @@ static struct s_string	fmap_free_all(struct s_string *str, t_fd f)
 	return (string_zero());
 }
 
-struct s_string	fmap(char *path)
+struct s_string	fmap(const char *path)
 {
 	t_fd			f;
 	char			buf[FMAP_BUF_SIZE + 1];

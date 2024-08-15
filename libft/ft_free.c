@@ -12,22 +12,38 @@
 
 #include "libft.h"
 #include <malloc.h>
+#include <stdarg.h>
 
-void	ft_free(const char *free_pattern, ...)
+static void	ft_free_impl(char code, t_free_function f, const char *fmt, va_list ap)
 {
 	int		i;
-	char	c;
-	va_list	ap;
+	int		c;
 
-	i = -1;
-	va_start(ap, free_pattern);
-	while (free_pattern[++i])
+	static t_free_function funcs[256] = {0};
+	if (fmt == NULL)
 	{
-		c = free_pattern[i];
-		if (c == 'p')
-			free(va_arg(ap, void *));
-		else if (c == 'a')
-			ft_arena_destroy(va_arg(ap, struct s_arena *));
+		funcs[(int)code] = f;
+		return ;
 	}
+	i = -1;
+	while (fmt[++i])
+	{
+		c = fmt[i];
+		if (funcs[c] != NULL)
+			funcs[c](va_arg(ap, void *));
+	}
+}
+
+void	ft_free(const char *fmt, ...)
+{
+	va_list	ap;
+	va_start(ap, fmt);
+        ft_free_impl(0, NULL, fmt, ap);
 	va_end(ap);
+}
+
+
+void	ft_free_register(char c, t_free_function f)
+{
+	ft_free_impl(c, f, NULL, NULL);
 }

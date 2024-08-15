@@ -62,5 +62,6 @@ typedef t_u8				t_bool;
 typedef int					t_fd;
 
 typedef void				(*t_lstdel_f)(void *);
+typedef void				(*t_free_function)(void *);
 
 #endif // TYPES_H

@@ -51,7 +51,7 @@ int32_t	string_to_sdword(struct s_string self)
 			MAX_U32 + 1);
 	if (string_error(false, 0) == STRING_CONVERSION_OVERFLOW)
 		return (ret);
-	if (ret > MAX_I16 + negative)
+	if (ret > (size_t)MAX_I32 + negative)
 	{
 		string_error(true, STRING_CONVERSION_OVERFLOW);
 		return (ret);
