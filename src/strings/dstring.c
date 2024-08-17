@@ -22,26 +22,6 @@ enum e_string_error	string_error(bool set, enum e_string_error value)
 	return (string_error);
 }
 
-char	*ft_realloc(char *ptr, size_t last, size_t new)
-{
-	char	*ret;
-
-	ret = ft_calloc(new, sizeof(char));
-	if (!ret)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	if (ptr)
-	{
-		while (last > 0 && --last)
-			ret[last] = ptr[last];
-		ret[0] = ptr[0];
-		free(ptr);
-	}
-	return (ret);
-}
-
 void	string_destroy(struct s_string *s)
 {
 	if (s->unowned)

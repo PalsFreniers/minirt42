@@ -35,6 +35,7 @@ SRC = ft_arena.c \
       ft_memset.c \
       ft_putchar_fd.c \
       ft_split.c \
+      ft_realloc.c \
       ft_strjoin.c \
       ft_strncmp.c \
       ft_strtrim.c \

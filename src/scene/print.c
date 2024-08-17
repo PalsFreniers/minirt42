@@ -1,20 +1,34 @@
-#include <stdio.h>
+#include <object/objects.h>
 #include <scene/scene.h>
+#include <stdio.h>
+
+static void	print_objects(struct s_scene scene)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < scene.len)
+	{
+		if (scene.objects[i]->type == OBJ_LIGHT)
+			print_light((void *)scene.objects[i]);
+		i++;
+	}
+}
 
 void	print_scene(struct s_scene scene)
 {
 	printf("struct scene => {\n");
 	printf("\tambient light => {\n");
-	printf("\t\tbritness => %f;\n", scene.ambient.ratio);
-	printf("\t\tcolor => 0x%x {%d, %d, %d};\n", scene.ambient.color.rgb,
-		scene.ambient.color.r, scene.ambient.color.g, scene.ambient.color.b);
+	print_float("\t\t", "brigtness", scene.ambient.ratio);
+	print_color("\t\t", scene.ambient.color);
 	printf("\t}\n");
 	printf("\tcamera => {\n");
-	printf("\t\tfov => %f;\n", scene.camera.fov);
-	printf("\t\tposition => {%f, %f, %f};\n", scene.camera.position.x,
-		scene.camera.position.y, scene.camera.position.z);
-	printf("\t\torientation => {%f, %f, %f};\n", scene.camera.orientation.x,
-		scene.camera.orientation.y, scene.camera.orientation.z);
+	print_float("\t\t", "fov", scene.camera.fov);
+	print_vec3("\t\t", "orientation", scene.camera.orientation);
+	print_vec3("\t\t", "position", scene.camera.position);
 	printf("\t}\n");
+	printf("\tobjects => [\n");
+	print_objects(scene);
+	printf("\t]\n");
 	printf("}\n");
 }

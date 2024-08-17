@@ -24,11 +24,14 @@ typedef struct s_scene
 {
 	struct s_ambient	ambient;
 	struct s_camera		camera;
-	struct s_objects	**objects;
+	struct s_object	**objects;
 	size_t				capacity;
 	size_t				len;
 }						t_scene;
 
 void					print_scene(struct s_scene scene);
+bool					scene_append(struct s_scene *scene,
+							struct s_object *obj);
+void	free_scene(struct s_scene *scene);
 
 #endif // SCENE_H

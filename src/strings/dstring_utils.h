@@ -15,7 +15,6 @@
 
 # include "dstring.h"
 
-char		*ft_realloc(char *ptr, size_t last, size_t new);
 bool		string_check(struct s_string self);
 bool		string_grow(struct s_string *self);
 char		*calculate_trim(struct s_string self, struct s_string chars);

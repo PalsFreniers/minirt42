@@ -1,15 +1,21 @@
 ##========== SOURCES ==========##
 
 SRC =  src/files/fmap.c
-SRC += src/scene/print.c
+SRC += src/scene/free.c \
+       src/scene/print.c \
+       src/scene/append.c 
 SRC += src/logger/logger.c \
        src/logger/logger_v.c \
        src/logger/logger_impl.c
+SRC += src/object/print.c \
+       src/object/object.c \
+       src/object/print_light.c
 SRC += src/parsing/obey.c \
        src/parsing/parse_color.c \
        src/parsing/parse_range.c \
        src/parsing/parse_file.c \
        src/parsing/parse_line.c \
+       src/parsing/parse_light.c \
        src/parsing/parse_camera.c \
        src/parsing/parse_position.c \
        src/parsing/parse_ranged_vector.c \
@@ -133,7 +139,7 @@ $(OBJS_DIR)%.o : %.c
 	@sleep $(TIMER)
 	@clear
 	@echo "$(GREEN)Compiling $(NAME)$(BASE_COLOR)"
-	@echo "╔==============================================╗"
+	@echo "╔══════════════════════════════════════════════╗"
 	@echo -n "║$(GREEN)"
 	@echo -n "▓"
 	@for i in $$(seq 1 $$(expr $(INDEX) \* 45 / $(NUM_SRC))); do \
@@ -143,7 +149,7 @@ $(OBJS_DIR)%.o : %.c
 		echo -n " "; \
 		done
 	@echo "$(BASE_COLOR)║"
-	@echo "╚==============================================╝"
+	@echo "╚══════════════════════════════════════════════╝"
 	@$(eval INDEX=$(shell expr $(INDEX) + 1))
 	@echo "Compiling : $<"
 	@mkdir -p $(dir $@)

@@ -32,7 +32,11 @@ int	main(int c, char **args)
 		return (1);
 	}
 	if (!parse_file(args[1], &scene, args[0]))
+	{
+		free_scene(&scene);
 		return (1);
+	}
 	print_scene(scene);
+	free_scene(&scene);
 	return (0);
 }

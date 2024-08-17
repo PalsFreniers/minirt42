@@ -4,6 +4,7 @@
 #include <files/files.h>
 #include <logger/logger.h>
 #include <parsing/parse.h>
+#include <stdlib.h>
 
 static bool	parse_file_error_split(struct s_string *file)
 {
@@ -31,6 +32,7 @@ bool	parse_file(const char *path, struct s_scene *scene, const char *prog)
 	struct s_string	*lines;
 	bool			ret;
 
+	count = 0;
 	ret = true;
 	ft_bzero(scene, sizeof(struct s_scene));
 	if (!ft_strsufix((char *)path, ".rt"))
