@@ -8,6 +8,6 @@
 
 # define FMAP_BUF_SIZE 200
 
-struct s_string	fmap(const char *path);
+bool			get_file(struct s_string *file, const char *arg);
 
 #endif // FILES_H

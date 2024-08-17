@@ -1,5 +1,5 @@
+#include <parsing/obey.h>
 #include <libft.h>
-#include "obey.h"
 
 bool	float_obey(char c)
 {

@@ -9,7 +9,8 @@ static bool	get_byte(struct s_string byte, uint8_t *byt, struct s_string *parts)
 	if (string_error(false, 0) != STRING_SUCCESS)
 	{
 		logger_error("byte values should be in range 0-255");
-		logger_info("byte value is currently: %d (0x%x)", *byt, *byt);
+		logger_info("byte value is currently: %d (0x%x) with overflow", *byt,
+			*byt);
 		ft_free("p", parts);
 		return (false);
 	}
@@ -27,7 +28,6 @@ bool	parse_color(struct s_string rgb, union u_color *color)
 	if (!string_obey(rgb, color_obey) || count != 3)
 	{
 		logger_error("unable to parse color");
-		ft_free("p", parts);
 		return (false);
 	}
 	color->rgb = 0;

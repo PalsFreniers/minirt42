@@ -1,12 +1,15 @@
 ##========== SOURCES ==========##
 
 SRC =  src/files/fmap.c
+SRC += src/scene/print.c
 SRC += src/logger/logger.c \
        src/logger/logger_v.c \
        src/logger/logger_impl.c
 SRC += src/parsing/obey.c \
        src/parsing/parse_color.c \
        src/parsing/parse_range.c \
+       src/parsing/parse_file.c \
+       src/parsing/parse_line.c \
        src/parsing/parse_camera.c \
        src/parsing/parse_position.c \
        src/parsing/parse_ranged_vector.c \
@@ -21,7 +24,7 @@ SRC += src/strings/dstring.c \
        src/strings/dstring_conv5.c \
        src/strings/dstring_conv6.c \
        src/strings/dstring_split.c \
-	   src/strings/dstring_equals.c \
+       src/strings/dstring_equals.c \
        src/strings/dstring_trim_utils.c \
        src/strings/dstring_charp_manip.c
 MAIN = src/main.c

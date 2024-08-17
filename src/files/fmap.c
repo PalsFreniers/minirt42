@@ -1,4 +1,5 @@
-#include "files.h"
+#include <files/files.h>
+#include <logger/logger.h>
 
 static struct s_string	fmap_free_all(struct s_string *str, t_fd f)
 {
@@ -7,7 +8,7 @@ static struct s_string	fmap_free_all(struct s_string *str, t_fd f)
 	return (string_zero());
 }
 
-struct s_string	fmap(const char *path)
+static struct s_string	fmap(const char *path)
 {
 	t_fd			f;
 	char			buf[FMAP_BUF_SIZE + 1];
@@ -31,4 +32,16 @@ struct s_string	fmap(const char *path)
 	}
 	close(f);
 	return (ret);
+}
+
+bool	get_file(struct s_string *file, const char *arg)
+{
+	*file = fmap(arg);
+	if (file->ptr == NULL || string_error(false, 0) != STRING_SUCCESS)
+	{
+		logger_error("unable to access file %s", arg);
+		ft_free("s", file);
+		return (false);
+	}
+	return (true);
 }
