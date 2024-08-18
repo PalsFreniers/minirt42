@@ -9,13 +9,16 @@ SRC += src/logger/logger.c \
        src/logger/logger_impl.c
 SRC += src/object/print.c \
        src/object/object.c \
-       src/object/print_light.c
+       src/object/print_light.c \
+       src/object/print_sphere.c
 SRC += src/parsing/obey.c \
-       src/parsing/parse_color.c \
-       src/parsing/parse_range.c \
        src/parsing/parse_file.c \
        src/parsing/parse_line.c \
+       src/parsing/parse_color.c \
+       src/parsing/parse_range.c \
        src/parsing/parse_light.c \
+       src/parsing/parse_float.c \
+       src/parsing/parse_sphere.c \
        src/parsing/parse_camera.c \
        src/parsing/parse_position.c \
        src/parsing/parse_ranged_vector.c \

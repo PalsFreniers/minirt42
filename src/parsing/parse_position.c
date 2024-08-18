@@ -5,16 +5,8 @@
 static bool	get_float(struct s_string sratio, float *ratio,
 		struct s_string *parts)
 {
-	if (!string_obey(sratio, float_obey) || string_count_of(sratio, '.') > 1)
+	if (!parse_float(sratio, ratio))
 	{
-		logger_error("unable to parse floating point number");
-		ft_free("p", parts);
-		return (false);
-	}
-	*ratio = string_to_float(sratio);
-	if (string_error(true, 0) != SUCCESS)
-	{
-		logger_error("unable to parse floating point number");
 		ft_free("p", parts);
 		return (false);
 	}

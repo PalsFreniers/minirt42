@@ -11,6 +11,8 @@ static bool	parse_line_impl(struct s_string *parts, size_t count,
 		return (parse_camera(parts, count, &(scene->camera)));
 	if (string_equal(parts[0], string_new_u_from_cstr("L")))
 		return (parse_light(parts, count, scene));
+	if (string_equal(parts[0], string_new_u_from_cstr("sp")))
+		return (parse_sphere(parts, count, scene));
 	logger_error("unable to find object");
 	return (false);
 }

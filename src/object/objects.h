@@ -25,6 +25,7 @@ typedef union u_color
 enum				e_object_type
 {
 	OBJ_LIGHT,
+	OBJ_SPHERE,
 };
 
 struct				s_object
@@ -51,5 +52,6 @@ void				print_vec3(char *tabs, char *name, struct s_vec3 vec);
 void				print_color(char *tabs, union u_color c);
 void				print_float(char *tabs, char *name, float value);
 void				print_light(struct s_light *light);
+void				print_sphere(struct s_sphere *sphere);
 
 #endif // OBJECTS_H

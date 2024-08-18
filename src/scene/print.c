@@ -11,6 +11,8 @@ static void	print_objects(struct s_scene scene)
 	{
 		if (scene.objects[i]->type == OBJ_LIGHT)
 			print_light((void *)scene.objects[i]);
+		if (scene.objects[i]->type == OBJ_SPHERE)
+			print_sphere((void *)scene.objects[i]);
 		i++;
 	}
 }
