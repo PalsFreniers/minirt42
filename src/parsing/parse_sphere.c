@@ -9,7 +9,7 @@ bool	parse_sphere(struct s_string *parts, size_t count,
 
 	if (count != 4)
 	{
-		logger_error("unable to parse light");
+		logger_error("unable to parse sphere");
 		return (false);
 	}
 	sphere = (void *)object_new(sizeof(struct s_sphere), OBJ_SPHERE);

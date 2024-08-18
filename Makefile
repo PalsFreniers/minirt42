@@ -10,7 +10,9 @@ SRC += src/logger/logger.c \
 SRC += src/object/print.c \
        src/object/object.c \
        src/object/print_light.c \
-       src/object/print_sphere.c
+       src/object/print_plane.c \
+       src/object/print_sphere.c \
+       src/object/print_cylinder.c
 SRC += src/parsing/obey.c \
        src/parsing/parse_file.c \
        src/parsing/parse_line.c \
@@ -18,8 +20,10 @@ SRC += src/parsing/obey.c \
        src/parsing/parse_range.c \
        src/parsing/parse_light.c \
        src/parsing/parse_float.c \
+       src/parsing/parse_plane.c \
        src/parsing/parse_sphere.c \
        src/parsing/parse_camera.c \
+       src/parsing/parse_cylinder.c \
        src/parsing/parse_position.c \
        src/parsing/parse_ranged_vector.c \
        src/parsing/parse_ambient_light.c

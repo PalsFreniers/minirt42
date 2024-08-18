@@ -20,5 +20,9 @@ bool	parse_light(struct s_string *parts, size_t count,
 			struct s_scene *scene);
 bool	parse_sphere(struct s_string *parts, size_t count,
 			struct s_scene *scene);
+bool	parse_plane(struct s_string *parts, size_t count,
+			struct s_scene *scene);
+bool	parse_cylinder(struct s_string *parts, size_t count,
+			struct s_scene *scene);
 
 #endif // PARSE_H
