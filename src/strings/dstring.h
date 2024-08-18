@@ -104,7 +104,7 @@ struct s_string		string_from_udword(uint32_t value);
 struct s_string		string_from_sqword(int64_t value);
 struct s_string		string_from_uqword(uint64_t value);
 struct s_string		string_from_bool(bool value);
-// struct s_string		string_from_float(float value);
+struct s_string		string_from_float(float value, int a_dot);
 // struct s_string		string_from_double(double value);
 // struct s_string		string_from_long_double(long double value);
 

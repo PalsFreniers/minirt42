@@ -25,6 +25,8 @@ void	logger_log(enum e_logger_level lvl, const char *fmt, ...)
 
 void	logger_log_v(enum e_logger_level lvl, const char *fmt, va_list ap)
 {
+	if (lvl == LOG_ERROR)
+		printf("Error\n");
 	printf("%s", logger_preamble(lvl));
 	printf(fmt, *ap);
 	printf("\n");

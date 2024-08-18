@@ -36,6 +36,7 @@ SRC += src/strings/dstring.c \
        src/strings/dstring_conv4.c \
        src/strings/dstring_conv5.c \
        src/strings/dstring_conv6.c \
+       src/strings/dstring_conv7.c \
        src/strings/dstring_split.c \
        src/strings/dstring_equals.c \
        src/strings/dstring_trim_utils.c \

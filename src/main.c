@@ -20,7 +20,7 @@
 #include <stdlib.h>
 #include <strings/dstring.h>
 
-int	main(int c, char **args)
+int	main0(int c, char **args)
 {
 	struct s_scene	scene;
 
@@ -38,5 +38,17 @@ int	main(int c, char **args)
 	}
 	print_scene(scene);
 	free_scene(&scene);
+	return (0);
+}
+
+int	main(void)
+{
+	struct s_string	ret;
+
+	ret = string_from_float(12.5, 4);
+	if (string_error(false, 0) != STRING_SUCCESS)
+		return (1);
+	printf("%.*s\n", (int)ret.len, ret.ptr);
+	string_destroy(&ret);
 	return (0);
 }

@@ -1,5 +1,4 @@
 #include "dstring.h"
-#include "dstring_utils.h"
 
 struct s_string	string_from_sbyte(int8_t value)
 {
