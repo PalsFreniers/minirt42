@@ -29,7 +29,7 @@ typedef struct s_scene
 	size_t				len;
 }						t_scene;
 
-void					print_scene(struct s_scene scene);
+void					print_scene(struct s_scene *scene);
 bool					scene_append(struct s_scene *scene,
 							struct s_object *obj);
 void	free_scene(struct s_scene *scene);

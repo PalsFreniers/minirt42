@@ -41,6 +41,7 @@ SRC += src/strings/dstring.c \
        src/strings/dstring_equals.c \
        src/strings/dstring_trim_utils.c \
        src/strings/dstring_charp_manip.c
+SRC += src/ui/button.c
 MAIN = src/main.c
 
 ##========== NAMES ==========##
@@ -77,21 +78,14 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 ##========== MLX ==========##
 
-MLX_DIR = mlx
-MLX = $(MLX_DIR)/libmlx.a
-
-MLX_SRCS		=  $(wildcard $(addsuffix /*.cpp, ./mlx/src/core))
-MLX_SRCS		+= $(wildcard $(addsuffix /*.cpp, ./mlx/src/platform))
-MLX_SRCS		+= $(wildcard $(addsuffix /*.cpp, ./mlx/src/renderer))
-MLX_SRCS		+= $(wildcard $(addsuffix /*.cpp, ./mlx/src/renderer/**))
-MLX_OBJ_DIR		= $(MLX_DIR)/objs/makefile
-MLX_OBJS		= $(addprefix $(MLX_OBJ_DIR)/, $(SRCS:.cpp=.o))
+MLX_DIR = ./mlx
+MLX = $(MLX_DIR)/libmlx.so
 
 ##========== FLAGS ==========##
 
-CFLAGS = -Wall -Wextra -Werror -I $(LIBFT_DIR) -I ./src/
-LDFLAGS = $(LIBS) 
-LIBS = -lm -L $(LIBFT_DIR) -lft #-L $(MLX_DIR) -lmlx -lSDL2
+CFLAGS = -Wall -Wextra -Werror -I $(LIBFT_DIR) -I ./src/ -I $(MLX_DIR)/includes
+LDFLAGS = -Wl,-rpath=$(MLX_DIR) $(LIBS) 
+LIBS = -lm -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -lSDL2
 
 ##========== MODES ==========##
 
@@ -110,8 +104,9 @@ NUM_LINES_TO_CLEAR = 1
 
 all : $(CLEAR) $(NAME)
 
-$(NAME) : $(OBJS) $(LIBFT) $(MAIN_OBJ) #$(MLX)
-	@$(CC) -o $(NAME) $(CFLAGS) $(MAIN_OBJ) $(OBJS) $(LDFLAGS)
+$(NAME) : $(MLX) $(OBJS) $(LIBFT) $(MAIN_OBJ)
+	@echo -n " + "
+	$(CC) -o $(NAME) $(CFLAGS) $(MAIN_OBJ) $(OBJS) $(LDFLAGS)
 	@echo "$(GREEN)-= $(NAME) compiled =-$(BASE_COLOR)"
 
 $(LIBFT) :
@@ -127,9 +122,7 @@ $(MLX_DIR):
 
 $(MLX) : $(MLX_DIR)
 	@make -C $(MLX_DIR) -j16
-	@rm -rf $(MLX_DIR)/libmlx.so
-	@ar rcs $(MLX) $(MLX_OBJS)
-	@echo "$(GREEN)-= libft compiled =-$(BASE_COLOR)"
+	@echo "$(GREEN)-= mlx compiled =-$(BASE_COLOR)"
 
 clean :
 	@make -C $(LIBFT_DIR) clean
