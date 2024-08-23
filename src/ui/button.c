@@ -1,8 +1,10 @@
-#include <mlx.h>
+#include <libft.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <ui/buttons.h>
+#include <ui/vline.h>
 #include <ui/window.h>
+#include <mlx/mmlx.h>
 
 static bool	collide(int a[4], int b[4])
 {
@@ -30,7 +32,7 @@ void	button_update(void *mlx, struct s_button *b)
 	rect[1] = b->y;
 	rect[2] = b->width;
 	rect[3] = b->height;
-	if (collide((int[4]){x, y, 2, 2}, rect))
+	if (collide((int [4]){x, y, 2, 2}, rect))
 	{
 		b->is_clicked = true;
 		b->on_click(b->data);
@@ -42,32 +44,18 @@ void	button_unclick(struct s_button *b)
 	b->is_clicked = false;
 }
 
-void	button_draw(void *mlx, void *win, struct s_button *b)
+void	button_draw(struct s_mlx *mlx, struct s_button *b)
 {
 	int	x;
 	int	y;
 
-	x = 0;
-	y = 0;
-	while (y < b->height)
-	{
-		if (y + b->y < 0 || y + b->y >= WIN_HEIGHT)
-		{
-			y++;
-			continue ;
-		}
-// 		x = 0;
-		while (x < b->width)
-		{
-			if (x + b->x < 0 || x + b->x >= WIN_WIDTH)
-			{
-				x++;
-				continue ;
-			}
-			mlx_pixel_put(mlx, win, x + b->x, y + b->y, b->color);
-			x++;
-		}
-		y++;
-	}
-	mlx_string_put(mlx, win, b->x + 5, b->y + 5, b->tcolor, b->text);
+	x = b->x + b->width / 2 - ((ft_strlen(b->text) * PPC) / 2);
+	y = b->y + b->height / 2 - (PPC / 2) + PPC - 2;
+	mlx_string_put(mlx->mlx, mlx->win, x, y, TEXTC, b->text);
+	vline_print(mlx, (struct s_vline){b->x, b->y, b->y + b->height}, BORDERC);
+	vline_print(mlx, (struct s_vline){b->x + b->width, b->y, b->y + b->height},
+		BORDERC);
+	hline_print(mlx, (struct s_vline){b->y, b->x, b->x + b->width}, BORDERC);
+	hline_print(mlx, (struct s_vline){b->y + b->height, b->x, b->x + b->width},
+		BORDERC);
 }

@@ -2,6 +2,10 @@
 # define BUTTONS_H
 
 # include <stdbool.h>
+# include <mlx/mmlx_sd.h>
+# define PPC 7
+# define BORDERC 0xFF8888FF
+# define TEXTC 0xFFDDDDDD
 
 typedef void	(*t_button_f)(void *);
 
@@ -12,8 +16,6 @@ struct			s_button
 	int			width;
 	int			height;
 	char		*text;
-	int			color;
-	int			tcolor;
 	void		*data;
 	bool		is_clicked;
 	t_button_f	on_click;
@@ -21,6 +23,6 @@ struct			s_button
 
 void			button_update(void *mlx, struct s_button *b);
 void			button_unclick(struct s_button *b);
-void			button_draw(void *mlx, void *win, struct s_button *b);
+void			button_draw(struct s_mlx *mlx, struct s_button *b);
 
 #endif // BUTTONS_H
