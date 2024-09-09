@@ -6,14 +6,13 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:00 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/04 22:21:41 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/09/02 14:27:23 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DSTRING_H
 # define DSTRING_H
 
-# include <float.h>
 # include <libft.h>
 # include <stdbool.h>
 # include <stddef.h>

@@ -32,7 +32,7 @@ void	button_update(void *mlx, struct s_button *b)
 	rect[1] = b->y;
 	rect[2] = b->width;
 	rect[3] = b->height;
-	if (collide((int [4]){x, y, 2, 2}, rect))
+	if (b->on_click && collide((int [4]){x, y, 0, 0}, rect))
 	{
 		b->is_clicked = true;
 		b->on_click(b->data);

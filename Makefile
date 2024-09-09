@@ -42,7 +42,8 @@ SRC += src/strings/dstring.c \
        src/strings/dstring_trim_utils.c \
        src/strings/dstring_charp_manip.c
 SRC += src/ui/vline.c \
-       src/ui/button.c
+       src/ui/button.c \
+       src/ui/button_init.c
 SRC += src/mlx/mmlx.c \
 	   src/mlx/hooks.c
 SRC += src/actions/buttons_actions.c

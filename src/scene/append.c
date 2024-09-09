@@ -14,8 +14,8 @@ static bool	scene_grow(struct s_scene *scene)
 	}
 	scene->capacity *= 2;
 	scene->objects = (void *)ft_realloc((char *)scene->objects, (scene->capacity
-			/ 2) * sizeof(struct s_object *), scene->capacity
-		* sizeof(struct s_object *));
+				/ 2) * sizeof(struct s_object *), scene->capacity
+			* sizeof(struct s_object *));
 	if (!scene->objects)
 	{
 		scene->capacity = 0;
