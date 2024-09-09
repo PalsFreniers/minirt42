@@ -98,7 +98,7 @@ LIBS =
 TIMER = 0.01
 
 ifdef DEBUG
-	CFLAGS += -g -fsanitize=address #(address, memory, thread)
+	CFLAGS += -g #-fsanitize=address #(address, memory, thread)
 	DEBUG_MODE = 1
 endif
 

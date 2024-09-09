@@ -48,6 +48,15 @@ SRC += src/mlx/mmlx.c \
 SRC += src/actions/buttons_actions.c
 MAIN = src/main.c
 
+##========== BONUS ==========##
+
+SRC += src/scene/save.c
+SRC += src/object/save.c \
+       src/object/save_light.c \
+       src/object/save_plane.c \
+       src/object/save_sphere.c \
+       src/object/save_cylinder.c
+
 ##========== NAMES ==========##
 
 NAME = minirt
@@ -96,7 +105,7 @@ LIBS = -lm -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -lSDL2
 TIMER = 0.1
 
 ifdef DEBUG
-	CFLAGS += -g -fsanitize=address #(address, memory, thread)
+	CFLAGS += -g #-fsanitize=address #(address, memory, thread)
 	DEBUG_MODE = 1
 endif
 

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "scene/scene.h"
 #include <files/files.h>
 #include <libft.h>
 #include <logger/logger.h>

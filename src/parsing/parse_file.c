@@ -1,4 +1,5 @@
 #include "libft.h"
+#include "object/objects.h"
 #include "scene/scene.h"
 #include "strings/dstring.h"
 #include <files/files.h>
@@ -25,6 +26,29 @@ static bool	parse_file_lines(struct s_string *lines, size_t count,
 	return (true);
 }
 
+static bool	check_scene(struct s_scene *scene)
+{
+	size_t	i;
+	size_t	count;
+
+	if (!scene->ambient.exist || !scene->camera.exist)
+	{
+		logger_error("missing camera or ambient light");
+		return (false);
+	}
+	i = 0;
+	count = 0;
+	while (i < scene->len)
+	{
+		if (scene->objects[i]->type == OBJ_LIGHT)
+			count++;
+		i++;
+	}
+	if (count > 1)
+		return (false);
+	return (true);
+}
+
 bool	parse_file(const char *path, struct s_scene *scene, const char *prog)
 {
 	struct s_string	file;
@@ -48,5 +72,7 @@ bool	parse_file(const char *path, struct s_scene *scene, const char *prog)
 	if (!parse_file_lines(lines, count, scene))
 		ret = false;
 	ft_free("sp", &file, lines);
+	if (!check_scene(scene))
+		ret = false;
 	return (ret);
 }
