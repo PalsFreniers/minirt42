@@ -7,3 +7,4 @@ OBJ
 libft/OBJ
 mlx
 .cache
+!src/mlx
