@@ -156,7 +156,7 @@ void	init_buttons_edit_ambiant_light(struct s_mlx *mlx)
 		.width = 20,
 		.height = 20,
 		.text = "+",
-		.data = &(mlx->scene->ambient.ratio),
+		.data = &(mlx->scene.ambient.ratio),
 		.on_click = (t_button_f)add_0_1,
 		.is_clicked = false,
 	};
@@ -166,7 +166,7 @@ void	init_buttons_edit_ambiant_light(struct s_mlx *mlx)
 		.width = 60,
 		.height = 20,
 		.text = "ratio",
-		.data = &(mlx->scene->ambient.ratio),
+		.data = &(mlx->scene.ambient.ratio),
 		.on_click = (t_button_f)print_flt,
 		.is_clicked = false,
 	};
@@ -176,9 +176,9 @@ void	init_buttons_edit_ambiant_light(struct s_mlx *mlx)
 		.width = 20,
 		.height = 20,
 		.text = "-",
-		.data = &(mlx->scene->ambient.ratio),
+		.data = &(mlx->scene.ambient.ratio),
 		.on_click = (t_button_f)sub_0_1,
 		.is_clicked = false,
 	};
-	append_interface_color(mlx, &(mlx->scene->ambient.color), 150, BASE_LINE_Y);
+	append_interface_color(mlx, &(mlx->scene.ambient.color), 150, BASE_LINE_Y);
 }

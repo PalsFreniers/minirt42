@@ -4,9 +4,13 @@
 #include <scene/scene.h>
 #include <ui/window.h>
 
-bool	init_mlx(struct s_mlx *mlx, struct s_scene *scene)
+void add_scene(struct s_mlx *mlx) {
+
+}
+
+bool	init_mlx(struct s_mlx *mlx)
 {
-	ft_bzero(mlx, sizeof(struct s_mlx));
+	ft_bzero(mlx, sizeof(struct s_mlx) - sizeof(struct s_scene));
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
 		return (false);
@@ -29,8 +33,17 @@ bool	init_mlx(struct s_mlx *mlx, struct s_scene *scene)
 		.width = 100,
 		.height = 50,
 		.text = "print scene",
-		.data = scene,
+		.data = &(mlx->scene),
 		.on_click = (t_button_f)print_scene,
+	};
+	mlx->static_b[2] = (struct s_button){
+		.x = 200,
+		.y = 0,
+		.width = 100,
+		.height = 50,
+		.text = "add",
+		.data = &mlx,
+		.on_click = (t_button_f)add_scene,
 	};
 	mlx->btn_count = 0;
 	init_buttons_edit_ambiant_light(mlx);
@@ -44,4 +57,5 @@ void	free_mlx(struct s_mlx *mlx)
 	if (mlx->win)
 		mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_display(mlx->mlx);
+        ft_free("c", &(mlx->scene));
 }

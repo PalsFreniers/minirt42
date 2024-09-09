@@ -45,18 +45,18 @@ SRC += src/ui/vline.c \
        src/ui/button.c \
        src/ui/button_init.c
 SRC += src/mlx/mmlx.c \
-	   src/mlx/hooks.c
+       src/mlx/hooks.c
 SRC += src/actions/buttons_actions.c
 MAIN = src/main.c
 
 ##========== BONUS ==========##
 
-SRC += src/scene/save.c
-SRC += src/object/save.c \
-       src/object/save_light.c \
-       src/object/save_plane.c \
-       src/object/save_sphere.c \
-       src/object/save_cylinder.c
+## SRC += src/scene/save.c
+## SRC += src/object/save.c \
+##        src/object/save_light.c \
+##        src/object/save_plane.c \
+##        src/object/save_sphere.c \
+##        src/object/save_cylinder.c
 
 ##========== NAMES ==========##
 
@@ -83,7 +83,7 @@ WHITE		=		\033[0;97m
 
 ##========== COMPILATOR ==========##
 
-CC = cc
+CC = clang
 
 ##========== LIBFT ==========##
 

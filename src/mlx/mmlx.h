@@ -12,17 +12,17 @@ struct				s_mlx
 {
 	void			*mlx;
 	void			*win;
-	struct s_scene	*scene;
 	bool			redraw;
-	struct s_button	static_b[2];
+	struct s_button	static_b[3];
         struct s_button interface_buttons[20];
         int btn_count;
+	struct s_scene	scene;
 };
 
 typedef int			(*t_mlx_e_f)(int, void *);
 typedef int			(*t_mlx_l_f)(void *);
 
-bool	init_mlx(struct s_mlx *mlx, struct s_scene *scene);
+bool	init_mlx(struct s_mlx *mlx);
 void	free_mlx(struct s_mlx *mlx);
 
 #endif // MMLX_H

@@ -36,7 +36,6 @@ void	register_free_funcs(void)
 
 int	main(int c, char **args)
 {
-	struct s_scene	scene;
 	struct s_mlx	mlx;
 
 	register_free_funcs();
@@ -45,14 +44,14 @@ int	main(int c, char **args)
 		logger_error("usage: %s <path/to/file.rt>", args[0]);
 		return (1);
 	}
-	if (!parse_file(args[1], &scene, args[0]))
+	if (!parse_file(args[1], &mlx.scene, args[0]))
 	{
-		free_scene(&scene);
+		ft_free("c", &mlx.scene);
 		return (1);
 	}
-	if (!init_mlx(&mlx, &scene))
+	if (!init_mlx(&mlx))
 	{
-		ft_free("cm", &scene, &mlx);
+		ft_free("m", &mlx);
 		return (1);
 	}
 	mlx_on_event(mlx.mlx, mlx.win, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
@@ -64,6 +63,6 @@ int	main(int c, char **args)
 	mlx_on_event(mlx.mlx, mlx.win, MLX_KEYDOWN, (t_mlx_e_f)key_event, &mlx);
 	mlx_loop_hook(mlx.mlx, (t_mlx_l_f)loop_draw_ui, &mlx);
 	mlx_loop(mlx.mlx);
-	ft_free("cm", &scene, &mlx);
+	ft_free("m", &mlx);
 	return (0);
 }

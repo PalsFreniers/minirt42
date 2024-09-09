@@ -32,6 +32,7 @@ bool	parse_cylinder(struct s_string *parts, size_t count,
 		logger_error("unable to parse cylinder");
 		return (false);
 	}
+        logger_debug("test");
 	cylinder = (void *)object_new(sizeof(struct s_cylinder), OBJ_CYLINDER);
 	if (!scene_append(scene, (struct s_object *)cylinder))
 		return (false);
