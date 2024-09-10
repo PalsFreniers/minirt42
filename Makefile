@@ -54,7 +54,8 @@ SRC += src/actions/buttons_actions.c \
        src/actions/buttons_actions_mod_obj_color.c \
        src/actions/buttons_actions_mod_obj_float.c \
        src/actions/buttons_actions_mod_obj_vector3.c \
-       src/actions/buttons_actions_mod_obj_float_2.c
+       src/actions/buttons_actions_mod_obj_float_2.c \
+       src/actions/buttons_actions_modify_cylinder.c
 MAIN = src/main.c
 
 ##========== BONUS ==========##

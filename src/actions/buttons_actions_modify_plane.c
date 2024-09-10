@@ -12,9 +12,9 @@ void	button_scene_modify_plane(struct s_mlx *mlx, int index)
 		&(((struct s_plane *)mlx->scene.objects[index])->normal.y), "norm y");
 	button_scene_modify_float_1_1(mlx, (struct s_vec2i){100, BASE_LINE_Y + 100},
 		&(((struct s_plane *)mlx->scene.objects[index])->normal.z), "norm z");
-	button_scene_modify_color(mlx, (struct s_vec2i){220, BASE_LINE_Y},
+	button_scene_modify_color(mlx, (struct s_vec2i){240, BASE_LINE_Y},
 		&(mlx->scene.objects[index]->color));
-	button_scene_modify_vec3(mlx, (struct s_vec2i){340, BASE_LINE_Y},
+	button_scene_modify_vec3(mlx, (struct s_vec2i){380, BASE_LINE_Y},
 		&(mlx->scene.objects[index]->position));
 }
 

@@ -26,5 +26,8 @@ void	button_add_scene(struct s_mlx *mlx)
 	mlx->interface_buttons[2] = button_new(400, BASE_LINE_Y, 100, 60);
 	button_set(&(mlx->interface_buttons[2]), "plane", mlx,
 		(t_button_f)button_add_plane);
-	mlx->btn_count = 3;
+	mlx->interface_buttons[3] = button_new(250, BASE_LINE_Y + 110, 100, 60);
+	button_set(&(mlx->interface_buttons[3]), "cylinder", mlx,
+		(t_button_f)button_add_cylinder);
+	mlx->btn_count = 4;
 }

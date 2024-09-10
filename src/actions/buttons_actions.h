@@ -40,5 +40,6 @@ void	button_scene_reset(struct s_mlx *mlx);
 void	button_add_sphere(struct s_mlx *mlx);
 void	button_add_light(struct s_mlx *mlx);
 void	button_add_plane(struct s_mlx *mlx);
+void	button_add_cylinder(struct s_mlx *mlx);
 
 #endif // BUTTONS_ACTIONS_H
