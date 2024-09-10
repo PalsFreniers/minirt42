@@ -10,6 +10,8 @@ void	button_scene_modify_sphere(struct s_mlx *mlx, int index)
 		&(((struct s_sphere *)mlx->scene.objects[index])->diameter), "radius");
 	button_scene_modify_color(mlx, (struct s_vec2i){220, BASE_LINE_Y},
 		&(mlx->scene.objects[index]->color));
+	button_scene_modify_vec3(mlx, (struct s_vec2i){340, BASE_LINE_Y},
+		&(mlx->scene.objects[index]->position));
 }
 
 void	button_add_sphere(struct s_mlx *mlx)

@@ -15,7 +15,7 @@ struct				s_mlx
 	void			*win;
 	struct s_button	static_b[3];
 	int				current_modif;
-	struct s_button	interface_buttons[20];
+	struct s_button	interface_buttons[50];
 	int				btn_count;
 	struct s_numpad	interface_numpad[20];
 	int				pad_count;

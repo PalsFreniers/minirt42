@@ -1,7 +1,7 @@
 #include "object/objects.h"
 #include "scene/scene.h"
-#include <mlx/mmlx.h>
 #include <actions/buttons_actions.h>
+#include <mlx/mmlx.h>
 
 void	button_scene_modify_light(struct s_mlx *mlx, int index)
 {
@@ -10,6 +10,8 @@ void	button_scene_modify_light(struct s_mlx *mlx, int index)
 		&(((struct s_sphere *)mlx->scene.objects[index])->diameter), "ratio");
 	button_scene_modify_color(mlx, (struct s_vec2i){220, BASE_LINE_Y},
 		&(mlx->scene.objects[index]->color));
+	button_scene_modify_vec3(mlx, (struct s_vec2i){340, BASE_LINE_Y},
+		&(mlx->scene.objects[index]->position));
 }
 
 void	button_add_light(struct s_mlx *mlx)
