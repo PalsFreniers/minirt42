@@ -48,6 +48,7 @@ SRC += src/ui/vline.c \
 SRC += src/mlx/mmlx.c \
        src/mlx/hooks.c
 SRC += src/actions/buttons_actions.c \
+       src/actions/buttons_actions_modify_plane.c \
        src/actions/buttons_actions_modify_light.c \
        src/actions/buttons_actions_modify_sphere.c \
        src/actions/buttons_actions_mod_obj_color.c \
@@ -113,7 +114,7 @@ LIBS = -lm -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -lSDL2
 TIMER = 0.1
 
 ifdef DEBUG
-	CFLAGS += -g -gdwarf2 #-fsanitize=address #(address, memory, thread)
+	CFLAGS += -g -gdwarf-2 #-fsanitize=address #(address, memory, thread)
 	DEBUG_MODE = 1
 endif
 
