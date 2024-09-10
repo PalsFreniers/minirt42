@@ -1,5 +1,4 @@
 #include "dstring.h"
-#include "dstring_utils.h"
 
 struct s_string	string_from_sdword(int32_t value)
 {
@@ -8,7 +7,7 @@ struct s_string	string_from_sdword(int32_t value)
 
 	if (value == 0)
 		return (string_copy(string_new_u_from_cstr("0")));
-	negative = value > 0;
+	negative = value < 0;
 	if (negative)
 		ret = string_from_udword(-value);
 	else
@@ -42,11 +41,11 @@ struct s_string	string_from_sqword(int64_t value)
 
 	if (value == 0)
 		return (string_copy(string_new_u_from_cstr("0")));
-	negative = value > 0;
+	negative = value < 0;
 	if (negative)
 		ret = string_from_uqword(-value);
 	else
-		return (string_from_uqword(value));
+		ret = string_from_uqword(value);
 	if (negative && string_error(false, 0) == STRING_SUCCESS)
 		string_push_front(&ret, '-');
 	return (ret);

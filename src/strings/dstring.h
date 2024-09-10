@@ -91,6 +91,7 @@ int64_t				string_to_sqword(struct s_string self);
 uint64_t			string_to_uqword(struct s_string self);
 bool				string_to_bool(struct s_string self);
 float				string_to_float(struct s_string self);
+char				*string_to_cstr(struct s_string self);
 // double				string_to_double(struct s_string self);
 // long double			string_to_long_double(struct s_string self);
 

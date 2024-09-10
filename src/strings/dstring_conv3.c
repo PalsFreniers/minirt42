@@ -7,7 +7,7 @@ int64_t	string_to_sqword(struct s_string self)
 	bool		negative;
 	uint64_t	ret;
 
-if (!string_check(self))
+	if (!string_check(self))
 		return (0);
 	off = string_conv_trimspaces(self);
 	negative = string_is_negative(self, &off);

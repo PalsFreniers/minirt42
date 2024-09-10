@@ -43,10 +43,15 @@ SRC += src/strings/dstring.c \
        src/strings/dstring_charp_manip.c
 SRC += src/ui/vline.c \
        src/ui/button.c \
-       src/ui/button_init.c
+       src/ui/numpad.c \
+       src/ui/button2.c
 SRC += src/mlx/mmlx.c \
        src/mlx/hooks.c
-SRC += src/actions/buttons_actions.c
+SRC += src/actions/buttons_actions.c \
+       src/actions/buttons_actions_modify_light.c \
+       src/actions/buttons_actions_modify_sphere.c \
+       src/actions/buttons_actions_mod_obj_color.c \
+       src/actions/buttons_actions_mod_obj_float.c
 MAIN = src/main.c
 
 ##========== BONUS ==========##
@@ -106,7 +111,7 @@ LIBS = -lm -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -lSDL2
 TIMER = 0.1
 
 ifdef DEBUG
-	CFLAGS += -g #-fsanitize=address #(address, memory, thread)
+	CFLAGS += -g -gdwarf2 #-fsanitize=address #(address, memory, thread)
 	DEBUG_MODE = 1
 endif
 

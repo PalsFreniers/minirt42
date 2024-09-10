@@ -18,6 +18,16 @@ static void	set_neg(int *neg, char c)
 		*neg = 1;
 }
 
+int	num_zero_a_dot(struct s_string self, int off)
+{
+	int	i;
+
+	i = 0;
+	while (self.ptr[off + i] == '0' && self.len > (size_t)off + i)
+		i++;
+	return (i);
+}
+
 float	string_to_float(struct s_string self)
 {
 	int64_t	dec;
@@ -43,5 +53,6 @@ float	string_to_float(struct s_string self)
 	p = log10((dec2 * 1.0)) + 1;
 	if (dec2 == 0.f)
 		p = 1;
+	p += num_zero_a_dot(self, off);
 	return ((dec * 1.0f + (dec2 / pow(10, p))) * neg);
 }

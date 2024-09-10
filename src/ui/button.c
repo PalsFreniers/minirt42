@@ -1,10 +1,10 @@
 #include <libft.h>
+#include <mlx/mmlx.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <ui/buttons.h>
 #include <ui/vline.h>
 #include <ui/window.h>
-#include <mlx/mmlx.h>
 
 static bool	collide(int a[4], int b[4])
 {
@@ -35,13 +35,11 @@ void	button_update(void *mlx, struct s_button *b)
 	if (b->on_click && collide((int [4]){x, y, 0, 0}, rect))
 	{
 		b->is_clicked = true;
-		b->on_click(b->data);
+		if (b->has_idx)
+			b->on_click_idx(b->data, b->data_index);
+		else
+			b->on_click(b->data);
 	}
-}
-
-void	button_unclick(struct s_button *b)
-{
-	b->is_clicked = false;
 }
 
 void	button_draw(struct s_mlx *mlx, struct s_button *b)
@@ -58,4 +56,27 @@ void	button_draw(struct s_mlx *mlx, struct s_button *b)
 	hline_print(mlx, (struct s_vline){b->y, b->x, b->x + b->width}, BORDERC);
 	hline_print(mlx, (struct s_vline){b->y + b->height, b->x, b->x + b->width},
 		BORDERC);
+}
+
+struct s_button	button_new(int x, int y, int width, int height)
+{
+	return ((struct s_button){
+		.x = x,
+		.y = y,
+		.width = width,
+		.height = height,
+		.text = NULL,
+		.on_click = NULL,
+		.is_clicked = false,
+		.data_index = 0,
+		.has_idx = false,
+	});
+}
+
+void	button_set(struct s_button *self, char *text, void *data,
+		t_button_f func)
+{
+	self->data = data;
+	self->text = text;
+	self->on_click = func;
 }

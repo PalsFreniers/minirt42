@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "dstring.h"
+#include "libft.h"
 #include <stdlib.h>
 
 enum e_string_error	string_error(bool set, enum e_string_error value)
@@ -55,7 +56,7 @@ struct s_string	string_copy(struct s_string self)
 
 	if (!string_check(self))
 		return ((struct s_string){0});
-	ptr = ft_realloc(NULL, 0, self.capacity);
+	ptr = ft_calloc(self.len, sizeof(char));
 	if (!ptr)
 	{
 		string_error(true, STRING_MALLOC_ERROR);
@@ -65,7 +66,7 @@ struct s_string	string_copy(struct s_string self)
 	return ((struct s_string){
 		.unowned = false,
 		.ptr = ptr,
-		.capacity = self.capacity,
+		.capacity = self.len,
 		.len = self.len,
 	});
 }

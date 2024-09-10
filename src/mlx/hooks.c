@@ -1,3 +1,4 @@
+#include "mlx.h"
 #include <mlx/hooks.h>
 #include <stdio.h>
 #include <ui/buttons.h>
@@ -11,6 +12,7 @@ void	update_buttons_click(int e, struct s_mlx *mlx)
 	(void)e;
 	button_update(mlx->mlx, &(mlx->static_b[0]));
 	button_update(mlx->mlx, &(mlx->static_b[1]));
+	button_update(mlx->mlx, &(mlx->static_b[2]));
 	x = 0;
 	while (x < mlx->btn_count)
 	{
@@ -24,12 +26,13 @@ void	update_buttons_unclick(int e, struct s_mlx *mlx)
 	int	x;
 
 	(void)e;
-	button_unclick(&(mlx->static_b[0]));
-	button_unclick(&(mlx->static_b[1]));
+	mlx->static_b[0].is_clicked = false;
+	mlx->static_b[1].is_clicked = false;
+	mlx->static_b[2].is_clicked = false;
 	x = 0;
 	while (x < mlx->btn_count)
 	{
-		button_unclick(&(mlx->interface_buttons[x]));
+		mlx->interface_buttons[x].is_clicked = false;
 		x++;
 	}
 }
@@ -45,17 +48,21 @@ void	loop_draw_ui(struct s_mlx *mlx)
 {
 	int	x;
 
-	if (mlx->redraw)
+	mlx_clear_window(mlx->mlx, mlx->win);
+	button_draw(mlx, &(mlx->static_b[0]));
+	button_draw(mlx, &(mlx->static_b[1]));
+	button_draw(mlx, &(mlx->static_b[2]));
+	x = 0;
+	while (x < mlx->btn_count)
 	{
-		mlx->redraw = false;
-		button_draw(mlx, &(mlx->static_b[0]));
-		button_draw(mlx, &(mlx->static_b[1]));
-		x = 0;
-		while (x < mlx->btn_count)
-		{
-			button_draw(mlx, &(mlx->interface_buttons[x]));
-			x++;
-		}
+		button_draw(mlx, &(mlx->interface_buttons[x]));
+		x++;
+	}
+	x = 0;
+	while (x < mlx->pad_count)
+	{
+		numpad_draw(mlx, &(mlx->interface_numpad[x]));
+		x++;
 	}
 }
 

@@ -7,7 +7,7 @@ struct s_string	string_from_sbyte(int8_t value)
 
 	if (value == 0)
 		return (string_copy(string_new_u_from_cstr("0")));
-	negative = value > 0;
+	negative = value < 0;
 	if (negative)
 		ret = string_from_ubyte(-value);
 	else
@@ -41,7 +41,7 @@ struct s_string	string_from_sword(int16_t value)
 
 	if (value == 0)
 		return (string_copy(string_new_u_from_cstr("0")));
-	negative = value > 0;
+	negative = value < 0;
 	if (negative)
 		ret = string_from_uword(-value);
 	else
