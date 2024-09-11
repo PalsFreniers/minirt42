@@ -13,7 +13,7 @@ struct				s_mlx
 {
 	void			*mlx;
 	void			*win;
-	struct s_button	static_b[3];
+	struct s_button	static_b[4];
 	int				current_modif;
 	struct s_button	interface_buttons[50];
 	int				btn_count;

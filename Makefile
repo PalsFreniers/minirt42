@@ -56,16 +56,16 @@ SRC += src/actions/buttons_actions.c \
        src/actions/buttons_actions_mod_obj_vector3.c \
        src/actions/buttons_actions_mod_obj_float_2.c \
        src/actions/buttons_actions_modify_cylinder.c
+SRC += src/save/save_vec3.c \
+       src/save/save_float.c \
+       src/save/save_color.c \
+       src/save/save_light.c \
+       src/save/save_plane.c \
+       src/save/save_sphere.c \
+       src/save/save_camera.c \
+       src/save/save_cylinder.c \
+       src/save/save_ambient_light.c
 MAIN = src/main.c
-
-##========== BONUS ==========##
-
-## SRC += src/scene/save.c
-## SRC += src/object/save.c \
-##        src/object/save_light.c \
-##        src/object/save_plane.c \
-##        src/object/save_sphere.c \
-##        src/object/save_cylinder.c
 
 ##========== NAMES ==========##
 

@@ -1,13 +1,14 @@
 #include "object/objects.h"
 #include "scene/scene.h"
-#include <mlx/mmlx.h>
 #include <actions/buttons_actions.h>
+#include <mlx/mmlx.h>
 
 void	button_scene_modify_sphere(struct s_mlx *mlx, int index)
 {
 	button_scene_reset(mlx);
 	button_scene_modify_float(mlx, (struct s_vec2i){100, BASE_LINE_Y},
-		&(((struct s_sphere *)mlx->scene.objects[index])->diameter), "radius");
+		&(((struct s_sphere *)mlx->scene.objects[index])->diameter),
+		"diameter");
 	button_scene_modify_color(mlx, (struct s_vec2i){240, BASE_LINE_Y},
 		&(mlx->scene.objects[index]->color));
 	button_scene_modify_vec3(mlx, (struct s_vec2i){380, BASE_LINE_Y},

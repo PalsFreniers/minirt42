@@ -7,4 +7,6 @@ OBJ
 libft/OBJ
 mlx
 .cache
+*.rt
+!test/*.rt
 !src/mlx

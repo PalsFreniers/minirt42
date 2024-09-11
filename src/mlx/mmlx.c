@@ -21,7 +21,9 @@ bool	init_mlx(struct s_mlx *mlx)
 		(t_button_f)print_scene);
 	mlx->static_b[2] = button_new(200, 0, 100, 50);
 	button_set(&(mlx->static_b[2]), "add", mlx, (t_button_f)button_add_scene);
-	mlx->redraw = true;
+	mlx->static_b[3] = button_new(300, 0, 100, 50);
+	button_set(&(mlx->static_b[3]), "save", &(mlx->scene),
+		(t_button_f)button_save);
 	return (true);
 }
 

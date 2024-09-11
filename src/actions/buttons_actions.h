@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 19:13:57 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/23 19:15:35 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/09/11 16:53:14 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	button_add_sphere(struct s_mlx *mlx);
 void	button_add_light(struct s_mlx *mlx);
 void	button_add_plane(struct s_mlx *mlx);
 void	button_add_cylinder(struct s_mlx *mlx);
+void	button_save(struct s_scene *scene);
 
 #endif // BUTTONS_ACTIONS_H
