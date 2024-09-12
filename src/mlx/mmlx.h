@@ -13,12 +13,15 @@ struct				s_mlx
 {
 	void			*mlx;
 	void			*win;
-	struct s_button	static_b[4];
-	int				current_modif;
-	struct s_button	interface_buttons[50];
+	void			*ray;
+	void			*ray_img;
+	void			*ray_back;
+	struct s_button	static_b[6];
+	struct s_button	interface_buttons[33];
 	int				btn_count;
-	struct s_numpad	interface_numpad[20];
+	struct s_numpad	interface_numpad[11];
 	int				pad_count;
+	int				page;
 	struct s_scene	scene;
 };
 
@@ -27,5 +30,6 @@ typedef int			(*t_mlx_l_f)(void *);
 
 bool				init_mlx(struct s_mlx *mlx);
 void				free_mlx(struct s_mlx *mlx);
+void				mlx_swap_ray_buffer(struct s_mlx *mlx);
 
 #endif // MMLX_H

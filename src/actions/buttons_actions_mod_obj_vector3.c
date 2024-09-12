@@ -11,3 +11,10 @@ void	button_scene_modify_vec3(struct s_mlx *mlx, struct s_vec2i pos,
 	pos.y += 50;
 	button_scene_modify_float_full(mlx, pos, &(pos_p->z), "Z");
 }
+
+void	ufloat_dec(float *ptr)
+{
+	*ptr -= 0.01f;
+	if (*ptr < 0)
+		*ptr = 0.f;
+}

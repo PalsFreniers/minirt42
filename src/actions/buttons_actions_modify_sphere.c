@@ -23,5 +23,6 @@ void	button_add_sphere(struct s_mlx *mlx)
 	if (!new)
 		return ;
 	scene_append(&(mlx->scene), new);
+	((struct s_sphere *)new)->diameter = 0.01f;
 	button_scene_modify_sphere(mlx, mlx->scene.len - 1);
 }

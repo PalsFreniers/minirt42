@@ -1,10 +1,9 @@
 #include "mlx.h"
-#include <stdio.h>
-#include <mlx/mmlx.h>
 #include "strings/dstring.h"
 #include "ui/buttons.h"
-#include <ui/numpad.h>
+#include <mlx/mmlx.h>
 #include <stdlib.h>
+#include <ui/numpad.h>
 
 struct s_numpad	numpad_new(void *value, bool is_int, int x, int y)
 {
@@ -30,8 +29,10 @@ void	numpad_draw(struct s_mlx *mlx, struct s_numpad *self)
 	ptr = string_to_cstr(s);
 	string_destroy(&s);
 	if (!ptr)
-		mlx_string_put(mlx->mlx, mlx->win, self->x, self->y, TEXTC, "0000");
+		mlx_string_put(mlx->mlx, mlx->win, self->x, self->y, TEXTC,
+			"0000");
 	else
-		mlx_string_put(mlx->mlx, mlx->win, self->x, self->y, TEXTC, ptr);
+		mlx_string_put(mlx->mlx, mlx->win, self->x, self->y, TEXTC,
+			ptr);
 	free(ptr);
 }

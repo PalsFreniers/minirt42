@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/23 19:22:02 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/09/12 03:37:50 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,21 @@ void	register_free_funcs(void)
 	ft_free_register('m', (t_free_function)free_mlx);
 }
 
+void	register_mlx_hooks(struct s_mlx *mlx)
+{
+	mlx_on_event(mlx->mlx, mlx->win, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
+		mlx);
+	mlx_on_event(mlx->mlx, mlx->ray, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
+		mlx);
+	mlx_on_event(mlx->mlx, mlx->win, MLX_MOUSEDOWN,
+		(t_mlx_e_f)update_buttons_click, mlx);
+	mlx_on_event(mlx->mlx, mlx->win, MLX_MOUSEUP,
+		(t_mlx_e_f)update_buttons_unclick, mlx);
+	mlx_on_event(mlx->mlx, mlx->win, MLX_KEYDOWN, (t_mlx_e_f)key_event, mlx);
+	mlx_on_event(mlx->mlx, mlx->ray, MLX_KEYDOWN, (t_mlx_e_f)key_event, mlx);
+	mlx_loop_hook(mlx->mlx, (t_mlx_l_f)loop_draw_ui, mlx);
+}
+
 int	main(int c, char **args)
 {
 	struct s_mlx	mlx;
@@ -46,22 +61,17 @@ int	main(int c, char **args)
 	}
 	if (!parse_file(args[1], &mlx.scene, args[0]))
 	{
+		logger_error("during file parsing", args[0]);
 		ft_free("c", &mlx.scene);
 		return (1);
 	}
 	if (!init_mlx(&mlx))
 	{
+		logger_error("during mlx initialisation", args[0]);
 		ft_free("m", &mlx);
 		return (1);
 	}
-	mlx_on_event(mlx.mlx, mlx.win, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
-		&mlx);
-	mlx_on_event(mlx.mlx, mlx.win, MLX_MOUSEDOWN,
-		(t_mlx_e_f)update_buttons_click, &mlx);
-	mlx_on_event(mlx.mlx, mlx.win, MLX_MOUSEUP,
-		(t_mlx_e_f)update_buttons_unclick, &mlx);
-	mlx_on_event(mlx.mlx, mlx.win, MLX_KEYDOWN, (t_mlx_e_f)key_event, &mlx);
-	mlx_loop_hook(mlx.mlx, (t_mlx_l_f)loop_draw_ui, &mlx);
+	register_mlx_hooks(&mlx);
 	mlx_loop(mlx.mlx);
 	ft_free("m", &mlx);
 	return (0);

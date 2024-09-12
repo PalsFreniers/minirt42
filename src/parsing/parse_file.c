@@ -5,7 +5,6 @@
 #include <files/files.h>
 #include <logger/logger.h>
 #include <parsing/parse.h>
-#include <stdlib.h>
 
 static bool	parse_file_error_split(struct s_string *file)
 {

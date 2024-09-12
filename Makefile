@@ -48,9 +48,13 @@ SRC += src/ui/vline.c \
 SRC += src/mlx/mmlx.c \
        src/mlx/hooks.c
 SRC += src/actions/buttons_actions.c \
+       src/actions/button_actions_2.c \
+       src/actions/buttons_actions_3.c \
+       src/actions/buttons_actions_4.c \
        src/actions/buttons_actions_modify_plane.c \
        src/actions/buttons_actions_modify_light.c \
        src/actions/buttons_actions_modify_sphere.c \
+       src/actions/buttons_actions_modify_ambient.c \
        src/actions/buttons_actions_mod_obj_color.c \
        src/actions/buttons_actions_mod_obj_float.c \
        src/actions/buttons_actions_mod_obj_vector3.c \

@@ -13,6 +13,8 @@ void	update_buttons_click(int e, struct s_mlx *mlx)
 	button_update(mlx->mlx, &(mlx->static_b[1]));
 	button_update(mlx->mlx, &(mlx->static_b[2]));
 	button_update(mlx->mlx, &(mlx->static_b[3]));
+	button_update(mlx->mlx, &(mlx->static_b[4]));
+	button_update(mlx->mlx, &(mlx->static_b[5]));
 	x = 0;
 	while (x < mlx->btn_count)
 	{
@@ -30,6 +32,8 @@ void	update_buttons_unclick(int e, struct s_mlx *mlx)
 	mlx->static_b[1].is_clicked = false;
 	mlx->static_b[2].is_clicked = false;
 	mlx->static_b[3].is_clicked = false;
+	mlx->static_b[4].is_clicked = false;
+	mlx->static_b[5].is_clicked = false;
 	x = 0;
 	while (x < mlx->btn_count)
 	{
@@ -54,6 +58,8 @@ void	loop_draw_ui(struct s_mlx *mlx)
 	button_draw(mlx, &(mlx->static_b[1]));
 	button_draw(mlx, &(mlx->static_b[2]));
 	button_draw(mlx, &(mlx->static_b[3]));
+	button_draw(mlx, &(mlx->static_b[4]));
+	button_draw(mlx, &(mlx->static_b[5]));
 	x = 0;
 	while (x < mlx->btn_count)
 	{
@@ -66,6 +72,7 @@ void	loop_draw_ui(struct s_mlx *mlx)
 		numpad_draw(mlx, &(mlx->interface_numpad[x]));
 		x++;
 	}
+	mlx_put_image_to_window(mlx->mlx, mlx->ray, mlx->ray_img, 0, 0);
 }
 
 int	key_event(int key, struct s_mlx *mlx)

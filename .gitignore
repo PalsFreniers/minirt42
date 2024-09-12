@@ -8,5 +8,7 @@ libft/OBJ
 mlx
 .cache
 *.rt
+*.ppm
+dfgh
 !test/*.rt
 !src/mlx

@@ -4,7 +4,7 @@
 
 bool	save_light(struct s_light *self, int fd)
 {
-	write(fd, "L ", 3);
+	write(fd, "L ", 2);
 	if (!save_vec3(self->base.position, fd))
 		return (false);
 	write(fd, " ", 1);
