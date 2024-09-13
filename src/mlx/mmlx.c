@@ -23,17 +23,29 @@ void	mlx_init_static_button(struct s_mlx *mlx)
 	button_set(&(mlx->static_b[5]), "screen", mlx, (t_button_f)button_screen);
 }
 
+void	set_window_position(struct s_mlx *mlx)
+{
+	int	w;
+	int	h;
+
+	mlx_get_screens_size(mlx->mlx, mlx->win, &w, &h);
+	w /= 2;
+	h = (h - WIN_HEIGHT) / 2;
+	mlx_set_window_position(mlx->mlx, mlx->ray, w - WIN_WIDTH, h);
+	mlx_set_window_position(mlx->mlx, mlx->win, w, h);
+}
+
 bool	init_mlx(struct s_mlx *mlx)
 {
 	ft_bzero(mlx, sizeof(struct s_mlx) - sizeof(struct s_scene));
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
 		return (false);
-	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "minirt panel");
-	if (!mlx->win)
-		return (false);
 	mlx->ray = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "minirt render");
 	if (!mlx->ray)
+		return (false);
+	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "minirt panel");
+	if (!mlx->win)
 		return (false);
 	mlx->ray_img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!mlx->ray_img)
@@ -41,6 +53,7 @@ bool	init_mlx(struct s_mlx *mlx)
 	mlx->ray_back = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!mlx->ray_back)
 		return (false);
+	set_window_position(mlx);
 	mlx_init_static_button(mlx);
 	return (true);
 }
