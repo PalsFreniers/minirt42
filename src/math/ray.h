@@ -4,6 +4,7 @@
 # include <object/objects.h>
 # include <scene/scene.h>
 # include <stdbool.h>
+# include <ui/window.h>
 
 typedef struct s_ray
 {
@@ -23,19 +24,22 @@ typedef struct s_ray
  *                      si OBJ_LIGHT:
  *                              passer a la boucle suivante
  *                      si OBJ_PLANE:
- *                              si ray_collision_plane_depth(&ray, obj, &tmp) est faux:
+ *                              si ray_collision_plane_depth(&ray, obj,
+	&tmp) est faux:
  *                                      passer a la boucle suivante
  *                              sinon si tmp < f:
  *                                      f = tmp
  *                                      object = obj
  *                      si OBJ_SPHERE:
- *                              si ray_collision_sphere_depth(&ray, obj, &tmp) est faux:
+ *                              si ray_collision_sphere_depth(&ray, obj,
+	&tmp) est faux:
  *                                      passer a la boucle suivante
  *                              sinon si tmp < f:
  *                                      f = tmp
  *                                      object = obj
  *                      si OBJ_CYLINDER:
- *                              si ray_collision_cylinder_depth(&ray, obj, &tmp) est faux:
+ *                              si ray_collision_cylinder_depth(&ray, obj,
+	&tmp) est faux:
  *                                      passer a la boucle suivante
  *                              sinon si tmp < f:
  *                                      f = tmp
@@ -49,18 +53,13 @@ typedef struct s_ray
  *                              pour obj dans scene.objects:
  *                                      si obj == object:
  *                                              passer a la boucle suivante
- *                                      si is_blocking_light_from(position, light, obj) est faux:
- *                                              tmp = calculate_color_from_light(ray, light, position)
+ *                                      si is_blocking_light_from(position,
+	light, obj) est faux:
+
+	*                                              tmp = calculate_color_from_light(ray,
+		light, position)
  *                                              color = blend(color, tmp)
  *      renvoyer color
  */
-union u_color		get_color_traced_at_position(struct s_scene *scene, float x,
-						float y);
-bool				ray_collision_plane_depth(struct s_ray *ray,
-						struct s_plane *plane, float *ret);
-bool				ray_collision_sphere_depth(struct s_ray *ray,
-						struct s_sphere *plane, float *ret);
-bool				ray_collision_cylinder_depth(struct s_ray *ray,
-						struct s_cylinder *plane, float *ret);
 
 #endif // RAY_H

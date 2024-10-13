@@ -32,7 +32,6 @@ struct s_string	string_from_float(float value, int a_dot)
 	if (string_error(false, 0) != STRING_SUCCESS)
 		return ((struct s_string){0});
 	fpart = (value - (int64_t)value) * pow(10, a_dot);
-	fpart *= -1 + 2 * (!(value < 0 && (int)value == 0));
 	if ((size_t)fpart == 0)
 		return (ret);
 	add_start_zero(&ret, fpart, pow(10, a_dot));
