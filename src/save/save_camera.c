@@ -8,7 +8,7 @@ bool	save_camera(struct s_camera *self, int fd)
 	if (!save_vec3(self->position, fd))
 		return (false);
 	write(fd, " ", 1);
-	if (!save_vec3(self->orientation, fd))
+	if (!save_vec3(self->direction, fd))
 		return (false);
 	write(fd, " ", 1);
 	if (!save_float(self->fov, fd))

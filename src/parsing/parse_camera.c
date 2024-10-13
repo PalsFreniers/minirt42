@@ -7,7 +7,7 @@ static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 {
 	if (!parse_position(parts[1], &(camera->position)))
 		return (false);
-	if (!parse_ranged_vector(parts[2], &(camera->orientation), 1, -1))
+	if (!parse_ranged_vector(parts[2], &(camera->direction), 1, -1))
 		return (false);
 	if (!parse_range(parts[3], &(camera->fov), 180, 0))
 		return (false);

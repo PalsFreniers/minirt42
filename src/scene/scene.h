@@ -15,7 +15,7 @@ struct					s_ambient
 struct					s_camera
 {
 	struct s_vec3		position;
-	struct s_vec3		orientation;
+	struct s_vec3		direction;
 	float				fov;
 	bool				exist;
 };

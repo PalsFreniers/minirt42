@@ -30,7 +30,7 @@ void	print_scene(struct s_scene *scene)
 	printf("\t}\n");
 	printf("\tcamera => {\n");
 	print_float("\t\t", "fov", scene->camera.fov);
-	print_vec3("\t\t", "orientation", scene->camera.orientation);
+	print_vec3("\t\t", "direction", scene->camera.direction);
 	print_vec3("\t\t", "position", scene->camera.position);
 	printf("\t}\n");
 	printf("\tobjects => [\n");
