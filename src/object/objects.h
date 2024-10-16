@@ -1,15 +1,10 @@
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
+# include <math/la.h>
 # include <stddef.h>
 # include <stdint.h>
 
-typedef struct s_vec3
-{
-	float			x;
-	float			y;
-	float			z;
-}					t_vec3;
 
 typedef union u_color
 {
