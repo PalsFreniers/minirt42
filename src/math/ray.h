@@ -2,9 +2,6 @@
 # define RAY_H
 
 # include <object/objects.h>
-# include <scene/scene.h>
-# include <stdbool.h>
-# include <ui/window.h>
 
 typedef struct s_ray
 {

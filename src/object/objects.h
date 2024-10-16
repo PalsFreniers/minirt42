@@ -5,7 +5,6 @@
 # include <stddef.h>
 # include <stdint.h>
 
-
 typedef union u_color
 {
 	uint32_t		rgb;
