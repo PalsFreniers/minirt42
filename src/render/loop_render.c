@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2024/10/18 23:48:53 by maamine          ###   ########.fr       */
+/*   Updated: 2024/10/19 21:25:51 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,29 @@ t_vec3	shoot_ray_from_camera(struct s_mlx *mlx, int x, int y)
 	// ray.y = math_formula;
 	// ray.z = math_formula;
 	// ray = rotate(ray, camera);
+	return (ray);
 }
 
 t_collision	get_collision(struct s_mlx *mlx, struct s_vec3 ray)
 {
 	t_collision		collision;
 	t_collision		tmp_collision;
-	struct s_object	*object;
+	int				i_obj;
 	float			dist;
 	float			tmp_dist;
 
-	// object = first object of the scene;
+	i_obj = next_object(mlx->scene.objects, -1);
 	// dist = +inf;
-	while (object)
+	while (i_obj >= 0)
 	{
-		if (test_collision(object, ray, &tmp_collision) == 1)
+		if (test_collision(mlx->scene.objects[i_obj], ray, &tmp_collision) == 1)
 			tmp_dist = get_dist(tmp_collision);
 			if (tmp_dist < dist)
 			{
 				collision = tmp_collision;
 				dist = tmp_dist;
 			}
-	// 	object = next object;
+		i_obj = next_object(mlx->scene.objects, i_obj);
 	}
 	return (collision);
 }
