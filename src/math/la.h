@@ -44,7 +44,18 @@ float				vec3_lenght(t_vec3 a);
 float				vec3_dot(t_vec3 a, t_vec3 b);
 float				vec3_sum(t_vec3 a);
 
+t_vec3 vec3_map_2pi(t_vec3 a);
+
 t_mat3				mat3_mul(t_mat3 a, t_mat3 b);
 t_vec3 mat3_apply(t_mat3 a, t_vec3 b);
+
+t_mat3 mat3_zero();
+t_mat3 mat3_identity();
+
+t_mat3 rotation_matrix_x(float angle);
+t_mat3 rotation_matrix_y(float angle);
+t_mat3 rotation_matrix_z(float angle);
+
+t_mat3 get_rotation_matrix(t_vec3 angle);
 
 #endif // LA_H
