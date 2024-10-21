@@ -81,4 +81,5 @@ void	mlx_swap_ray_buffer(struct s_mlx *mlx)
 	tmp = mlx->ray_back;
 	mlx->ray_back = mlx->ray_img;
 	mlx->ray_img = tmp;
+        mlx_put_image_to_window(mlx->mlx, mlx->ray, mlx->ray_img, 0, 0);
 }
