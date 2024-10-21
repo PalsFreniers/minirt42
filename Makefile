@@ -69,7 +69,9 @@ SRC += src/save/save_vec3.c \
        src/save/save_camera.c \
        src/save/save_cylinder.c \
        src/save/save_ambient_light.c
+SRC += src/math/la.c
 SRC += src/render/loop_render.c
+SRC += src/render/collision/sphere.c
 MAIN = src/main.c
 
 ##========== NAMES ==========##

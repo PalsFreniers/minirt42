@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2024/10/19 21:25:51 by maamine          ###   ########.fr       */
+/*   Updated: 2024/10/21 02:30:34 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
  * 				collision = tmp_collision
  */
 
+// look at src/math/la.h to know all the matrix and vector operations
 t_vec3	shoot_ray_from_camera(struct s_mlx *mlx, int x, int y)
 {
 	t_vec3	ray;
