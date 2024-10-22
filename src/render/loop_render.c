@@ -33,7 +33,7 @@
  * 				collision = tmp_collision
  */
 
-look at src/math/la.h to know all the matrix and vector operations
+//look at src/math/la.h to know all the matrix and vector operations
 t_vec3	shoot_ray_from_camera(struct s_mlx *mlx, int x, int y)
 {
 	t_vec3	ray;
@@ -91,34 +91,34 @@ void	loop_render(struct s_mlx *mlx)
 	}
 }
 
-// #define DEG2RAD 0.0174533f
-// void loop_render(struct s_mlx *mlx) {
-//         struct s_sphere s = (struct s_sphere) {
-//                 .base = (struct s_object) {
-//                         .color = (union u_color) {
-//                                 .rgb = 0,
-//                         },
-//                         .position = vec3_new(100, 50, 0),
-//                         .type = OBJ_SPHERE,
-//                 },
-//                 .diameter = 10,
-//         };
-//         t_vec3 dum;
-//         float app = (70.f / WIN_HEIGHT) * DEG2RAD;
-//         loop_draw_ui(mlx);
-//         for(int y = 0; y < WIN_HEIGHT; y++) {
-//                 for (int x = 0; x < WIN_WIDTH; ++x) {
-//                         t_mat3 rot = get_rotation_matrix(vec3_new((x - (WIN_WIDTH / 2.f)) * app, 0, (y - (WIN_HEIGHT / 2.f)) * app));
-//                         t_ray r = (t_ray) {
-//                                 .origin = vec3_zero(),
-//                                 .direction = mat3_apply(rot, vec3_new(1, 0, 0)),
-//                         };
-//                         if(sphere_collide_function(r, &s, &dum, &dum)) {
-//                                 mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, 0xFFFFFFFF);
-//                         } else {
-//                                 mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, 0xFF000000);
-//                         }
-//                 }
-//         }
-//         mlx_swap_ray_buffer(mlx);
-// }
+//#define DEG2RAD 0.0174533f
+//void loop_render(struct s_mlx *mlx) {
+//        struct s_sphere s = (struct s_sphere) {
+//                .base = (struct s_object) {
+//                        .color = (union u_color) {
+//                                .rgb = 0,
+//                        },
+//                        .position = vec3_new(100, 20, 0),
+//                        .type = OBJ_SPHERE,
+//                },
+//                .diameter = 10,
+//        };
+//        t_vec3 dum;
+//        float app = (70.f / WIN_HEIGHT) * DEG2RAD;
+//        loop_draw_ui(mlx);
+//        for(int y = 0; y < WIN_HEIGHT; y++) {
+//                for (int x = 0; x < WIN_WIDTH; ++x) {
+//                        t_mat3 rot = get_rotation_matrix(vec3_new(((WIN_WIDTH / 2.f) - x) * app, 0, ((WIN_HEIGHT / 2.f) - y) * app));
+//                        t_ray r = (t_ray) {
+//                                .origin = vec3_zero(),
+//                                .direction = vec3_normalise(mat3_apply(rot, vec3_new(M_PI, 0, 0))),
+//                        };
+//                        if(sphere_collide_function(r, &s, &dum, &dum)) {
+//                                mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, 0xFFFFFFFF);
+//                        } else {
+//                                mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, 0xFF000000);
+//                        }
+//                }
+//        }
+//        mlx_swap_ray_buffer(mlx);
+//}

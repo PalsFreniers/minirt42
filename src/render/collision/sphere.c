@@ -5,38 +5,16 @@
 bool	sphere_collide_function(struct s_ray ray, struct s_sphere *sphere,
 		struct s_vec3 *position, struct s_vec3 *normal)
 {
-	t_vec3		l;
-	float		tca;
 	const float	radius = sphere->diameter / 2;
-	float		d2;
-	float		thc;
-	float		t0;
-	float		t1;
-	float		tmp;
 
-	*position = vec3_zero();
-	*normal = vec3_zero();
-	l = vec3_sub(sphere->base.position, ray.origin);
-	tca = vec3_dot(l, ray.direction);
-	if (tca < 0)
-		return (false);
-	d2 = vec3_dot(l, l) - tca * tca;
-	if (d2 > radius * radius)
-		return (false);
-	thc = sqrtf(radius * radius - d2);
-	t0 = tca - thc;
-	t1 = tca + thc;
-	if (t0 > t1)
-	{
-		tmp = t0;
-		t0 = t1;
-		t1 = tmp;
-	}
-	if (t0 < 0)
-	{
-		t0 = t1;
-		if (t0 < 0)
-			return (false);
-	}
+        *position = vec3_zero();
+        *normal = vec3_zero();
+        t_vec3 c = vec3_sub(sphere->base.position, ray.origin);
+        float t = vec3_dot(c, ray.direction);
+        float p = vec3_lenght(vec3_sub(c, vec3_mul(ray.direction, vec3_new_from_one(t))));
+        if(p > radius)
+                return false;
+        float x = t - sqrtf(radius * radius - p * p);
+        if(x <= 0) return false;
 	return (true);
 }

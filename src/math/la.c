@@ -131,9 +131,9 @@ t_mat3	rotation_matrix_x(float angle)
 		.m02 = 0,
 		.m10 = 0,
 		.m11 = cosf(angle),
-		.m12 = sinf(angle),
+		.m12 = -sinf(angle),
 		.m20 = 0,
-		.m21 = -sinf(angle),
+		.m21 = sinf(angle),
 		.m22 = cosf(angle),
 	});
 }
@@ -143,11 +143,11 @@ t_mat3	rotation_matrix_y(float angle)
 	return ((t_mat3){
 		.m00 = cosf(angle),
 		.m01 = 0,
-		.m02 = -sinf(angle),
+		.m02 = sinf(angle),
 		.m10 = 0,
 		.m11 = 1,
 		.m12 = 0,
-		.m20 = sinf(angle),
+		.m20 = -sinf(angle),
 		.m21 = 0,
 		.m22 = cosf(angle),
 	});
@@ -157,9 +157,9 @@ t_mat3	rotation_matrix_z(float angle)
 {
 	return ((t_mat3){
 		.m00 = cosf(angle),
-		.m01 = sinf(angle),
+		.m01 = -sinf(angle),
 		.m02 = 0,
-		.m10 = -sinf(angle),
+		.m10 = sinf(angle),
 		.m11 = cosf(angle),
 		.m12 = 0,
 		.m20 = 0,
