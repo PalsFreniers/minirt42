@@ -17,6 +17,7 @@ struct					s_camera
 	struct s_vec3		position;
 	struct s_vec3		direction;
 	float				fov;
+	float				screen_to_camera_factor;
 	bool				exist;
 };
 

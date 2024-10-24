@@ -2,6 +2,7 @@
 #include <logger/logger.h>
 #include <parsing/obey.h>
 #include <parsing/parse.h>
+#include <math.h>
 
 static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 {
@@ -11,6 +12,7 @@ static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 		return (false);
 	if (!parse_range(parts[3], &(camera->fov), 180, 0))
 		return (false);
+	// camera->screen_to_camera_factor = 2 * atanf(camera->fov / 2) / SCREEN_X;
 	return (true);
 }
 

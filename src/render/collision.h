@@ -11,7 +11,7 @@ typedef struct s_collision
 {
 	struct s_vec3	position;
 	struct s_vec3	normal;
-	struct s_object	object;
+	struct s_object	*object;
 }					t_collision;
 
 bool	sphere_collide_function(struct s_ray ray, struct s_sphere *sphere,
