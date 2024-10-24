@@ -6,7 +6,7 @@
 /*   By: marwan <marwan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2024/10/24 12:10:30 by marwan           ###   ########.fr       */
+/*   Updated: 2024/10/24 13:15:28 by marwan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,23 @@
 // 		screen_to_camera_factor = 2 * CAMERA_Z * arctan(FOV / 2) / SCREEN_X
 // 
 //look at src/math/la.h to know all the matrix and vector operations
-t_vec3	shoot_ray_from_camera(struct s_mlx *mlx, int x, int y)
+struct s_ray	shoot_ray_from_camera(struct s_mlx *mlx, int x, int y)
 {
-	t_vec3	ray;
+	struct s_ray	ray;
 
-	ray.x = x * mlx->scene.camera.screen_to_camera_factor;
-	ray.y = y * mlx->scene.camera.screen_to_camera_factor;
+	ray.direction.x = x * mlx->scene.camera.screen_to_camera_factor;
+	ray.direction.y = y * mlx->scene.camera.screen_to_camera_factor;
 	// ray.z = CAMERA_Z;
-	ray.z = 1;
+	ray.direction.z = 1;
 	// ray = rotate(ray, camera);
+	ray.direction = vec3_mul(ray.direction, mlx->scene.camera.direction);
+	ray.origin = mlx->scene.camera.position;
 	// // Should we normalise the ray ?
 	// // If we don't *need* to, we could use the not-normalised ray to easily determine if an object is inside the camera.
 	return (ray);
 }
 
-t_collision	get_collision(struct s_mlx *mlx, struct s_vec3 ray)
+t_collision	get_collision(struct s_mlx *mlx, struct s_ray ray)
 {
 	t_collision		collision;
 	t_collision		tmp_collision;
@@ -77,7 +79,7 @@ t_collision	get_collision(struct s_mlx *mlx, struct s_vec3 ray)
 	// dist = +inf;
 	while (i_obj >= 0)
 	{
-		if (test_collision(mlx->scene.objects[i_obj], ray, &tmp_collision) == 1)
+		if (test_collision(mlx, mlx->scene.objects[i_obj], ray, &tmp_collision) == 1)
 			tmp_dist = get_dist(tmp_collision);
 			if (tmp_dist < dist)
 			{
@@ -99,10 +101,10 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision collision)
 
 void	loop_render(struct s_mlx *mlx)
 {
-	int			x;
-	int			y;
-	t_vec3		ray;
-	t_collision	collision;
+	int				x;
+	int				y;
+	struct s_ray	ray;
+	t_collision		collision;
 
 	y = 0;
 	while (y < 1000)

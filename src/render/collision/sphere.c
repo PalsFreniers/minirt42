@@ -2,6 +2,15 @@
 #include <math/la.h>
 #include <render/collision.h>
 
+/**
+ * float x = t - sqrtf(radius * radius - p * p);
+ * if(x <= 0) return false;
+ * return (true);
+ * 
+ * Même logique :
+ * return (t * t <= (radius * radius - p * p));
+*/
+
 bool	sphere_collide_function(struct s_ray ray, struct s_sphere *sphere,
 		struct s_vec3 *position, struct s_vec3 *normal)
 {
