@@ -5,6 +5,7 @@
 # include <stdbool.h>
 # define PPC 7
 # define BORDERC 0xFF8888FF
+# define BORDER2C 0xFF2222FF
 # define TEXTC 0xFFDDDDDD
 
 typedef void			(*t_button_f)(void *);

@@ -50,8 +50,7 @@ float	vec3_distance_sq(t_vec3 a, t_vec3 b)
 	t_vec3	tmp;
 
 	tmp = vec3_sub(a, b);
-	return (vec3_dot(tmp, tmp));
-	return (0);
+	return (vec3_lenght(tmp));
 }
 
 float	vec3_lenght(t_vec3 a)
@@ -173,8 +172,8 @@ t_mat3	get_rotation_matrix(t_vec3 angle)
 	t_mat3	ret;
 
 	ret = mat3_identity();
-	ret = mat3_mul(ret, rotation_matrix_x(angle.x));
-	ret = mat3_mul(ret, rotation_matrix_y(angle.y));
 	ret = mat3_mul(ret, rotation_matrix_z(angle.z));
+	ret = mat3_mul(ret, rotation_matrix_y(angle.y));
+	ret = mat3_mul(ret, rotation_matrix_x(angle.x));
 	return (ret);
 }

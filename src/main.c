@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2024/10/21 02:59:22 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/10/27 02:26:25 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	main(int c, char **args)
 	}
 	if (!parse_file(args[1], &mlx.scene, args[0]))
 	{
-		logger_error("during file parsing", args[0]);
 		ft_free("c", &mlx.scene);
 		return (1);
 	}

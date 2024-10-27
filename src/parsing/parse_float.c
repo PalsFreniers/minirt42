@@ -5,7 +5,8 @@
 
 bool	parse_float(struct s_string sratio, float *ratio)
 {
-	if (!string_obey(sratio, float_obey) || string_count_of(sratio, '.') > 1)
+	if (!string_obey(sratio, float_obey) || string_count_of(sratio, '.') > 1
+		|| string_count_of(sratio, '-') > 1)
 	{
 		logger_error("unable to parse floating point number");
 		return (false);

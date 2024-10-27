@@ -71,7 +71,7 @@ bool	parse_file(const char *path, struct s_scene *scene, const char *prog)
 	if (!parse_file_lines(lines, count, scene))
 		ret = false;
 	ft_free("sp", &file, lines);
-	if (!check_scene(scene))
+	if (ret && !check_scene(scene))
 		ret = false;
 	return (ret);
 }
