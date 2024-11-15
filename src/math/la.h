@@ -1,6 +1,14 @@
 #ifndef LA_H
 # define LA_H
 
+# include <math.h>
+
+
+# define DEG2RAD 0.0174533f
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
+
 typedef struct s_vec3
 {
 	float			x;
@@ -27,6 +35,7 @@ typedef struct s_mat3
 			float	m22;
 		};
 		float		m[9];
+		// float		m[3][3];
 	};
 }					t_mat3;
 
@@ -38,6 +47,7 @@ t_vec3				vec3_add(t_vec3 a, t_vec3 b);
 t_vec3				vec3_sub(t_vec3 a, t_vec3 b);
 t_vec3				vec3_mul(t_vec3 a, t_vec3 b);
 t_vec3				vec3_div(t_vec3 a, t_vec3 b);
+t_vec3				vec3_cross_prod(t_vec3 a, t_vec3 b);
 t_vec3				vec3_normalise(t_vec3 a);
 
 float				vec3_distance(t_vec3 a, t_vec3 b);

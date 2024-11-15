@@ -1,4 +1,3 @@
-#include <math.h>
 #include <math/la.h>
 
 t_vec3	vec3_new(float x, float y, float z)
@@ -38,6 +37,14 @@ t_vec3	vec3_mul(t_vec3 a, t_vec3 b)
 t_vec3	vec3_div(t_vec3 a, t_vec3 b)
 {
 	return (vec3_new(a.x / b.x, a.y / b.y, a.z / b.z));
+}
+
+t_vec3	vec3_cross_prod(t_vec3 a, t_vec3 b)
+{
+	return (vec3_new(
+			a.y * b.z - a.z * b.y,
+			a.z * b.x - a.x * b.z,
+			a.x * b.y - a.y * b.x));
 }
 
 t_vec3	vec3_normalise(t_vec3 a)
