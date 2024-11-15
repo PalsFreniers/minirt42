@@ -4,6 +4,70 @@
 #include <parsing/parse.h>
 #include <math.h>
 
+/**
+ * ray_cam is expressed in camera coordinates.
+ * ray_world is the same ray, expressed in world coordinates.
+ * 
+ * ray_world = (camera->transform * ray_cam) + camera->position
+ * 
+ * camera->transform (T) is made from camera->direction. it cannot be created if camera is pointed to the top or bottom.
+ * 
+ * ray_world = (
+ * 		rwx,
+ * 		rwy,
+ * 		rwz)
+ * 
+ * T = (
+ * 		m00	m01	m02,
+ * 		m10	m11	m12,
+ * 		m20	m21	m22)
+ * 
+ * ray_cam = (
+ * 		rcx,
+ * 		rcy
+ * 		rcz)
+ * 
+ * T * ray_cam = (
+ * 		m00 * rcx + m01 * rcy + m02 * rcz,
+ * 		m10 * rcx + m11 * rcy + m12 * rcz,
+ * 		m20 * rcx + m21 * rcy + m22 * rcz)
+ * 
+ * If ray_cam = (0, 0, 1), then T * ray_cam = camera->direction.
+ * T * (0, 0, 1) = (
+ * 		m00 * 0 + m01 * 0 + m02 * 1,
+ * 		m10 * 0 + m11 * 0 + m12 * 1,
+ * 		m20 * 0 + m21 * 0 + m22 * 1)
+ * 		= (m02, m12, m22) = direction
+ * camera->direction is the camera's depth, it's Z vector cZ.
+ * So we can deduce:
+ * T = (
+ * 		cXx cYx cZx,
+ * 		cXy cYy cZy,
+ * 		cXz cYz cZz)
+ * cX will always by parallel with the ground. if cZ isn't perpendicular to the ground, it can be found.
+ * cY can be deduced from cX and cZ.
+ * 
+ */
+static void	transform_camera(struct s_camera *camera)
+{
+	t_vec3	t_x;
+	t_vec3	t_y;
+
+	t_x = vec3_cross_prod(
+		vec3_normalise(vec3_new(camera->direction.x, camera->direction.y, 0)),
+		vec3_new(0, 0, 1));		// CAREFUL, THIS CAN BREAK
+	t_y = vec3_cross_prod(camera->direction, t_x);
+	camera->transform.m00 = t_x.x;
+	camera->transform.m10 = t_x.y;
+	camera->transform.m20 = t_x.z;
+	camera->transform.m01 = t_y.x;
+	camera->transform.m11 = t_y.y;
+	camera->transform.m21 = t_y.z;
+	camera->transform.m02 = camera->direction.x;
+	camera->transform.m12 = camera->direction.y;
+	camera->transform.m22 = camera->direction.z;
+}
+
 static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 {
 	if (!parse_position(parts[1], &(camera->position)))
@@ -12,6 +76,7 @@ static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 		return (false);
 	if (!parse_range(parts[3], &(camera->fov), 180, 0))
 		return (false);
+	transform_camera(camera);
 	// camera->screen_to_camera_factor = 2 * atanf(camera->fov / 2) / SCREEN_X;
 	return (true);
 }
