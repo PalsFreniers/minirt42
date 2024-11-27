@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:38:33 by marwan            #+#    #+#             */
-/*   Updated: 2024/11/15 21:50:21 by maamine          ###   ########.fr       */
+/*   Updated: 2024/11/21 01:30:37 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	test_collision(struct s_mlx *mlx, struct s_object *object,
 
 	if (object->type == OBJ_SPHERE)
 		is_collide = sphere_collide_function(ray, (struct s_sphere*) object,
-			&collision->position, &collision->normal);
+			collision, );
 	// else if (object->type == OBJ_PLANE)
 	// 	is_collide = plane_collide_function(ray, object,
 	// 		&collision->position, &collision->normal);
