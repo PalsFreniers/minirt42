@@ -81,9 +81,12 @@ static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 	return (true);
 }
 
+#include <stdio.h>
+
 bool	parse_camera(struct s_string *parts, size_t count,
 		struct s_camera *camera)
 {
+        printf("%d\n", camera->exist);
 	if (camera->exist)
 	{
 		logger_error("only one camera is able to exist at one time");
