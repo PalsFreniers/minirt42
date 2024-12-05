@@ -23,7 +23,9 @@ bool	sphere_collide_function(struct s_ray ray, struct s_sphere *sphere,
 
 	(void)m;
 	ft_bzero(coll, sizeof(t_collision));
-	position = mat3_apply(m->rotation, sphere->base.position);
+	// position = mat3_apply(m->rotation, sphere->base.position);
+	(void) m;
+	position = sphere->base.position;
 	t = vec3_dot(vec3_sub(position, ray.origin), ray.direction);
 	p = vec3_add(ray.origin, vec3_mul(ray.direction, vec3_new_from_one(t)));
 	y = vec3_lenght(vec3_sub(position, p));
