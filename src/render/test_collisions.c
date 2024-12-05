@@ -6,10 +6,11 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:38:33 by marwan            #+#    #+#             */
-/*   Updated: 2024/11/19 17:19:31 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/05 19:53:38 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "math/la.h"
 #include <render/collision.h>
 
 // Maybe put this in the object folder ?
@@ -26,12 +27,15 @@ bool	test_collision(struct s_mlx *mlx, struct s_object *object,
 {
 	bool	is_collide;
 
-	(void) mlx;						// To remove?
+        t_matrices mats = {0};
+        (void)mlx;
+        mats.rotation = get_rotation_matrix((t_vec3){1, 0, 0});
+
 	if (object->type == OBJ_SPHERE)
 		// is_collide = sphere_collide_function(ray, (struct s_sphere*) object,
 		// 	&collision->position, &collision->normal);
 		is_collide = sphere_collide_function(ray, (struct s_sphere*) object,
-			collision, NULL);
+			collision, &mats);
 	// else if (object->type == OBJ_PLANE)
 	// 	is_collide = plane_collide_function(ray, object,
 	// 		&collision->position, &collision->normal);

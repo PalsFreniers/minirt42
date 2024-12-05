@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2024/10/27 02:26:25 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/11/30 17:39:23 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 #include <ui/window.h>
 #include <render/render.h>
 
+/**
+ * @brief test brief
+ */
 void	register_free_funcs(void)
 {
 	ft_free_register('s', (t_free_function)string_destroy);
@@ -56,6 +59,7 @@ int	main(int c, char **args)
 	struct s_mlx	mlx;
 
 	register_free_funcs();
+        reg
 	if (c != 2)
 	{
 		logger_error("usage: %s <path/to/file.rt>", args[0]);
