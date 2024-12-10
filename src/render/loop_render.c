@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/10 19:25:24 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/10 23:01:49 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +57,21 @@ struct s_ray	shoot_ray_from_camera(struct s_mlx *mlx, int x, int y)
 
 	ray.direction.x = (x - WIN_WIDTH / 2) * mlx->scene.camera.screen_to_camera_factor;
 	ray.direction.y = (y - WIN_HEIGHT / 2) * mlx->scene.camera.screen_to_camera_factor;
-	// ray.direction.x = x * mlx->scene.camera.screen_to_camera_factor;
-	// ray.direction.y = y * mlx->scene.camera.screen_to_camera_factor;
-	// ray.z = CAMERA_Z;
 	ray.direction.z = 1;
-	ray.direction = mat3_apply(mlx->scene.camera.transform, ray.direction);		// Magic, so simple yet I'm so proud of it!
-	ray.origin = mlx->scene.camera.position;
-	// // Should we normalise the ray ?
-	// // If we don't *need* to,
-	// we could use the not
-	// 	-normalised ray to easily determine if an object is inside the camera.return (ray);
+	// ray.direction = mat3_apply(mlx->scene.camera.transform, ray.direction);		// Magic, so simple yet I'm so proud of it!
+	// ray.origin = mlx->scene.camera.position;
+	// // // Should we normalise the ray ?
+	// // // If we don't *need* to,
+	// // we could use the not
+	// // 	-normalised ray to easily determine if an object is inside the camera.return (ray);
 	ray.direction = vec3_normalise(ray.direction);
 	return (ray);
 }
-
-// float	get_dist(struct s_ray ray, t_collision collision)
-// {
-// 	return (vec3_lenght(vec3_sub(collision.position, ray.origin)));
-// }
 
 t_collision	get_collision(struct s_mlx *mlx, struct s_ray ray)
 {
 	t_collision		collision;
 	t_collision		tmp_collision;
-	// unsigned char	x;
 	size_t			i_obj;
 
 	collision.object = NULL;
@@ -91,7 +82,6 @@ t_collision	get_collision(struct s_mlx *mlx, struct s_ray ray)
 		if (test_collision(mlx, mlx->scene.objects[i_obj], ray,
 				&tmp_collision) == 1)
 		{
-			// tmp_dist = get_dist(ray, tmp_collision);
 			if (tmp_collision.dist > 0 && tmp_collision.dist < collision.dist)
 			{
 				collision = tmp_collision;

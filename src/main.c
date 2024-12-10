@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2024/12/06 21:34:02 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/10 23:20:27 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,24 @@ void	register_mlx_hooks(struct s_mlx *mlx)
 	mlx_loop_hook(mlx->mlx, (t_mlx_l_f)loop_render, mlx);
 }
 
+void	move_object(struct s_object *object, t_vec3 translation, t_mat3 transform)
+{
+	object->position = vec3_sub(object->position, translation);
+	object->position = mat3_apply(transform, object->position);
+}
+
+void	move_the_world(struct s_mlx *mlx, t_vec3 translation, t_mat3 transform)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < mlx->scene.len)
+	{
+		move_object(mlx->scene.objects[i], translation, transform);
+		i++;
+	}
+}
+
 int	main(int c, char **args)
 {
 	struct s_mlx	mlx;
@@ -77,6 +95,7 @@ int	main(int c, char **args)
 		return (1);
 	}
 	register_mlx_hooks(&mlx);
+	move_the_world(&mlx, mlx.scene.camera.position, mlx.scene.camera.transform);
 	mlx_loop(mlx.mlx);
 	ft_free("m", &mlx);
 	return (0);
