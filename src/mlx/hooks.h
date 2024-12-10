@@ -6,6 +6,13 @@
 enum	e_key_type
 {
 	KEY_ESCAPE = 41,
+	KEY_ENTER = 40,
+	KEY_W = 26,
+	KEY_A = 4,
+	KEY_S = 22,
+	KEY_D = 7,
+	KEY_LEFT_SHIFT = 225,
+	KEY_SPACE = 44,
 };
 
 void	update_buttons_click(int e, struct s_mlx *mlx);

@@ -2,6 +2,7 @@
 #include <logger/logger.h>
 #include <parsing/obey.h>
 #include <parsing/parse.h>
+#include <ui/window.h>
 #include <math.h>
 
 /**
@@ -48,7 +49,7 @@
  * cY can be deduced from cX and cZ.
  * 
  */
-static void	transform_camera(struct s_camera *camera)
+void	camera_create_transform(struct s_camera *camera)
 {
 	t_vec3	t_x;
 	t_vec3	t_y;
@@ -58,16 +59,17 @@ static void	transform_camera(struct s_camera *camera)
 		vec3_new(0, 0, 1));		// CAREFUL, THIS CAN BREAK
 	t_y = vec3_cross_prod(camera->direction, t_x);
 	camera->transform.m00 = t_x.x;
-	camera->transform.m10 = t_x.y;
-	camera->transform.m20 = t_x.z;
 	camera->transform.m01 = t_y.x;
-	camera->transform.m11 = t_y.y;
-	camera->transform.m21 = t_y.z;
 	camera->transform.m02 = camera->direction.x;
+	camera->transform.m10 = t_x.y;
+	camera->transform.m11 = t_y.y;
 	camera->transform.m12 = camera->direction.y;
+	camera->transform.m20 = t_x.z;
+	camera->transform.m21 = t_y.z;
 	camera->transform.m22 = camera->direction.z;
 }
 
+#include <stdio.h>	// 
 static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 {
 	if (!parse_position(parts[1], &(camera->position)))
@@ -76,17 +78,19 @@ static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 		return (false);
 	if (!parse_range(parts[3], &(camera->fov), 180, 0))
 		return (false);
-	transform_camera(camera);
-	// camera->screen_to_camera_factor = 2 * atanf(camera->fov / 2) / SCREEN_X;
+	camera_create_transform(camera);
+	printf("Camera transform:\n");
+	printf("/% .3f % .3f % .3f\\\n", camera->transform.m00, camera->transform.m01, camera->transform.m02);
+	printf("|% .3f % .3f % .3f|\n", camera->transform.m10, camera->transform.m11, camera->transform.m12);
+	printf("\\% .3f % .3f % .3f/\n", camera->transform.m20, camera->transform.m21, camera->transform.m22);
+	// camera->screen_to_camera_factor = 2 * atanf(camera->fov / 2) / WIN_WIDTH;
+	camera->screen_to_camera_factor = (2 * tanf(camera->fov / 2)) / WIN_WIDTH;
 	return (true);
 }
-
-#include <stdio.h>
 
 bool	parse_camera(struct s_string *parts, size_t count,
 		struct s_camera *camera)
 {
-        printf("%d\n", camera->exist);
 	if (camera->exist)
 	{
 		logger_error("only one camera is able to exist at one time");

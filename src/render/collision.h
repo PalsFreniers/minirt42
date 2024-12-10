@@ -15,7 +15,7 @@ typedef struct s_matrices
 
 typedef struct s_collision
 {
-        float dist;
+	float			dist;
 	struct s_vec3	position;
 	struct s_vec3	normal;
 	struct s_object	*object;
@@ -28,5 +28,7 @@ bool	test_collision(struct s_mlx *mlx, struct s_object *object,
 
 bool	sphere_collide_function(struct s_ray ray, struct s_sphere *sphere,
 			t_collision *collision, t_matrices *mats);
+
+bool	lit_collision(struct s_mlx *mlx, t_collision collision);
 
 #endif // COLLISION_H

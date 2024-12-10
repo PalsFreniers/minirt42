@@ -42,6 +42,7 @@ typedef struct s_mat3
 t_vec3				vec3_new(float x, float y, float z);
 t_vec3				vec3_new_from_one(float v);
 t_vec3				vec3_zero(void);
+t_vec3				vec3_scalar_mul(t_vec3 a, float f);
 
 t_vec3				vec3_add(t_vec3 a, t_vec3 b);
 t_vec3				vec3_sub(t_vec3 a, t_vec3 b);

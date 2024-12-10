@@ -19,6 +19,11 @@ t_vec3	vec3_zero(void)
 	return ((t_vec3){0});
 }
 
+t_vec3	vec3_scalar_mul(t_vec3 a, float f)
+{
+	return (vec3_new(f * a.x, f * a.y, f * a.z));
+}
+
 t_vec3	vec3_add(t_vec3 a, t_vec3 b)
 {
 	return (vec3_new(a.x + b.x, a.y + b.y, a.z + b.z));

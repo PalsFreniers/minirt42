@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 04:16:46 by maamine           #+#    #+#             */
-/*   Updated: 2024/10/13 05:43:18 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/12/09 20:56:53 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,25 @@
 # define RENDER_H
 
 # include <mlx/mmlx.h>
+# include <render/collision.h>
 
-void	loop_render(struct s_mlx *mlx);
+typedef union u_acolor
+{
+	uint32_t		argb;
+	struct
+	{
+		uint8_t		b;
+		uint8_t		g;
+		uint8_t		r;
+		uint8_t		a;
+	};
+}					t_acolor;
+
+void		loop_render(struct s_mlx *mlx);
+
+t_acolor	rgb_to_rgba(t_color color);
+t_acolor	blend_acolor(t_acolor a, t_acolor b);
+t_acolor	get_light_acolor(struct s_mlx *mlx);
+t_acolor	lit_color(struct s_mlx *mlx, t_collision collision);
 
 #endif // RENDER_H

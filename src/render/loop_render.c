@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2024/11/15 21:44:39 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/10 19:25:24 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ struct s_ray	shoot_ray_from_camera(struct s_mlx *mlx, int x, int y)
 {
 	struct s_ray	ray;
 
-	ray.direction.x = x * mlx->scene.camera.screen_to_camera_factor;
-	ray.direction.y = y * mlx->scene.camera.screen_to_camera_factor;
+	ray.direction.x = (x - WIN_WIDTH / 2) * mlx->scene.camera.screen_to_camera_factor;
+	ray.direction.y = (y - WIN_HEIGHT / 2) * mlx->scene.camera.screen_to_camera_factor;
+	// ray.direction.x = x * mlx->scene.camera.screen_to_camera_factor;
+	// ray.direction.y = y * mlx->scene.camera.screen_to_camera_factor;
 	// ray.z = CAMERA_Z;
 	ray.direction.z = 1;
 	ray.direction = mat3_apply(mlx->scene.camera.transform, ray.direction);		// Magic, so simple yet I'm so proud of it!
@@ -65,47 +67,108 @@ struct s_ray	shoot_ray_from_camera(struct s_mlx *mlx, int x, int y)
 	// // If we don't *need* to,
 	// we could use the not
 	// 	-normalised ray to easily determine if an object is inside the camera.return (ray);
+	ray.direction = vec3_normalise(ray.direction);
 	return (ray);
 }
 
-float	get_dist(struct s_ray ray, t_collision collision)
-{
-	return (vec3_lenght(vec3_sub(collision.position, ray.origin)));
-}
+// float	get_dist(struct s_ray ray, t_collision collision)
+// {
+// 	return (vec3_lenght(vec3_sub(collision.position, ray.origin)));
+// }
 
 t_collision	get_collision(struct s_mlx *mlx, struct s_ray ray)
 {
 	t_collision		collision;
 	t_collision		tmp_collision;
 	// unsigned char	x;
-	int				i_obj;
-	float			dist;
-	float			tmp_dist;
+	size_t			i_obj;
 
 	collision.object = NULL;
-	i_obj = next_object(mlx->scene.objects, -1);
-	// dist = +inf;
-	while (i_obj >= 0)
+	collision.dist = INFINITY;
+	i_obj = 0;
+	while (i_obj < mlx->scene.len)
 	{
 		if (test_collision(mlx, mlx->scene.objects[i_obj], ray,
 				&tmp_collision) == 1)
-			tmp_dist = get_dist(ray, tmp_collision);
-		if (tmp_dist < dist)
 		{
-			collision = tmp_collision;
-			dist = tmp_dist;
+			// tmp_dist = get_dist(ray, tmp_collision);
+			if (tmp_collision.dist > 0 && tmp_collision.dist < collision.dist)
+			{
+				collision = tmp_collision;
+				collision.dist = tmp_collision.dist;
+			}
 		}
-		i_obj = next_object(mlx->scene.objects, i_obj);
+		i_obj++;
 	}
 	return (collision);
 }
 
+static bool	is_float_on_grad(float f, float step, float precision)
+{
+	float	mod;
+
+	mod = fmod(f, step);
+	return (mod < precision || mod > (step - precision));
+}
+
+// static bool	keep_black_dist(float dist, float step, float precision)
+// {
+// 	return (is_float_on_grad(dist, step, precision));
+// }
+
+// static bool	keep_black_grad(t_collision collision, float step, float precision)
+// {
+// 	bool		x_bool;
+// 	bool		y_bool;
+// 	bool		z_bool;
+
+// 	x_bool = is_float_on_grad(collision.position.x, step, precision);
+// 	y_bool = is_float_on_grad(collision.position.y, step, precision);
+// 	z_bool = is_float_on_grad(collision.position.z, step, precision);
+// 	return (x_bool && y_bool && z_bool);
+// }
+
+static t_acolor	draw_graduation(t_collision collision, float step, float precision)
+{
+	t_acolor	color;
+	bool		x_bool;
+	bool		y_bool;
+	bool		z_bool;
+
+	x_bool = is_float_on_grad(fabs(collision.position.x), step, precision);
+	y_bool = is_float_on_grad(fabs(collision.position.y), step, precision);
+	z_bool = is_float_on_grad(fabs(collision.position.z), step, precision);
+	color.argb = 0XFF000000;
+	color.r = x_bool * 0XFF;
+	color.g = y_bool * 0XFF;
+	color.b = z_bool * 0XFF;
+	return (color);
+}
+
 void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision collision)
 {
+	t_acolor	color;
+
+	// if (collision.object && !keep_black_dist(collision.dist, 1.0f, 0.05f))
+	// if (collision.object && !keep_black_grad(collision, 1.0f, 0.05f))
 	if (collision.object)
-		mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, 0xFFFFFFFF);
+	{
+		color = draw_graduation(collision, 1.0f, 0.02f);
+		if (color.argb != 0XFF000000)
+		{
+			mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color.argb);
+			// mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, 0xFF000000);
+			return ;
+		}
+		if (mlx->scene.objects[0]->type == OBJ_LIGHT)
+			color = blend_acolor(get_light_acolor(mlx), lit_color(mlx, collision));
+		else
+			color.argb = 0XFF000000;
+		color = blend_acolor(color, rgb_to_rgba(mlx->scene.ambient.color));
+		mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color.argb);
+	}
 	else
-		mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, 0xFF000000);
+		mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, rgb_to_rgba(mlx->scene.ambient.color).argb);
 }
 
 // // void	loop_render(struct s_mlx *mlx)
@@ -121,31 +184,15 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision collision)
 
 void	loop_render(struct s_mlx *mlx)
 {
-	// t_collision	dum;
-	t_matrices	m;
-	t_vec3		pied;
-	// t_vec3		uv;
-	// float		t;
-	// int			color;
+	// t_matrices	m;
+	// t_vec3		pied;
 	t_ray		ray;
 	t_collision	collision;
 
-	// struct s_sphere s = (struct s_sphere){
-	// 	.base =
-	// 		(struct s_object){
-	// 			.color =
-	// 				(union u_color){
-	// 					.rgb = 0,
-	// 				},
-	// 			.position = vec3_new(0, 0, 4),
-	// 			.type = OBJ_SPHERE,
-	// 		},
-	// 	.diameter = 1,
-	// };
 	loop_draw_ui(mlx);
-	pied = vec3_add(vec3_mul(mlx->scene.camera.direction,
-				vec3_new_from_one(M_PI)), vec3_new_from_one(M_PI));
-	m.rotation = get_rotation_matrix(pied);
+	// pied = vec3_add(vec3_mul(mlx->scene.camera.direction,
+	// 			vec3_new_from_one(M_PI)), vec3_new_from_one(M_PI));
+	// m.rotation = get_rotation_matrix(pied);
 	for (int y = 0; y < WIN_HEIGHT; y++)
 	{
 		for (int x = 0; x < WIN_WIDTH; ++x)
@@ -153,11 +200,11 @@ void	loop_render(struct s_mlx *mlx)
 			ray = shoot_ray_from_camera(mlx, x, y);
 			collision = get_collision(mlx, ray);
 			draw_pixel(mlx, x, y, collision);
-			// x++;
 		}
 	}
 	mlx_swap_ray_buffer(mlx);
 }
+
 // //#define DEG2RAD 0.0174533f
 // // void loop_render(struct s_mlx *mlx) {
 // //        struct s_sphere s = (struct s_sphere) {

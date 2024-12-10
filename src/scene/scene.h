@@ -36,4 +36,6 @@ bool					scene_append(struct s_scene *scene,
 							struct s_object *obj);
 void					free_scene(struct s_scene *scene);
 
+void					camera_create_transform(struct s_camera *camera);
+
 #endif // SCENE_H

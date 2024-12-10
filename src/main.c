@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2024/11/30 17:39:23 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/12/06 21:34:02 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	main(int c, char **args)
 	struct s_mlx	mlx;
 
 	register_free_funcs();
-        reg
+        // reg
 	if (c != 2)
 	{
 		logger_error("usage: %s <path/to/file.rt>", args[0]);
