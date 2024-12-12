@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:38:33 by marwan            #+#    #+#             */
-/*   Updated: 2024/12/09 20:57:41 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/12 18:52:49 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	next_object(struct s_object **objects, int i)
 	return (-1);
 }
 
-// is_front_side() would test if the collision occurs on the front side of the camera
 bool	test_collision(struct s_mlx *mlx, struct s_object *object,
 	struct s_ray ray, t_collision *collision)
 {
@@ -38,24 +37,23 @@ bool	test_collision(struct s_mlx *mlx, struct s_object *object,
 	}
 	else
 		is_collide = false;
-	// return (is_collide && is_front_side(mlx, collision->position));
 	return (is_collide);
 }
 
-bool	lit_collision(struct s_mlx *mlx, t_collision collision)
-{
-	t_ray	ray;
-	size_t	i;
+// bool	lit_collision(struct s_mlx *mlx, t_collision collision)
+// {
+// 	t_ray	ray;
+// 	size_t	i;
 
-	ray.origin = collision.position;
-	ray.direction = vec3_sub(mlx->scene.objects[0]->position, collision.position);
-	i = 1;
-	while (i < mlx->scene.len)
-	{
-		if (mlx->scene.objects[i] != collision.object)
-			if (test_collision(mlx, mlx->scene.objects[i], ray, NULL))
-				return (false);
-		i++;
-	}
-	return (true);
-}
+// 	ray.origin = collision.position;
+// 	ray.direction = vec3_sub(mlx->scene.objects[0]->position, collision.position);
+// 	i = 1;
+// 	while (i < mlx->scene.len)
+// 	{
+// 		if (mlx->scene.objects[i] != collision.object)
+// 			if (test_collision(mlx, mlx->scene.objects[i], ray, NULL))
+// 				return (false);
+// 		i++;
+// 	}
+// 	return (true);
+// }

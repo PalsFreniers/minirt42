@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/12 18:10:28 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/12 18:52:09 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,27 @@ t_acolor	get_light_acolor(struct s_mlx *mlx)
 	return (color);
 }
 
-// static bool	lit_angle(struct s_mlx *mlx, t_collision collision)
-// {
-// 	t_vec3	collision_to_light;
-// 
-// 	collision_to_light = vec3_sub(mlx->scene.objects[0]->position, collision.position);
-// 	return (vec3_dot(collision.normal, vec3_normalise(collision_to_light)) >= 0);
-// }
+static bool	is_lit(struct s_mlx *mlx, t_collision starting_point, t_vec3 light_dir)
+{
+	t_ray		ray;
+	t_collision	new_collision;
+	float		light_dist;
+	size_t		i;
+
+	ray.origin = starting_point.position;
+	ray.direction = vec3_normalise(light_dir);
+	light_dist = vec3_lenght(light_dir);
+	i = 0;
+	while (i < mlx->scene.len)
+	{
+		if (mlx->scene.objects[i] != starting_point.object
+			&& test_collision(mlx, mlx->scene.objects[i], ray, &new_collision)
+			&& new_collision.dist > 0 && new_collision.dist < light_dist)
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 t_acolor	lit_color(struct s_mlx *mlx, t_collision collision)
 {
@@ -83,8 +97,7 @@ t_acolor	lit_color(struct s_mlx *mlx, t_collision collision)
 
 	collision_to_light = vec3_sub(mlx->scene.objects[0]->position, collision.position);
 	cos_angle = vec3_dot(collision.normal, vec3_normalise(collision_to_light));
-	// if (cos_angle < 0 || !lit_collision(mlx, collision))
-	if (cos_angle < 0)
+	if (cos_angle < 0 || !is_lit(mlx, collision, collision_to_light))
 	{
 		color.argb = 0XFF000000;
 		return (color);

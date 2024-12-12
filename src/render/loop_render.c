@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/12 18:18:38 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/12 18:27:53 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision collision)
 		if (color.argb != 0XFF000000)
 		{
 			mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color.argb);
-			// mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, 0xFF000000);
 			return ;
 		}
 		// Normal program
