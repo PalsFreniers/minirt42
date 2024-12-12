@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 04:16:46 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/09 20:56:53 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/12 17:40:58 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef union u_acolor
 void		loop_render(struct s_mlx *mlx);
 
 t_acolor	rgb_to_rgba(t_color color);
+t_acolor	filter_acolor(t_acolor light, t_acolor filter);
 t_acolor	blend_acolor(t_acolor a, t_acolor b);
 t_acolor	get_light_acolor(struct s_mlx *mlx);
 t_acolor	lit_color(struct s_mlx *mlx, t_collision collision);

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/10 23:01:49 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/12 18:18:38 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,11 +138,16 @@ static t_acolor	draw_graduation(t_collision collision, float step, float precisi
 void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision collision)
 {
 	t_acolor	color;
+	t_acolor	light;
+	t_acolor	ambient;
 
+	light = get_light_acolor(mlx);
+	ambient = rgb_to_rgba(mlx->scene.ambient.color);
 	// if (collision.object && !keep_black_dist(collision.dist, 1.0f, 0.05f))
 	// if (collision.object && !keep_black_grad(collision, 1.0f, 0.05f))
 	if (collision.object)
 	{
+		// draw RGB lines on object,	DEBUG ONLY
 		color = draw_graduation(collision, 1.0f, 0.02f);
 		if (color.argb != 0XFF000000)
 		{
@@ -150,15 +155,16 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision collision)
 			// mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, 0xFF000000);
 			return ;
 		}
+		// Normal program
 		if (mlx->scene.objects[0]->type == OBJ_LIGHT)
-			color = blend_acolor(get_light_acolor(mlx), lit_color(mlx, collision));
+			color = filter_acolor(light, lit_color(mlx, collision));
 		else
 			color.argb = 0XFF000000;
-		color = blend_acolor(color, rgb_to_rgba(mlx->scene.ambient.color));
+		color = blend_acolor(color, ambient);
 		mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color.argb);
 	}
 	else
-		mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, rgb_to_rgba(mlx->scene.ambient.color).argb);
+		mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, ambient.argb);
 }
 
 // // void	loop_render(struct s_mlx *mlx)

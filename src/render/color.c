@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/09 20:44:55 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/12 18:10:28 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ t_acolor	rgb_to_rgba(t_color color)
 	acolor.g = color.g;
 	acolor.b = color.b;
 	return (acolor);
+}
+
+t_acolor	filter_acolor(t_acolor light, t_acolor filter)
+{
+	t_acolor	color;
+
+	color.a = 0XFF;
+	color.r = (light.r * filter.r) / 0XFF;
+	color.g = (light.g * filter.g) / 0XFF;
+	color.b = (light.b * filter.b) / 0XFF;
+	return (color);
 }
 
 t_acolor	blend_acolor(t_acolor a, t_acolor b)
@@ -56,19 +67,24 @@ t_acolor	get_light_acolor(struct s_mlx *mlx)
 	return (color);
 }
 
-static bool	lit_angle(struct s_mlx *mlx, t_collision collision)
-{
-	t_vec3	collision_to_light;
-
-	collision_to_light = vec3_sub(mlx->scene.objects[0]->position, collision.position);
-	return (vec3_dot(collision.normal, collision_to_light) > 0);
-}
+// static bool	lit_angle(struct s_mlx *mlx, t_collision collision)
+// {
+// 	t_vec3	collision_to_light;
+// 
+// 	collision_to_light = vec3_sub(mlx->scene.objects[0]->position, collision.position);
+// 	return (vec3_dot(collision.normal, vec3_normalise(collision_to_light)) >= 0);
+// }
 
 t_acolor	lit_color(struct s_mlx *mlx, t_collision collision)
 {
 	t_acolor	color;
+	t_vec3		collision_to_light;
+	float		cos_angle;
 
-	if (!lit_angle(mlx, collision) || !lit_collision(mlx, collision))
+	collision_to_light = vec3_sub(mlx->scene.objects[0]->position, collision.position);
+	cos_angle = vec3_dot(collision.normal, vec3_normalise(collision_to_light));
+	// if (cos_angle < 0 || !lit_collision(mlx, collision))
+	if (cos_angle < 0)
 	{
 		color.argb = 0XFF000000;
 		return (color);
