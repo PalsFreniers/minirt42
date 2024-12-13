@@ -119,7 +119,7 @@ int	camera_move(int key, struct s_mlx *mlx)
 #include <stdio.h>	// 
 int	key_event(int key, struct s_mlx *mlx)
 {
-	printf("key: %d\n", key);	// 
+// 	printf("key: %d\n", key);	// 
 	if (key == KEY_ESCAPE)
 		return (win_close(0, mlx));
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D || key == KEY_Q || key == KEY_E)

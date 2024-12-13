@@ -11,12 +11,12 @@ bool	plane_collide_function(struct s_ray ray, struct s_plane *plane,
 {
 	(void)m;
         t_vec3 norm = vec3_normalise(plane->normal);
-        float determinant = vec3_dot(ray.direction, norm);
+        float determinant = ft_abs(vec3_dot(ray.direction, norm));
 	if (determinant <= 0)
 		return (false);
 	if (coll)
 	{
-		float distance = vec3_dot(vec3_sub(ray.origin, plane->base.position), norm) / determinant;
+		float distance = vec3_dot(vec3_sub(plane->base.position, ray.origin), norm) / determinant;
 		coll->dist = distance;
 		coll->position = vec3_add(ray.origin, vec3_scalar_mul(ray.direction, distance));
 		coll->normal = norm;
