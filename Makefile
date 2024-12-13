@@ -73,7 +73,8 @@ SRC += src/math/la.c
 SRC += src/render/loop_render.c \
        src/render/test_collisions.c \
        src/render/color.c
-SRC += src/render/collision/sphere.c
+SRC += src/render/collision/sphere.c \
+       src/render/collision/plane.c
 MAIN = src/main.c
 
 ##========== NAMES ==========##
@@ -124,7 +125,7 @@ LIBS = -lm -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -lSDL2
 TIMER = 0.1
 
 ifdef DEBUG
-	CFLAGS += -g -gdwarf-2 #-fsanitize=address #(address, memory, thread)
+	CFLAGS += -g -gdwarf-2 -pg #-fsanitize=address #(address, memory, thread)
 	DEBUG_MODE = 1
 endif
 
