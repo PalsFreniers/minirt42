@@ -28,6 +28,7 @@ typedef struct s_scene
 	struct s_ambient	ambient;
 	struct s_camera		camera;
 	struct s_object		**objects;
+	struct s_object		**map_objects;
 	size_t				capacity;
 	size_t				len;
 }						t_scene;

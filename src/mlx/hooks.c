@@ -79,26 +79,24 @@ void	loop_draw_ui(struct s_mlx *mlx)
 
 int	camera_move(int key, struct s_mlx *mlx)
 {
-	// if (key == KEY_W)
-	// 	move_the_world(mlx, vec3_new(0.0f, 0.5f, 0.0f), mat3_identity());
-	// else if (key == KEY_S)
-	// 	move_the_world(mlx, vec3_new(0.0f, -0.5f, 0.0f), mat3_identity());
+	struct s_camera	*camera;
+
+	camera = &mlx->scene.camera;
 	if (key == KEY_W)
-		move_the_world(mlx, vec3_zero(), get_rotation_matrix(vec3_new(0.1f, 0.0f, 0.0f)));
+		camera->direction = mat3_apply(get_rotation_matrix(vec3_new(0.0f, -0.1f, 0.0f)), camera->direction);
 	else if (key == KEY_S)
-		move_the_world(mlx, vec3_zero(), get_rotation_matrix(vec3_new(-0.1f, 0.0f, 0.0f)));
-	// else if (key == KEY_A)
-	// 	move_the_world(mlx, vec3_new(0.5f, 0.0f, 0.0f), mat3_identity());
-	// else if (key == KEY_D)
-	// 	move_the_world(mlx, vec3_new(-0.5f, 0.0f, 0.0f), mat3_identity());
+		camera->direction = mat3_apply(get_rotation_matrix(vec3_new(0.0f, +0.1f, 0.0f)), camera->direction);
 	else if (key == KEY_A)
-		move_the_world(mlx, vec3_zero(), get_rotation_matrix(vec3_new(0.0f, -0.1f, 0.0f)));
+		camera->direction = mat3_apply(get_rotation_matrix(vec3_new(0.0f, 0.0f, +0.1f)), camera->direction);
 	else if (key == KEY_D)
-		move_the_world(mlx, vec3_zero(), get_rotation_matrix(vec3_new(0.0f, 0.1f, 0.0f)));
+		camera->direction = mat3_apply(get_rotation_matrix(vec3_new(0.0f, 0.0f, -0.1f)), camera->direction);
 	else if (key == KEY_Q)
-		move_the_world(mlx, vec3_new(0.0f, 0.0f, 0.5f), mat3_identity());
+		camera->position = vec3_add(camera->position, vec3_scalar_mul(camera->direction, +0.5f));
 	else if (key == KEY_E)
-		move_the_world(mlx, vec3_new(0.0f, 0.0f, -0.5f), mat3_identity());
+		camera->position = vec3_add(camera->position, vec3_scalar_mul(camera->direction, -0.5f));
+	if (key == KEY_W || key == KEY_S || key == KEY_A || key == KEY_D)
+		camera_create_transform(camera);
+	map_scene(&mlx->scene, camera->position, camera->transform);
 	return (0);
 }
 

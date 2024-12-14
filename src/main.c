@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2024/12/10 23:20:27 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/15 00:16:24 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,88 @@ void	register_free_funcs(void)
 	ft_free_register('m', (t_free_function)free_mlx);
 }
 
+static size_t	object_size(struct s_object *object)
+{
+	if (object->type == OBJ_LIGHT)
+	{
+		return (sizeof (struct s_light));
+	}
+	else if (object->type == OBJ_SPHERE)
+	{
+		return (sizeof (struct s_sphere));
+	}
+	else if (object->type == OBJ_PLANE)
+	{
+		return (sizeof (struct s_plane));
+	}
+	else if (object->type == OBJ_CYLINDER)
+	{
+		return (sizeof (struct s_cylinder));
+	}
+	else
+	{
+		return (0);
+	}
+}
+
+static bool	dup_objects(struct s_scene *scene)
+{
+	size_t	obj_size;
+	size_t	i;
+
+	scene->map_objects = ft_calloc(scene->len, sizeof (struct s_object *));
+	if (!scene->map_objects)
+		return (false);
+	i = 0;
+	while (i < scene->len)
+	{
+		obj_size = object_size(scene->objects[i]);
+		scene->map_objects[i] = malloc(obj_size);
+		if (!scene->map_objects[i])
+		{
+			// TODO: free everything ! (integrate into ft_free() ?)
+			return (false);
+		}
+		ft_memcpy(scene->map_objects[i], scene->objects[i], obj_size);
+		i++;
+	}
+	return (true);
+}
+
+static void	map_object(struct s_object *target, struct s_object *src,
+	t_vec3 translation, t_mat3 transform)
+{
+	target->position = vec3_sub(src->position, translation);
+	target->position = mat3_apply(transform, target->position);
+	if (src->type == OBJ_PLANE)
+	{
+		((struct s_plane *) target)->normal
+			= vec3_sub(((struct s_plane *) src)->normal, translation);
+		((struct s_plane *) target)->normal
+			= mat3_apply(transform, ((struct s_plane *) target)->normal);
+	}
+	else if (src->type == OBJ_CYLINDER)
+	{
+		((struct s_cylinder *) target)->axis
+			= vec3_sub(((struct s_cylinder *) src)->axis, translation);
+		((struct s_cylinder *) target)->axis
+			= mat3_apply(transform, ((struct s_cylinder *) target)->axis);
+	}
+}
+
+void	map_scene(struct s_scene *scene, t_vec3 translation, t_mat3 transform)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < scene->len)
+	{
+		map_object(scene->map_objects[i], scene->objects[i],
+			translation, transform);
+		i++;
+	}
+}
+
 void	register_mlx_hooks(struct s_mlx *mlx)
 {
 	mlx_on_event(mlx->mlx, mlx->win, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
@@ -54,22 +136,24 @@ void	register_mlx_hooks(struct s_mlx *mlx)
 	mlx_loop_hook(mlx->mlx, (t_mlx_l_f)loop_render, mlx);
 }
 
-void	move_object(struct s_object *object, t_vec3 translation, t_mat3 transform)
+#include <stdio.h>	//
+void	printf_vec3(t_vec3 vec)	//
 {
-	object->position = vec3_sub(object->position, translation);
-	object->position = mat3_apply(transform, object->position);
+	printf("(%f, %f, %f)", vec.x, vec.y, vec.z);
 }
 
-void	move_the_world(struct s_mlx *mlx, t_vec3 translation, t_mat3 transform)
+void	printf_obj_type(struct s_object *obj)	//
 {
-	size_t	i;
-
-	i = 0;
-	while (i < mlx->scene.len)
-	{
-		move_object(mlx->scene.objects[i], translation, transform);
-		i++;
-	}
+	if (obj->type == OBJ_LIGHT)
+		printf("light");
+	else if (obj->type == OBJ_SPHERE)
+		printf("sphere");
+	else if (obj->type == OBJ_PLANE)
+		printf("plane");
+	else if (obj->type == OBJ_CYLINDER)
+		printf("cylinder");
+	else
+		printf("wat.");
 }
 
 int	main(int c, char **args)
@@ -83,7 +167,7 @@ int	main(int c, char **args)
 		logger_error("usage: %s <path/to/file.rt>", args[0]);
 		return (1);
 	}
-	if (!parse_file(args[1], &mlx.scene, args[0]))
+	if (!parse_file(args[1], &mlx.scene, args[0]) || !dup_objects(&mlx.scene))
 	{
 		ft_free("c", &mlx.scene);
 		return (1);
@@ -94,8 +178,9 @@ int	main(int c, char **args)
 		ft_free("m", &mlx);
 		return (1);
 	}
+	map_scene(&mlx.scene, mlx.scene.camera.position,
+		mlx.scene.camera.transform);
 	register_mlx_hooks(&mlx);
-	move_the_world(&mlx, mlx.scene.camera.position, mlx.scene.camera.transform);
 	mlx_loop(mlx.mlx);
 	ft_free("m", &mlx);
 	return (0);

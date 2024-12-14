@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/12 18:52:09 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/15 00:30:36 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ t_acolor	get_light_acolor(struct s_mlx *mlx)
 {
 	t_acolor	color;
 
-	if (mlx->scene.objects[0]->type != OBJ_LIGHT)
+	if (mlx->scene.map_objects[0]->type != OBJ_LIGHT)
 		color.argb = 0XFFFFFFFF;
 	else
-		color = rgb_to_rgba(mlx->scene.objects[0]->color);
+		color = rgb_to_rgba(mlx->scene.map_objects[0]->color);
 	return (color);
 }
 
@@ -80,8 +80,8 @@ static bool	is_lit(struct s_mlx *mlx, t_collision starting_point, t_vec3 light_d
 	i = 0;
 	while (i < mlx->scene.len)
 	{
-		if (mlx->scene.objects[i] != starting_point.object
-			&& test_collision(mlx, mlx->scene.objects[i], ray, &new_collision)
+		if (mlx->scene.map_objects[i] != starting_point.object
+			&& test_collision(mlx, mlx->scene.map_objects[i], ray, &new_collision)
 			&& new_collision.dist > 0 && new_collision.dist < light_dist)
 			return (false);
 		i++;
@@ -95,7 +95,7 @@ t_acolor	lit_color(struct s_mlx *mlx, t_collision collision)
 	t_vec3		collision_to_light;
 	float		cos_angle;
 
-	collision_to_light = vec3_sub(mlx->scene.objects[0]->position, collision.position);
+	collision_to_light = vec3_sub(mlx->scene.map_objects[0]->position, collision.position);
 	cos_angle = vec3_dot(collision.normal, vec3_normalise(collision_to_light));
 	if (cos_angle < 0 || !is_lit(mlx, collision, collision_to_light))
 	{

@@ -6,20 +6,20 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:38:33 by marwan            #+#    #+#             */
-/*   Updated: 2024/12/13 01:58:37 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/12/15 00:32:24 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "math/la.h"
 #include <render/collision.h>
 
-// Maybe put this in the object folder ?
-int	next_object(struct s_object **objects, int i)
-{	// To delete?
-	if (i >= -1 && objects[i + 1])
-		return (i + 1);
-	return (-1);
-}
+// // Maybe put this in the object folder ?
+// int	next_object(struct s_object **objects, int i)
+// {	// To delete?
+// 	if (i >= -1 && objects[i + 1])
+// 		return (i + 1);
+// 	return (-1);
+// }
 
 bool	test_collision(struct s_mlx *mlx, struct s_object *object,
 	struct s_ray ray, t_collision *collision)
@@ -31,11 +31,11 @@ bool	test_collision(struct s_mlx *mlx, struct s_object *object,
 	// mats.rotation = get_rotation_matrix((t_vec3){1, 0, 0});
 
 	if (object->type == OBJ_SPHERE)
-	{
 		is_collide = sphere_collide_function(ray, (struct s_sphere*) object,
 			collision, &mats);
-	} else if(object->type == OBJ_PLANE)
-                is_collide = plane_collide_function(ray, (struct s_plane *) object, collision, &mats);
+	else if(object->type == OBJ_PLANE)
+		is_collide = plane_collide_function(ray, (struct s_plane *) object,
+			collision, &mats);
 	else
 		is_collide = false;
 	return (is_collide);

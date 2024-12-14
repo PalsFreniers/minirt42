@@ -25,4 +25,6 @@ bool	parse_plane(struct s_string *parts, size_t count,
 bool	parse_cylinder(struct s_string *parts, size_t count,
 			struct s_scene *scene);
 
+void	camera_create_transform(struct s_camera *camera);
+
 #endif // PARSE_H

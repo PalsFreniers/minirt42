@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/12 18:27:53 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:37:16 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_collision	get_collision(struct s_mlx *mlx, struct s_ray ray)
 	i_obj = 0;
 	while (i_obj < mlx->scene.len)
 	{
-		if (test_collision(mlx, mlx->scene.objects[i_obj], ray,
+		if (test_collision(mlx, mlx->scene.map_objects[i_obj], ray,
 				&tmp_collision) == 1)
 		{
 			if (tmp_collision.dist > 0 && tmp_collision.dist < collision.dist)
