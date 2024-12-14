@@ -79,56 +79,42 @@ void	loop_draw_ui(struct s_mlx *mlx)
 
 int	camera_move(int key, struct s_mlx *mlx)
 {
+	// if (key == KEY_W)
+	// 	move_the_world(mlx, vec3_new(0.0f, 0.5f, 0.0f), mat3_identity());
+	// else if (key == KEY_S)
+	// 	move_the_world(mlx, vec3_new(0.0f, -0.5f, 0.0f), mat3_identity());
 	if (key == KEY_W)
-		move_the_world(mlx, vec3_new(0.0f, 0.5f, 0.0f), mat3_identity());
+		move_the_world(mlx, vec3_zero(), get_rotation_matrix(vec3_new(0.1f, 0.0f, 0.0f)));
 	else if (key == KEY_S)
-		move_the_world(mlx, vec3_new(0.0f, -0.5f, 0.0f), mat3_identity());
+		move_the_world(mlx, vec3_zero(), get_rotation_matrix(vec3_new(-0.1f, 0.0f, 0.0f)));
+	// else if (key == KEY_A)
+	// 	move_the_world(mlx, vec3_new(0.5f, 0.0f, 0.0f), mat3_identity());
+	// else if (key == KEY_D)
+	// 	move_the_world(mlx, vec3_new(-0.5f, 0.0f, 0.0f), mat3_identity());
 	else if (key == KEY_A)
-		move_the_world(mlx, vec3_new(0.5f, 0.0f, 0.0f), mat3_identity());
+		move_the_world(mlx, vec3_zero(), get_rotation_matrix(vec3_new(0.0f, -0.1f, 0.0f)));
 	else if (key == KEY_D)
-		move_the_world(mlx, vec3_new(-0.5f, 0.0f, 0.0f), mat3_identity());
+		move_the_world(mlx, vec3_zero(), get_rotation_matrix(vec3_new(0.0f, 0.1f, 0.0f)));
 	else if (key == KEY_Q)
 		move_the_world(mlx, vec3_new(0.0f, 0.0f, 0.5f), mat3_identity());
 	else if (key == KEY_E)
 		move_the_world(mlx, vec3_new(0.0f, 0.0f, -0.5f), mat3_identity());
-	// if (key == KEY_LEFT_SHIFT)
-	// 	mlx->scene.camera.position.y += 0.2f;
-	// 	// mlx->scene.camera.position = vec3_add(mlx->scene.camera.position, mlx->scene.camera.direction);
-	// else if (key == KEY_SPACE)
-	// 	mlx->scene.camera.position.y -= 0.2f;
-	// 	// mlx->scene.camera.position = vec3_sub(mlx->scene.camera.position, mlx->scene.camera.direction);
-	// else if (key == KEY_W)
-	// 	mlx->scene.camera.position.z += 0.2f;
-	// else if (key == KEY_S)
-	// 	mlx->scene.camera.position.z -= 0.2f;
-	// else if (key == KEY_A)
-	// 	mlx->scene.camera.position.x -= 0.2f;
-	// else if (key == KEY_D)
-	// 	mlx->scene.camera.position.x += 0.2f;
-	// // else if (key == KEY_A || key == KEY_D)
-	// // {
-	// // 	if (KEY_A)
-	// // 		mlx->scene.camera.direction = mat3_apply(get_rotation_matrix(vec3_new(0.0f, 0.0f, 0.1f)), mlx->scene.camera.direction);
-	// // 	else
-	// // 		mlx->scene.camera.direction = mat3_apply(get_rotation_matrix(vec3_new(0.0f, 0.0f, -0.1f)), mlx->scene.camera.direction);
-	// // 	camera_create_transform(&mlx->scene.camera);
-	// // }
 	return (0);
 }
 
-#include <stdio.h>	// 
+// #include <stdio.h>	// 
 int	key_event(int key, struct s_mlx *mlx)
 {
-	printf("key: %d\n", key);	// 
+	// printf("key: %d\n", key);	// 
 	if (key == KEY_ESCAPE)
 		return (win_close(0, mlx));
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D || key == KEY_Q || key == KEY_E)
 		return (camera_move(key, mlx));
-	if (key == KEY_ENTER)
-	{
-		printf("cam_position: %f, %f, %f\n", mlx->scene.camera.position.x, mlx->scene.camera.position.y, mlx->scene.camera.position.z);
-		printf("cam_direction: %f, %f, %f\n", mlx->scene.camera.direction.x, mlx->scene.camera.direction.y, mlx->scene.camera.direction.z);
-		return (0);
-	}
+	// if (key == KEY_ENTER)
+	// {
+	// 	printf("cam_position: %f, %f, %f\n", mlx->scene.camera.position.x, mlx->scene.camera.position.y, mlx->scene.camera.position.z);
+	// 	printf("cam_direction: %f, %f, %f\n", mlx->scene.camera.direction.x, mlx->scene.camera.direction.y, mlx->scene.camera.direction.z);
+	// 	return (0);
+	// }
 	return (0);
 }
