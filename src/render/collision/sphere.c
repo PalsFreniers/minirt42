@@ -11,7 +11,7 @@ float	ft_abs(float x)
 	return (x);
 }
 
-#include <stdio.h>	//
+// #include <stdio.h>	//
 // Marwan's workaround for testing purposes
 bool	sphere_collide_function(struct s_ray ray, struct s_sphere *sphere,
 		t_collision *coll, t_matrices *m)

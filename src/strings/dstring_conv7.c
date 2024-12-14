@@ -22,6 +22,13 @@ void	add_start_zero(struct s_string *ret, float fpart, int p)
 	}
 }
 
+float	str_fabs(float f)
+{
+	if (f < 0)
+		return (-f);
+	return (f);
+}
+
 struct s_string	string_from_float(float value, int a_dot)
 {
 	struct s_string	ret;
@@ -31,7 +38,7 @@ struct s_string	string_from_float(float value, int a_dot)
 	ret = string_from_sqword((int64_t)value);
 	if (string_error(false, 0) != STRING_SUCCESS)
 		return ((struct s_string){0});
-	fpart = (value - (int64_t)value) * pow(10, a_dot);
+	fpart = str_fabs((value - (int64_t)value) * pow(10, a_dot));
 	if ((size_t)fpart == 0)
 		return (ret);
 	add_start_zero(&ret, fpart, pow(10, a_dot));
