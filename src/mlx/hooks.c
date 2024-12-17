@@ -91,9 +91,9 @@ int	camera_move(int key, struct s_mlx *mlx)
 	else if (key == KEY_D)
 		camera->direction = mat3_apply(get_rotation_matrix(vec3_new(0.0f, 0.0f, -0.1f)), camera->direction);
 	else if (key == KEY_Q)
-		camera->position = vec3_add(camera->position, vec3_scalar_mul(camera->direction, +0.5f));
+		camera->position = vec3_add(camera->position, vec3_scal_mul(camera->direction, +0.5f));
 	else if (key == KEY_E)
-		camera->position = vec3_add(camera->position, vec3_scalar_mul(camera->direction, -0.5f));
+		camera->position = vec3_add(camera->position, vec3_scal_mul(camera->direction, -0.5f));
 	if (key == KEY_W || key == KEY_S || key == KEY_A || key == KEY_D)
 		camera_create_transform(camera);
 	map_scene(&mlx->scene, camera->position, camera->transform);

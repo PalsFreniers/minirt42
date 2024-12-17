@@ -25,7 +25,7 @@ bool	plane_collide_function(struct s_ray ray, struct s_plane *plane,
 	if (coll)
 	{
 		coll->dist = distance;
-		coll->position = vec3_add(ray.origin, vec3_scalar_mul(ray.direction,
+		coll->position = vec3_add(ray.origin, vec3_scal_mul(ray.direction,
 					distance));
 		coll->normal = norm;
 		coll->object = (struct s_object *)plane;

@@ -54,10 +54,10 @@ void	camera_create_transform(struct s_camera *camera)
 	t_vec3	t_x;
 	t_vec3	t_y;
 
-	t_x = vec3_cross_prod(
+	t_x = vec3_cross(
 		vec3_normalise(vec3_new(camera->direction.x, camera->direction.y, 0)),
 		vec3_new(0, 0, 1));		// CAREFUL, THIS CAN BREAK
-	t_y = vec3_cross_prod(camera->direction, t_x);
+	t_y = vec3_cross(camera->direction, t_x);
 	// camera->transform.m00 = t_x.x;
 	// camera->transform.m01 = t_y.x;
 	// camera->transform.m02 = camera->direction.x;

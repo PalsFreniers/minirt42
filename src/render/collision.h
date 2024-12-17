@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 23:19:03 by tdelage           #+#    #+#             */
-/*   Updated: 2024/12/17 16:52:26 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/17 21:06:52 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ bool				sphere_collide_function(struct s_ray ray,
 						t_matrices *mats);
 bool				plane_collide_function(struct s_ray ray,
 						struct s_plane *plane, t_collision *coll,
+						t_matrices *m);
+bool				cylinder_collide_function(struct s_ray ray,
+						struct s_cylinder *cylinder, t_collision *coll,
 						t_matrices *m);
 
 bool				lit_collision(struct s_mlx *mlx, t_collision collision);
