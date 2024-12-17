@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 23:21:44 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/17 17:37:56 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/17 19:29:56 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <mlx/mmlx.h>
 # include <math/la.h>
 
+t_vec3	map_vec3(t_vec3 vec, t_vec3 translation, t_mat3 transform);
+t_vec3	unmap_vec3(t_vec3 vec, t_vec3 translation, t_mat3 inverse_transform);
 void	map_scene(struct s_scene *scene, t_vec3 translation, t_mat3 transform);
 
 #include <stdio.h>	//

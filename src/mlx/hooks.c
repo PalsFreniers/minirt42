@@ -119,6 +119,18 @@ int	key_event(int key, struct s_mlx *mlx)
 		printf_mat3(mlx->scene.camera.inverse_transform);											// 
 		printf("cam_T * cam_T^-1:\n");																// 
 		printf_mat3(mat3_mul(mlx->scene.camera.transform, mlx->scene.camera.inverse_transform));	// 
+		// printf("plane_type:\n");																	// 
+		// printf_obj_type(mlx->scene.map_objects[7]);													// 
+		// printf("\nplane_map_position:\n");															// 
+		// printf_vec3(mlx->scene.map_objects[7]->position);											// 
+		// printf("plane_map_normal:\n");																// 
+		// printf_vec3(((struct s_plane *) mlx->scene.map_objects[7])->normal);						// 
+		// printf("\nplane_unmap_position:\n");														// 
+		// printf_vec3(unmap_vec3(mlx->scene.map_objects[7]->position,
+		// 		mlx->scene.camera.position, mlx->scene.camera.inverse_transform));					// 
+		// printf("plane_unmap_normal:\n");															// 
+		// printf_vec3(mat3_apply(mlx->scene.camera.inverse_transform,
+		// 		((struct s_plane *) mlx->scene.map_objects[7])->normal));							// 
 		return (0);
 	}
 	return (0);

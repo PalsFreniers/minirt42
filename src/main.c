@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2024/12/17 18:08:55 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/17 19:29:41 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,24 +86,34 @@ static bool	dup_objects(struct s_scene *scene)
 	return (true);
 }
 
+t_vec3	map_vec3(t_vec3 vec, t_vec3 translation, t_mat3 transform)
+{
+	vec = vec3_sub(vec, translation);
+	vec = mat3_apply(transform, vec);
+	return (vec);
+}
+
+t_vec3	unmap_vec3(t_vec3 vec, t_vec3 translation, t_mat3 inverse_transform)
+{
+	vec = mat3_apply(inverse_transform, vec);
+	vec = vec3_add(vec, translation);
+	return (vec);
+}
+
 static void	map_object(struct s_object *target, struct s_object *src,
 	t_vec3 translation, t_mat3 transform)
 {
-	target->position = vec3_sub(src->position, translation);
-	target->position = mat3_apply(transform, target->position);
+	target->position = map_vec3(src->position, translation, transform);
 	if (src->type == OBJ_PLANE)
 	{
-		((struct s_plane *) target)->normal
-			= vec3_sub(((struct s_plane *) src)->normal, translation);
-		((struct s_plane *) target)->normal
-			= mat3_apply(transform, ((struct s_plane *) target)->normal);
+		((struct s_plane *) target)->normal = mat3_apply(transform, 
+				((struct s_plane *) src)->normal);
 	}
-	else if (src->type == OBJ_CYLINDER)
+	else if (src->type == OBJ_CYLINDER)		// Is `axis` more like `position` or `normal`?
 	{
-		((struct s_cylinder *) target)->axis
-			= vec3_sub(((struct s_cylinder *) src)->axis, translation);
-		((struct s_cylinder *) target)->axis
-			= mat3_apply(transform, ((struct s_cylinder *) target)->axis);
+		((struct s_cylinder *) target)->axis = map_vec3(
+				((struct s_cylinder *) src)->axis,
+				translation, transform);
 	}
 }
 

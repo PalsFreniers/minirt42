@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/17 18:29:40 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/17 19:39:03 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <math/la.h>
 #include <mlx/hooks.h>
 #include <ui/window.h>
+#include <minirt.h>
 
 /**
  * 	loop through x, y:
@@ -131,10 +132,8 @@ static t_acolor	draw_graduation(struct s_mlx *mlx, t_collision collision,
 	bool		y_bool;
 	bool		z_bool;
 
-	global_position = vec3_add(
-			mat3_apply(mlx->scene.camera.inverse_transform,
-				collision.position),
-			mlx->scene.camera.position);
+	global_position = unmap_vec3(collision.position,
+			mlx->scene.camera.position, mlx->scene.camera.inverse_transform);
 	x_bool = is_float_on_grad(fabs(global_position.x), step, precision);
 	y_bool = is_float_on_grad(fabs(global_position.y), step, precision);
 	z_bool = is_float_on_grad(fabs(global_position.z), step, precision);
