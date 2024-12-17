@@ -58,11 +58,12 @@ float				vec3_sum(t_vec3 a);
 
 t_vec3				vec3_map_2pi(t_vec3 a);
 
-t_mat3				mat3_mul(t_mat3 a, t_mat3 b);
-t_vec3				mat3_apply(t_mat3 a, t_vec3 b);
-
 t_mat3				mat3_zero(void);
 t_mat3				mat3_identity(void);
+t_mat3				mat3_inverse(t_mat3 a);
+
+t_mat3				mat3_mul(t_mat3 a, t_mat3 b);
+t_vec3				mat3_apply(t_mat3 a, t_vec3 b);
 
 t_mat3				rotation_matrix_x(float angle);
 t_mat3				rotation_matrix_y(float angle);

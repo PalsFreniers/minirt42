@@ -100,7 +100,6 @@ int	camera_move(int key, struct s_mlx *mlx)
 	return (0);
 }
 
-// #include <stdio.h>	// 
 int	key_event(int key, struct s_mlx *mlx)
 {
 // 	printf("key: %d\n", key);	// 
@@ -108,11 +107,19 @@ int	key_event(int key, struct s_mlx *mlx)
 		return (win_close(0, mlx));
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D || key == KEY_Q || key == KEY_E)
 		return (camera_move(key, mlx));
-	// if (key == KEY_ENTER)
-	// {
-	// 	printf("cam_position: %f, %f, %f\n", mlx->scene.camera.position.x, mlx->scene.camera.position.y, mlx->scene.camera.position.z);
-	// 	printf("cam_direction: %f, %f, %f\n", mlx->scene.camera.direction.x, mlx->scene.camera.direction.y, mlx->scene.camera.direction.z);
-	// 	return (0);
-	// }
+	if (key == KEY_ENTER)
+	{
+		printf("cam_position:\n");																	// 
+		printf_vec3(mlx->scene.camera.position);													// 
+		printf("cam_direction:\n");																	// 
+		printf_vec3(mlx->scene.camera.direction);													// 
+		printf("cam_transform:\n");																	// 
+		printf_mat3(mlx->scene.camera.transform);													// 
+		printf("cam_inverse_transform:\n");															// 
+		printf_mat3(mlx->scene.camera.inverse_transform);											// 
+		printf("cam_T * cam_T^-1:\n");																// 
+		printf_mat3(mat3_mul(mlx->scene.camera.transform, mlx->scene.camera.inverse_transform));	// 
+		return (0);
+	}
 	return (0);
 }

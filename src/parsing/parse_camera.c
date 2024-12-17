@@ -76,9 +76,9 @@ void	camera_create_transform(struct s_camera *camera)
 	camera->transform.m20 = camera->direction.x;
 	camera->transform.m21 = camera->direction.y;
 	camera->transform.m22 = camera->direction.z;
+	camera->inverse_transform = mat3_inverse(camera->transform);
 }
 
-// #include <stdio.h>	// 
 static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 {
 	if (!parse_position(parts[1], &(camera->position)))
@@ -88,10 +88,6 @@ static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 	if (!parse_range(parts[3], &(camera->fov), 180, 0))
 		return (false);
 	camera_create_transform(camera);
-	// printf("Camera transform:\n");
-	// printf("/% .3f % .3f % .3f\\\n", camera->transform.m00, camera->transform.m01, camera->transform.m02);
-	// printf("|% .3f % .3f % .3f|\n", camera->transform.m10, camera->transform.m11, camera->transform.m12);
-	// printf("\\% .3f % .3f % .3f/\n", camera->transform.m20, camera->transform.m21, camera->transform.m22);
 	camera->screen_to_camera_factor = (2 * tanf(camera->fov / 2)) / WIN_WIDTH;
 	return (true);
 }

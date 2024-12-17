@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/14 23:37:16 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/17 18:29:40 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ struct s_ray	shoot_ray_from_camera(struct s_mlx *mlx, int x, int y)
 {
 	struct s_ray	ray;
 
-	ray.direction.x = (x - WIN_WIDTH / 2) * mlx->scene.camera.screen_to_camera_factor;
-	ray.direction.y = (y - WIN_HEIGHT / 2) * mlx->scene.camera.screen_to_camera_factor;
+	ray.direction.x = (x - WIN_WIDTH / 2)
+		* mlx->scene.camera.screen_to_camera_factor;
+	ray.direction.y = (y - WIN_HEIGHT / 2)
+		* mlx->scene.camera.screen_to_camera_factor;
 	ray.direction.z = 1;
 	// ray.direction = mat3_apply(mlx->scene.camera.transform, ray.direction);		// Magic, so simple yet I'm so proud of it!
 	// ray.origin = mlx->scene.camera.position;
@@ -97,6 +99,8 @@ static bool	is_float_on_grad(float f, float step, float precision)
 {
 	float	mod;
 
+	if (f < step && f > -step)
+		return (f < 2 * precision && f > -2 * precision);
 	mod = fmod(f, step);
 	return (mod < precision || mod > (step - precision));
 }
@@ -118,16 +122,22 @@ static bool	is_float_on_grad(float f, float step, float precision)
 // 	return (x_bool && y_bool && z_bool);
 // }
 
-static t_acolor	draw_graduation(t_collision collision, float step, float precision)
+static t_acolor	draw_graduation(struct s_mlx *mlx, t_collision collision,
+	float step, float precision)
 {
 	t_acolor	color;
+	t_vec3		global_position;
 	bool		x_bool;
 	bool		y_bool;
 	bool		z_bool;
 
-	x_bool = is_float_on_grad(fabs(collision.position.x), step, precision);
-	y_bool = is_float_on_grad(fabs(collision.position.y), step, precision);
-	z_bool = is_float_on_grad(fabs(collision.position.z), step, precision);
+	global_position = vec3_add(
+			mat3_apply(mlx->scene.camera.inverse_transform,
+				collision.position),
+			mlx->scene.camera.position);
+	x_bool = is_float_on_grad(fabs(global_position.x), step, precision);
+	y_bool = is_float_on_grad(fabs(global_position.y), step, precision);
+	z_bool = is_float_on_grad(fabs(global_position.z), step, precision);
 	color.argb = 0XFF000000;
 	color.r = x_bool * 0XFF;
 	color.g = y_bool * 0XFF;
@@ -148,7 +158,7 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision collision)
 	if (collision.object)
 	{
 		// draw RGB lines on object,	DEBUG ONLY
-		color = draw_graduation(collision, 1.0f, 0.02f);
+		color = draw_graduation(mlx, collision, 1.0f, 0.02f);
 		if (color.argb != 0XFF000000)
 		{
 			mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color.argb);

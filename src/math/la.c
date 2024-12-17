@@ -1,4 +1,5 @@
 #include <math/la.h>
+#include "la.h"
 
 t_vec3	vec3_new(float x, float y, float z)
 {
@@ -90,6 +91,52 @@ t_vec3	vec3_map_2pi(t_vec3 a)
 	return (vec3_add(vec3_mul(a, tmp), tmp));
 }
 
+t_mat3	mat3_zero(void)
+{
+	return ((t_mat3){0});
+}
+
+t_mat3	mat3_identity(void)
+{
+	return ((t_mat3){
+		.m00 = 1,
+		.m01 = 0,
+		.m02 = 0,
+		.m10 = 0,
+		.m11 = 1,
+		.m12 = 0,
+		.m20 = 0,
+		.m21 = 0,
+		.m22 = 1,
+	});
+}
+
+t_mat3 mat3_inverse(t_mat3 a)
+{
+	t_mat3	inverse;
+	float	inv_determinant;
+
+	inv_determinant
+		= a.m00 * a.m11 * a.m22
+		+ a.m01 * a.m12 * a.m20
+		+ a.m02 * a.m10 * a.m21
+		- a.m02 * a.m11 * a.m20
+		- a.m12 * a.m21 * a.m00
+		- a.m22 * a.m01 * a.m10;
+	if (inv_determinant != 0)
+		inv_determinant = 1 / inv_determinant;
+	inverse.m00 = (a.m11 * a.m22 - a.m12 * a.m21) * inv_determinant;
+	inverse.m01 = (a.m02 * a.m21 - a.m01 * a.m22) * inv_determinant;
+	inverse.m02 = (a.m01 * a.m12 - a.m02 * a.m11) * inv_determinant;
+	inverse.m10 = (a.m12 * a.m20 - a.m10 * a.m22) * inv_determinant;
+	inverse.m11 = (a.m00 * a.m22 - a.m02 * a.m20) * inv_determinant;
+	inverse.m12 = (a.m02 * a.m10 - a.m00 * a.m12) * inv_determinant;
+	inverse.m20 = (a.m10 * a.m21 - a.m11 * a.m20) * inv_determinant;
+	inverse.m21 = (a.m01 * a.m20 - a.m00 * a.m21) * inv_determinant;
+	inverse.m22 = (a.m00 * a.m11 - a.m01 * a.m10) * inv_determinant;
+	return (inverse);
+}
+
 t_mat3	mat3_mul(t_mat3 a, t_mat3 b)
 {
 	return ((t_mat3){
@@ -114,27 +161,7 @@ t_vec3	mat3_apply(t_mat3 a, t_vec3 b)
 	});
 }
 
-t_mat3	mat3_zero(void)
-{
-	return ((t_mat3){0});
-}
-
-t_mat3	mat3_identity(void)
-{
-	return ((t_mat3){
-		.m00 = 1,
-		.m01 = 0,
-		.m02 = 0,
-		.m10 = 0,
-		.m11 = 1,
-		.m12 = 0,
-		.m20 = 0,
-		.m21 = 0,
-		.m22 = 1,
-	});
-}
-
-t_mat3	rotation_matrix_x(float angle)
+t_mat3 rotation_matrix_x(float angle)
 {
 	return ((t_mat3){
 		.m00 = 1,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 23:19:03 by tdelage           #+#    #+#             */
-/*   Updated: 2024/12/13 01:58:23 by tdelage          ###   ########.fr       */
+/*   Updated: 2024/12/17 16:52:26 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_collision
 
 float				ft_abs(float val);
 
-int					next_object(struct s_object **objects, int i);
+// int					next_object(struct s_object **objects, int i);
 
 bool				test_collision(struct s_mlx *mlx, struct s_object *object,
 						struct s_ray ray, t_collision *collision);

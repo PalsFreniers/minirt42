@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2024/12/15 00:16:24 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/17 18:08:55 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	register_mlx_hooks(struct s_mlx *mlx)
 #include <stdio.h>	//
 void	printf_vec3(t_vec3 vec)	//
 {
-	printf("(%f, %f, %f)", vec.x, vec.y, vec.z);
+	printf("(% f, % f, % f)\n", vec.x, vec.y, vec.z);
 }
 
 void	printf_obj_type(struct s_object *obj)	//
@@ -154,6 +154,13 @@ void	printf_obj_type(struct s_object *obj)	//
 		printf("cylinder");
 	else
 		printf("wat.");
+}
+
+void	printf_mat3(t_mat3 mat)	//
+{
+	printf(" /% f % f % f\\\n", mat.m00, mat.m01, mat.m02);
+	printf("| % f % f % f |\n", mat.m10, mat.m11, mat.m12);
+	printf(" \\% f % f % f/\n", mat.m20, mat.m21, mat.m22);
 }
 
 int	main(int c, char **args)
