@@ -73,8 +73,8 @@ SRC += src/math/la.c
 SRC += src/render/loop_render.c \
        src/render/test_collisions.c \
        src/render/color.c
-SRC += src/render/collision/sphere.c \
-       src/render/collision/plane.c \
+SRC += src/render/collision/plane.c \
+       src/render/collision/sphere.c \
        src/render/collision/cylinder.c
 MAIN = src/main.c
 

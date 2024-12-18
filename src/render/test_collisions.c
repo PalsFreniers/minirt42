@@ -6,11 +6,16 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:38:33 by marwan            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/12/18 21:33:11 by maamine          ###   ########.fr       */
+=======
+/*   Updated: 2024/12/18 18:36:12 by tdelage          ###   ########.fr       */
+>>>>>>> afa6dbe (dding cylinder without caps)
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "math/la.h"
+#include "object/objects.h"
 #include <render/collision.h>
 
 // // Maybe put this in the object folder ?
