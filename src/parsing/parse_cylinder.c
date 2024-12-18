@@ -39,6 +39,7 @@ bool	parse_cylinder(struct s_string *parts, size_t count,
 		return (false);
 	if (!parse_ranged_vector(parts[2], &(cylinder->axis), 1, -1))
 		return (false);
+	cylinder->axis = vec3_normalise(cylinder->axis);
 	if (!parse_cylinder_floats(parts, cylinder))
 		return (false);
 	if (!parse_color(parts[5], &(cylinder->base.color)))

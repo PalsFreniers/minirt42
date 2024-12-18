@@ -22,6 +22,7 @@ struct				s_mlx
 	struct s_numpad	interface_numpad[11];
 	int				pad_count;
 	int				page;
+	int				down_sizing;
 	struct s_scene	scene;
 };
 

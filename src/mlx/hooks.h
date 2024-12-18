@@ -13,6 +13,9 @@ enum	e_key_type
 	KEY_D = 7,
 	KEY_Q = 20,
 	KEY_E = 8,
+	KEY_NUM_5 = 93,
+	KEY_NUM_MINUS = 86,
+	KEY_NUM_PLUS = 87,
 	// KEY_LEFT_SHIFT = 225,
 	// KEY_SPACE = 44,
 };

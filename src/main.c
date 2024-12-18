@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2024/12/17 19:29:41 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/18 21:35:46 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,10 @@ static void	map_object(struct s_object *target, struct s_object *src,
 		((struct s_plane *) target)->normal = mat3_apply(transform, 
 				((struct s_plane *) src)->normal);
 	}
-	else if (src->type == OBJ_CYLINDER)		// Is `axis` more like `position` or `normal`?
+	else if (src->type == OBJ_CYLINDER)
 	{
-		((struct s_cylinder *) target)->axis = map_vec3(
-				((struct s_cylinder *) src)->axis,
-				translation, transform);
+		((struct s_cylinder *) target)->axis = mat3_apply(transform, 
+				((struct s_cylinder *) src)->axis);
 	}
 }
 
@@ -154,7 +153,9 @@ void	printf_vec3(t_vec3 vec)	//
 
 void	printf_obj_type(struct s_object *obj)	//
 {
-	if (obj->type == OBJ_LIGHT)
+	if (!obj)
+		printf("(void)");
+	else if (obj->type == OBJ_LIGHT)
 		printf("light");
 	else if (obj->type == OBJ_SPHERE)
 		printf("sphere");
@@ -172,6 +173,8 @@ void	printf_mat3(t_mat3 mat)	//
 	printf("| % f % f % f |\n", mat.m10, mat.m11, mat.m12);
 	printf(" \\% f % f % f/\n", mat.m20, mat.m21, mat.m22);
 }
+
+bool g_debug_show_grid = false;
 
 int	main(int c, char **args)
 {

@@ -116,6 +116,21 @@ t_mat3	mat3_identity(void)
 	});
 }
 
+t_mat3 mat3_scal_mul(t_mat3 a, float f)
+{
+	return ((t_mat3){
+		.m00 = a.m00 * f,
+		.m01 = a.m01 * f,
+		.m02 = a.m02 * f,
+		.m10 = a.m10 * f,
+		.m11 = a.m11 * f,
+		.m12 = a.m12 * f,
+		.m20 = a.m20 * f,
+		.m21 = a.m21 * f,
+		.m22 = a.m22 * f,
+	});
+}
+
 t_mat3 mat3_inverse(t_mat3 a)
 {
 	t_mat3	inverse;
@@ -142,7 +157,22 @@ t_mat3 mat3_inverse(t_mat3 a)
 	return (inverse);
 }
 
-t_mat3	mat3_mul(t_mat3 a, t_mat3 b)
+t_mat3 mat3_add(t_mat3 a, t_mat3 b)
+{
+	return ((t_mat3){
+		.m00 = a.m00 + b.m00,
+		.m01 = a.m01 + b.m01,
+		.m02 = a.m02 + b.m02,
+		.m10 = a.m10 + b.m10,
+		.m11 = a.m11 + b.m11,
+		.m12 = a.m12 + b.m12,
+		.m20 = a.m20 + b.m20,
+		.m21 = a.m21 + b.m21,
+		.m22 = a.m22 + b.m22,
+	});
+}
+
+t_mat3 mat3_mul(t_mat3 a, t_mat3 b)
 {
 	return ((t_mat3){
 		.m00 = a.m00 * b.m00 + a.m01 * b.m10 + a.m02 * b.m20,

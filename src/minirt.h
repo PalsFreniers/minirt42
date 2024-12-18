@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 23:21:44 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/17 19:29:56 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/17 23:37:25 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ void	map_scene(struct s_scene *scene, t_vec3 translation, t_mat3 transform);
 void	printf_vec3(t_vec3 vec);	// 
 void	printf_obj_type(struct s_object *obj);	// 
 void	printf_mat3(t_mat3 mat);	// 
+
+extern bool	g_debug_show_grid;
 
 #endif // MINIRT_H

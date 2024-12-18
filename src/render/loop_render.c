@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/17 19:39:03 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/18 21:47:41 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,24 @@ struct s_ray	shoot_ray_from_camera(struct s_mlx *mlx, int x, int y)
 	return (ray);
 }
 
-t_collision	get_collision(struct s_mlx *mlx, struct s_ray ray)
+void	get_collision(struct s_mlx *mlx, struct s_ray *ray, t_collision *collision)
 {
-	t_collision		collision;
 	t_collision		tmp_collision;
 	size_t			i_obj;
 
-	collision.object = NULL;
-	collision.dist = INFINITY;
+	collision->object = NULL;
+	collision->dist = INFINITY;
 	i_obj = 0;
 	while (i_obj < mlx->scene.len)
 	{
-		if (test_collision(mlx, mlx->scene.map_objects[i_obj], ray,
-				&tmp_collision) == 1)
-		{
-			if (tmp_collision.dist > 0 && tmp_collision.dist < collision.dist)
-			{
-				collision = tmp_collision;
-				collision.dist = tmp_collision.dist;
-			}
-		}
+		if (test_collision(mlx, mlx->scene.map_objects[i_obj], ray, &tmp_collision))
+			if (tmp_collision.dist > 0 && tmp_collision.dist < collision->dist)
+				*collision = tmp_collision;
 		i_obj++;
 	}
-	return (collision);
+	// printf("coll: ");
+	// printf_obj_type(collision.object);
+	// printf("\n");
 }
 
 static bool	is_float_on_grad(float f, float step, float precision)
@@ -106,24 +101,7 @@ static bool	is_float_on_grad(float f, float step, float precision)
 	return (mod < precision || mod > (step - precision));
 }
 
-// static bool	keep_black_dist(float dist, float step, float precision)
-// {
-// 	return (is_float_on_grad(dist, step, precision));
-// }
-
-// static bool	keep_black_grad(t_collision collision, float step, float precision)
-// {
-// 	bool		x_bool;
-// 	bool		y_bool;
-// 	bool		z_bool;
-
-// 	x_bool = is_float_on_grad(collision.position.x, step, precision);
-// 	y_bool = is_float_on_grad(collision.position.y, step, precision);
-// 	z_bool = is_float_on_grad(collision.position.z, step, precision);
-// 	return (x_bool && y_bool && z_bool);
-// }
-
-static t_acolor	draw_graduation(struct s_mlx *mlx, t_collision collision,
+static t_acolor	draw_graduation(struct s_mlx *mlx, t_collision *collision,
 	float step, float precision)
 {
 	t_acolor	color;
@@ -132,7 +110,7 @@ static t_acolor	draw_graduation(struct s_mlx *mlx, t_collision collision,
 	bool		y_bool;
 	bool		z_bool;
 
-	global_position = unmap_vec3(collision.position,
+	global_position = unmap_vec3(collision->position,
 			mlx->scene.camera.position, mlx->scene.camera.inverse_transform);
 	x_bool = is_float_on_grad(fabs(global_position.x), step, precision);
 	y_bool = is_float_on_grad(fabs(global_position.y), step, precision);
@@ -144,7 +122,23 @@ static t_acolor	draw_graduation(struct s_mlx *mlx, t_collision collision,
 	return (color);
 }
 
-void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision collision)
+static void	set_pixel(struct s_mlx *mlx, int x, int y, uint32_t color)
+{
+	if (mlx->down_sizing == 1)
+	{
+		mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color);
+		return ;
+	}
+	for (int yi = y; yi < WIN_HEIGHT && yi < y + mlx->down_sizing; yi++)
+	{
+		for (int xi = x; yi < WIN_WIDTH && xi < x + mlx->down_sizing; xi++)
+		{
+			mlx_set_image_pixel(mlx->mlx, mlx->ray_back, xi, yi, color);
+		}
+	}
+}
+
+void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 {
 	t_acolor	color;
 	t_acolor	light;
@@ -152,27 +146,37 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision collision)
 
 	light = get_light_acolor(mlx);
 	ambient = rgb_to_rgba(mlx->scene.ambient.color);
-	// if (collision.object && !keep_black_dist(collision.dist, 1.0f, 0.05f))
+	// // set_pixel(mlx, x, y, ambient.argb);
+	// mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, ambient.argb);
+	// return ;
+	// // if (collision.object && !keep_black_dist(collision.dist, 1.0f, 0.05f))
 	// if (collision.object && !keep_black_grad(collision, 1.0f, 0.05f))
-	if (collision.object)
+	if (collision->object)
 	{
+		// color.argb = 0XFFFFFFFF;
 		// draw RGB lines on object,	DEBUG ONLY
-		color = draw_graduation(mlx, collision, 1.0f, 0.02f);
-		if (color.argb != 0XFF000000)
+		if (g_debug_show_grid)
 		{
-			mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color.argb);
-			return ;
+			color = draw_graduation(mlx, collision, 1.0f, 0.02f);
+			if (color.argb != 0XFF000000)
+			{
+				// mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color.argb);
+				set_pixel(mlx, x, y, color.argb);
+				return ;
+			}
 		}
 		// Normal program
-		if (mlx->scene.objects[0]->type == OBJ_LIGHT)
+		if (mlx->scene.objects[0]->type == OBJ_LIGHT && collision->dist < 25000.0f)
 			color = filter_acolor(light, lit_color(mlx, collision));
 		else
 			color.argb = 0XFF000000;
 		color = blend_acolor(color, ambient);
-		mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color.argb);
+		// mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color.argb);
+		set_pixel(mlx, x, y, color.argb);
 	}
 	else
-		mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, ambient.argb);
+		// mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, ambient.argb);
+		set_pixel(mlx, x, y, ambient.argb);
 }
 
 // // void	loop_render(struct s_mlx *mlx)
@@ -201,9 +205,12 @@ void	loop_render(struct s_mlx *mlx)
 	{
 		for (int x = 0; x < WIN_WIDTH; ++x)
 		{
-			ray = shoot_ray_from_camera(mlx, x, y);
-			collision = get_collision(mlx, ray);
-			draw_pixel(mlx, x, y, collision);
+			if (x % mlx->down_sizing == 0 && y % mlx->down_sizing == 0)
+			{
+				ray = shoot_ray_from_camera(mlx, x, y);
+				get_collision(mlx, &ray, &collision);
+				draw_pixel(mlx, x, y, &collision);
+			}
 		}
 	}
 	mlx_swap_ray_buffer(mlx);

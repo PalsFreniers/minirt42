@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:38:33 by marwan            #+#    #+#             */
-/*   Updated: 2024/12/17 21:07:52 by maamine          ###   ########.fr       */
+/*   Updated: 2024/12/18 21:33:11 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,28 @@
 // }
 
 bool	test_collision(struct s_mlx *mlx, struct s_object *object,
-	struct s_ray ray, t_collision *collision)
+	struct s_ray *ray, t_collision *collision)
 {
 	bool	is_collide;
 
-	t_matrices mats = {0};
 	(void)mlx;
 	// mats.rotation = get_rotation_matrix((t_vec3){1, 0, 0});
-
 	if (object->type == OBJ_SPHERE)
 		is_collide = sphere_collide_function(ray,
-				(struct s_sphere*) object, collision, &mats);
+				(struct s_sphere*) object, collision);
 	else if(object->type == OBJ_PLANE)
 		is_collide = plane_collide_function(ray,
-				(struct s_plane *) object, collision, &mats);
+				(struct s_plane *) object, collision);
 	else if(object->type == OBJ_CYLINDER)
 		is_collide = cylinder_collide_function(ray,
-				(struct s_cylinder *) object, collision, &mats);
+				(struct s_cylinder *) object, collision);
 	else
-		is_collide = false;
+		return (false);
+	if (is_collide)
+	{
+		collision->object = object;
+		collision->ray = *ray;
+	}
 	return (is_collide);
 }
 

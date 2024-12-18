@@ -13,8 +13,8 @@ float	ft_abs(float x)
 
 // #include <stdio.h>	//
 // Marwan's workaround for testing purposes
-bool	sphere_collide_function(struct s_ray ray, struct s_sphere *sphere,
-		t_collision *coll, t_matrices *m)
+bool	sphere_collide_function(struct s_ray *ray, struct s_sphere *sphere,
+		t_collision *coll)
 {
 	const float	radius = sphere->diameter / 2;
 	float		determinant;
@@ -22,9 +22,8 @@ bool	sphere_collide_function(struct s_ray ray, struct s_sphere *sphere,
 	float		rtSp_norm_squarred;
 	float		ray_dot_rtSp;
 
-	(void)m;
-	ray_to_sphere = vec3_sub(ray.origin, sphere->base.position);
-	ray_dot_rtSp = vec3_dot(ray.direction, ray_to_sphere);
+	ray_to_sphere = vec3_sub(ray->origin, sphere->base.position);
+	ray_dot_rtSp = vec3_dot(ray->direction, ray_to_sphere);
 	rtSp_norm_squarred = vec3_lenght_sq(ray_to_sphere);
 	determinant = ray_dot_rtSp * ray_dot_rtSp - (rtSp_norm_squarred - radius * radius);
 	if (determinant < 0)
@@ -32,9 +31,10 @@ bool	sphere_collide_function(struct s_ray ray, struct s_sphere *sphere,
 	if (coll)
 	{
 		coll->dist = -(ray_dot_rtSp) - sqrtf(determinant);
-		coll->position = vec3_add(ray.origin, vec3_scal_mul(ray.direction, coll->dist));
+		// if (coll->dist < 0.0f)
+		// 	coll->dist = -(ray_dot_rtSp) + sqrtf(determinant);
+		coll->position = vec3_add(ray->origin, vec3_scal_mul(ray->direction, coll->dist));
 		coll->normal = vec3_normalise(vec3_sub(coll->position, sphere->base.position));
-		coll->object = (struct s_object *) sphere;
 	}
 	return (true);
 }

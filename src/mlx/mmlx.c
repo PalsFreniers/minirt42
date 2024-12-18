@@ -55,6 +55,7 @@ bool	init_mlx(struct s_mlx *mlx)
 		return (false);
 	set_window_position(mlx);
 	mlx_init_static_button(mlx);
+	mlx->down_sizing = 1;
 	return (true);
 }
 
