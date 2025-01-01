@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/18 21:47:41 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/01 05:48:45 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ struct s_ray	shoot_ray_from_camera(struct s_mlx *mlx, int x, int y)
 {
 	struct s_ray	ray;
 
-	ray.direction.x = (x - WIN_WIDTH / 2)
+	ray.direction.x = (x - (float)WIN_WIDTH / 2)
 		* mlx->scene.camera.screen_to_camera_factor;
-	ray.direction.y = (y - WIN_HEIGHT / 2)
+	ray.direction.y = (y - (float)WIN_HEIGHT / 2)
 		* mlx->scene.camera.screen_to_camera_factor;
 	ray.direction.z = 1;
 	// ray.direction = mat3_apply(mlx->scene.camera.transform, ray.direction);		// Magic, so simple yet I'm so proud of it!

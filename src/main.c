@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2024/12/18 21:35:46 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/01 05:35:12 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 #include <mlx/mmlx.h>
 #include <parsing/obey.h>
 #include <parsing/parse.h>
+#include <render/render.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <strings/dstring.h>
 #include <ui/buttons.h>
 #include <ui/vline.h>
 #include <ui/window.h>
-#include <render/render.h>
 
 /**
  * @brief test brief
@@ -42,19 +42,19 @@ static size_t	object_size(struct s_object *object)
 {
 	if (object->type == OBJ_LIGHT)
 	{
-		return (sizeof (struct s_light));
+		return (sizeof(struct s_light));
 	}
 	else if (object->type == OBJ_SPHERE)
 	{
-		return (sizeof (struct s_sphere));
+		return (sizeof(struct s_sphere));
 	}
 	else if (object->type == OBJ_PLANE)
 	{
-		return (sizeof (struct s_plane));
+		return (sizeof(struct s_plane));
 	}
 	else if (object->type == OBJ_CYLINDER)
 	{
-		return (sizeof (struct s_cylinder));
+		return (sizeof(struct s_cylinder));
 	}
 	else
 	{
@@ -66,8 +66,9 @@ static bool	dup_objects(struct s_scene *scene)
 {
 	size_t	obj_size;
 	size_t	i;
+	size_t	x;
 
-	scene->map_objects = ft_calloc(scene->len, sizeof (struct s_object *));
+	scene->map_objects = ft_calloc(scene->len, sizeof(struct s_object *));
 	if (!scene->map_objects)
 		return (false);
 	i = 0;
@@ -77,7 +78,10 @@ static bool	dup_objects(struct s_scene *scene)
 		scene->map_objects[i] = malloc(obj_size);
 		if (!scene->map_objects[i])
 		{
-			// TODO: free everything ! (integrate into ft_free() ?)
+			x = 0;
+			while (x < i)
+				ft_free("p", scene->map_objects[x++]);
+			ft_free("p", scene->map_objects);
 			return (false);
 		}
 		ft_memcpy(scene->map_objects[i], scene->objects[i], obj_size);
@@ -101,18 +105,18 @@ t_vec3	unmap_vec3(t_vec3 vec, t_vec3 translation, t_mat3 inverse_transform)
 }
 
 static void	map_object(struct s_object *target, struct s_object *src,
-	t_vec3 translation, t_mat3 transform)
+		t_vec3 translation, t_mat3 transform)
 {
 	target->position = map_vec3(src->position, translation, transform);
 	if (src->type == OBJ_PLANE)
 	{
-		((struct s_plane *) target)->normal = mat3_apply(transform, 
-				((struct s_plane *) src)->normal);
+		((struct s_plane *)target)->normal = mat3_apply(transform,
+			((struct s_plane *)src)->normal);
 	}
 	else if (src->type == OBJ_CYLINDER)
 	{
-		((struct s_cylinder *) target)->axis = mat3_apply(transform, 
-				((struct s_cylinder *) src)->axis);
+		((struct s_cylinder *)target)->axis = mat3_apply(transform,
+			((struct s_cylinder *)src)->axis);
 	}
 }
 
@@ -123,8 +127,8 @@ void	map_scene(struct s_scene *scene, t_vec3 translation, t_mat3 transform)
 	i = 0;
 	while (i < scene->len)
 	{
-		map_object(scene->map_objects[i], scene->objects[i],
-			translation, transform);
+		map_object(scene->map_objects[i], scene->objects[i], translation,
+			transform);
 		i++;
 	}
 }
@@ -141,17 +145,18 @@ void	register_mlx_hooks(struct s_mlx *mlx)
 		(t_mlx_e_f)update_buttons_unclick, mlx);
 	mlx_on_event(mlx->mlx, mlx->win, MLX_KEYDOWN, (t_mlx_e_f)key_event, mlx);
 	mlx_on_event(mlx->mlx, mlx->ray, MLX_KEYDOWN, (t_mlx_e_f)key_event, mlx);
-// 	mlx_loop_hook(mlx->mlx, (t_mlx_l_f)loop_draw_ui, mlx);
+	// 	mlx_loop_hook(mlx->mlx, (t_mlx_l_f)loop_draw_ui, mlx);
 	mlx_loop_hook(mlx->mlx, (t_mlx_l_f)loop_render, mlx);
 }
 
-#include <stdio.h>	//
-void	printf_vec3(t_vec3 vec)	//
+#include <stdio.h> //
+
+void	printf_vec3(t_vec3 vec) //
 {
 	printf("(% f, % f, % f)\n", vec.x, vec.y, vec.z);
 }
 
-void	printf_obj_type(struct s_object *obj)	//
+void	printf_obj_type(struct s_object *obj) //
 {
 	if (!obj)
 		printf("(void)");
@@ -167,21 +172,20 @@ void	printf_obj_type(struct s_object *obj)	//
 		printf("wat.");
 }
 
-void	printf_mat3(t_mat3 mat)	//
+void	printf_mat3(t_mat3 mat) //
 {
 	printf(" /% f % f % f\\\n", mat.m00, mat.m01, mat.m02);
 	printf("| % f % f % f |\n", mat.m10, mat.m11, mat.m12);
 	printf(" \\% f % f % f/\n", mat.m20, mat.m21, mat.m22);
 }
 
-bool g_debug_show_grid = false;
+bool			g_debug_show_grid = false;
 
 int	main(int c, char **args)
 {
 	struct s_mlx	mlx;
 
 	register_free_funcs();
-        // reg
 	if (c != 2)
 	{
 		logger_error("usage: %s <path/to/file.rt>", args[0]);

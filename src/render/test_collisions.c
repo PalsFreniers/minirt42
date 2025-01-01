@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:38:33 by marwan            #+#    #+#             */
-/*   Updated: 2024/12/29 01:51:23 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/01 05:58:04 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 bool	test_collision(struct s_mlx *mlx, struct s_object *object,
 	struct s_ray *ray, t_collision *collision)
 {
-	bool	is_collide;
+	bool	is_collide = false;
 
 	(void)mlx;
 	// mats.rotation = get_rotation_matrix((t_vec3){1, 0, 0});

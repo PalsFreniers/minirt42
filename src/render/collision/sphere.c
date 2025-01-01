@@ -31,8 +31,6 @@ bool	sphere_collide_function(struct s_ray *ray, struct s_sphere *sphere,
 	if (coll)
 	{
 		coll->dist = -(ray_dot_rtSp) - sqrtf(determinant);
-		// if (coll->dist < 0.0f)
-		// 	coll->dist = -(ray_dot_rtSp) + sqrtf(determinant);
 		coll->position = vec3_add(ray->origin, vec3_scal_mul(ray->direction, coll->dist));
 		coll->normal = vec3_normalise(vec3_sub(coll->position, sphere->base.position));
 	}

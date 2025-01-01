@@ -1,3 +1,5 @@
+#include "libft.h"
+#include "scene/scene.h"
 #include "strings/dstring.h"
 #include <logger/logger.h>
 #include <parsing/obey.h>
@@ -100,6 +102,7 @@ bool	parse_camera(struct s_string *parts, size_t count,
 		logger_error("only one camera is able to exist at one time");
 		return (false);
 	}
+        ft_bzero(camera, sizeof(struct s_camera));
 	if (count != 4)
 	{
 		logger_error("unable to parse camera");

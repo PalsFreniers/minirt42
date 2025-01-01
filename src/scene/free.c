@@ -13,7 +13,11 @@ void	free_scene(struct s_scene *scene)
 	}
 	i = 0;
 	while (i < scene->len)
-		ft_free("p", scene->objects[i++]);
-	ft_free("p", scene->objects);
+	{
+		ft_free("p", scene->objects[i]);
+		ft_free("p", scene->map_objects[i]);
+		i++;
+	}
+	ft_free("pp", scene->objects, scene->map_objects);
 	ft_bzero(scene, sizeof(struct s_scene));
 }

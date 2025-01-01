@@ -19,14 +19,13 @@ bool	plane_collide_function(struct s_ray *ray, struct s_plane *plane,
 		return (false);
 	distance = vec3_dot(vec3_sub(plane->base.position, ray->origin), norm)
 		/ determinant;
-	if (distance < 0)
-		return (false);
 	if (coll)
 	{
 		coll->dist = distance;
 		coll->position = vec3_add(ray->origin, vec3_scal_mul(ray->direction,
 					distance));
 		coll->normal = norm;
+                coll->object = (void *)plane;
 	}
 	return (true);
 }
