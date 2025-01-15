@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/01 05:48:45 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/15 17:08:36 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ static bool	is_float_on_grad(float f, float step, float precision)
 	return (mod < precision || mod > (step - precision));
 }
 
-static t_acolor	draw_graduation(struct s_mlx *mlx, t_collision *collision,
+static mlx_color	draw_graduation(struct s_mlx *mlx, t_collision *collision,
 	float step, float precision)
 {
-	t_acolor	color;
+	mlx_color	color;
 	t_vec3		global_position;
 	bool		x_bool;
 	bool		y_bool;
@@ -115,14 +115,14 @@ static t_acolor	draw_graduation(struct s_mlx *mlx, t_collision *collision,
 	x_bool = is_float_on_grad(fabs(global_position.x), step, precision);
 	y_bool = is_float_on_grad(fabs(global_position.y), step, precision);
 	z_bool = is_float_on_grad(fabs(global_position.z), step, precision);
-	color.argb = 0XFF000000;
+	color.rgba = 0X000000FF;
 	color.r = x_bool * 0XFF;
 	color.g = y_bool * 0XFF;
 	color.b = z_bool * 0XFF;
 	return (color);
 }
 
-static void	set_pixel(struct s_mlx *mlx, int x, int y, uint32_t color)
+static void	set_pixel(struct s_mlx *mlx, int x, int y, mlx_color color)
 {
 	if (mlx->down_sizing == 1)
 	{
@@ -146,11 +146,11 @@ static void	set_pixel(struct s_mlx *mlx, int x, int y, uint32_t color)
 
 void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 {
-	t_acolor	color;
-	t_acolor	light;
-	t_acolor	ambient;
+	mlx_color	color;
+	mlx_color	light;
+	mlx_color	ambient;
 
-	light = get_light_acolor(mlx);
+	light = get_light_color(mlx);
 	ambient = rgb_to_rgba(mlx->scene.ambient.color);
 	// // set_pixel(mlx, x, y, ambient.argb);
 	// mlx_set_image_pixel(mlx->mlx, mlx->img, x, y, ambient.argb);
@@ -164,10 +164,10 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 		if (g_debug_show_grid)
 		{
 			color = draw_graduation(mlx, collision, 1.0f, 0.02f);
-			if (color.argb != 0XFF000000)
+			if (color.rgba != 0X000000FF)
 			{
-				// mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color.argb);
-				set_pixel(mlx, x, y, color.argb);
+				// mlx_set_image_pixel(mlx->mlx, mlx->img, x, y, color.argb);
+				set_pixel(mlx, x, y, color);
 				return ;
 			}
 		}
@@ -175,14 +175,14 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 		if (mlx->scene.objects[0]->type == OBJ_LIGHT && collision->dist < 25000.0f)
 			color = filter_acolor(light, lit_color(mlx, collision));
 		else
-			color.argb = 0XFF000000;
-		color = blend_acolor(color, ambient);
-		// mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color.argb);
-		set_pixel(mlx, x, y, color.argb);
+			color.rgba = 0X000000FF;
+		color = blend_color(color, ambient);
+		// mlx_set_image_pixel(mlx->mlx, mlx->img, x, y, color.argb);
+		set_pixel(mlx, x, y, color);
 	}
 	else
-		// mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, ambient.argb);
-		set_pixel(mlx, x, y, ambient.argb);
+		// mlx_set_image_pixel(mlx->mlx, mlx->img, x, y, ambient.argb);
+		set_pixel(mlx, x, y, ambient);
 }
 
 // // void	loop_render(struct s_mlx *mlx)

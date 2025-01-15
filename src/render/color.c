@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2024/12/18 21:42:16 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/15 16:35:38 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <object/objects.h>
 #include <render/collision.h>
 
-t_acolor	rgb_to_rgba(t_color color)
+mlx_color	rgb_to_rgba(t_color color)
 {
-	t_acolor	acolor;
+	mlx_color	acolor;
 
 	acolor.a = 0XFF;
 	acolor.r = color.r;
@@ -25,7 +25,7 @@ t_acolor	rgb_to_rgba(t_color color)
 	return (acolor);
 }
 
-t_acolor	mul_acolor(t_acolor color, float f)
+mlx_color	mul_acolor(mlx_color color, float f)
 {
 	color.r *= f;
 	if (color.r > 0XFF)
@@ -39,9 +39,9 @@ t_acolor	mul_acolor(t_acolor color, float f)
 	return (color);
 }
 
-t_acolor	filter_acolor(t_acolor light, t_acolor filter)
+mlx_color	filter_acolor(mlx_color light, mlx_color filter)
 {
-	t_acolor	color;
+	mlx_color	color;
 
 	color.a = 0XFF;
 	color.r = (light.r * filter.r) / 0XFF;
@@ -50,9 +50,9 @@ t_acolor	filter_acolor(t_acolor light, t_acolor filter)
 	return (color);
 }
 
-t_acolor	blend_acolor(t_acolor a, t_acolor b)
+mlx_color	blend_color(mlx_color a, mlx_color b)
 {
-	t_acolor	blend;
+	mlx_color	blend;
 
 	blend.a = 0xFF;
 	if (a.r > 0XFF - b.r)
@@ -70,12 +70,12 @@ t_acolor	blend_acolor(t_acolor a, t_acolor b)
 	return (blend);
 }
 
-t_acolor	get_light_acolor(struct s_mlx *mlx)
+mlx_color	get_light_color(struct s_mlx *mlx)
 {
-	t_acolor	color;
+	mlx_color	color;
 
 	if (mlx->scene.map_objects[0]->type != OBJ_LIGHT)
-		color.argb = 0XFFFFFFFF;
+		color.rgba = 0XFFFFFFFF;
 	else
 		color = rgb_to_rgba(mlx->scene.map_objects[0]->color);
 	return (color);
@@ -103,9 +103,9 @@ static bool	is_lit(struct s_mlx *mlx, t_collision *starting_point, t_vec3 light_
 	return (true);
 }
 
-static t_acolor	lambert_shading(t_collision *coll, t_vec3 coll_to_light)
+static mlx_color	lambert_shading(t_collision *coll, t_vec3 coll_to_light)
 {
-	t_acolor	color;
+	mlx_color	color;
 	float		light_per_area;
 	float		diffuse_coeff;
 	float		light_amount;
@@ -113,7 +113,7 @@ static t_acolor	lambert_shading(t_collision *coll, t_vec3 coll_to_light)
 	light_per_area = vec3_dot(coll->normal, vec3_normalise(coll_to_light));
 	if (light_per_area <= 0)
 	{
-		color.argb = 0XFF000000;
+		color.rgba = 0X000000FF;
 		return (color);
 	}
 	diffuse_coeff = 1.0f;
@@ -124,9 +124,9 @@ static t_acolor	lambert_shading(t_collision *coll, t_vec3 coll_to_light)
 	return (color);
 }
 
-static t_acolor	blinn_phong_shading(t_collision *coll, t_vec3 coll_to_light)
+static mlx_color	blinn_phong_shading(t_collision *coll, t_vec3 coll_to_light)
 {
-	t_acolor	color;
+	mlx_color	color;
 	t_vec3		reflect_normal;
 	float		light_per_area;
 	float		diffuse_coeff;
@@ -138,7 +138,7 @@ static t_acolor	blinn_phong_shading(t_collision *coll, t_vec3 coll_to_light)
 	light_per_area = light_per_area * light_per_area * light_per_area;
 	if (light_per_area <= 0)
 	{
-		color.argb = 0XFF000000;
+		color.rgba = 0X000000FF;
 		return (color);
 	}
 	diffuse_coeff = 1.0f;
@@ -149,20 +149,20 @@ static t_acolor	blinn_phong_shading(t_collision *coll, t_vec3 coll_to_light)
 	return (color);
 }
 
-t_acolor	lit_color(struct s_mlx *mlx, t_collision *collision)
+mlx_color	lit_color(struct s_mlx *mlx, t_collision *collision)
 {
-	t_acolor	color;
+	mlx_color	color;
 	t_vec3		coll_to_light;
 
 	coll_to_light = vec3_sub(mlx->scene.map_objects[0]->position, collision->position);
 	if (!is_lit(mlx, collision, coll_to_light))
 	{
-		color.argb = 0XFF000000;
+		color.rgba = 0X000000FF;
 		return (color);
 	}
 	// color = rgb_to_rgba(collision->object->color);
 	// color = lambert_shading(collision, coll_to_light);
-	color = blend_acolor(lambert_shading(collision, coll_to_light),
+	color = blend_color(lambert_shading(collision, coll_to_light),
 			blinn_phong_shading(collision, coll_to_light));
 	return (color);
 }
