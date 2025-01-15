@@ -28,45 +28,47 @@ void	set_window_position(struct s_mlx *mlx)
 	int	w;
 	int	h;
 
-	mlx_get_screen_size(mlx->mlx, mlx->win.win, &w, &h);
+	mlx_get_screen_size(mlx->context, mlx->ui.win, &w, &h);
 	w /= 2;
 	h = (h - WIN_HEIGHT) / 2;
-	mlx_set_window_position(mlx->mlx, mlx->ray.win, w - WIN_WIDTH, h);
-	mlx_set_window_position(mlx->mlx, mlx->win.win, w, h);
+	mlx_set_window_position(mlx->context, mlx->render.win, w - WIN_WIDTH, h);
+	mlx_set_window_position(mlx->context, mlx->ui.win, w, h);
 }
 
 mlx_window_create_info	create_info(mlx_image render_target, const char *title)
 {
-	return ((mlx_window_create_info){
-		.render_target = render_target,
-		.title = title,
-		.width = WIN_WIDTH,
-		.height = WIN_HEIGHT,
-		.is_fullscreen = false,
-		.is_resizable = false,
-	});
+	mlx_window_create_info	info = { 0 };
+
+	if (render_target)
+		info.render_target = render_target;
+	if (title)
+		info.title = title;
+	info.width = WIN_WIDTH;
+	info.height = WIN_HEIGHT;
+	return (info);
 }
 
 bool	init_mlx(struct s_mlx *mlx)
 {
 	// ft_bzero(mlx, sizeof(struct s_mlx) - sizeof(struct s_scene));
 	ft_bzero(mlx, sizeof(struct s_mlx));
-	mlx->mlx = mlx_init();
-	if (!mlx->mlx)
+	mlx->context = mlx_init();
+	if (!mlx->context)
 		return (false);
-	mlx->ray.info = create_info(0x0, "minirt render");
-	mlx->ray.win = mlx_new_window(mlx->mlx, &mlx->ray.info);
-	if (!mlx->ray.win)
+	mlx->render.info = create_info(0x0, "minirt render");
+	mlx->render.win = mlx_new_window(mlx->context, &mlx->render.info);
+	if (!mlx->render.win)
 		return (false);
-	mlx->win.info = create_info(0x0, "minirt panel");
-	mlx->win.win = mlx_new_window(mlx->mlx, &mlx->win.info);
-	if (!mlx->win.win)
+	mlx->ui.info = create_info(0x0, "minirt panel");
+	mlx->ui.win = mlx_new_window(mlx->context, &mlx->ui.info);
+	if (!mlx->ui.win)
 		return (false);
-	mlx->ray_img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!mlx->ray_img)
+	mlx->img = mlx_new_image(mlx->context, WIN_WIDTH, WIN_HEIGHT);
+	if (!mlx->img)
 		return (false);
-	mlx->ray_back = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!mlx->ray_back)
+	mlx->buffer.info = create_info(mlx->img, "buffer");
+	mlx->buffer.win = mlx_new_window(mlx->context, &mlx->buffer.info);
+	if (!mlx->buffer.win)
 		return (false);
 	set_window_position(mlx);
 	mlx_init_static_button(mlx);
@@ -81,19 +83,19 @@ bool	init_mlx(struct s_mlx *mlx)
 // 	mlx->mlx = mlx_init();
 // 	if (!mlx->mlx)
 // 		return (false);
-// 	mlx->ray_img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-// 	if (!mlx->ray_img)
+// 	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
+// 	if (!mlx->img)
 // 		return (false);
-// 	mlx->ray.info = create_info(mlx->ray_img, "minirt render");
-// 	mlx->ray.win = mlx_new_window(mlx->mlx, &mlx->ray.info);
-// 	if (!mlx->ray.win)
+// 	mlx->render.info = create_info(mlx->img, "minirt render");
+// 	mlx->render.win = mlx_new_window(mlx->mlx, &mlx->render.info);
+// 	if (!mlx->render.win)
 // 		return (false);
 // 	mlx->win.info = create_info(0x0, "minirt panel");
 // 	mlx->win.win = mlx_new_window(mlx->mlx, &mlx->win.info);
 // 	if (!mlx->win.win)
 // 		return (false);
-// 	mlx->ray_back = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-// 	if (!mlx->ray_back)
+// 	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
+// 	if (!mlx->img)
 // 		return (false);
 // 	set_window_position(mlx);
 // 	mlx_init_static_button(mlx);
@@ -103,26 +105,31 @@ bool	init_mlx(struct s_mlx *mlx)
 
 void	free_mlx(struct s_mlx *mlx)
 {
-	if (!mlx->mlx)
+	if (!mlx->context)
 		return ;
-	if (mlx->ray_img)
-		mlx_destroy_image(mlx->mlx, mlx->ray_img);
-	if (mlx->ray_back)
-		mlx_destroy_image(mlx->mlx, mlx->ray_back);
-	if (mlx->win.win)
-		mlx_destroy_window(mlx->mlx, mlx->win.win);
-	if (mlx->ray.win)
-		mlx_destroy_window(mlx->mlx, mlx->ray.win);
-	mlx_destroy_context(mlx->mlx);
+	if (mlx->img)
+		mlx_destroy_image(mlx->context, mlx->img);
+	if (mlx->buffer.win)
+		mlx_destroy_window(mlx->context, mlx->buffer.win);
+	if (mlx->render.win)
+		mlx_destroy_window(mlx->context, mlx->render.win);
+	if (mlx->ui.win)
+		mlx_destroy_window(mlx->context, mlx->ui.win);
+	mlx_destroy_context(mlx->context);
 	// ft_free("c", &(mlx->scene));
 }
 
 void	mlx_swap_ray_buffer(struct s_mlx *mlx)
 {
-	mlx_image	tmp;
-
-	tmp = mlx->ray_back;
-	mlx->ray_back = mlx->ray_img;
-	mlx->ray_img = tmp;
-	mlx_put_image_to_window(mlx->mlx, mlx->ray.win, mlx->ray_img, 0, 0);
+	mlx_put_image_to_window(mlx->context, mlx->render.win, mlx->img, 0, 0);
+// 	mlx_image	tmp;
+// 	// static int	i = 0;
+// 
+// 	tmp = mlx->img;
+// 	mlx->img = mlx->img;
+// 	mlx->img = tmp;
+// 	mlx_put_image_to_window(mlx->context, mlx->render.win, mlx->img, 0, 0);
+// 	// if (i >= 3)
+// 	// 	mlximag
+// 	// i++;
 }

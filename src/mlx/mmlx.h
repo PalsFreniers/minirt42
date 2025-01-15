@@ -17,11 +17,11 @@ struct s_window
 
 struct				s_mlx
 {
-	mlx_context		mlx;
-	struct s_window	win;
-	struct s_window	ray;
-	mlx_image		ray_img;
-	mlx_image		ray_back;
+	mlx_context		context;
+	struct s_window	ui;
+	struct s_window	render;
+	struct s_window	buffer;
+	mlx_image		img;
 	struct s_button	static_b[6];
 	struct s_button	interface_buttons[33];
 	int				btn_count;

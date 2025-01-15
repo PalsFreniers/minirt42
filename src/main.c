@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/13 18:07:46 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/15 17:02:49 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,18 +135,18 @@ void	map_scene(struct s_scene *scene, t_vec3 translation, t_mat3 transform)
 
 void	register_mlx_hooks(struct s_mlx *mlx)
 {
-	mlx_on_event(mlx->mlx, mlx->win.win, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
+	mlx_on_event(mlx->context, mlx->ui.win, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
 		mlx);
-	mlx_on_event(mlx->mlx, mlx->ray.win, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
+	mlx_on_event(mlx->context, mlx->render.win, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
 		mlx);
-	mlx_on_event(mlx->mlx, mlx->win.win, MLX_MOUSEDOWN,
+	mlx_on_event(mlx->context, mlx->ui.win, MLX_MOUSEDOWN,
 		(t_mlx_e_f)update_buttons_click, mlx);
-	mlx_on_event(mlx->mlx, mlx->win.win, MLX_MOUSEUP,
+	mlx_on_event(mlx->context, mlx->ui.win, MLX_MOUSEUP,
 		(t_mlx_e_f)update_buttons_unclick, mlx);
-	mlx_on_event(mlx->mlx, mlx->win.win, MLX_KEYDOWN, (t_mlx_e_f)key_event, mlx);
-	mlx_on_event(mlx->mlx, mlx->ray.win, MLX_KEYDOWN, (t_mlx_e_f)key_event, mlx);
+	mlx_on_event(mlx->context, mlx->ui.win, MLX_KEYDOWN, (t_mlx_e_f)key_event, mlx);
+	mlx_on_event(mlx->context, mlx->render.win, MLX_KEYDOWN, (t_mlx_e_f)key_event, mlx);
 	// 	mlx_loop_hook(mlx->mlx, (t_mlx_l_f)loop_draw_ui, mlx);
-	mlx_add_loop_hook(mlx->mlx, (t_mlx_l_f)loop_render, mlx);
+	mlx_add_loop_hook(mlx->context, (t_mlx_l_f)loop_render, mlx);
 }
 
 #include <stdio.h> //
@@ -181,6 +181,28 @@ void	printf_mat3(t_mat3 mat) //
 
 bool			g_debug_show_grid = false;
 
+/* // 2 Invalid reads, plein de leaks.
+int	main(int c, char **args)
+{
+	struct s_mlx	mlx;
+
+	register_free_funcs();
+	if (c != 2)
+	{
+		logger_error("usage: %s <path/to/file.rt>", args[0]);
+		return (1);
+	}
+	if (!init_mlx(&mlx))
+	{
+		logger_error("during mlx initialisation", args[0]);
+		ft_free("m", &mlx);
+		return (1);
+	}
+	ft_free("m", &mlx);
+	return (0);
+}
+*/
+
 int	main(int c, char **args)
 {
 	struct s_mlx	mlx;
@@ -205,7 +227,36 @@ int	main(int c, char **args)
 	map_scene(&mlx.scene, mlx.scene.camera.position,
 		mlx.scene.camera.transform);
 	register_mlx_hooks(&mlx);
-	mlx_loop(mlx.mlx);
+	mlx_loop(mlx.context);
 	ft_free("m", &mlx);
 	return (0);
 }
+
+// int	main(int c, char **args)
+// {
+// 	struct s_mlx	mlx;
+// 
+// 	register_free_funcs();
+// 	if (c != 2)
+// 	{
+// 		logger_error("usage: %s <path/to/file.rt>", args[0]);
+// 		return (1);
+// 	}
+// 	if (!init_mlx(&mlx))
+// 	{
+// 		logger_error("during mlx initialisation", args[0]);
+// 		ft_free("m", &mlx);
+// 		return (1);
+// 	}
+// 	if (!parse_file(args[1], &mlx.scene, args[0]) || !dup_objects(&mlx.scene))
+// 	{
+// 		ft_free("mc", &mlx, &mlx.scene);
+// 		return (1);
+// 	}
+// 	map_scene(&mlx.scene, mlx.scene.camera.position,
+// 		mlx.scene.camera.transform);
+// 	register_mlx_hooks(&mlx);
+// 	mlx_loop(mlx.mlx);
+// 	ft_free("m", &mlx);
+// 	return (0);
+// }

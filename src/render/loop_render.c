@@ -126,14 +126,20 @@ static void	set_pixel(struct s_mlx *mlx, int x, int y, uint32_t color)
 {
 	if (mlx->down_sizing == 1)
 	{
-		mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, color);
+		// // mlx_set_image_pixel(mlx->context, mlx->img, x, y, color);
+		// mlx_set_image_pixel(mlx->context, mlx->img, x, y, color);
+		// // mlx_pixel_put(mlx->context, mlx->ray.win, x, y, color);
+		mlx_pixel_put(mlx->context, mlx->buffer.win, x, y, color);
 		return ;
 	}
 	for (int yi = y; yi < WIN_HEIGHT && yi < y + mlx->down_sizing; yi++)
 	{
 		for (int xi = x; yi < WIN_WIDTH && xi < x + mlx->down_sizing; xi++)
 		{
-			mlx_set_image_pixel(mlx->mlx, mlx->ray_back, xi, yi, color);
+			// // mlx_set_image_pixel(mlx->context, mlx->img, xi, yi, color);
+			// mlx_set_image_pixel(mlx->context, mlx->img, xi, yi, color);
+			// // mlx_pixel_put(mlx->context, mlx->ray.win, x, y, color);
+			mlx_pixel_put(mlx->context, mlx->buffer.win, x, y, color);
 		}
 	}
 }
@@ -147,7 +153,7 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 	light = get_light_acolor(mlx);
 	ambient = rgb_to_rgba(mlx->scene.ambient.color);
 	// // set_pixel(mlx, x, y, ambient.argb);
-	// mlx_set_image_pixel(mlx->mlx, mlx->ray_back, x, y, ambient.argb);
+	// mlx_set_image_pixel(mlx->mlx, mlx->img, x, y, ambient.argb);
 	// return ;
 	// // if (collision.object && !keep_black_dist(collision.dist, 1.0f, 0.05f))
 	// if (collision.object && !keep_black_grad(collision, 1.0f, 0.05f))
@@ -192,8 +198,9 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 
 void	loop_render(struct s_mlx *mlx)
 {
-	// t_matrices	m;
-	// t_vec3		pied;
+	// static int	i = 0;	// 
+	// // t_matrices	m;
+	// // t_vec3		pied;
 	t_ray		ray;
 	t_collision	collision;
 
@@ -213,7 +220,12 @@ void	loop_render(struct s_mlx *mlx)
 			}
 		}
 	}
+	// // mlx_put_image_to_window(mlx->mlx, mlx->ray.win, mlx->img, 0, 0);
 	mlx_swap_ray_buffer(mlx);
+	// // i++;						// 
+	// // if (i >= 2)					// 
+	// // 	mlx_loop_end(mlx->mlx);	// 
+	// // printf(".\n");				// 
 }
 
 // //#define DEG2RAD 0.0174533f

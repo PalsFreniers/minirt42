@@ -29,10 +29,10 @@ void	numpad_draw(struct s_mlx *mlx, struct s_numpad *self)
 	ptr = string_to_cstr(s);
 	string_destroy(&s);
 	if (!ptr)
-		mlx_string_put(mlx->mlx, mlx->win.win, self->x, self->y, TEXTC,
+		mlx_string_put(mlx->context, mlx->ui.win, self->x, self->y, TEXTC,
 			"0000");
 	else
-		mlx_string_put(mlx->mlx, mlx->win.win, self->x, self->y, TEXTC,
+		mlx_string_put(mlx->context, mlx->ui.win, self->x, self->y, TEXTC,
 			ptr);
 	free(ptr);
 }

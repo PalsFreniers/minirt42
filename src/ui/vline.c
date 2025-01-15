@@ -17,7 +17,7 @@ void	vline_print(struct s_mlx *mlx, struct s_vline v, uint32_t color)
 	while (i < v.y2)
 	{
 		if (i < WIN_HEIGHT && i >= 0)
-			mlx_pixel_put(mlx->mlx, mlx->win.win, v.x, i, (mlx_color) color);
+			mlx_pixel_put(mlx->context, mlx->ui.win, v.x, i, (mlx_color) color);
 		i++;
 	}
 }
@@ -37,7 +37,7 @@ void	hline_print(struct s_mlx *mlx, struct s_vline v, uint32_t color)
 	while (i < v.y2)
 	{
 		if (i < WIN_WIDTH && i >= 0)
-			mlx_pixel_put(mlx->mlx, mlx->win.win, i, v.x, (mlx_color) color);
+			mlx_pixel_put(mlx->context, mlx->ui.win, i, v.x, (mlx_color) color);
 		i++;
 	}
 }
