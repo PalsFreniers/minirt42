@@ -156,6 +156,7 @@ $(MLX_DIR):
 
 $(MLX) : $(MLX_DIR)
 	@make -C $(MLX_DIR) -j16
+	# @make -C $(MLX_DIR) -j16 IMAGES_OPTIMIZED=false
 	@echo "$(GREEN)-= mlx compiled =-$(BASE_COLOR)"
 
 clean :
