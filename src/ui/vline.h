@@ -10,7 +10,7 @@ struct	s_vline
 	int	y2;
 };
 
-void	vline_print(struct s_mlx *mlx, struct s_vline v, int tcolor);
-void	hline_print(struct s_mlx *mlx, struct s_vline v, int tcolor);
+void	vline_print(struct s_mlx *mlx, struct s_vline v, uint32_t tcolor);
+void	hline_print(struct s_mlx *mlx, struct s_vline v, uint32_t tcolor);
 
 #endif // VLINE_H

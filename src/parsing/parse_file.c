@@ -57,7 +57,7 @@ bool	parse_file(const char *path, struct s_scene *scene, const char *prog)
 
 	count = 0;
 	ret = true;
-	ft_bzero(scene, sizeof(struct s_scene));
+	// ft_bzero(scene, sizeof(struct s_scene));	// DONE IN `init_mlx()`
 	if (!ft_strsufix((char *)path, ".rt"))
 	{
 		logger_info("usage: %s <path/to/file.rt>", prog);

@@ -55,7 +55,7 @@ void	loop_draw_ui(struct s_mlx *mlx)
 {
 	int	x;
 
-	mlx_clear_window(mlx->mlx, mlx->win);
+	mlx_clear_window(mlx->mlx, mlx->win.win, (mlx_color)(uint32_t) 0);
 	button_draw(mlx, &(mlx->static_b[0]));
 	button_draw(mlx, &(mlx->static_b[1]));
 	button_draw(mlx, &(mlx->static_b[2]));
@@ -74,7 +74,7 @@ void	loop_draw_ui(struct s_mlx *mlx)
 		numpad_draw(mlx, &(mlx->interface_numpad[x]));
 		x++;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->ray, mlx->ray_img, 0, 0);
+	mlx_put_image_to_window(mlx->mlx, mlx->ray.win, mlx->ray_img, 0, 0);
 }
 
 static t_vec3	rotate_camera_x(struct s_mlx *mlx, float angle)

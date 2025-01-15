@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/01 05:35:12 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/13 18:07:46 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,18 +135,18 @@ void	map_scene(struct s_scene *scene, t_vec3 translation, t_mat3 transform)
 
 void	register_mlx_hooks(struct s_mlx *mlx)
 {
-	mlx_on_event(mlx->mlx, mlx->win, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
+	mlx_on_event(mlx->mlx, mlx->win.win, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
 		mlx);
-	mlx_on_event(mlx->mlx, mlx->ray, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
+	mlx_on_event(mlx->mlx, mlx->ray.win, MLX_WINDOW_EVENT, (t_mlx_e_f)win_close,
 		mlx);
-	mlx_on_event(mlx->mlx, mlx->win, MLX_MOUSEDOWN,
+	mlx_on_event(mlx->mlx, mlx->win.win, MLX_MOUSEDOWN,
 		(t_mlx_e_f)update_buttons_click, mlx);
-	mlx_on_event(mlx->mlx, mlx->win, MLX_MOUSEUP,
+	mlx_on_event(mlx->mlx, mlx->win.win, MLX_MOUSEUP,
 		(t_mlx_e_f)update_buttons_unclick, mlx);
-	mlx_on_event(mlx->mlx, mlx->win, MLX_KEYDOWN, (t_mlx_e_f)key_event, mlx);
-	mlx_on_event(mlx->mlx, mlx->ray, MLX_KEYDOWN, (t_mlx_e_f)key_event, mlx);
+	mlx_on_event(mlx->mlx, mlx->win.win, MLX_KEYDOWN, (t_mlx_e_f)key_event, mlx);
+	mlx_on_event(mlx->mlx, mlx->ray.win, MLX_KEYDOWN, (t_mlx_e_f)key_event, mlx);
 	// 	mlx_loop_hook(mlx->mlx, (t_mlx_l_f)loop_draw_ui, mlx);
-	mlx_loop_hook(mlx->mlx, (t_mlx_l_f)loop_render, mlx);
+	mlx_add_loop_hook(mlx->mlx, (t_mlx_l_f)loop_render, mlx);
 }
 
 #include <stdio.h> //
@@ -191,15 +191,15 @@ int	main(int c, char **args)
 		logger_error("usage: %s <path/to/file.rt>", args[0]);
 		return (1);
 	}
-	if (!parse_file(args[1], &mlx.scene, args[0]) || !dup_objects(&mlx.scene))
-	{
-		ft_free("c", &mlx.scene);
-		return (1);
-	}
 	if (!init_mlx(&mlx))
 	{
 		logger_error("during mlx initialisation", args[0]);
 		ft_free("m", &mlx);
+		return (1);
+	}
+	if (!parse_file(args[1], &mlx.scene, args[0]) || !dup_objects(&mlx.scene))
+	{
+		ft_free("mc", &mlx, &mlx.scene);
 		return (1);
 	}
 	map_scene(&mlx.scene, mlx.scene.camera.position,

@@ -28,24 +28,39 @@ void	set_window_position(struct s_mlx *mlx)
 	int	w;
 	int	h;
 
-	mlx_get_screens_size(mlx->mlx, mlx->win, &w, &h);
+	mlx_get_screen_size(mlx->mlx, mlx->win.win, &w, &h);
 	w /= 2;
 	h = (h - WIN_HEIGHT) / 2;
-	mlx_set_window_position(mlx->mlx, mlx->ray, w - WIN_WIDTH, h);
-	mlx_set_window_position(mlx->mlx, mlx->win, w, h);
+	mlx_set_window_position(mlx->mlx, mlx->ray.win, w - WIN_WIDTH, h);
+	mlx_set_window_position(mlx->mlx, mlx->win.win, w, h);
+}
+
+mlx_window_create_info	create_info(mlx_image render_target, const char *title)
+{
+	return ((mlx_window_create_info){
+		.render_target = render_target,
+		.title = title,
+		.width = WIN_WIDTH,
+		.height = WIN_HEIGHT,
+		.is_fullscreen = false,
+		.is_resizable = false,
+	});
 }
 
 bool	init_mlx(struct s_mlx *mlx)
 {
-	ft_bzero(mlx, sizeof(struct s_mlx) - sizeof(struct s_scene));
+	// ft_bzero(mlx, sizeof(struct s_mlx) - sizeof(struct s_scene));
+	ft_bzero(mlx, sizeof(struct s_mlx));
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
 		return (false);
-	mlx->ray = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "minirt render");
-	if (!mlx->ray)
+	mlx->ray.info = create_info(0x0, "minirt render");
+	mlx->ray.win = mlx_new_window(mlx->mlx, &mlx->ray.info);
+	if (!mlx->ray.win)
 		return (false);
-	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "minirt panel");
-	if (!mlx->win)
+	mlx->win.info = create_info(0x0, "minirt panel");
+	mlx->win.win = mlx_new_window(mlx->mlx, &mlx->win.info);
+	if (!mlx->win.win)
 		return (false);
 	mlx->ray_img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!mlx->ray_img)
@@ -59,6 +74,33 @@ bool	init_mlx(struct s_mlx *mlx)
 	return (true);
 }
 
+// bool	init_mlx(struct s_mlx *mlx)
+// {
+// 	// ft_bzero(mlx, sizeof(struct s_mlx) - sizeof(struct s_scene));
+// 	ft_bzero(mlx, sizeof(struct s_mlx));
+// 	mlx->mlx = mlx_init();
+// 	if (!mlx->mlx)
+// 		return (false);
+// 	mlx->ray_img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
+// 	if (!mlx->ray_img)
+// 		return (false);
+// 	mlx->ray.info = create_info(mlx->ray_img, "minirt render");
+// 	mlx->ray.win = mlx_new_window(mlx->mlx, &mlx->ray.info);
+// 	if (!mlx->ray.win)
+// 		return (false);
+// 	mlx->win.info = create_info(0x0, "minirt panel");
+// 	mlx->win.win = mlx_new_window(mlx->mlx, &mlx->win.info);
+// 	if (!mlx->win.win)
+// 		return (false);
+// 	mlx->ray_back = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
+// 	if (!mlx->ray_back)
+// 		return (false);
+// 	set_window_position(mlx);
+// 	mlx_init_static_button(mlx);
+// 	mlx->down_sizing = 1;
+// 	return (true);
+// }
+
 void	free_mlx(struct s_mlx *mlx)
 {
 	if (!mlx->mlx)
@@ -67,20 +109,20 @@ void	free_mlx(struct s_mlx *mlx)
 		mlx_destroy_image(mlx->mlx, mlx->ray_img);
 	if (mlx->ray_back)
 		mlx_destroy_image(mlx->mlx, mlx->ray_back);
-	if (mlx->win)
-		mlx_destroy_window(mlx->mlx, mlx->win);
-	if (mlx->ray)
-		mlx_destroy_window(mlx->mlx, mlx->ray);
-	mlx_destroy_display(mlx->mlx);
-	ft_free("c", &(mlx->scene));
+	if (mlx->win.win)
+		mlx_destroy_window(mlx->mlx, mlx->win.win);
+	if (mlx->ray.win)
+		mlx_destroy_window(mlx->mlx, mlx->ray.win);
+	mlx_destroy_context(mlx->mlx);
+	// ft_free("c", &(mlx->scene));
 }
 
 void	mlx_swap_ray_buffer(struct s_mlx *mlx)
 {
-	void	*tmp;
+	mlx_image	tmp;
 
 	tmp = mlx->ray_back;
 	mlx->ray_back = mlx->ray_img;
 	mlx->ray_img = tmp;
-	mlx_put_image_to_window(mlx->mlx, mlx->ray, mlx->ray_img, 0, 0);
+	mlx_put_image_to_window(mlx->mlx, mlx->ray.win, mlx->ray_img, 0, 0);
 }

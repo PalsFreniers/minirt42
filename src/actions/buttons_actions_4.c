@@ -27,7 +27,7 @@ void	button_screen(struct s_mlx *mlx)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			compute_color(mlx_get_image_pixel(mlx->mlx, mlx->ray_img, x, y), c);
+			compute_color(mlx_get_image_pixel(mlx->mlx, mlx->ray_img, x, y).rgba, c);
 			write(fd, c, 3);
 			x++;
 		}

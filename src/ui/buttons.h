@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buttons.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:42:46 by tdelage           #+#    #+#             */
-/*   Updated: 2024/11/30 17:42:47 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/13 14:37:39 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define PPC 7
 # define BORDERC 0xFF8888FF
 # define BORDER2C 0xFF2222FF
-# define TEXTC 0xFFDDDDDD
+# define TEXTC (mlx_color) 0xFFDDDDDD
 
 typedef void			(*t_button_f)(void *);
 typedef void			(*t_button_i_f)(void *, int);

@@ -49,7 +49,7 @@ void	button_draw(struct s_mlx *mlx, struct s_button *b)
 		color = BORDER2C;
 	x = b->x + b->width / 2 - ((ft_strlen(b->text) * PPC) / 2);
 	y = b->y + b->height / 2 - (PPC / 2) + PPC - 2;
-	mlx_string_put(mlx->mlx, mlx->win, x, y, TEXTC, b->text);
+	mlx_string_put(mlx->mlx, mlx->win.win, x, y, TEXTC, b->text);
 	vline_print(mlx, (struct s_vline){b->x, b->y, b->y + b->height}, color);
 	vline_print(mlx, (struct s_vline){b->x + b->width, b->y, b->y + b->height},
 		color);

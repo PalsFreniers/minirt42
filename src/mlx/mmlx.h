@@ -9,13 +9,19 @@
 
 # define BASE_LINE_Y 70
 
+struct s_window
+{
+	mlx_window				win;
+	mlx_window_create_info	info;
+};
+
 struct				s_mlx
 {
-	void			*mlx;
-	void			*win;
-	void			*ray;
-	void			*ray_img;
-	void			*ray_back;
+	mlx_context		mlx;
+	struct s_window	win;
+	struct s_window	ray;
+	mlx_image		ray_img;
+	mlx_image		ray_back;
 	struct s_button	static_b[6];
 	struct s_button	interface_buttons[33];
 	int				btn_count;
@@ -26,8 +32,8 @@ struct				s_mlx
 	struct s_scene	scene;
 };
 
-typedef int			(*t_mlx_e_f)(int, void *);
-typedef int			(*t_mlx_l_f)(void *);
+typedef void		(*t_mlx_e_f)(int, void *);
+typedef void		(*t_mlx_l_f)(void *);
 
 bool				init_mlx(struct s_mlx *mlx);
 void				free_mlx(struct s_mlx *mlx);
