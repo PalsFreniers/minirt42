@@ -3,11 +3,18 @@
 #include <ui/window.h>
 #include <unistd.h>
 
-void	compute_color(int c, char ret[3])
+// void	compute_color(int c, char ret[3])
+// {
+// 	ret[0] = (c >> (8 * 2)) & 0xFF;
+// 	ret[1] = (c >> (8 * 1)) & 0xFF;
+// 	ret[2] = (c >> (8 * 0)) & 0xFF;
+// }
+
+void	compute_color(mlx_color c, char ret[3])
 {
-	ret[0] = (c >> (8 * 2)) & 0xFF;
-	ret[1] = (c >> (8 * 1)) & 0xFF;
-	ret[2] = (c >> (8 * 0)) & 0xFF;
+	ret[0] = c.r;
+	ret[1] = c.g;
+	ret[2] = c.b;
 }
 
 void	button_screen(struct s_mlx *mlx)
@@ -27,7 +34,7 @@ void	button_screen(struct s_mlx *mlx)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			compute_color(mlx_get_image_pixel(mlx->context, mlx->img, x, y).rgba, c);
+			compute_color(mlx_get_image_pixel(mlx->context, mlx->img, x, y), c);
 			write(fd, c, 3);
 			x++;
 		}

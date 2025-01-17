@@ -51,7 +51,6 @@ mlx_window_create_info	create_info(mlx_image render_target, const char *title)
 
 bool	init_mlx(struct s_mlx *mlx)
 {
-	// ft_bzero(mlx, sizeof(struct s_mlx) - sizeof(struct s_scene));
 	ft_bzero(mlx, sizeof(struct s_mlx));
 	mlx->context = mlx_init();
 	if (!mlx->context)
@@ -64,41 +63,14 @@ bool	init_mlx(struct s_mlx *mlx)
 	mlx->ui.win = mlx_new_window(mlx->context, &mlx->ui.info);
 	if (!mlx->ui.win)
 		return (false);
-        mlx->img = mlx_new_image(mlx->context, WIN_WIDTH, WIN_HEIGHT);
-        if(!mlx->img)
-                return false;
+	mlx->img = mlx_new_image(mlx->context, WIN_WIDTH, WIN_HEIGHT);
+	if(!mlx->img)
+			return false;
 	set_window_position(mlx);
 	mlx_init_static_button(mlx);
 	mlx->down_sizing = 1;
 	return (true);
 }
-
-// bool	init_mlx(struct s_mlx *mlx)
-// {
-// 	// ft_bzero(mlx, sizeof(struct s_mlx) - sizeof(struct s_scene));
-// 	ft_bzero(mlx, sizeof(struct s_mlx));
-// 	mlx->mlx = mlx_init();
-// 	if (!mlx->mlx)
-// 		return (false);
-// 	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-// 	if (!mlx->img)
-// 		return (false);
-// 	mlx->render.info = create_info(mlx->img, "minirt render");
-// 	mlx->render.win = mlx_new_window(mlx->mlx, &mlx->render.info);
-// 	if (!mlx->render.win)
-// 		return (false);
-// 	mlx->win.info = create_info(0x0, "minirt panel");
-// 	mlx->win.win = mlx_new_window(mlx->mlx, &mlx->win.info);
-// 	if (!mlx->win.win)
-// 		return (false);
-// 	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-// 	if (!mlx->img)
-// 		return (false);
-// 	set_window_position(mlx);
-// 	mlx_init_static_button(mlx);
-// 	mlx->down_sizing = 1;
-// 	return (true);
-// }
 
 void	free_mlx(struct s_mlx *mlx)
 {
@@ -108,8 +80,8 @@ void	free_mlx(struct s_mlx *mlx)
 		mlx_destroy_window(mlx->context, mlx->render.win);
 	if (mlx->ui.win)
 		mlx_destroy_window(mlx->context, mlx->ui.win);
-        if(mlx->img)
-                mlx_destroy_image(mlx->context, mlx->img);
+	if(mlx->img)
+		mlx_destroy_image(mlx->context, mlx->img);
 	mlx_destroy_context(mlx->context);
 	// ft_free("c", &(mlx->scene));
 }
