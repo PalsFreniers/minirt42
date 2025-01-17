@@ -65,7 +65,7 @@ bool	init_mlx(struct s_mlx *mlx)
 		return (false);
 	mlx->img = mlx_new_image(mlx->context, WIN_WIDTH, WIN_HEIGHT);
 	if(!mlx->img)
-			return false;
+		return (false);
 	set_window_position(mlx);
 	mlx_init_static_button(mlx);
 	mlx->down_sizing = 1;
