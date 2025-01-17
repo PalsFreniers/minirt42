@@ -20,8 +20,7 @@ struct				s_mlx
 	mlx_context		context;
 	struct s_window	ui;
 	struct s_window	render;
-	struct s_window	buffer;
-	mlx_image		img;
+        mlx_image img;
 	struct s_button	static_b[6];
 	struct s_button	interface_buttons[33];
 	int				btn_count;
