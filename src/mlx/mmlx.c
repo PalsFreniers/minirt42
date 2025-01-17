@@ -121,6 +121,7 @@ void	free_mlx(struct s_mlx *mlx)
 
 void	mlx_swap_ray_buffer(struct s_mlx *mlx)
 {
+	mlx_clear_window(mlx->context, mlx->render.win, (mlx_color)(uint32_t) 0);
 	mlx_put_image_to_window(mlx->context, mlx->render.win, mlx->img, 0, 0);
 // 	mlx_image	tmp;
 // 	// static int	i = 0;

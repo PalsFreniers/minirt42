@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/15 17:08:36 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/17 16:12:08 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,7 @@ void	loop_render(struct s_mlx *mlx)
 	t_ray		ray;
 	t_collision	collision;
 
+	mlx_clear_window(mlx->context, mlx->buffer.win, (mlx_color)(uint32_t) 0);
 	loop_draw_ui(mlx);
 	// pied = vec3_add(vec3_mul(mlx->scene.camera.direction,
 	// 			vec3_new_from_one(M_PI)), vec3_new_from_one(M_PI));
@@ -220,7 +221,7 @@ void	loop_render(struct s_mlx *mlx)
 			}
 		}
 	}
-	// // mlx_put_image_to_window(mlx->mlx, mlx->ray.win, mlx->img, 0, 0);
+	// mlx_put_image_to_window(mlx->context, mlx->render.win, mlx->img, 0, 0);
 	mlx_swap_ray_buffer(mlx);
 	// // i++;						// 
 	// // if (i >= 2)					// 
