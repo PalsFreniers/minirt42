@@ -2,7 +2,7 @@
 #include <ui/vline.h>
 #include <ui/window.h>
 
-void	vline_print(struct s_mlx *mlx, struct s_vline v, uint32_t color)
+void	vline_print(struct s_mlx *mlx, struct s_vline v, mlx_color color)
 {
 	int	tmp;
 	int	i;
@@ -17,12 +17,12 @@ void	vline_print(struct s_mlx *mlx, struct s_vline v, uint32_t color)
 	while (i < v.y2)
 	{
 		if (i < WIN_HEIGHT && i >= 0)
-			mlx_pixel_put(mlx->context, mlx->ui.win, v.x, i, (mlx_color) color);
+			mlx_pixel_put(mlx->context, mlx->ui.win, v.x, i, color);
 		i++;
 	}
 }
 
-void	hline_print(struct s_mlx *mlx, struct s_vline v, uint32_t color)
+void	hline_print(struct s_mlx *mlx, struct s_vline v, mlx_color color)
 {
 	int	tmp;
 	int	i;
@@ -37,7 +37,7 @@ void	hline_print(struct s_mlx *mlx, struct s_vline v, uint32_t color)
 	while (i < v.y2)
 	{
 		if (i < WIN_WIDTH && i >= 0)
-			mlx_pixel_put(mlx->context, mlx->ui.win, i, v.x, (mlx_color) color);
+			mlx_pixel_put(mlx->context, mlx->ui.win, i, v.x, color);
 		i++;
 	}
 }

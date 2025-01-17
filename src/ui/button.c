@@ -39,17 +39,17 @@ void	button_update(void *mlx, struct s_button *b)
 
 void	button_draw(struct s_mlx *mlx, struct s_button *b)
 {
-	int	x;
-	int	y;
-	int	color;
+	int			x;
+	int			y;
+	mlx_color	color;
 
-	color = BORDERC;
+	color = (mlx_color) BORDERC;
 	mlx_mouse_get_pos(mlx->context, &x, &y);
 	if (collide((int[4]){x, y, 0, 0}, (int *)b))
-		color = BORDER2C;
+		color = (mlx_color) BORDER2C;
 	x = b->x + b->width / 2 - ((ft_strlen(b->text) * PPC) / 2);
 	y = b->y + b->height / 2 - (PPC / 2) + PPC - 2;
-	mlx_string_put(mlx->context, mlx->ui.win, x, y, TEXTC, b->text);
+	mlx_string_put(mlx->context, mlx->ui.win, x, y, (mlx_color) TEXTC, b->text);
 	vline_print(mlx, (struct s_vline){b->x, b->y, b->y + b->height}, color);
 	vline_print(mlx, (struct s_vline){b->x + b->width, b->y, b->y + b->height},
 		color);
