@@ -1,3 +1,4 @@
+#include "mlx.h"
 #include "ui/buttons.h"
 #include <actions/buttons_actions.h>
 #include <libft.h>
@@ -63,13 +64,9 @@ bool	init_mlx(struct s_mlx *mlx)
 	mlx->ui.win = mlx_new_window(mlx->context, &mlx->ui.info);
 	if (!mlx->ui.win)
 		return (false);
-	mlx->img = mlx_new_image(mlx->context, WIN_WIDTH, WIN_HEIGHT);
-	if (!mlx->img)
-		return (false);
-	mlx->buffer.info = create_info(mlx->img, "buffer");
-	mlx->buffer.win = mlx_new_window(mlx->context, &mlx->buffer.info);
-	if (!mlx->buffer.win)
-		return (false);
+        mlx->img = mlx_new_image(mlx->context, WIN_WIDTH, WIN_HEIGHT);
+        if(!mlx->img)
+                return false;
 	set_window_position(mlx);
 	mlx_init_static_button(mlx);
 	mlx->down_sizing = 1;
@@ -107,30 +104,12 @@ void	free_mlx(struct s_mlx *mlx)
 {
 	if (!mlx->context)
 		return ;
-	if (mlx->img)
-		mlx_destroy_image(mlx->context, mlx->img);
-	if (mlx->buffer.win)
-		mlx_destroy_window(mlx->context, mlx->buffer.win);
 	if (mlx->render.win)
 		mlx_destroy_window(mlx->context, mlx->render.win);
 	if (mlx->ui.win)
 		mlx_destroy_window(mlx->context, mlx->ui.win);
+        if(mlx->img)
+                mlx_destroy_image(mlx->context, mlx->img);
 	mlx_destroy_context(mlx->context);
 	// ft_free("c", &(mlx->scene));
-}
-
-void	mlx_swap_ray_buffer(struct s_mlx *mlx)
-{
-	mlx_clear_window(mlx->context, mlx->render.win, (mlx_color)(uint32_t) 0);
-	mlx_put_image_to_window(mlx->context, mlx->render.win, mlx->img, 0, 0);
-// 	mlx_image	tmp;
-// 	// static int	i = 0;
-// 
-// 	tmp = mlx->img;
-// 	mlx->img = mlx->img;
-// 	mlx->img = tmp;
-// 	mlx_put_image_to_window(mlx->context, mlx->render.win, mlx->img, 0, 0);
-// 	// if (i >= 3)
-// 	// 	mlximag
-// 	// i++;
 }

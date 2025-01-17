@@ -74,7 +74,6 @@ void	loop_draw_ui(struct s_mlx *mlx)
 		numpad_draw(mlx, &(mlx->interface_numpad[x]));
 		x++;
 	}
-	mlx_put_image_to_window(mlx->context, mlx->render.win, mlx->img, 0, 0);
 }
 
 static t_vec3	rotate_camera_x(struct s_mlx *mlx, float angle)
