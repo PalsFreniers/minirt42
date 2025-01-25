@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:08:52 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/22 04:20:43 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/25 18:55:25 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,35 +38,33 @@ static t_vec3	get_normal(struct s_cylinder *cylinder, t_collision *coll)
 	return (normal);
 }
 
-/**
- * Not finished, but the idea is here.
- */
-static bool	end_caps(float dist, float t_front, float determinant, struct s_ray *ray,
-	struct s_cylinder *cylinder, t_collision *coll)
+static bool	end_caps(float dist_front, float height_front, float inside,
+	struct s_ray *ray, struct s_cylinder *cylinder, t_collision *coll)
 {
-	float	inside;
-	float	t_back;
+	float	height_back;
 
-	inside = 2 * sqrtf(determinant);
-	t_back = vec3_dot(cylinder->axis, vec3_sub(vec3_scal_mul(ray->direction,
-				dist + inside), cylinder->base.position));
-	if (t_back < 0 || t_back > cylinder->height)
+	height_back = vec3_dot(cylinder->axis,
+		vec3_sub(vec3_scal_mul(ray->direction, dist_front + inside),
+		cylinder->base.position));
+	if ((height_back < 0 && height_front < 0)
+		|| (height_back > cylinder->height && height_front > cylinder->height))
 		return (false);
-	if (coll)
+	if (!coll)
+		return (true);
+	if (height_front < 0)
 	{
-		if (t_front < 0)
-		{
-			coll->dist = dist + (inside * t_front / (t_front - t_back));
-			coll->position = vec3_add(ray->origin, vec3_scal_mul(ray->direction, coll->dist));
-			coll->normal = vec3_scal_mul(cylinder->axis, -1.0f);
-		}
-		else
-		{
-			coll->dist = dist + (inside * (t_front - cylinder->height) / (t_front - t_back));
-			coll->position = vec3_add(ray->origin, vec3_scal_mul(ray->direction, coll->dist));
-			coll->normal = cylinder->axis;
-		}
+		coll->dist = dist_front + (inside * height_front
+				/ (height_front - height_back));
+		coll->normal = vec3_scal_mul(cylinder->axis, -1.0f);
 	}
+	else
+	{
+		coll->dist = dist_front + (inside * (height_front - cylinder->height)
+				/ (height_front - height_back));
+		coll->normal = cylinder->axis;
+	}
+	coll->position = vec3_add(ray->origin,
+			vec3_scal_mul(ray->direction, coll->dist));
 	return (true);
 }
 
@@ -76,20 +74,20 @@ static void	body(float dist, struct s_ray *ray,
 	if (coll)
 	{
 		coll->dist = dist;
-		coll->position = vec3_add(ray->origin, vec3_scal_mul(ray->direction,
-				coll->dist));
+		coll->position = vec3_add(ray->origin,
+				vec3_scal_mul(ray->direction, coll->dist));
 		coll->normal = get_normal(cylinder, coll);
 	}
 }
 
 bool	cylinder_collide_function(struct s_ray *ray,
-		struct s_cylinder *cylinder, t_collision *coll) // Unfinished, end caps missing
+		struct s_cylinder *cylinder, t_collision *coll)
 {
 	float	determinant;
 	t_vec3	away_from_axis;
 	t_vec3	ray_to_base;
 	float	dist;
-	float	t;
+	float	height;
 
 	away_from_axis = vec3_cross(ray->direction, cylinder->axis);
 	ray_to_base = vec3_sub(cylinder->base.position, ray->origin);
@@ -99,10 +97,13 @@ bool	cylinder_collide_function(struct s_ray *ray,
 		return (false);
 	dist = vec3_dot(away_from_axis, vec3_cross(ray_to_base, cylinder->axis));
 	dist = (dist - sqrtf(determinant)) / vec3_lenght_sq(away_from_axis);
-	t = vec3_dot(cylinder->axis, vec3_sub(vec3_scal_mul(ray->direction,
+	height = vec3_dot(cylinder->axis, vec3_sub(vec3_scal_mul(ray->direction,
 				dist), cylinder->base.position));
-	if (t < 0 || t > cylinder->height)
-		return (end_caps(dist, t, determinant, ray, cylinder, coll));
+	if (height < 0 || height > cylinder->height)
+	{
+		determinant = 2 * sqrtf(determinant) / vec3_lenght_sq(away_from_axis);
+		return (end_caps(dist, height, determinant, ray, cylinder, coll));
+	}
 	else
 		body(dist, ray, cylinder, coll);
 	return (true);
