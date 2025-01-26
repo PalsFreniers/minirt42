@@ -126,7 +126,7 @@ LIBS = -lm -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -lSDL2
 TIMER = 0.1
 
 ifdef DEBUG
-	CFLAGS += -g -gdwarf-2 #-pg #-fsanitize=address #(address, memory, thread)
+	CFLAGS += -g -gdwarf-2 #-fsanitize=address #(address, memory, thread) #-pg 
 	DEBUG_MODE = 1
 endif
 
