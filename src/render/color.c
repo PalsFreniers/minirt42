@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/15 16:35:38 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/26 02:09:31 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,12 +149,22 @@ static mlx_color	blinn_phong_shading(t_collision *coll, t_vec3 coll_to_light)
 	return (color);
 }
 
+struct s_object *get_map_light(struct s_scene *scene) {
+        size_t x = 0;
+        while(x < scene->len) {
+                if(scene->map_objects[x]->type == OBJ_LIGHT)
+                        return scene->map_objects[x];
+                x++;
+        }
+        return NULL;
+}
+
 mlx_color	lit_color(struct s_mlx *mlx, t_collision *collision)
 {
 	mlx_color	color;
 	t_vec3		coll_to_light;
 
-	coll_to_light = vec3_sub(mlx->scene.map_objects[0]->position, collision->position);
+	coll_to_light = vec3_sub(get_map_light(&mlx->scene)->position, collision->position);
 	if (!is_lit(mlx, collision, coll_to_light))
 	{
 		color.rgba = 0X000000FF;

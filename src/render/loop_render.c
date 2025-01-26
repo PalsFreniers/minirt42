@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/25 19:45:49 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/26 02:21:07 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ static void	set_pixel(struct s_mlx *mlx, int x, int y, mlx_color color)
 	{
 		for (int xi = x; yi < WIN_WIDTH && xi < x + mlx->down_sizing; xi++)
 		{
-			mlx_pixel_put(mlx->context, mlx->render.win, x, y, color);
-			mlx_set_image_pixel(mlx->context, mlx->img, x, y, color);
+			mlx_pixel_put(mlx->context, mlx->render.win, xi, yi, color);
+			mlx_set_image_pixel(mlx->context, mlx->img, xi, yi, color);
 		}
 	}
 }
