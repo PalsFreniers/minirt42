@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/26 16:05:40 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/26 16:19:47 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ static mlx_color	blinn_phong_shading(t_collision *coll, t_vec3 coll_to_light)
 	return (color);
 }
 
-mlx_color	lit_color(struct s_mlx *mlx, t_collision *collision)
+mlx_color	lit_color(struct s_mlx *mlx, t_collision *collision, float ratio)
 {
 	mlx_color	color;
 	t_vec3		coll_to_light;
@@ -187,5 +187,6 @@ mlx_color	lit_color(struct s_mlx *mlx, t_collision *collision)
 	// color = lambert_shading(collision, coll_to_light);
 	color = blend_color(lambert_shading(collision, coll_to_light),
 			blinn_phong_shading(collision, coll_to_light), 0.5f);
+        color = blend_color(rgb_to_rgba(collision->object->color), color, ratio);
 	return (color);
 }
