@@ -10,5 +10,6 @@ mlx
 *.rt
 *.ppm
 dfgh
+gmon.out
 !test/*.rt
 !src/mlx
