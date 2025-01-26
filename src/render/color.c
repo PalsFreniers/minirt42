@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/26 15:03:31 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/26 15:46:00 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,17 @@ mlx_color	filter_acolor(mlx_color light, mlx_color filter)
 	return (color);
 }
 
-mlx_color	blend_color(mlx_color a, mlx_color b)
+mlx_color	blend_color(mlx_color a, mlx_color b, float ratio)
 {
 	mlx_color	blend;
 
 	blend.a = 0xFF;
-        blend.r = (a.r + b.r) / 2;
-        blend.g = (a.g + b.g) / 2;
-        blend.b = (a.b + b.b) / 2;
+        blend.r = (1 - ratio) * a.r + ratio * b.r;
+        blend.g = (1 - ratio) * a.g + ratio * b.g;
+        blend.b = (1 - ratio) * a.b + ratio * b.b;
+////        blend.r = (a.r + b.r) / 2;
+////        blend.g = (a.g + b.g) / 2;
+////        blend.b = (a.b + b.b) / 2;
 //	if (a.r > 0XFF - b.r)
 //		blend.r = 0XFF;
 //	else
@@ -173,6 +176,6 @@ mlx_color	lit_color(struct s_mlx *mlx, t_collision *collision)
 	// color = rgb_to_rgba(collision->object->color);
 	// color = lambert_shading(collision, coll_to_light);
 	color = blend_color(lambert_shading(collision, coll_to_light),
-			blinn_phong_shading(collision, coll_to_light));
+			blinn_phong_shading(collision, coll_to_light), 0.5f);
 	return (color);
 }

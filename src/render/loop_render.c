@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/26 02:21:07 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/26 15:40:24 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ void	get_collision(struct s_mlx *mlx, struct s_ray *ray,
 	}
 }
 
-static bool	is_float_on_grad(float f, float step, float precision)	// DEBUG
+static bool	is_float_on_grad(float f, float step, float precision) // DEBUG
 {
-	float	mod;
+	float mod;
 
 	if (f < step && f > -step)
 		return (f < 2 * precision && f > -2 * precision);
@@ -97,13 +97,13 @@ static bool	is_float_on_grad(float f, float step, float precision)	// DEBUG
 }
 
 static mlx_color	draw_graduation(struct s_mlx *mlx, t_collision *collision,
-		float step, float precision)											// DEBUG
+		float step, float precision) // DEBUG
 {
-	mlx_color	color;
-	t_vec3		global_position;
-	bool		x_bool;
-	bool		y_bool;
-	bool		z_bool;
+	mlx_color color;
+	t_vec3 global_position;
+	bool x_bool;
+	bool y_bool;
+	bool z_bool;
 
 	global_position = unmap_vec3(collision->position,
 		mlx->scene.camera.position, mlx->scene.camera.inverse_transform);
@@ -137,10 +137,12 @@ static void	set_pixel(struct s_mlx *mlx, int x, int y, mlx_color color)
 
 void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 {
-	mlx_color	color;
-	mlx_color	light;
-	mlx_color	ambient;
+	mlx_color		color;
+	mlx_color		light;
+	mlx_color		ambient;
+	struct s_light	*o_light;
 
+	o_light = NULL;
 	light = get_light_color(mlx);
 	ambient = rgb_to_rgba(mlx->scene.ambient.color);
 	if (collision->object)
@@ -156,12 +158,12 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 			}
 		}
 		// Normal program
-		if (mlx->scene.objects[0]->type == OBJ_LIGHT
-			&& collision->dist < 25000.0f)
+		o_light = (struct s_light *)get_map_light(&mlx->scene);
+		if (collision->dist < 25000.0f)
 			color = filter_acolor(light, lit_color(mlx, collision));
 		else
 			color.rgba = 0X000000FF;
-		color = blend_color(color, ambient);
+		color = blend_color(color, ambient, mlx->scene.ambient.ratio / (mlx->scene.ambient.ratio + o_light->ratio));
 		set_pixel(mlx, x, y, color);
 	}
 	else
@@ -174,9 +176,9 @@ void	loop_render(struct s_mlx *mlx)
 	t_collision	collision;
 
 	loop_draw_ui(mlx);
-	mlx_clear_window(mlx->context, mlx->render.win, (mlx_color) 0xFF000000);
-	ft_bzero(&collision, sizeof (collision));
-	ft_bzero(&ray, sizeof (ray));
+	mlx_clear_window(mlx->context, mlx->render.win, (mlx_color)0xFF000000);
+	ft_bzero(&collision, sizeof(collision));
+	ft_bzero(&ray, sizeof(ray));
 	for (int y = 0; y < WIN_HEIGHT; y++)
 	{
 		for (int x = 0; x < WIN_WIDTH; ++x)
