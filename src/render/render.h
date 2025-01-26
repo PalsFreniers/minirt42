@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 04:16:46 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/26 15:39:41 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/26 16:05:30 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ mlx_color		blend_color(mlx_color a, mlx_color b, float ratio);
 mlx_color		get_light_color(struct s_mlx *mlx);
 mlx_color		lit_color(struct s_mlx *mlx, t_collision *collision);
 struct s_object	*get_map_light(struct s_scene *scene);
+struct s_object *get_real_light(struct s_scene *scene);
 
 #endif // RENDER_H

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/26 15:46:00 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/26 16:05:40 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ struct s_object *get_map_light(struct s_scene *scene) {
         while(x < scene->len) {
                 if(scene->map_objects[x]->type == OBJ_LIGHT)
                         return scene->map_objects[x];
+                x++;
+        }
+        return NULL;
+}
+
+struct s_object *get_real_light(struct s_scene *scene) {
+        size_t x = 0;
+        while(x < scene->len) {
+                if(scene->objects[x]->type == OBJ_LIGHT)
+                        return scene->objects[x];
                 x++;
         }
         return NULL;
@@ -90,7 +100,7 @@ mlx_color	get_light_color(struct s_mlx *mlx)
 {
 	mlx_color	color;
 
-	color = rgb_to_rgba(get_map_light(&mlx->scene)->color);
+	color = rgb_to_rgba(get_real_light(&mlx->scene)->color);
 	return (color);
 }
 

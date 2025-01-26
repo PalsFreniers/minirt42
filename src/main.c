@@ -6,10 +6,11 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/15 17:02:49 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/26 16:03:54 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "object/objects.h"
 #include "scene/scene.h"
 #include <files/files.h>
 #include <libft.h>

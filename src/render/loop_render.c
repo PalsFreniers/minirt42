@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/26 15:40:24 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/26 16:13:00 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,12 +158,11 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 			}
 		}
 		// Normal program
-		o_light = (struct s_light *)get_map_light(&mlx->scene);
+		o_light = (struct s_light *)get_real_light(&mlx->scene);
 		if (collision->dist < 25000.0f)
-			color = filter_acolor(light, lit_color(mlx, collision));
+		        color = filter_acolor(blend_color(blend_color((mlx_color){.rgba = 0x000000FF}, ambient, mlx->scene.ambient.ratio), light, o_light->ratio), lit_color(mlx, collision));
 		else
 			color.rgba = 0X000000FF;
-		color = blend_color(color, ambient, mlx->scene.ambient.ratio / (mlx->scene.ambient.ratio + o_light->ratio));
 		set_pixel(mlx, x, y, color);
 	}
 	else
