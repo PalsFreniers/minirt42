@@ -6,13 +6,23 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/26 02:09:31 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/26 15:03:31 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <render/render.h>
 #include <object/objects.h>
 #include <render/collision.h>
+
+struct s_object *get_map_light(struct s_scene *scene) {
+        size_t x = 0;
+        while(x < scene->len) {
+                if(scene->map_objects[x]->type == OBJ_LIGHT)
+                        return scene->map_objects[x];
+                x++;
+        }
+        return NULL;
+}
 
 mlx_color	rgb_to_rgba(t_color color)
 {
@@ -55,18 +65,21 @@ mlx_color	blend_color(mlx_color a, mlx_color b)
 	mlx_color	blend;
 
 	blend.a = 0xFF;
-	if (a.r > 0XFF - b.r)
-		blend.r = 0XFF;
-	else
-		blend.r = a.r + b.r;
-	if (a.g > 0XFF - b.g)
-		blend.g = 0XFF;
-	else
-		blend.g = a.g + b.g;
-	if (a.b > 0XFF - b.b)
-		blend.b = 0XFF;
-	else
-		blend.b = a.b + b.b;
+        blend.r = (a.r + b.r) / 2;
+        blend.g = (a.g + b.g) / 2;
+        blend.b = (a.b + b.b) / 2;
+//	if (a.r > 0XFF - b.r)
+//		blend.r = 0XFF;
+//	else
+//		blend.r = a.r + b.r;
+//	if (a.g > 0XFF - b.g)
+//		blend.g = 0XFF;
+//	else
+//		blend.g = a.g + b.g;
+//	if (a.b > 0XFF - b.b)
+//		blend.b = 0XFF;
+//	else
+//		blend.b = a.b + b.b;
 	return (blend);
 }
 
@@ -74,10 +87,7 @@ mlx_color	get_light_color(struct s_mlx *mlx)
 {
 	mlx_color	color;
 
-	if (mlx->scene.map_objects[0]->type != OBJ_LIGHT)
-		color.rgba = 0XFFFFFFFF;
-	else
-		color = rgb_to_rgba(mlx->scene.map_objects[0]->color);
+	color = rgb_to_rgba(get_map_light(&mlx->scene)->color);
 	return (color);
 }
 
@@ -147,16 +157,6 @@ static mlx_color	blinn_phong_shading(t_collision *coll, t_vec3 coll_to_light)
 	light_amount = diffuse_coeff * light_per_area;
 	color = mul_acolor(rgb_to_rgba(coll->object->color), light_amount);
 	return (color);
-}
-
-struct s_object *get_map_light(struct s_scene *scene) {
-        size_t x = 0;
-        while(x < scene->len) {
-                if(scene->map_objects[x]->type == OBJ_LIGHT)
-                        return scene->map_objects[x];
-                x++;
-        }
-        return NULL;
 }
 
 mlx_color	lit_color(struct s_mlx *mlx, t_collision *collision)

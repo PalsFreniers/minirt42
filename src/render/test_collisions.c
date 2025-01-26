@@ -6,11 +6,10 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:38:33 by marwan            #+#    #+#             */
-/*   Updated: 2025/01/01 14:30:13 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/26 14:58:15 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math/la.h"
 #include "object/objects.h"
 #include <render/collision.h>
 
