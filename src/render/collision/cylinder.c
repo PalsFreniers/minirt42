@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:08:52 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/26 02:11:07 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/26 02:23:11 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static bool	end_caps(float dist_front, float height_front, float inside,
 	{
 		coll->dist = dist_front + (inside * height_front
 				/ (height_front - height_back));
-		coll->normal = cylinder->axis;
+		coll->normal = vec3_scal_mul(cylinder->axis, -1.0f);
 	}
 	else
 	{
