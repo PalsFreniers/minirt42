@@ -10,28 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <render/render.h>
 #include <object/objects.h>
 #include <render/collision.h>
+#include <render/render.h>
 
-struct s_object *get_map_light(struct s_scene *scene) {
-        size_t x = 0;
-        while(x < scene->len) {
-                if(scene->map_objects[x]->type == OBJ_LIGHT)
-                        return scene->map_objects[x];
-                x++;
-        }
-        return (NULL);
+struct s_object	*get_map_light(struct s_scene *scene)
+{
+	size_t	x;
+
+	x = 0;
+	while (x < scene->len)
+	{
+		if (scene->map_objects[x]->type == OBJ_LIGHT)
+			return (scene->map_objects[x]);
+		x++;
+	}
+	return (NULL);
 }
 
-struct s_object *get_real_light(struct s_scene *scene) {
-        size_t x = 0;
-        while(x < scene->len) {
-                if(scene->objects[x]->type == OBJ_LIGHT)
-                        return scene->objects[x];
-                x++;
-        }
-        return (NULL);
+struct s_object	*get_real_light(struct s_scene *scene)
+{
+	size_t	x;
+
+	x = 0;
+	while (x < scene->len)
+	{
+		if (scene->objects[x]->type == OBJ_LIGHT)
+			return (scene->objects[x]);
+		x++;
+	}
+	return (NULL);
 }
 
 t_render_color	render_color_black(void)
@@ -120,8 +128,8 @@ mlx_color	get_light_color(struct s_mlx *mlx)
 	return (rgb_to_mlx_color(get_real_light(&mlx->scene)->color));
 }
 
-static bool
-is_lit(struct s_mlx *mlx, t_collision *starting_point, t_vec3 light_dir)
+static bool	is_lit(struct s_mlx *mlx, t_collision *starting_point,
+		t_vec3 light_dir)
 {
 	t_ray		ray;
 	t_collision	new_coll;
