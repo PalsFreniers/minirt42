@@ -6,32 +6,40 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/26 16:19:47 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/27 04:58:45 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <render/render.h>
 #include <object/objects.h>
 #include <render/collision.h>
+#include <render/render.h>
 
-struct s_object *get_map_light(struct s_scene *scene) {
-        size_t x = 0;
-        while(x < scene->len) {
-                if(scene->map_objects[x]->type == OBJ_LIGHT)
-                        return scene->map_objects[x];
-                x++;
-        }
-        return NULL;
+struct s_object	*get_map_light(struct s_scene *scene)
+{
+	size_t	x;
+
+	x = 0;
+	while (x < scene->len)
+	{
+		if (scene->map_objects[x]->type == OBJ_LIGHT)
+			return (scene->map_objects[x]);
+		x++;
+	}
+	return (NULL);
 }
 
-struct s_object *get_real_light(struct s_scene *scene) {
-        size_t x = 0;
-        while(x < scene->len) {
-                if(scene->objects[x]->type == OBJ_LIGHT)
-                        return scene->objects[x];
-                x++;
-        }
-        return NULL;
+struct s_object	*get_real_light(struct s_scene *scene)
+{
+	size_t	x;
+
+	x = 0;
+	while (x < scene->len)
+	{
+		if (scene->objects[x]->type == OBJ_LIGHT)
+			return (scene->objects[x]);
+		x++;
+	}
+	return (NULL);
 }
 
 mlx_color	rgb_to_rgba(t_color color)
@@ -75,24 +83,24 @@ mlx_color	blend_color(mlx_color a, mlx_color b, float ratio)
 	mlx_color	blend;
 
 	blend.a = 0xFF;
-        blend.r = (1 - ratio) * a.r + ratio * b.r;
-        blend.g = (1 - ratio) * a.g + ratio * b.g;
-        blend.b = (1 - ratio) * a.b + ratio * b.b;
-////        blend.r = (a.r + b.r) / 2;
-////        blend.g = (a.g + b.g) / 2;
-////        blend.b = (a.b + b.b) / 2;
-//	if (a.r > 0XFF - b.r)
-//		blend.r = 0XFF;
-//	else
-//		blend.r = a.r + b.r;
-//	if (a.g > 0XFF - b.g)
-//		blend.g = 0XFF;
-//	else
-//		blend.g = a.g + b.g;
-//	if (a.b > 0XFF - b.b)
-//		blend.b = 0XFF;
-//	else
-//		blend.b = a.b + b.b;
+	blend.r = (1 - ratio) * a.r + ratio * b.r;
+	blend.g = (1 - ratio) * a.g + ratio * b.g;
+	blend.b = (1 - ratio) * a.b + ratio * b.b;
+	////        blend.r = (a.r + b.r) / 2;
+	////        blend.g = (a.g + b.g) / 2;
+	////        blend.b = (a.b + b.b) / 2;
+	//	if (a.r > 0XFF - b.r)
+	//		blend.r = 0XFF;
+	//	else
+	//		blend.r = a.r + b.r;
+	//	if (a.g > 0XFF - b.g)
+	//		blend.g = 0XFF;
+	//	else
+	//		blend.g = a.g + b.g;
+	//	if (a.b > 0XFF - b.b)
+	//		blend.b = 0XFF;
+	//	else
+	//		blend.b = a.b + b.b;
 	return (blend);
 }
 
@@ -104,7 +112,8 @@ mlx_color	get_light_color(struct s_mlx *mlx)
 	return (color);
 }
 
-static bool	is_lit(struct s_mlx *mlx, t_collision *starting_point, t_vec3 light_dir)
+static bool	is_lit(struct s_mlx *mlx, t_collision *starting_point,
+		t_vec3 light_dir)
 {
 	t_ray		ray;
 	t_collision	new_collision;
@@ -118,8 +127,9 @@ static bool	is_lit(struct s_mlx *mlx, t_collision *starting_point, t_vec3 light_
 	while (i < mlx->scene.len)
 	{
 		if (mlx->scene.map_objects[i] != starting_point->object
-			&& test_collision(mlx, mlx->scene.map_objects[i], &ray, &new_collision)
-			&& new_collision.dist > 0 && new_collision.dist < light_dist)
+			&& test_collision(mlx, mlx->scene.map_objects[i], &ray,
+				&new_collision) && new_collision.dist > 0
+			&& new_collision.dist < light_dist)
 			return (false);
 		i++;
 	}
@@ -155,7 +165,8 @@ static mlx_color	blinn_phong_shading(t_collision *coll, t_vec3 coll_to_light)
 	float		diffuse_coeff;
 	float		light_amount;
 
-	reflect_normal = vec3_sub(vec3_normalise(coll_to_light), coll->ray.direction);
+	reflect_normal = vec3_sub(vec3_normalise(coll_to_light),
+			coll->ray.direction);
 	reflect_normal = vec3_normalise(reflect_normal);
 	light_per_area = vec3_dot(coll->normal, reflect_normal);
 	light_per_area = light_per_area * light_per_area * light_per_area;
@@ -177,7 +188,8 @@ mlx_color	lit_color(struct s_mlx *mlx, t_collision *collision, float ratio)
 	mlx_color	color;
 	t_vec3		coll_to_light;
 
-	coll_to_light = vec3_sub(get_map_light(&mlx->scene)->position, collision->position);
+	coll_to_light = vec3_sub(get_map_light(&mlx->scene)->position,
+			collision->position);
 	if (!is_lit(mlx, collision, coll_to_light))
 	{
 		color.rgba = 0X000000FF;
@@ -187,6 +199,6 @@ mlx_color	lit_color(struct s_mlx *mlx, t_collision *collision, float ratio)
 	// color = lambert_shading(collision, coll_to_light);
 	color = blend_color(lambert_shading(collision, coll_to_light),
 			blinn_phong_shading(collision, coll_to_light), 0.5f);
-        color = blend_color(rgb_to_rgba(collision->object->color), color, ratio);
+	color = blend_color(rgb_to_rgba(collision->object->color), color, ratio);
 	return (color);
 }
