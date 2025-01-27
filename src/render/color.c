@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marwan <marwan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/26 16:19:47 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/27 01:53:15 by marwan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,33 @@ mlx_color	blend_color(mlx_color a, mlx_color b, float ratio)
 	mlx_color	blend;
 
 	blend.a = 0xFF;
-        blend.r = (1 - ratio) * a.r + ratio * b.r;
-        blend.g = (1 - ratio) * a.g + ratio * b.g;
-        blend.b = (1 - ratio) * a.b + ratio * b.b;
-////        blend.r = (a.r + b.r) / 2;
-////        blend.g = (a.g + b.g) / 2;
-////        blend.b = (a.b + b.b) / 2;
-//	if (a.r > 0XFF - b.r)
-//		blend.r = 0XFF;
-//	else
-//		blend.r = a.r + b.r;
-//	if (a.g > 0XFF - b.g)
-//		blend.g = 0XFF;
-//	else
-//		blend.g = a.g + b.g;
-//	if (a.b > 0XFF - b.b)
-//		blend.b = 0XFF;
-//	else
-//		blend.b = a.b + b.b;
+	blend.r = (1 - ratio) * a.r + ratio * b.r;
+	blend.g = (1 - ratio) * a.g + ratio * b.g;
+	blend.b = (1 - ratio) * a.b + ratio * b.b;
+	return (blend);
+}
+
+mlx_color	blend_color_safe(mlx_color a, mlx_color b, float ratio)
+{
+	mlx_color	blend;
+	int			tmp;
+
+	blend.a = 0xFF;
+	tmp = (1 - ratio) * a.r + ratio * b.r;
+	if (tmp <= 0XFF)
+		blend.r = tmp;
+	else
+		blend.r = 0XFF;
+	tmp = (1 - ratio) * a.g + ratio * b.g;
+	if (tmp <= 0XFF)
+		blend.g = tmp;
+	else
+		blend.g = 0XFF;
+	tmp = (1 - ratio) * a.b + ratio * b.b;
+	if (tmp <= 0XFF)
+		blend.b = tmp;
+	else
+		blend.b = 0XFF;
 	return (blend);
 }
 
@@ -172,7 +181,7 @@ static mlx_color	blinn_phong_shading(t_collision *coll, t_vec3 coll_to_light)
 	return (color);
 }
 
-mlx_color	lit_color(struct s_mlx *mlx, t_collision *collision, float ratio)
+mlx_color	lit_color(struct s_mlx *mlx, t_collision *collision)
 {
 	mlx_color	color;
 	t_vec3		coll_to_light;
@@ -187,6 +196,5 @@ mlx_color	lit_color(struct s_mlx *mlx, t_collision *collision, float ratio)
 	// color = lambert_shading(collision, coll_to_light);
 	color = blend_color(lambert_shading(collision, coll_to_light),
 			blinn_phong_shading(collision, coll_to_light), 0.5f);
-        color = blend_color(rgb_to_rgba(collision->object->color), color, ratio);
 	return (color);
 }
