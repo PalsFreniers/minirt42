@@ -3,7 +3,6 @@
 
 # include <math.h>
 
-
 # define DEG2RAD 0.0174533f
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -58,6 +57,9 @@ float				vec3_dot(t_vec3 a, t_vec3 b);
 float				vec3_sum(t_vec3 a);
 
 t_vec3				vec3_map_2pi(t_vec3 a);
+t_vec3				map_vec3(t_vec3 vec, t_vec3 translation, t_mat3 transform);
+t_vec3				unmap_vec3(t_vec3 vec, t_vec3 translation,
+						t_mat3 inverse_transform);
 
 t_mat3				mat3_zero(void);
 t_mat3				mat3_identity(void);

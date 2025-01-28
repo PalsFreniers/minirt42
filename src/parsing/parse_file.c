@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_file.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 06:21:54 by tdelage           #+#    #+#             */
+/*   Updated: 2025/01/28 06:22:15 by tdelage          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "object/objects.h"
 #include "scene/scene.h"
@@ -57,7 +69,6 @@ bool	parse_file(const char *path, struct s_scene *scene, const char *prog)
 
 	count = 0;
 	ret = true;
-	// ft_bzero(scene, sizeof(struct s_scene));	// DONE IN `init_mlx()`
 	if (!ft_strsufix((char *)path, ".rt"))
 	{
 		logger_info("usage: %s <path/to/file.rt>", prog);

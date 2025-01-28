@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:00 by tdelage           #+#    #+#             */
-/*   Updated: 2024/09/02 14:27:23 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/28 06:19:57 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ uint64_t			string_to_uqword(struct s_string self);
 bool				string_to_bool(struct s_string self);
 float				string_to_float(struct s_string self);
 char				*string_to_cstr(struct s_string self);
-// double				string_to_double(struct s_string self);
-// long double			string_to_long_double(struct s_string self);
 
 struct s_string		string_from_sbyte(int8_t value);
 struct s_string		string_from_ubyte(uint8_t value);
@@ -105,7 +103,5 @@ struct s_string		string_from_sqword(int64_t value);
 struct s_string		string_from_uqword(uint64_t value);
 struct s_string		string_from_bool(bool value);
 struct s_string		string_from_float(float value, int a_dot);
-// struct s_string		string_from_double(double value);
-// struct s_string		string_from_long_double(long double value);
 
 #endif // DARRAY_H

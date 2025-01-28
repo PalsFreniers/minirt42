@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_light.c                                      :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 06:21:06 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:21:08 by tdelage          ###   ########.fr       */
+/*   Created: 2025/01/28 06:58:01 by tdelage           #+#    #+#             */
+/*   Updated: 2025/01/28 06:58:32 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <object/objects.h>
-#include <stdio.h>
+#include <minirt.h>
 
-void	print_light(struct s_light *light)
+struct s_ray	shoot_ray_from_camera(struct s_mlx *mlx, int x, int y)
 {
-	printf("\t\tlight => {\n");
-	print_vec3("\t\t\t", "position", light->base.position);
-	print_color("\t\t\t", light->base.color);
-	print_float("\t\t\t", "britness", light->ratio);
-	printf("\t\t}\n");
+	struct s_ray	ray;
+
+	ray.origin = vec3_zero();
+	ray.direction.x = (x - (float)WIN_WIDTH / 2)
+		* mlx->scene.camera.screen_to_camera_factor;
+	ray.direction.y = (y - (float)WIN_HEIGHT / 2)
+		* mlx->scene.camera.screen_to_camera_factor;
+	ray.direction.z = 1;
+	ray.direction = vec3_normalise(ray.direction);
+	return (ray);
 }

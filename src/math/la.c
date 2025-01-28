@@ -1,5 +1,5 @@
-#include <math/la.h>
 #include "la.h"
+#include <math/la.h>
 
 t_vec3	vec3_new(float x, float y, float z)
 {
@@ -47,10 +47,8 @@ t_vec3	vec3_div(t_vec3 a, t_vec3 b)
 
 t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
 {
-	return (vec3_new(
-			a.y * b.z - a.z * b.y,
-			a.z * b.x - a.x * b.z,
-			a.x * b.y - a.y * b.x));
+	return (vec3_new(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y
+			- a.y * b.x));
 }
 
 t_vec3	vec3_normalise(t_vec3 a)
@@ -96,6 +94,20 @@ t_vec3	vec3_map_2pi(t_vec3 a)
 	return (vec3_add(vec3_mul(a, tmp), tmp));
 }
 
+t_vec3	map_vec3(t_vec3 vec, t_vec3 translation, t_mat3 transform)
+{
+	vec = vec3_sub(vec, translation);
+	vec = mat3_apply(transform, vec);
+	return (vec);
+}
+
+t_vec3	unmap_vec3(t_vec3 vec, t_vec3 translation, t_mat3 inverse_transform)
+{
+	vec = mat3_apply(inverse_transform, vec);
+	vec = vec3_add(vec, translation);
+	return (vec);
+}
+
 t_mat3	mat3_zero(void)
 {
 	return ((t_mat3){0});
@@ -116,7 +128,7 @@ t_mat3	mat3_identity(void)
 	});
 }
 
-t_mat3 mat3_scal_mul(t_mat3 a, float f)
+t_mat3	mat3_scal_mul(t_mat3 a, float f)
 {
 	return ((t_mat3){
 		.m00 = a.m00 * f,
@@ -131,18 +143,14 @@ t_mat3 mat3_scal_mul(t_mat3 a, float f)
 	});
 }
 
-t_mat3 mat3_inverse(t_mat3 a)
+t_mat3	mat3_inverse(t_mat3 a)
 {
 	t_mat3	inverse;
 	float	inv_determinant;
 
-	inv_determinant
-		= a.m00 * a.m11 * a.m22
-		+ a.m01 * a.m12 * a.m20
-		+ a.m02 * a.m10 * a.m21
-		- a.m02 * a.m11 * a.m20
-		- a.m12 * a.m21 * a.m00
-		- a.m22 * a.m01 * a.m10;
+	inv_determinant = a.m00 * a.m11 * a.m22 + a.m01 * a.m12 * a.m20 + a.m02
+		* a.m10 * a.m21 - a.m02 * a.m11 * a.m20 - a.m12 * a.m21 * a.m00 - a.m22
+		* a.m01 * a.m10;
 	if (inv_determinant != 0)
 		inv_determinant = 1 / inv_determinant;
 	inverse.m00 = (a.m11 * a.m22 - a.m12 * a.m21) * inv_determinant;
@@ -157,7 +165,7 @@ t_mat3 mat3_inverse(t_mat3 a)
 	return (inverse);
 }
 
-t_mat3 mat3_add(t_mat3 a, t_mat3 b)
+t_mat3	mat3_add(t_mat3 a, t_mat3 b)
 {
 	return ((t_mat3){
 		.m00 = a.m00 + b.m00,
@@ -172,7 +180,7 @@ t_mat3 mat3_add(t_mat3 a, t_mat3 b)
 	});
 }
 
-t_mat3 mat3_mul(t_mat3 a, t_mat3 b)
+t_mat3	mat3_mul(t_mat3 a, t_mat3 b)
 {
 	return ((t_mat3){
 		.m00 = a.m00 * b.m00 + a.m01 * b.m10 + a.m02 * b.m20,
@@ -196,7 +204,7 @@ t_vec3	mat3_apply(t_mat3 a, t_vec3 b)
 	});
 }
 
-t_mat3 rotation_matrix_x(float angle)
+t_mat3	rotation_matrix_x(float angle)
 {
 	return ((t_mat3){
 		.m00 = 1,

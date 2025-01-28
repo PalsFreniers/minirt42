@@ -37,7 +37,9 @@ void					print_scene(struct s_scene *scene);
 bool					scene_append(struct s_scene *scene,
 							struct s_object *obj);
 void					free_scene(struct s_scene *scene);
-
+bool					dup_objects(struct s_scene *scene);
 void					camera_create_transform(struct s_camera *camera);
+void					map_scene(struct s_scene *scene, t_vec3 translation,
+							t_mat3 transform);
 
 #endif // SCENE_H

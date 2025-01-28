@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   objects.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 06:21:25 by tdelage           #+#    #+#             */
+/*   Updated: 2025/01/28 06:21:26 by tdelage          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
@@ -65,5 +77,7 @@ void				print_light(struct s_light *light);
 void				print_sphere(struct s_sphere *sphere);
 void				print_plane(struct s_plane *plane);
 void				print_cylinder(struct s_cylinder *cylinder);
+void				map_object(struct s_object *target, struct s_object *src,
+						t_vec3 translation, t_mat3 transform);
 
 #endif // OBJECTS_H

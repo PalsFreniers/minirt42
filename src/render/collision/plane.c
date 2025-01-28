@@ -1,11 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plane.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 06:33:17 by tdelage           #+#    #+#             */
+/*   Updated: 2025/01/28 06:41:28 by tdelage          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "object/objects.h"
 #include <libft.h>
-#include <math.h>
 #include <math/la.h>
 #include <render/collision.h>
 
-// #include <stdio.h>	//
-// Marwan's workaround for testing purposes
 bool	plane_collide_function(struct s_ray *ray, struct s_plane *plane,
 		t_collision *coll)
 {
@@ -24,8 +33,11 @@ bool	plane_collide_function(struct s_ray *ray, struct s_plane *plane,
 		coll->dist = distance;
 		coll->position = vec3_add(ray->origin, vec3_scal_mul(ray->direction,
 					distance));
-		coll->normal = norm;
-                coll->object = (void *)plane;
+		if (determinant > .0f)
+			coll->normal = vec3_scal_mul(norm, -1.0f);
+		else
+			coll->normal = norm;
+		coll->object = (void *)plane;
 	}
 	return (true);
 }

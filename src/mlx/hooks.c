@@ -123,32 +123,6 @@ int	key_event(int key, struct s_mlx *mlx)
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D
 		|| key == KEY_Q || key == KEY_E)
 		return (camera_move(key, mlx));
-	if (key == KEY_ENTER)
-	{
-		printf("cam_position:\n");																	// 
-		printf_vec3(mlx->scene.camera.position);													// 
-		printf("cam_direction:\n");																	// 
-		printf_vec3(mlx->scene.camera.direction);													// 
-		printf("cam_transform:\n");																	// 
-		printf_mat3(mlx->scene.camera.transform);													// 
-		printf("cam_inverse_transform:\n");															// 
-		printf_mat3(mlx->scene.camera.inverse_transform);											// 
-		printf("cam_T * cam_T^-1:\n");																// 
-		printf_mat3(mat3_mul(mlx->scene.camera.transform, mlx->scene.camera.inverse_transform));	// 
-		// printf("plane_type:\n");																	// 
-		// printf_obj_type(mlx->scene.map_objects[7]);													// 
-		// printf("\nplane_map_position:\n");															// 
-		// printf_vec3(mlx->scene.map_objects[7]->position);											// 
-		// printf("plane_map_normal:\n");																// 
-		// printf_vec3(((struct s_plane *) mlx->scene.map_objects[7])->normal);						// 
-		// printf("\nplane_unmap_position:\n");														// 
-		// printf_vec3(unmap_vec3(mlx->scene.map_objects[7]->position,
-		// 		mlx->scene.camera.position, mlx->scene.camera.inverse_transform));					// 
-		// printf("plane_unmap_normal:\n");															// 
-		// printf_vec3(mat3_apply(mlx->scene.camera.inverse_transform,
-		// 		((struct s_plane *) mlx->scene.map_objects[7])->normal));							// 
-		return (0);
-	}
 	if (key == KEY_NUM_MINUS)
 	{
 		if (mlx->down_sizing > 1)
@@ -156,7 +130,5 @@ int	key_event(int key, struct s_mlx *mlx)
 	}
 	if (key == KEY_NUM_PLUS)
 		(mlx->down_sizing)++;
-	if (key == KEY_NUM_5)
-		g_debug_show_grid = !g_debug_show_grid;
 	return (0);
 }

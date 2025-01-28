@@ -1,13 +1,15 @@
 ##========== SOURCES ==========##
 
 SRC =  src/files/fmap.c
-SRC += src/scene/free.c \
+SRC += src/scene/map.c \
+       src/scene/free.c \
        src/scene/print.c \
        src/scene/append.c 
 SRC += src/logger/logger.c \
        src/logger/logger_v.c \
        src/logger/logger_impl.c
 SRC += src/object/print.c \
+       src/object/utils.c \
        src/object/object.c \
        src/object/print_light.c \
        src/object/print_plane.c \
@@ -72,6 +74,9 @@ SRC += src/save/save_vec3.c \
 SRC += src/math/la.c
 SRC += src/render/loop_render.c \
        src/render/test_collisions.c \
+       src/render/get_light.c \
+       src/render/convertion.c \
+       src/render/color_math.c \
        src/render/color.c
 SRC += src/render/collision/plane.c \
        src/render/collision/sphere.c \

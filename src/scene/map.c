@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_light.c                                      :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 06:21:06 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:21:08 by tdelage          ###   ########.fr       */
+/*   Created: 2025/01/28 06:04:35 by tdelage           #+#    #+#             */
+/*   Updated: 2025/01/28 06:05:01 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <object/objects.h>
-#include <stdio.h>
+#include <minirt.h>
 
-void	print_light(struct s_light *light)
+void	map_scene(struct s_scene *scene, t_vec3 translation, t_mat3 transform)
 {
-	printf("\t\tlight => {\n");
-	print_vec3("\t\t\t", "position", light->base.position);
-	print_color("\t\t\t", light->base.color);
-	print_float("\t\t\t", "britness", light->ratio);
-	printf("\t\t}\n");
+	size_t	i;
+
+	i = 0;
+	while (i < scene->len)
+	{
+		map_object(scene->map_objects[i], scene->objects[i], translation,
+			transform);
+		i++;
+	}
 }
