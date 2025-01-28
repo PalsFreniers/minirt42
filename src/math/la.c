@@ -56,7 +56,7 @@ t_vec3	vec3_normalise(t_vec3 a)
 	return (vec3_div(a, vec3_new_from_one(vec3_lenght(a))));
 }
 
-float	vec3_distance_sq(t_vec3 a, t_vec3 b)
+float	vec3_distance(t_vec3 a, t_vec3 b)
 {
 	t_vec3	tmp;
 

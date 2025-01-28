@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/28 06:31:15 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/28 12:41:44 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static bool	is_lit(struct s_mlx *mlx, t_collision *starting_point,
 	float		light_dist;
 	size_t		i;
 
+	light_dist = vec3_lenght(light_dir);
 	ray.origin = starting_point->position;
 	ray.direction = vec3_normalise(light_dir);
-	light_dist = vec3_lenght(light_dir);
 	i = 0;
 	while (i < mlx->scene.len)
 	{

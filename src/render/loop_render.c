@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/28 07:02:54 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/28 13:05:10 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	set_pixel(struct s_mlx *mlx, int x, int y, mlx_color color)
 	int	xi;
 	int	yi;
 
-	yi = 0;
+	yi = y;
 	if (mlx->down_sizing == 1)
 	{
 		mlx_pixel_put(mlx->context, mlx->render.win, x, y, color);
@@ -53,8 +53,8 @@ static void	set_pixel(struct s_mlx *mlx, int x, int y, mlx_color color)
 	}
 	while (yi < WIN_HEIGHT && yi < y + mlx->down_sizing)
 	{
-		xi = 0;
-		while (yi < WIN_WIDTH && xi < x + mlx->down_sizing)
+		xi = x;
+		while (xi < WIN_WIDTH && xi < x + mlx->down_sizing)
 		{
 			mlx_pixel_put(mlx->context, mlx->render.win, xi, yi, color);
 			mlx_set_image_pixel(mlx->context, mlx->img, xi, yi, color);

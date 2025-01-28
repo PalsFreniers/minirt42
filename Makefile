@@ -71,7 +71,8 @@ SRC += src/save/save_vec3.c \
        src/save/save_camera.c \
        src/save/save_cylinder.c \
        src/save/save_ambient_light.c
-SRC += src/math/la.c
+SRC += src/math/la.c \
+       src/math/ray.c
 SRC += src/render/loop_render.c \
        src/render/test_collisions.c \
        src/render/get_light.c \

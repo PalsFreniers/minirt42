@@ -6,14 +6,14 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:17:30 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:17:32 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/28 13:40:15 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WINDOW_H
 # define WINDOW_H
 
-# define WIN_WIDTH 800
+# define WIN_WIDTH 900
 # define WIN_HEIGHT 600
 
 #endif // WINDOW_H
