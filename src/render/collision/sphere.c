@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:17:56 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:18:59 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/28 14:42:16 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ bool	sphere_collide_function(struct s_ray *ray, struct s_sphere *sphere,
 	if (coll)
 	{
 		coll->dist = (-ray_dot_rtsp) - sqrtf(determinant);
-		coll->position = vec3_add(ray->origin, vec3_scal_mul(ray->direction,
-					coll->dist));
+		coll->position = vec3_add(ray->origin,
+				vec3_scal_mul(ray->direction, coll->dist));
 		coll->normal = vec3_normalise(vec3_sub(coll->position,
 					sphere->base.position));
 	}

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 13:38:37 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/28 15:05:06 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,34 +61,6 @@ int	main(int c, char **args)
 	}
 	map_scene(&mlx.scene, mlx.scene.camera.position,
 		mlx.scene.camera.transform);
-// 	t_ray		ray;
-// 	t_collision	collision;
-// 	int			x = 20;
-// 	int			y = 20;
-//         ft_bzero(&ray, sizeof(t_ray));
-//         ft_bzero(&collision, sizeof(t_collision));
-// 
-// 	mlx.scene.camera.position = vec3_add(mlx.scene.camera.position,
-// 			vec3_scal_mul(mlx.scene.camera.position, +0.5f));
-// 	camera_create_transform(&mlx.scene.camera);
-// 	map_scene(&mlx.scene, mlx.scene.camera.position, mlx.scene.camera.transform);
-// 
-// 	ray = shoot_ray_from_camera(&mlx, x, y);
-// 	get_collision(&mlx, &ray, &collision);
-// 	draw_pixel(&mlx, x, y, &collision);
-// 
-//         ft_bzero(&ray, sizeof(t_ray));
-//         ft_bzero(&collision, sizeof(t_collision));
-// 
-// 	mlx.scene.camera.position = vec3_add(mlx.scene.camera.position,
-// 			vec3_scal_mul(mlx.scene.camera.position, -0.5f));
-// 	camera_create_transform(&mlx.scene.camera);
-// 	map_scene(&mlx.scene, mlx.scene.camera.position, mlx.scene.camera.transform);
-// 
-// 	ray = shoot_ray_from_camera(&mlx, x, y);
-// 	get_collision(&mlx, &ray, &collision);
-// 	draw_pixel(&mlx, x, y, &collision);
-//         return 0;
 	register_mlx_hooks(&mlx);
 	mlx_loop(mlx.context);
 	ft_free("m", &mlx);

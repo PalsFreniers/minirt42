@@ -1,5 +1,6 @@
 #include "la.h"
 #include <math/la.h>
+#include <object/objects.h>
 
 t_vec3	vec3_new(float x, float y, float z)
 {
@@ -53,7 +54,10 @@ t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
 
 t_vec3	vec3_normalise(t_vec3 a)
 {
-	return (vec3_div(a, vec3_new_from_one(vec3_lenght(a))));
+        float len = vec3_lenght(a);
+        if(len == 0)
+                return vec3_new_from_one(0);
+	return (vec3_div(a, vec3_new_from_one(len)));
 }
 
 float	vec3_distance(t_vec3 a, t_vec3 b)
@@ -151,6 +155,9 @@ t_mat3	mat3_inverse(t_mat3 a)
 	inv_determinant = a.m00 * a.m11 * a.m22 + a.m01 * a.m12 * a.m20 + a.m02
 		* a.m10 * a.m21 - a.m02 * a.m11 * a.m20 - a.m12 * a.m21 * a.m00 - a.m22
 		* a.m01 * a.m10;
+        print_vec3("", "mat[0]", vec3_new(a.m00, a.m01, a.m02));
+        print_vec3("", "mat[1]", vec3_new(a.m10, a.m11, a.m12));
+        print_vec3("", "mat[2]", vec3_new(a.m20, a.m21, a.m22));
 	if (inv_determinant != 0)
 		inv_determinant = 1 / inv_determinant;
 	inverse.m00 = (a.m11 * a.m22 - a.m12 * a.m21) * inv_determinant;
@@ -197,11 +204,12 @@ t_mat3	mat3_mul(t_mat3 a, t_mat3 b)
 
 t_vec3	mat3_apply(t_mat3 a, t_vec3 b)
 {
-	return ((t_vec3){
+	t_vec3 test = ((t_vec3){
 		.x = a.m00 * b.x + a.m01 * b.y + a.m02 * b.z,
 		.y = a.m10 * b.x + a.m11 * b.y + a.m12 * b.z,
 		.z = a.m20 * b.x + a.m21 * b.y + a.m22 * b.z,
 	});
+        return test;
 }
 
 t_mat3	rotation_matrix_x(float angle)
