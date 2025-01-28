@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/27 19:37:22 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/28 03:01:25 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 		if (g_debug_show_grid)
 		{
 			color = draw_graduation(mlx, collision, 1.0f, 0.02f);
-			if (color.rgba != 0X000000FF)
+			if (color.rgba != 0x000000FF)
 			{
 				set_pixel(mlx, x, y, color);
 				return ;
@@ -156,6 +156,8 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 		}
 		// Normal program
 		o_light = (struct s_light *)get_real_light(&mlx->scene);
+                struct s_light dum_light = {.base = {.type = OBJ_LIGHT, .position = {0}, .color = {.rgb = 0xFFFFFFFF}}, .ratio = 0.0001f};
+                if(o_light == NULL) o_light = &dum_light;
 		if (mlx->scene.ambient.ratio + o_light->ratio > 0)
 		{
 			ambient = color_scal_mul(
@@ -168,7 +170,7 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 						rgb_to_render_color(collision->object->color)));
 		}
 		else
-			rgb_to_mlx_color(collision->object->color);
+			color = rgb_to_mlx_color((union u_color){.rgb = 0});
 		set_pixel(mlx, x, y, color);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:38:33 by marwan            #+#    #+#             */
-/*   Updated: 2025/01/26 14:58:15 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/28 03:02:19 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ bool	test_collision(struct s_mlx *mlx, struct s_object *object,
 
 	(void)mlx;
 	// mats.rotation = get_rotation_matrix((t_vec3){1, 0, 0});
+        if(!object) return false;
 	if (object->type == OBJ_SPHERE)
 		is_collide = sphere_collide_function(ray,
 				(struct s_sphere*) object, collision);

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/26 16:03:54 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/28 03:15:49 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,12 @@ static bool	dup_objects(struct s_scene *scene)
 	size_t	i;
 	size_t	x;
 
-	scene->map_objects = ft_calloc(scene->len, sizeof(struct s_object *));
 	if (!scene->map_objects)
 		return (false);
 	i = 0;
 	while (i < scene->len)
 	{
 		obj_size = object_size(scene->objects[i]);
-		scene->map_objects[i] = malloc(obj_size);
 		if (!scene->map_objects[i])
 		{
 			x = 0;
