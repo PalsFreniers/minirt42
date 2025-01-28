@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/26 16:21:33 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/27 19:37:22 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,14 +138,11 @@ static void	set_pixel(struct s_mlx *mlx, int x, int y, mlx_color color)
 void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 {
 	mlx_color		color;
-	mlx_color		light;
-	mlx_color		ambient;
 	struct s_light	*o_light;
+	t_render_color	ambient;
 
 	o_light = NULL;
-	light = get_light_color(mlx);
-	ambient = rgb_to_rgba(mlx->scene.ambient.color);
-	if (collision->object)
+	if (collision->object && collision->dist < 25000.0f)
 	{
 		// draw RGB lines on object,	DEBUG ONLY
 		if (g_debug_show_grid)
@@ -159,14 +156,23 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 		}
 		// Normal program
 		o_light = (struct s_light *)get_real_light(&mlx->scene);
-		if (collision->dist < 25000.0f)
-		        color = filter_acolor(blend_color(blend_color((mlx_color){.rgba = 0x000000FF}, ambient, mlx->scene.ambient.ratio), light, o_light->ratio), lit_color(mlx, collision, o_light->ratio));
+		if (mlx->scene.ambient.ratio + o_light->ratio > 0)
+		{
+			ambient = color_scal_mul(
+					rgb_to_render_color(mlx->scene.ambient.color),
+					mlx->scene.ambient.ratio);
+			color = render_to_mlx_color(filter_color(
+						color_add(ambient,
+							color_scal_mul(lit_color(mlx, collision),
+								o_light->ratio)),
+						rgb_to_render_color(collision->object->color)));
+		}
 		else
-			color.rgba = 0X000000FF;
+			rgb_to_mlx_color(collision->object->color);
 		set_pixel(mlx, x, y, color);
 	}
 	else
-		set_pixel(mlx, x, y, ambient);
+		set_pixel(mlx, x, y, rgb_to_mlx_color(mlx->scene.ambient.color));
 }
 
 void	loop_render(struct s_mlx *mlx)
