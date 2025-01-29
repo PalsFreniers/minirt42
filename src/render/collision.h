@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 23:19:03 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 07:01:40 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/29 18:26:37 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ typedef struct s_collision
 }					t_collision;
 
 float				ft_abs(float val);
-bool				test_collision(struct s_mlx *mlx, struct s_object *object,
-						struct s_ray *ray, t_collision *collision);
-bool				sphere_collide_function(struct s_ray *ray,
+bool				test_collision(struct s_object *object, struct s_ray *ray,
+						t_collision *collision);
+bool				sphere_collide(struct s_ray *ray,
 						struct s_sphere *sphere, t_collision *collision);
-bool				plane_collide_function(struct s_ray *ray,
+bool				plane_collide(struct s_ray *ray,
 						struct s_plane *plane, t_collision *coll);
-bool				cylinder_collide_function(struct s_ray *ray,
+bool				cylinder_collide(struct s_ray *ray,
 						struct s_cylinder *cylinder, t_collision *coll);
 
 #endif // COLLISION_H

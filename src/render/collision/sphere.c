@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:17:56 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 14:42:16 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/29 18:26:26 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ float	ft_abs(float x)
 	return (x);
 }
 
-bool	sphere_collide_function(struct s_ray *ray, struct s_sphere *sphere,
+bool	sphere_collide(struct s_ray *ray, struct s_sphere *sphere,
 		t_collision *coll)
 {
 	const float	radius = sphere->diameter / 2;

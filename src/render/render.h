@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 04:16:46 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/28 13:06:56 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/29 18:29:55 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ struct s_object	*get_map_light(struct s_scene *scene);
 struct s_object	*get_real_light(struct s_scene *scene);
 void			draw_pixel(struct s_mlx *mlx, int x, int y,
 					t_collision *collision);
-void			get_collision(struct s_mlx *mlx, struct s_ray *ray,
+void			get_collision(struct s_scene *scene, struct s_ray *ray,
 					t_collision *collision);
 
 #endif // RENDER_H

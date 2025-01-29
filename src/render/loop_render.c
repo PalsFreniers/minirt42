@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/28 14:48:16 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/29 18:40:17 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <render/render.h>
 #include <ui/window.h>
 
-void	get_collision(struct s_mlx *mlx, struct s_ray *ray,
+void	get_collision(struct s_scene *scene, struct s_ray *ray,
 		t_collision *collision)
 {
 	t_collision	tmp_collision;
@@ -29,10 +29,9 @@ void	get_collision(struct s_mlx *mlx, struct s_ray *ray,
 	collision->object = NULL;
 	collision->dist = INFINITY;
 	i_obj = 0;
-	while (i_obj < mlx->scene.len)
+	while (i_obj < scene->len)
 	{
-		if (test_collision(mlx, mlx->scene.map_objects[i_obj], ray,
-				&tmp_collision))
+		if (test_collision(scene->map_objects[i_obj], ray, &tmp_collision))
 			if (tmp_collision.dist > 0 && tmp_collision.dist < collision->dist)
 				*collision = tmp_collision;
 		i_obj++;
@@ -108,11 +107,11 @@ void	loop_render(struct s_mlx *mlx)
 	int			x;
 	int			y;
 
-	y = 0;
 	loop_draw_ui(mlx);
 	mlx_clear_window(mlx->context, mlx->render.win, (mlx_color)0xFF000000);
 	ft_bzero(&collision, sizeof(collision));
 	ft_bzero(&ray, sizeof(ray));
+	y = 0;
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
@@ -120,13 +119,13 @@ void	loop_render(struct s_mlx *mlx)
 		{
 			if (x % mlx->down_sizing == 0 && y % mlx->down_sizing == 0)
 			{
-				ray = shoot_ray_from_camera(mlx, x, y);
-				get_collision(mlx, &ray, &collision);
+				ray = shoot_ray(x, y, mlx->scene.camera.screen_to_cam_factor);
+				get_collision(&mlx->scene, &ray, &collision);
 				draw_pixel(mlx, x, y, &collision);
 			}
 			++x;
 		}
 		++y;
 	}
-        set_pixel(mlx, 14, 15, render_to_mlx_color(render_color_black()));
+	set_pixel(mlx, 14, 15, render_to_mlx_color(render_color_black()));
 }

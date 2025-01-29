@@ -19,7 +19,7 @@ struct					s_camera
 	t_mat3				transform;
 	t_mat3				inverse_transform;
 	float				fov;
-	float				screen_to_camera_factor;
+	float				screen_to_cam_factor;
 	bool				exist;
 };
 

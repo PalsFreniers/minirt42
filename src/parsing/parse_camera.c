@@ -48,7 +48,7 @@ static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 	if (!parse_range(parts[3], &(camera->fov), 180, 0))
 		return (false);
 	camera_create_transform(camera);
-	camera->screen_to_camera_factor = (2 * tanf(camera->fov / 2)) / WIN_WIDTH;
+	camera->screen_to_cam_factor = (2 * tanf(camera->fov / 2)) / WIN_WIDTH;
 	return (true);
 }
 

@@ -48,24 +48,23 @@ t_vec3	vec3_div(t_vec3 a, t_vec3 b)
 
 t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
 {
-	return (vec3_new(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y
-			- a.y * b.x));
+	return (vec3_new(
+			(a.y * b.z) - (a.z * b.y),
+			(a.z * b.x) - (a.x * b.z),
+			(a.x * b.y) - (a.y * b.x)));
 }
 
 t_vec3	vec3_normalise(t_vec3 a)
 {
-        float len = vec3_lenght(a);
-        if(len == 0)
-                return vec3_new_from_one(0);
+	float len = vec3_lenght(a);
+	if(len == 0)
+		return vec3_new_from_one(0);
 	return (vec3_div(a, vec3_new_from_one(len)));
 }
 
 float	vec3_distance(t_vec3 a, t_vec3 b)
 {
-	t_vec3	tmp;
-
-	tmp = vec3_sub(a, b);
-	return (vec3_lenght(tmp));
+	return (vec3_lenght(vec3_sub(a, b)));
 }
 
 float	vec3_lenght(t_vec3 a)
@@ -152,12 +151,16 @@ t_mat3	mat3_inverse(t_mat3 a)
 	t_mat3	inverse;
 	float	inv_determinant;
 
-	inv_determinant = a.m00 * a.m11 * a.m22 + a.m01 * a.m12 * a.m20 + a.m02
-		* a.m10 * a.m21 - a.m02 * a.m11 * a.m20 - a.m12 * a.m21 * a.m00 - a.m22
-		* a.m01 * a.m10;
-        print_vec3("", "mat[0]", vec3_new(a.m00, a.m01, a.m02));
-        print_vec3("", "mat[1]", vec3_new(a.m10, a.m11, a.m12));
-        print_vec3("", "mat[2]", vec3_new(a.m20, a.m21, a.m22));
+	inv_determinant =
+		a.m00 * a.m11 * a.m22
+		+ a.m01 * a.m12 * a.m20
+		+ a.m02 * a.m10 * a.m21
+		- a.m02 * a.m11 * a.m20
+		- a.m12 * a.m21 * a.m00
+		- a.m22 * a.m01 * a.m10;
+	print_vec3("", "mat[0]", vec3_new(a.m00, a.m01, a.m02));
+	print_vec3("", "mat[1]", vec3_new(a.m10, a.m11, a.m12));
+	print_vec3("", "mat[2]", vec3_new(a.m20, a.m21, a.m22));
 	if (inv_determinant != 0)
 		inv_determinant = 1 / inv_determinant;
 	inverse.m00 = (a.m11 * a.m22 - a.m12 * a.m21) * inv_determinant;

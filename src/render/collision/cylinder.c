@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:08:52 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/28 13:46:56 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/29 18:26:37 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	body(float dist, struct s_ray *ray, struct s_cylinder *cylinder,
 	}
 }
 
-bool	cylinder_collide_function(struct s_ray *ray,
+bool	cylinder_collide(struct s_ray *ray,
 		struct s_cylinder *cylinder, t_collision *coll)
 {
 	float	determinant;

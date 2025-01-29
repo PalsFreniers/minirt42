@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/28 12:41:44 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/29 18:25:04 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static bool	is_lit(struct s_mlx *mlx, t_collision *starting_point,
 	while (i < mlx->scene.len)
 	{
 		if (mlx->scene.map_objects[i] != starting_point->object
-			&& test_collision(mlx, mlx->scene.map_objects[i], &ray, &new_coll)
+			&& test_collision(mlx->scene.map_objects[i], &ray, &new_coll)
 			&& new_coll.dist > 0 && new_coll.dist < light_dist)
 			return (false);
 		i++;

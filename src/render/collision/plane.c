@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:33:17 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 14:41:44 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/29 18:26:33 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <math/la.h>
 #include <render/collision.h>
 
-bool	plane_collide_function(struct s_ray *ray, struct s_plane *plane,
+bool	plane_collide(struct s_ray *ray, struct s_plane *plane,
 		t_collision *coll)
 {
 	t_vec3	norm;
