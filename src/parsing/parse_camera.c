@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:52 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/31 17:24:35 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 17:48:30 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <parsing/parse.h>
 #include <ui/window.h>
 
+#include <stdio.h>
 void	camera_create_transform(struct s_camera *camera)
 {
 	t_vec3	t_x;
@@ -37,6 +38,10 @@ void	camera_create_transform(struct s_camera *camera)
 	camera->transform.m21 = camera->direction.y;
 	camera->transform.m22 = camera->direction.z;
 	camera->inverse_transform = mat3_inverse(camera->transform);
+	printf("camera transform: \n");
+	printf("/% f, % f, % f\\\n", camera->transform.m00, camera->transform.m01, camera->transform.m02);
+	printf("|% f, % f, % f|\n", camera->transform.m10, camera->transform.m11, camera->transform.m12);
+	printf("\\% f, % f, % f/\n", camera->transform.m20, camera->transform.m21, camera->transform.m22);
 }
 
 static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
