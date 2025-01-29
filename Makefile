@@ -78,7 +78,7 @@ SRC += src/render/loop_render.c \
        src/render/get_light.c \
        src/render/convertion.c \
        src/render/color_math.c \
-       src/render/color.c
+       src/render/shading.c
 SRC += src/render/collision/plane.c \
        src/render/collision/sphere.c \
        src/render/collision/cylinder.c
