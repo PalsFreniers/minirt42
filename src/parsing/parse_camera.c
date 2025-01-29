@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:52 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 15:08:23 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/29 22:01:48 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,39 @@
 #include <parsing/parse.h>
 #include <ui/window.h>
 
+#include <stdio.h>
 void	camera_create_transform(struct s_camera *camera)
 {
 	t_vec3	t_x;
 	t_vec3	t_y;
 
-	t_x = vec3_normalise(vec3_cross(vec3_normalise(vec3_new(camera->direction.x,
-					camera->direction.y, 0)), vec3_new(0, 0, 1)));
-	t_y = vec3_normalise(vec3_cross(vec3_normalise(camera->direction), t_x));
-	camera->transform.m00 = -t_x.x;
-	camera->transform.m01 = -t_x.y;
-	camera->transform.m02 = -t_x.z;
-	camera->transform.m10 = -t_y.x;
-	camera->transform.m11 = -t_y.y;
-	camera->transform.m12 = -t_y.z;
+	if (camera->direction.x == 0.0f && camera->direction.y == 0.0f)
+		t_x = vec3_new(0.0f, -1.0f, 0.0f);
+	else
+		t_x = vec3_normalise(vec3_cross(
+					vec3_normalise(vec3_new(
+							camera->direction.x,
+							camera->direction.y,
+							0)),
+					vec3_new(0, 0, 1)));
+	print_vec3("", "t_x", t_x);
+	t_y = vec3_normalise(vec3_cross(camera->direction, t_x));
+	print_vec3("", "t_y", t_y);
+	print_vec3("", "t_z", camera->direction);
+	camera->transform.m00 = - t_x.x;
+	camera->transform.m01 = - t_x.y;
+	camera->transform.m02 = - t_x.z;
+	camera->transform.m10 = - t_y.x;
+	camera->transform.m11 = - t_y.y;
+	camera->transform.m12 = - t_y.z;
 	camera->transform.m20 = camera->direction.x;
 	camera->transform.m21 = camera->direction.y;
 	camera->transform.m22 = camera->direction.z;
 	camera->inverse_transform = mat3_inverse(camera->transform);
+	printf("camera transform: \n");
+	printf("/% f, % f, % f\\\n", camera->transform.m00, camera->transform.m01, camera->transform.m02);
+	printf("|% f, % f, % f|\n", camera->transform.m10, camera->transform.m11, camera->transform.m12);
+	printf("\\% f, % f, % f/\n", camera->transform.m20, camera->transform.m21, camera->transform.m22);
 }
 
 static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
@@ -47,6 +62,7 @@ static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 		return (false);
 	if (!parse_range(parts[3], &(camera->fov), 180, 0))
 		return (false);
+	camera->direction = vec3_normalise(camera->direction);
 	camera_create_transform(camera);
 	camera->screen_to_cam_factor = (2 * tanf(camera->fov / 2)) / WIN_WIDTH;
 	return (true);
