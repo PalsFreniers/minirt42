@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/29 18:40:17 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/29 21:35:53 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ mlx_color	get_pixel_color(struct s_mlx *mlx, t_collision *collision)
 
 	dum_light = (struct s_light){.base = {.type = OBJ_LIGHT, .position = {0},
 		.color = {.rgb = 0xFFFFFFFF}}, .ratio = 0};
-	o_light = (struct s_light *)get_real_light(&mlx->scene);
+	o_light = (struct s_light *)get_map_light(&mlx->scene);
 	if (o_light == NULL)
 		o_light = &dum_light;
 	if (mlx->scene.ambient.ratio + o_light->ratio > 0)
@@ -79,7 +79,7 @@ mlx_color	get_pixel_color(struct s_mlx *mlx, t_collision *collision)
 		ambient = rgb_to_render_color(mlx->scene.ambient.color);
 		ambient = color_scal_mul(ambient, mlx->scene.ambient.ratio);
 		return (render_to_mlx_color(filter_color(color_add(ambient,
-						color_scal_mul(lit_color(mlx, collision),
+						color_scal_mul(lit_color(mlx, collision, o_light),
 							o_light->ratio)),
 					rgb_to_render_color(collision->object->color))));
 	}

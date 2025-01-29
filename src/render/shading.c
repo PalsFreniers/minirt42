@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   shading.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/29 18:25:04 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/29 21:53:38 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,48 +37,45 @@ static bool	is_lit(struct s_mlx *mlx, t_collision *starting_point,
 	return (true);
 }
 
-static t_render_color	lambert(t_collision *coll, t_vec3 coll_to_light)
+static float	lambert(t_collision *coll, t_vec3 coll_to_light)
 {
 	float	light_per_area;
-	float	diffuse_coeff;
-	float	light_amount;
 
-	light_per_area = vec3_dot(coll->normal, vec3_normalise(coll_to_light));
+	light_per_area = vec3_dot(coll->normal, coll_to_light);
 	if (light_per_area <= 0)
-		return (render_color_black());
-	diffuse_coeff = 1.0f;
-	light_amount = diffuse_coeff * light_per_area;
-	return (color_scal_mul(rgb_to_render_color(coll->object->color),
-			light_amount));
+		return (0.0f);
+	return (light_per_area);
 }
 
-static t_render_color	blinn_phong(t_collision *coll, t_vec3 coll_to_light)
+static float	blinn_phong(t_collision *coll, t_vec3 coll_to_light)
 {
 	t_vec3	reflect_normal;
 	float	light_per_area;
-	float	diffuse_coeff;
-	float	light_amount;
 
-	reflect_normal = vec3_normalise(vec3_sub(vec3_normalise(coll_to_light),
+	reflect_normal = vec3_normalise(vec3_sub(
+				coll_to_light,
 				coll->ray.direction));
 	light_per_area = vec3_dot(coll->normal, reflect_normal);
 	light_per_area = light_per_area * light_per_area * light_per_area;
 	if (light_per_area <= 0)
-		return (render_color_black());
-	diffuse_coeff = 1.0f;
-	light_amount = diffuse_coeff * light_per_area;
-	return (color_scal_mul(rgb_to_render_color(coll->object->color),
-			light_amount));
+		return (0.0f);
+	return (light_per_area);
 }
 
-t_render_color	lit_color(struct s_mlx *mlx, t_collision *collision)
+t_render_color	lit_color(struct s_mlx *mlx, t_collision *collision,
+		struct s_light *light)
 {
 	t_vec3	coll_to_light;
+	float	light_amount;
 
-	coll_to_light = vec3_sub(get_map_light(&mlx->scene)->position,
-			collision->position);
+	coll_to_light = vec3_sub(light->base.position, collision->position);
 	if (!is_lit(mlx, collision, coll_to_light))
 		return (render_color_black());
-	return (color_add(color_scal_mul(lambert(collision, coll_to_light), 0.5f),
-			color_scal_mul(blinn_phong(collision, coll_to_light), 0.5f)));
+	coll_to_light = vec3_normalise(coll_to_light);
+	light_amount = lambert(collision, coll_to_light);
+	if (light_amount <= 0.0f)
+		return (render_color_black());
+	light_amount += blinn_phong(collision, coll_to_light);
+	return (color_scal_mul(rgb_to_render_color(light->base.color),
+			light_amount / 2));
 }
