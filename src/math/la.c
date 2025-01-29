@@ -158,9 +158,6 @@ t_mat3	mat3_inverse(t_mat3 a)
 		- a.m02 * a.m11 * a.m20
 		- a.m12 * a.m21 * a.m00
 		- a.m22 * a.m01 * a.m10;
-	print_vec3("", "mat[0]", vec3_new(a.m00, a.m01, a.m02));
-	print_vec3("", "mat[1]", vec3_new(a.m10, a.m11, a.m12));
-	print_vec3("", "mat[2]", vec3_new(a.m20, a.m21, a.m22));
 	if (inv_determinant != 0)
 		inv_determinant = 1 / inv_determinant;
 	inverse.m00 = (a.m11 * a.m22 - a.m12 * a.m21) * inv_determinant;

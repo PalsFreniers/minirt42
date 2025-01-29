@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:52 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 15:08:23 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/29 23:20:34 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 		return (false);
 	if (!parse_range(parts[3], &(camera->fov), 180, 0))
 		return (false);
+	if (camera->direction.x == 0)
+		camera->direction.x += 0.1;
+	if (camera->direction.y == 0)
+		camera->direction.y += 0.1;
+        camera->direction = vec3_normalise(camera->direction);
 	camera_create_transform(camera);
 	camera->screen_to_cam_factor = (2 * tanf(camera->fov / 2)) / WIN_WIDTH;
 	return (true);
