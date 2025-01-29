@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:52 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/29 23:20:34 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/30 00:50:05 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	camera_create_transform(struct s_camera *camera)
 	t_vec3	t_x;
 	t_vec3	t_y;
 
-	t_x = vec3_normalise(vec3_cross(vec3_normalise(vec3_new(camera->direction.x,
-					camera->direction.y, 0)), vec3_new(0, 0, 1)));
-	t_y = vec3_normalise(vec3_cross(vec3_normalise(camera->direction), t_x));
+	t_x = vec3_normalise(vec3_cross(vec3_normalise(
+					vec3_new(camera->direction.x, camera->direction.y, 0)),
+				vec3_new(0, 0, 1)));
+	t_y = vec3_normalise(vec3_cross(camera->direction, t_x));
 	camera->transform.m00 = -t_x.x;
 	camera->transform.m01 = -t_x.y;
 	camera->transform.m02 = -t_x.z;
@@ -51,7 +52,7 @@ static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 		camera->direction.x += 0.1;
 	if (camera->direction.y == 0)
 		camera->direction.y += 0.1;
-        camera->direction = vec3_normalise(camera->direction);
+	camera->direction = vec3_normalise(camera->direction);
 	camera_create_transform(camera);
 	camera->screen_to_cam_factor = (2 * tanf(camera->fov / 2)) / WIN_WIDTH;
 	return (true);

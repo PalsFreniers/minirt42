@@ -111,8 +111,10 @@ int	camera_move(int key, struct s_mlx *mlx)
 		camera->position = vec3_add(camera->position,
 				vec3_scal_mul(camera->direction, -0.5f));
 	if (key == KEY_W || key == KEY_S || key == KEY_A || key == KEY_D)
+	{
 		camera_create_transform(camera);
-        camera->direction = vec3_normalise(camera->direction);
+		camera->direction = vec3_normalise(camera->direction);
+	}
 	map_scene(&mlx->scene, camera->position, camera->transform);
 	return (0);
 }
