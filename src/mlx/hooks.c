@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:06:40 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:13:47 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/30 19:56:59 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	loop_draw_ui(struct s_mlx *mlx)
 		numpad_draw(mlx, &(mlx->interface_numpad[x]));
 		x++;
 	}
+	axes_draw(mlx);
 }
 
 int	key_event(int key, struct s_mlx *mlx)
