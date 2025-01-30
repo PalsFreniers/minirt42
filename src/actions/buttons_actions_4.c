@@ -3,13 +3,6 @@
 #include <ui/window.h>
 #include <unistd.h>
 
-// void	compute_color(int c, char ret[3])
-// {
-// 	ret[0] = (c >> (8 * 2)) & 0xFF;
-// 	ret[1] = (c >> (8 * 1)) & 0xFF;
-// 	ret[2] = (c >> (8 * 0)) & 0xFF;
-// }
-
 void	compute_color(mlx_color c, char ret[3])
 {
 	ret[0] = c.r;
@@ -27,7 +20,7 @@ void	button_screen(struct s_mlx *mlx)
 	fd = open("screen.ppm", O_CREAT | O_TRUNC | O_WRONLY, 0666);
 	if (fd < 0)
 		return ;
-	write(fd, "P6\n800 600 255\n", 15);
+	write(fd, "P6\n900 600 255\n", 15);
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:33:17 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/29 22:49:18 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/30 03:36:39 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ bool	plane_collide(struct s_ray *ray, struct s_plane *plane,
 	if (coll)
 	{
 		coll->dist = distance;
-		coll->position = vec3_add(ray->origin,
-				vec3_scal_mul(ray->direction, distance));
+		coll->position = vec3_add(ray->origin, vec3_scal_mul(ray->direction,
+				distance));
 		if (determinant > 0.0f)
 			coll->normal = vec3_scal_mul(norm, -1.0f);
 		else

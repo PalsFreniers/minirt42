@@ -6,10 +6,11 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/29 21:53:38 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/30 09:43:54 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "math/la.h"
 #include <object/objects.h>
 #include <render/collision.h>
 #include <render/render.h>
@@ -52,9 +53,8 @@ static float	blinn_phong(t_collision *coll, t_vec3 coll_to_light)
 	t_vec3	reflect_normal;
 	float	light_per_area;
 
-	reflect_normal = vec3_normalise(vec3_sub(
-				coll_to_light,
-				coll->ray.direction));
+	reflect_normal = vec3_normalise(vec3_sub(coll_to_light,
+			coll->ray.direction));
 	light_per_area = vec3_dot(coll->normal, reflect_normal);
 	light_per_area = light_per_area * light_per_area * light_per_area;
 	if (light_per_area <= 0)
@@ -76,6 +76,7 @@ t_render_color	lit_color(struct s_mlx *mlx, t_collision *collision,
 	if (light_amount <= 0.0f)
 		return (render_color_black());
 	light_amount += blinn_phong(collision, coll_to_light);
-	return (color_scal_mul(rgb_to_render_color(light->base.color),
-			light_amount / 2));
+	light_amount /= vec3_lenght(coll_to_light) * vec3_lenght(coll_to_light);
+	return (color_scal_mul(rgb_to_render_color(light->base.color), light_amount
+			/ 2));
 }
