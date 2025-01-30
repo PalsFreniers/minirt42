@@ -6,11 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:52 by tdelage           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/01/30 02:14:52 by maamine          ###   ########.fr       */
-=======
-/*   Updated: 2025/01/29 23:28:04 by tdelage          ###   ########.fr       */
->>>>>>> 28f9217 (fixing some things and adding a cub3d like empty map)
+/*   Updated: 2025/01/30 03:11:48 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

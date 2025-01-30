@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 05:55:14 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/30 02:03:02 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/30 03:11:03 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ void	map_object(struct s_object *target, struct s_object *src,
 	if (src->type == OBJ_PLANE)
 	{
 		((struct s_plane *)target)->normal = mat3_apply(transform,
-			((struct s_plane *)src)->normal);
+				((struct s_plane *)src)->normal);
 	}
 	else if (src->type == OBJ_CYLINDER)
 	{
 		((struct s_cylinder *)target)->axis = mat3_apply(transform,
-			((struct s_cylinder *)src)->axis);
+				((struct s_cylinder *)src)->axis);
 	}
 }
