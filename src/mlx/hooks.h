@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:06:50 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:12:58 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/30 20:29:19 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ enum	e_key_type
 	KEY_NUM_5 = 93,
 	KEY_NUM_MINUS = 86,
 	KEY_NUM_PLUS = 87,
-	// KEY_LEFT_SHIFT = 225,
-	// KEY_SPACE = 44,
 };
 
 void	update_buttons_click(int e, struct s_mlx *mlx);
