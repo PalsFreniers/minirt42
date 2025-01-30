@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 18:18:32 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/30 18:21:31 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static float	blinn_phong(t_collision *coll, t_vec3 coll_to_light)
 	float	light_per_area;
 
 	reflect_normal = vec3_normalise(vec3_sub(coll_to_light,
-			coll->ray.direction));
+				coll->ray.direction));
 	light_per_area = vec3_dot(coll->normal, reflect_normal);
 	light_per_area = light_per_area * light_per_area * light_per_area;
 	if (light_per_area <= 0)
