@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 09:43:54 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/30 18:18:32 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,25 @@ static float	blinn_phong(t_collision *coll, t_vec3 coll_to_light)
 	return (light_per_area);
 }
 
+#define DIST_FACTOR 0.004f
+
 t_render_color	lit_color(struct s_mlx *mlx, t_collision *collision,
 		struct s_light *light)
 {
 	t_vec3	coll_to_light;
+	float	dist_to_light_sq;
 	float	light_amount;
 
 	coll_to_light = vec3_sub(light->base.position, collision->position);
 	if (!is_lit(mlx, collision, coll_to_light))
 		return (render_color_black());
+	dist_to_light_sq = vec3_lenght_sq(coll_to_light);
 	coll_to_light = vec3_normalise(coll_to_light);
 	light_amount = lambert(collision, coll_to_light);
 	if (light_amount <= 0.0f)
 		return (render_color_black());
 	light_amount += blinn_phong(collision, coll_to_light);
-	light_amount /= vec3_lenght(coll_to_light) * vec3_lenght(coll_to_light);
+	light_amount /= dist_to_light_sq * DIST_FACTOR;
 	return (color_scal_mul(rgb_to_render_color(light->base.color), light_amount
 			/ 2));
 }
