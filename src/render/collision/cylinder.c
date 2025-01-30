@@ -65,9 +65,9 @@ static bool	end_caps(t_vec3 values, struct s_ray *ray,
 	height_front = values.y;
 	inside = values.z;
 	height_back = vec3_dot(cylinder->axis,
-			vec3_sub(vec3_add(
-					vec3_scal_mul(ray->direction, dist_front + inside),
-					ray->origin), cylinder->base.position));
+			vec3_add(
+				vec3_sub(ray->origin, cylinder->base.position),
+				vec3_scal_mul(ray->direction, dist_front + inside)));
 	if ((height_back < 0 && height_front < 0)
 		|| (height_back > cylinder->height && height_front > cylinder->height))
 		return (false);
