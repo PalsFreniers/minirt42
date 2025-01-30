@@ -1,88 +1,88 @@
 ##========== SOURCES ==========##
 
-SRC =  src/files/fmap.c
-SRC += src/scene/map.c \
-       src/scene/free.c \
-       src/scene/print.c \
-       src/scene/append.c 
-SRC += src/logger/logger.c \
-       src/logger/logger_v.c \
-       src/logger/logger_impl.c
-SRC += src/object/print.c \
-       src/object/utils.c \
-       src/object/object.c \
-       src/object/print_light.c \
-       src/object/print_plane.c \
-       src/object/print_sphere.c \
-       src/object/print_cylinder.c
-SRC += src/parsing/obey.c \
-       src/parsing/parse_file.c \
-       src/parsing/parse_line.c \
-       src/parsing/parse_color.c \
-       src/parsing/parse_range.c \
-       src/parsing/parse_light.c \
-       src/parsing/parse_float.c \
-       src/parsing/parse_plane.c \
-       src/parsing/parse_sphere.c \
-       src/parsing/parse_camera.c \
-       src/parsing/parse_cylinder.c \
-       src/parsing/parse_position.c \
-       src/parsing/parse_ranged_vector.c \
-       src/parsing/parse_ambient_light.c
-SRC += src/strings/dstring.c \
-       src/strings/dstring_new.c \
-       src/strings/dstring_char.c \
-       src/strings/dstring_conv1.c \
-       src/strings/dstring_conv2.c \
-       src/strings/dstring_conv3.c \
-       src/strings/dstring_conv4.c \
-       src/strings/dstring_conv5.c \
-       src/strings/dstring_conv6.c \
-       src/strings/dstring_conv7.c \
-       src/strings/dstring_split.c \
-       src/strings/dstring_equals.c \
-       src/strings/dstring_trim_utils.c \
-       src/strings/dstring_charp_manip.c
-SRC += src/ui/vline.c \
-       src/ui/button.c \
-       src/ui/numpad.c \
-       src/ui/button2.c
-SRC += src/mlx/mmlx.c \
-       src/mlx/hooks.c \
-       src/mlx/camera_move.c
-SRC += src/actions/buttons_actions.c \
-       src/actions/button_actions_2.c \
-       src/actions/buttons_actions_3.c \
-       src/actions/buttons_actions_4.c \
-       src/actions/buttons_actions_modify_plane.c \
-       src/actions/buttons_actions_modify_light.c \
-       src/actions/buttons_actions_modify_sphere.c \
-       src/actions/buttons_actions_mod_obj_color.c \
-       src/actions/buttons_actions_mod_obj_float.c \
-       src/actions/buttons_actions_modify_ambient.c \
-       src/actions/buttons_actions_mod_obj_vector3.c \
-       src/actions/buttons_actions_mod_obj_float_2.c \
-       src/actions/buttons_actions_modify_cylinder.c
-SRC += src/save/save_vec3.c \
-       src/save/save_float.c \
-       src/save/save_color.c \
-       src/save/save_light.c \
-       src/save/save_plane.c \
-       src/save/save_sphere.c \
-       src/save/save_camera.c \
-       src/save/save_cylinder.c \
-       src/save/save_ambient_light.c
-SRC += src/math/la.c \
-       src/math/ray.c
-SRC += src/render/loop_render.c \
-       src/render/test_collisions.c \
-       src/render/get_light.c \
-       src/render/convertion.c \
-       src/render/color_math.c \
-       src/render/shading.c
-SRC += src/render/collision/plane.c \
-       src/render/collision/sphere.c \
-       src/render/collision/cylinder.c
+SRC = 	src/files/fmap.c
+SRC +=	src/scene/map.c \
+		src/scene/free.c \
+		src/scene/print.c \
+		src/scene/append.c 
+SRC +=	src/logger/logger.c \
+		src/logger/logger_v.c \
+		src/logger/logger_impl.c
+SRC +=	src/object/print.c \
+		src/object/utils.c \
+		src/object/object.c \
+		src/object/print_light.c \
+		src/object/print_plane.c \
+		src/object/print_sphere.c \
+		src/object/print_cylinder.c
+SRC +=	src/parsing/obey.c \
+		src/parsing/parse_file.c \
+		src/parsing/parse_line.c \
+		src/parsing/parse_color.c \
+		src/parsing/parse_range.c \
+		src/parsing/parse_light.c \
+		src/parsing/parse_float.c \
+		src/parsing/parse_plane.c \
+		src/parsing/parse_sphere.c \
+		src/parsing/parse_camera.c \
+		src/parsing/parse_cylinder.c \
+		src/parsing/parse_position.c \
+		src/parsing/parse_ranged_vector.c \
+		src/parsing/parse_ambient_light.c
+SRC +=	src/strings/dstring.c \
+		src/strings/dstring_new.c \
+		src/strings/dstring_char.c \
+		src/strings/dstring_conv1.c \
+		src/strings/dstring_conv2.c \
+		src/strings/dstring_conv3.c \
+		src/strings/dstring_conv4.c \
+		src/strings/dstring_conv5.c \
+		src/strings/dstring_conv6.c \
+		src/strings/dstring_conv7.c \
+		src/strings/dstring_split.c \
+		src/strings/dstring_equals.c \
+		src/strings/dstring_trim_utils.c \
+		src/strings/dstring_charp_manip.c
+SRC +=	src/ui/vline.c \
+		src/ui/button.c \
+		src/ui/numpad.c \
+		src/ui/button2.c
+SRC +=	src/mlx/mmlx.c \
+		src/mlx/hooks.c \
+		src/mlx/camera_move.c
+SRC +=	src/actions/buttons_actions.c \
+		src/actions/button_actions_2.c \
+		src/actions/buttons_actions_3.c \
+		src/actions/buttons_actions_4.c \
+		src/actions/buttons_actions_modify_plane.c \
+		src/actions/buttons_actions_modify_light.c \
+		src/actions/buttons_actions_modify_sphere.c \
+		src/actions/buttons_actions_mod_obj_color.c \
+		src/actions/buttons_actions_mod_obj_float.c \
+		src/actions/buttons_actions_modify_ambient.c \
+		src/actions/buttons_actions_mod_obj_vector3.c \
+		src/actions/buttons_actions_mod_obj_float_2.c \
+		src/actions/buttons_actions_modify_cylinder.c
+SRC +=	src/save/save_vec3.c \
+		src/save/save_float.c \
+		src/save/save_color.c \
+		src/save/save_light.c \
+		src/save/save_plane.c \
+		src/save/save_sphere.c \
+		src/save/save_camera.c \
+		src/save/save_cylinder.c \
+		src/save/save_ambient_light.c
+SRC +=	src/math/la.c \
+SRC +=	src/render/loop_render.c \
+		src/render/test_collisions.c \
+		src/render/get_light.c \
+		src/render/convertion.c \
+		src/render/color_math.c \
+		src/render/shading.c \
+		src/render/ray.c
+SRC +=	src/render/collision/plane.c \
+		src/render/collision/sphere.c \
+		src/render/collision/cylinder.c
 MAIN = src/main.c
 
 ##========== NAMES ==========##
@@ -98,14 +98,14 @@ MAIN_OBJ = $(addprefix $(OBJS_DIR),$(MAIN:.c=.o))
 
 ##========== COLORS ==========##
 
-BASE_COLOR 	=		\033[0;39m
-GRAY 		=		\033[0;90m
-RED 		=		\033[0;91m
-GREEN 		=		\033[0;92m
-YELLOW 		=		\033[0;93m
-BLUE 		=		\033[0;94m
+BASE_COLOR	=		\033[0;39m
+GRAY		=		\033[0;90m
+RED			=		\033[0;91m
+GREEN		=		\033[0;92m
+YELLOW		=		\033[0;93m
+BLUE		=		\033[0;94m
 MAGENTA		=		\033[0;95m
-CYAN 		=		\033[0;96m
+CYAN		=		\033[0;96m
 WHITE		=		\033[0;97m
 
 ##========== COMPILATOR ==========##
