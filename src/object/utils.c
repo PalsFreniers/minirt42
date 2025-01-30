@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 05:55:14 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:03:41 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/30 02:03:02 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,21 @@ bool	dup_objects(struct s_scene *scene)
 void	map_object(struct s_object *target, struct s_object *src,
 		t_vec3 translation, t_mat3 transform)
 {
+	int	obj_size;
+
+	if (target->type != src->type)
+		return ;
+	obj_size = object_size(target);
+	ft_memcpy(target, src, obj_size);
 	target->position = map_vec3(src->position, translation, transform);
 	if (src->type == OBJ_PLANE)
 	{
 		((struct s_plane *)target)->normal = mat3_apply(transform,
-				((struct s_plane *)src)->normal);
+			((struct s_plane *)src)->normal);
 	}
 	else if (src->type == OBJ_CYLINDER)
 	{
 		((struct s_cylinder *)target)->axis = mat3_apply(transform,
-				((struct s_cylinder *)src)->axis);
+			((struct s_cylinder *)src)->axis);
 	}
 }
