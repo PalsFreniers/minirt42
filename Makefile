@@ -94,7 +94,7 @@ MAIN = src/main.c
 
 ##========== NAMES ==========##
 
-NAME = minirt
+NAME = miniRT
 SRCS_DIR = ./
 OBJS_DIR = ./OBJ/
 

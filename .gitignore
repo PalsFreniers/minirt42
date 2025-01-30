@@ -3,6 +3,7 @@
 *.a
 compile_commands.json
 minirt
+miniRT
 OBJ
 libft/OBJ
 mlx
