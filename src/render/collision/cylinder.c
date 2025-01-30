@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:08:52 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/29 18:26:37 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/30 01:58:05 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,98 +15,113 @@
 #include <render/collision.h>
 #include <stdio.h>
 
-static float	get_determinant(float radius, t_vec3 ray_to_base,
+static float	get_determinant(struct s_cylinder *cyl, t_vec3 ray_to_base,
 		t_vec3 away_from_axis)
 {
 	float	determinant;
+	float	radius;
 
 	determinant = vec3_dot(ray_to_base, away_from_axis);
 	determinant *= determinant;
+	radius = cyl->diameter / 2;
 	determinant = vec3_lenght_sq(away_from_axis) * radius * radius
 		- determinant;
 	return (determinant);
 }
 
-static t_vec3	get_normal(struct s_cylinder *cylinder, t_collision *coll)
+static void	fill_cyl_coll(struct s_cylinder_collision *check,
+		t_vec3 away_from_axis, t_vec3 ray_to_base, float determinant)
 {
-	t_vec3	normal;
-	t_vec3	base_to_coll;
-	t_vec3	offset;
-
-	base_to_coll = vec3_sub(coll->position, cylinder->base.position);
-	offset = vec3_scal_mul(cylinder->axis, vec3_dot(base_to_coll,
-				cylinder->axis));
-	normal = vec3_normalise(vec3_sub(base_to_coll, offset));
-	return (normal);
+	check->dist = vec3_dot(away_from_axis,
+			vec3_cross(ray_to_base, check->cyl->axis));
+	check->dist -= sqrtf(determinant);
+	check->dist /= vec3_lenght_sq(away_from_axis);
+	check->hght_front = vec3_dot(
+			check->cyl->axis,
+			vec3_sub(vec3_add(
+					vec3_scal_mul(check->ray->direction, check->dist),
+					check->ray->origin),
+				check->cyl->base.position));
+	check->dist_inside = 2 * sqrtf(determinant)
+		/ vec3_lenght_sq(away_from_axis);
+	check->hght_back = vec3_dot(
+			check->cyl->axis,
+			vec3_sub(vec3_add(
+					vec3_scal_mul(
+						check->ray->direction,
+						check->dist + check->dist_inside),
+					check->ray->origin),
+				check->cyl->base.position));
 }
 
-static bool	end_caps(float dist_front, float height_front, float inside,
-		struct s_ray *ray, struct s_cylinder *cylinder, t_collision *coll)
+static bool	end_caps(struct s_cylinder_collision *check, t_collision *coll)
 {
-	float	height_back;
-
-	height_back = vec3_dot(cylinder->axis,
-			vec3_sub(vec3_add(vec3_scal_mul(ray->direction, dist_front + inside), ray->origin),
-				cylinder->base.position));
-	if ((height_back < 0 && height_front < 0) || (height_back > cylinder->height
-			&& height_front > cylinder->height))
+	if ((check->hght_back < 0 && check->hght_front < 0)
+		|| (check->hght_back > check->cyl->height
+			&& check->hght_front > check->cyl->height))
 		return (false);
 	if (!coll)
 		return (true);
-	if (height_front < 0)
+	if (check->hght_front < 0)
 	{
-		coll->dist = dist_front + (inside * height_front / (height_front
-					- height_back));
-		coll->normal = vec3_scal_mul(cylinder->axis, -1.0f);
+		coll->dist = check->dist + (check->dist_inside * check->hght_front
+				/ (check->hght_front - check->hght_back));
+		coll->normal = vec3_scal_mul(check->cyl->axis, -1.0f);
 	}
 	else
 	{
-		coll->dist = dist_front + (inside * (height_front - cylinder->height)
-				/ (height_front - height_back));
-		coll->normal = cylinder->axis;
+		coll->dist = check->dist + (check->dist_inside
+				* (check->hght_front - check->cyl->height)
+				/ (check->hght_front - check->hght_back));
+		coll->normal = check->cyl->axis;
 	}
-	coll->position = vec3_add(ray->origin, vec3_add(vec3_scal_mul(ray->direction,
-				coll->dist), ray->origin));
+	coll->position = vec3_add(
+			check->ray->origin,
+			vec3_add(
+				vec3_scal_mul(check->ray->direction, coll->dist),
+				check->ray->origin));
 	return (true);
 }
 
-static void	body(float dist, struct s_ray *ray, struct s_cylinder *cylinder,
-		t_collision *coll)
+static void	body(struct s_cylinder_collision *check, t_collision *coll)
 {
-	if (coll)
-	{
-		coll->dist = dist;
-		coll->position = vec3_add(ray->origin, vec3_add(vec3_scal_mul(ray->direction,
-					coll->dist), ray->origin));
-		coll->normal = get_normal(cylinder, coll);
-	}
+	t_vec3	base_to_coll;
+	t_vec3	offset;
+
+	if (!coll)
+		return ;
+	coll->dist = check->dist;
+	coll->position = vec3_add(
+			check->ray->origin,
+			vec3_add(
+				vec3_scal_mul(check->ray->direction, coll->dist),
+				check->ray->origin));
+	base_to_coll = vec3_sub(coll->position, check->cyl->base.position);
+	offset = vec3_scal_mul(check->cyl->axis,
+			vec3_dot(base_to_coll, check->cyl->axis));
+	coll->normal = vec3_normalise(vec3_sub(base_to_coll, offset));
 }
 
 bool	cylinder_collide(struct s_ray *ray,
 		struct s_cylinder *cylinder, t_collision *coll)
 {
-	float	determinant;
-	t_vec3	away_from_axis;
-	t_vec3	ray_to_base;
-	float	dist;
-	float	height;
+	struct s_cylinder_collision	check;
+	t_vec3						away_from_axis;
+	t_vec3						ray_to_base;
+	float						determinant;
 
 	away_from_axis = vec3_cross(ray->direction, cylinder->axis);
 	ray_to_base = vec3_sub(cylinder->base.position, ray->origin);
-	determinant = get_determinant(cylinder->diameter / 2, ray_to_base,
+	determinant = get_determinant(cylinder, ray_to_base,
 			away_from_axis);
 	if (determinant < 0)
 		return (false);
-	dist = vec3_dot(away_from_axis, vec3_cross(ray_to_base, cylinder->axis));
-	dist = (dist - sqrtf(determinant)) / vec3_lenght_sq(away_from_axis);
-	height = vec3_dot(cylinder->axis, vec3_sub(vec3_add(vec3_scal_mul(ray->direction,
-					dist), ray->origin), cylinder->base.position));
-	if (height < 0 || height > cylinder->height)
-	{
-		determinant = 2 * sqrtf(determinant) / vec3_lenght_sq(away_from_axis);
-		return (end_caps(dist, height, determinant, ray, cylinder, coll));
-	}
+	check.ray = ray;
+	check.cyl = cylinder;
+	fill_cyl_coll(&check, away_from_axis, ray_to_base, determinant);
+	if (check.hght_front < 0 || check.hght_front > cylinder->height)
+		return (end_caps(&check, coll));
 	else
-		body(dist, ray, cylinder, coll);
+		body(&check, coll);
 	return (true);
 }
