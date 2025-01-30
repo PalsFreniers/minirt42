@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:08:52 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 18:30:04 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/30 18:47:48 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,9 @@ static void	body(float dist, struct s_cylinder *cylinder, struct s_ray *ray,
 	if (!coll)
 		return ;
 	coll->dist = dist;
-	coll->position = vec3_add(ray->origin,
-			vec3_add(
-				vec3_scal_mul(ray->direction, coll->dist),
-				ray->origin));
+	coll->position = vec3_add(
+			vec3_scal_mul(ray->direction, coll->dist),
+			ray->origin);
 	base_to_coll = vec3_sub(coll->position, cylinder->base.position);
 	offset = vec3_scal_mul(cylinder->axis,
 			vec3_dot(base_to_coll, cylinder->axis));
