@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:08:52 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 03:08:52 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/30 03:18:51 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,16 @@ static bool	end_caps(t_vec3 values, struct s_ray *ray,
 	return (true);
 }
 
-static void	body(struct s_cylinder_collision *check, t_collision *coll)
+static void	body(float dist, struct s_cylinder *cylinder, struct s_ray *ray,
+		t_collision *coll)
 {
 	if (coll)
 	{
 		coll->dist = dist;
 		coll->position = vec3_add(ray->origin,
-			vec3_add(vec3_scal_mul(ray->direction, coll->dist), ray->origin));
+			vec3_add(
+				vec3_scal_mul(ray->direction, coll->dist),
+				ray->origin));
 		coll->normal = get_normal(cylinder, coll);
 	}
 }
@@ -105,15 +108,15 @@ static void	body(struct s_cylinder_collision *check, t_collision *coll)
 bool	cylinder_collide(struct s_ray *ray, struct s_cylinder *cylinder,
 		t_collision *coll)
 {
-	struct s_cylinder_collision	check;
-	t_vec3						away_from_axis;
-	t_vec3						ray_to_base;
-	float						determinant;
+	t_vec3	away_from_axis;
+	t_vec3	ray_to_base;
+	float	determinant;
+	float	dist;
+	float	height;
 
 	away_from_axis = vec3_cross(ray->direction, cylinder->axis);
 	ray_to_base = vec3_sub(cylinder->base.position, ray->origin);
-	determinant = get_determinant(cylinder->diameter / 2, ray_to_base,
-		away_from_axis);
+	determinant = get_determinant(cylinder, ray_to_base, away_from_axis);
 	if (determinant < 0)
 		return (false);
 	dist = vec3_dot(away_from_axis, vec3_cross(ray_to_base, cylinder->axis));
@@ -128,6 +131,6 @@ bool	cylinder_collide(struct s_ray *ray, struct s_cylinder *cylinder,
 				coll));
 	}
 	else
-		body(&check, coll);
+		body(dist, cylinder, ray, coll);
 	return (true);
 }
