@@ -46,7 +46,8 @@ SRC +=	src/strings/dstring.c \
 SRC +=	src/ui/vline.c \
 		src/ui/button.c \
 		src/ui/numpad.c \
-		src/ui/button2.c
+		src/ui/button2.c \
+		src/ui/axes.c
 SRC +=	src/mlx/mmlx.c \
 		src/mlx/hooks.c \
 		src/mlx/camera_move.c
