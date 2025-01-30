@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/29 21:35:53 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/30 01:00:36 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,4 @@ void	loop_render(struct s_mlx *mlx)
 		}
 		++y;
 	}
-	set_pixel(mlx, 14, 15, render_to_mlx_color(render_color_black()));
 }
