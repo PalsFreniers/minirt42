@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mmlx.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/30 02:07:00 by maamine           #+#    #+#             */
+/*   Updated: 2025/01/30 02:09:59 by maamine          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mlx.h"
 #include "ui/buttons.h"
 #include <actions/buttons_actions.h>
@@ -38,8 +50,9 @@ void	set_window_position(struct s_mlx *mlx)
 
 mlx_window_create_info	create_info(mlx_image render_target, const char *title)
 {
-	mlx_window_create_info	info = { 0 };
+	mlx_window_create_info	info;
 
+	info = (mlx_window_create_info){0};
 	if (render_target)
 		info.render_target = render_target;
 	if (title)
@@ -64,7 +77,7 @@ bool	init_mlx(struct s_mlx *mlx)
 	if (!mlx->ui.win)
 		return (false);
 	mlx->img = mlx_new_image(mlx->context, WIN_WIDTH, WIN_HEIGHT);
-	if(!mlx->img)
+	if (!mlx->img)
 		return (false);
 	set_window_position(mlx);
 	mlx_init_static_button(mlx);
@@ -80,8 +93,7 @@ void	free_mlx(struct s_mlx *mlx)
 		mlx_destroy_window(mlx->context, mlx->render.win);
 	if (mlx->ui.win)
 		mlx_destroy_window(mlx->context, mlx->ui.win);
-	if(mlx->img)
+	if (mlx->img)
 		mlx_destroy_image(mlx->context, mlx->img);
 	mlx_destroy_context(mlx->context);
-	// ft_free("c", &(mlx->scene));
 }

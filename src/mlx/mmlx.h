@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mmlx.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/30 02:07:03 by maamine           #+#    #+#             */
+/*   Updated: 2025/01/30 02:10:30 by maamine          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MMLX_H
 # define MMLX_H
 
@@ -20,7 +32,7 @@ struct				s_mlx
 	mlx_context		context;
 	struct s_window	ui;
 	struct s_window	render;
-        mlx_image img;
+	mlx_image		img;
 	struct s_button	static_b[6];
 	struct s_button	interface_buttons[33];
 	int				btn_count;

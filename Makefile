@@ -48,7 +48,8 @@ SRC += src/ui/vline.c \
        src/ui/numpad.c \
        src/ui/button2.c
 SRC += src/mlx/mmlx.c \
-       src/mlx/hooks.c
+       src/mlx/hooks.c \
+       src/mlx/camera_move.c
 SRC += src/actions/buttons_actions.c \
        src/actions/button_actions_2.c \
        src/actions/buttons_actions_3.c \

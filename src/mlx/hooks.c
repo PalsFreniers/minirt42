@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/30 02:06:40 by maamine           #+#    #+#             */
+/*   Updated: 2025/01/30 02:13:47 by maamine          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "math/la.h"
 #include "mlx.h"
 #include <mlx/hooks.h>
@@ -77,51 +89,8 @@ void	loop_draw_ui(struct s_mlx *mlx)
 	}
 }
 
-static t_vec3	rotate_camera_x(struct s_mlx *mlx, float angle)
-{
-	t_vec3	new_dir_local;
-	t_vec3	new_dir_global;
-
-	new_dir_local = mat3_apply(rotation_matrix_x(angle),
-			vec3_new(0.0f, 0.0f, 1.0f));
-	new_dir_global = mat3_apply(mlx->scene.camera.inverse_transform,
-			new_dir_local);
-	return (new_dir_global);
-}
-
-int	camera_move(int key, struct s_mlx *mlx)
-{
-	struct s_camera	*camera;
-
-	camera = &mlx->scene.camera;
-	if (key == KEY_W)
-		camera->direction = rotate_camera_x(mlx, -0.1f);
-	else if (key == KEY_S)
-		camera->direction = rotate_camera_x(mlx, +0.1f);
-	else if (key == KEY_A)
-		camera->direction = mat3_apply(rotation_matrix_z(+0.1f),
-				camera->direction);
-	else if (key == KEY_D)
-		camera->direction = mat3_apply(rotation_matrix_z(-0.1f),
-				camera->direction);
-	else if (key == KEY_Q)
-		camera->position = vec3_add(camera->position,
-				vec3_scal_mul(camera->direction, +0.5f));
-	else if (key == KEY_E)
-		camera->position = vec3_add(camera->position,
-				vec3_scal_mul(camera->direction, -0.5f));
-	if (key == KEY_W || key == KEY_S || key == KEY_A || key == KEY_D)
-	{
-		camera_create_transform(camera);
-		camera->direction = vec3_normalise(camera->direction);
-	}
-	map_scene(&mlx->scene, camera->position, camera->transform);
-	return (0);
-}
-
 int	key_event(int key, struct s_mlx *mlx)
 {
-	// printf("key: %d\n", key);	// 
 	if (key == KEY_ESCAPE)
 		return (win_close(0, mlx));
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D
