@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   buttons_actions_modify_light.c                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/30 18:33:03 by maamine           #+#    #+#             */
+/*   Updated: 2025/01/30 18:33:04 by maamine          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "object/objects.h"
 #include "scene/scene.h"
 #include <actions/buttons_actions.h>

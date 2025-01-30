@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_actions_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:14:34 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:14:49 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/30 18:35:35 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ void	button_list(struct s_mlx *mlx)
 			- 25, WIN_HEIGHT - 40);
 	button_scene_list_populate(mlx, mlx->page == 0, mlx->page * 16);
 	mlx->btn_count += 2;
-        mlx->pad_count = 1;
+	mlx->pad_count = 1;
 }
