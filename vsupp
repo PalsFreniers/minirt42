@@ -7,7 +7,7 @@
    ...
 }
 {
-   name
+   lib_mlx_cond
    Memcheck:Cond
    fun:*
    ...
@@ -15,7 +15,7 @@
    ...
 }
 {
-   name
+   sdl_alloc
    Memcheck:Leak
    fun:*
    ...
@@ -23,7 +23,7 @@
    ...
 }
 {
-   name
+   x11_alloc
    Memcheck:Leak
    fun:*
    ...
@@ -31,7 +31,7 @@
    ...
 }
 {
-   name
+   nvidia_dbus
    Memcheck:Leak
    fun:*
    ...
@@ -39,7 +39,7 @@
    ...
 }
 {
-   name
+   x11_dbus
    Memcheck:Leak
    fun:*
    obj:*
@@ -48,7 +48,7 @@
    ...
 }
 {
-   name
+   sdl_dbus
    Memcheck:Leak
    fun:*alloc
    obj:*

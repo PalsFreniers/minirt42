@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:07:00 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:09:59 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/30 02:27:40 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ bool	init_mlx(struct s_mlx *mlx)
 		return (false);
 	set_window_position(mlx);
 	mlx_init_static_button(mlx);
-	mlx->down_sizing = 1;
+	mlx->down_sizing = 4;
 	return (true);
 }
 

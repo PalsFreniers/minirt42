@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 15:05:06 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/30 01:41:45 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ int	main(int c, char **args)
 		mlx.scene.camera.transform);
 	register_mlx_hooks(&mlx);
 	mlx_loop(mlx.context);
-	ft_free("m", &mlx);
+	ft_free("mc", &mlx, &mlx.scene);
 	return (0);
 }
