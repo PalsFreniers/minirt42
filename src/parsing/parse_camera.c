@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:52 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/31 17:52:20 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 19:01:18 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 		camera->direction.x += 0.1;
 	if (camera->direction.y == 0)
 		camera->direction.y -= 0.1;
-	camera->direction = vec3_normalise(camera->direction);
 	camera_create_transform(camera);
 	camera->screen_to_cam_factor = (2 * sinf(camera->fov * DEG2RAD / 2)) / WIN_WIDTH;
 	return (true);

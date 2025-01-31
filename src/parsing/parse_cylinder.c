@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:35 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:23:36 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/31 18:52:48 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ bool	parse_cylinder(struct s_string *parts, size_t count,
 		return (false);
 	if (!parse_ranged_vector(parts[2], &(cylinder->axis), 1, -1))
 		return (false);
-	cylinder->axis = vec3_normalise(cylinder->axis);
 	if (!parse_cylinder_floats(parts, cylinder))
 		return (false);
 	if (!parse_color(parts[5], &(cylinder->base.color)))
