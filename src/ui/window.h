@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:17:30 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/30 21:45:27 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 13:55:56 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define WIN_WIDTH 900
 # define WIN_HEIGHT 600
+
+# include <mlx/mmlx.h>
 
 void	axes_draw(struct s_mlx *mlx);
 
