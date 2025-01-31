@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:33:17 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/30 18:24:44 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 20:44:40 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ bool	plane_collide(struct s_ray *ray, struct s_plane *plane,
 			coll->normal = vec3_scal_mul(norm, -1.0f);
 		else
 			coll->normal = norm;
-		coll->object = (void *)plane;
 	}
 	return (true);
 }

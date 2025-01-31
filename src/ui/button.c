@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:15:05 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/31 15:23:30 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 17:55:45 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <mlx/mmlx.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <ui/buttons.h>
 #include <ui/vline.h>
 #include <ui/window.h>

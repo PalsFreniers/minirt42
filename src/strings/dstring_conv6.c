@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:03:27 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:03:27 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 17:55:55 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "dstring_utils.h"
 #include <math.h>
 #include <stddef.h>
-#include <stdio.h>
 
 static void	reset_neg(int *neg)
 {

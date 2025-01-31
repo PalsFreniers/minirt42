@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:57:26 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 17:43:05 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 18:16:19 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	line_high_draw(struct s_mlx *mlx, t_vec3 origin, t_vec3 axis, mlx_co
 	}
 }
 
-static void	axis_draw(struct s_mlx *mlx, t_vec3 origin, t_vec3 axis, mlx_color color)
+static void	line_draw(struct s_mlx *mlx, t_vec3 origin, t_vec3 axis, mlx_color color)
 {
 	if (fabsf(axis.y - origin.y) < fabsf(axis.x - origin.x))
 	{
@@ -90,13 +90,20 @@ void	axes_draw(struct s_mlx *mlx)
 {
 	t_mat3	axes;
 	t_vec3	origin;
+	t_vec3	axis;
 
 	axes = mat3_mul(mlx->scene.camera.inverse_transform, mat3_identity());
 	origin = mat3_apply(mlx->scene.camera.inverse_transform, vec3_zero());
 	origin = vec3_scal_mul(origin, AXIS_SIZE);
 	origin.x += AXIS_CENTER_X;
 	origin.y += AXIS_CENTER_Y;
-	axis_draw(mlx, origin, vec3_new(axes.m00 * AXIS_SIZE + AXIS_CENTER_X, axes.m01 * AXIS_SIZE + AXIS_CENTER_Y, 0.0f), (mlx_color){.rgba = RED});
-	axis_draw(mlx, origin, vec3_new(axes.m10 * AXIS_SIZE + AXIS_CENTER_X, axes.m11 * AXIS_SIZE + AXIS_CENTER_Y, 0.0f), (mlx_color){.rgba = GREEN});
-	axis_draw(mlx, origin, vec3_new(axes.m20 * AXIS_SIZE + AXIS_CENTER_X, axes.m21 * AXIS_SIZE + AXIS_CENTER_Y, 0.0f), (mlx_color){.rgba = BLUE});
+	axis = vec3_new(axes.m00 * AXIS_SIZE + AXIS_CENTER_X,
+			axes.m01 * AXIS_SIZE + AXIS_CENTER_Y, 0.0f);
+	line_draw(mlx, origin, axis, (mlx_color)RED);
+	axis = vec3_new(axes.m10 * AXIS_SIZE + AXIS_CENTER_X,
+			axes.m11 * AXIS_SIZE + AXIS_CENTER_Y, 0.0f);
+	line_draw(mlx, origin, axis, (mlx_color)GREEN);
+	axis = vec3_new(axes.m20 * AXIS_SIZE + AXIS_CENTER_X,
+			axes.m21 * AXIS_SIZE + AXIS_CENTER_Y, 0.0f);
+	line_draw(mlx, origin, axis, (mlx_color)BLUE);
 }

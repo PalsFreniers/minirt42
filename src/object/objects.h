@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:21:25 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:21:26 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/31 22:12:57 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ enum				e_object_type
 
 struct				s_object
 {
-	int				type;
+	enum e_object_type
+					type;
 	struct s_vec3	position;
 	union u_color	color;
 };

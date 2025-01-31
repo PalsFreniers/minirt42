@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 23:19:03 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/30 18:46:22 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 22:14:54 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct s_matrices
 typedef struct s_collision
 {
 	float			dist;
-	struct s_vec3	position;
-	struct s_vec3	normal;
+	t_vec3			position;
+	t_vec3			normal;
 	t_ray			ray;
 	struct s_object	*object;
 }					t_collision;
