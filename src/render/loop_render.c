@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 14:45:59 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 22:35:30 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 {
 	mlx_color	color;
 
-	if (collision->object && collision->dist < 25000.0f)
+	if (collision->object && collision->dist < MAX_DEPTH)
 	{
 		color = get_pixel_color(mlx, collision);
 		set_pixel(mlx, x, y, color);
