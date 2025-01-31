@@ -6,23 +6,13 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:32:45 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 15:45:59 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:52:53 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ui/buttons.h"
 #include "ui/numpad.h"
 #include <actions/buttons_actions.h>
-
-float	float_step(float val, bool is_left_click, int sign)
-{
-	float	step;
-
-	step = (0.01f);
-	if(is_left_click)
-		step = 0.1f;
-	return (val + step * sign);
-}
 
 void	float_inc(float *ptr, bool is_left_click)
 {

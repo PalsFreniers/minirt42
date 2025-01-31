@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:11:20 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:15:08 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 17:25:05 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	camera_move(int key, struct s_mlx *mlx)
 
 	camera = &mlx->scene.camera;
 	if (key == KEY_W)
-		camera->direction = rotate_camera_x(mlx, -0.1f);
-	else if (key == KEY_S)
 		camera->direction = rotate_camera_x(mlx, +0.1f);
+	else if (key == KEY_S)
+		camera->direction = rotate_camera_x(mlx, -0.1f);
 	else if (key == KEY_A)
 		camera->direction = mat3_apply(rotation_matrix_z(+0.1f),
 				camera->direction);

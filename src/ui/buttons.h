@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:42:46 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/31 15:24:06 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:53:43 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ struct					s_button
 	bool				has_idx;
 };
 
-void					button_update(void *mlx, struct s_button *b, bool is_left_click);
+void					button_update(void *mlx, struct s_button *b,
+							bool is_left_click);
 void					button_draw(struct s_mlx *mlx, struct s_button *b);
 struct s_button			button_new(int x, int y, int width, int height);
 void					button_set(struct s_button *self, char *text,

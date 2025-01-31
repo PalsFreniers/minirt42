@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:32:42 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 16:04:35 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:50:03 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	char_inc(unsigned char *ptr, bool is_left_click)
 		return ;
 	}
 	step = ((1 - is_left_click) + 10 * is_left_click);
-	// step = step - (int)*ptr + step - UINT8_MAX;
 	if (*ptr > UINT8_MAX - step)
 		*ptr = UINT8_MAX;
 	else
