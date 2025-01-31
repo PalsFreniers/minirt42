@@ -6,30 +6,47 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:32:42 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 18:36:11 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:04:35 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object/objects.h"
 #include <actions/buttons_actions.h>
 
-void	char_inc(unsigned char *ptr)
+static void	char_inc(unsigned char *ptr, bool is_left_click)
 {
-	int	tmp;
+	int	step;
 
-	tmp = *ptr + 1;
-	*ptr = tmp % 256;
+	if (*ptr == UINT8_MAX)
+	{
+		*ptr = 0;
+		return ;
+	}
+	step = ((1 - is_left_click) + 10 * is_left_click);
+	// step = step - (int)*ptr + step - UINT8_MAX;
+	if (*ptr > UINT8_MAX - step)
+		*ptr = UINT8_MAX;
+	else
+		*ptr += step;
 }
 
-void	char_dec(unsigned char *ptr)
+static void	char_dec(unsigned char *ptr, bool is_left_click)
 {
-	int	tmp;
+	int	step;
 
-	tmp = *ptr - 1;
-	*ptr = tmp % 256;
+	if (*ptr == 0)
+	{
+		*ptr = UINT8_MAX;
+		return ;
+	}
+	step = ((1 - is_left_click) + 10 * is_left_click);
+	if (*ptr < step)
+		*ptr = 0;
+	else
+		*ptr -= step;
 }
 
-void	button_scene_modify_uchar(struct s_mlx *mlx, struct s_vec2i pos,
+static void	button_scene_modify_uchar(struct s_mlx *mlx, struct s_vec2i pos,
 		unsigned char *data, char *text)
 {
 	mlx->interface_buttons[mlx->btn_count] = button_new(pos.x, pos.y, 20, 20);

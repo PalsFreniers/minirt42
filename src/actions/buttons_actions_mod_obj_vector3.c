@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buttons_actions_mod_obj_vector3.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:17:38 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:17:44 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/31 15:46:21 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	button_scene_modify_vec3(struct s_mlx *mlx, struct s_vec2i pos,
 	button_scene_modify_float_full(mlx, pos, &(pos_p->z), "Z");
 }
 
-void	ufloat_dec(float *ptr)
+void	ufloat_dec(float *ptr, bool is_left_click)
 {
-	*ptr -= 0.01f;
+	*ptr = float_step(*ptr, is_left_click, NEGATIVE);
 	if (*ptr < 0)
 		*ptr = 0.f;
 }

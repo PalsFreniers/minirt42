@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buttons_actions.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 19:13:57 by tdelage           #+#    #+#             */
-/*   Updated: 2024/09/12 04:01:27 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/31 15:49:36 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 
 # include <mlx/mmlx.h>
 
+# define POSITIVE 1
+# define NEGATIVE -1
+
 struct	s_vec2i
 {
 	int	x;
 	int	y;
 };
 
-void	ufloat_dec(float *ptr);
+float	float_step(float val, bool is_left_click, int sign);
+
+void	ufloat_dec(float *ptr, bool is_left_click);
 void	button_quit(struct s_mlx *mlx);
 void	button_add_scene(struct s_mlx *mlx);
 void	button_scene_modify_sphere(struct s_mlx *mlx, int index);

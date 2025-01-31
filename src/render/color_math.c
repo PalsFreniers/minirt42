@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_math.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:30:30 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/30 01:13:01 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:41:24 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ t_render_color	filter_color(t_render_color color, t_render_color filter)
 {
 	t_render_color	ret_color;
 
-	ret_color.r = (color.r * filter.r) / 0xFF;
-	ret_color.g = (color.g * filter.g) / 0xFF;
-	ret_color.b = (color.b * filter.b) / 0xFF;
+	ret_color.r = (color.r * filter.r) / MAX_U8;
+	ret_color.g = (color.g * filter.g) / MAX_U8;
+	ret_color.b = (color.b * filter.b) / MAX_U8;
 	return (ret_color);
 }
 

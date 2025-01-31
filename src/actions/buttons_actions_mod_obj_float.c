@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:32:48 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 18:35:12 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 15:48:48 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 #include "ui/numpad.h"
 #include <actions/buttons_actions.h>
 
-void	float_inc_1(float *ptr);
+void	float_inc_1(float *ptr, bool is_left_click);
 
-void	float_inc_full(float *ptr)
+void	float_inc_full(float *ptr, bool is_left_click)
 {
-	*ptr += 0.01f;
+	*ptr = float_step(*ptr, is_left_click, POSITIVE);
 }
 
-void	ufloat_dec_full(float *ptr)
+void	ufloat_dec_full(float *ptr, bool is_left_click)
 {
-	*ptr -= 0.01f;
+	*ptr = float_step(*ptr, is_left_click, NEGATIVE);
 }
 
-void	float_dec_1(float *ptr)
+void	float_dec_1(float *ptr, bool is_left_click)
 {
-	*ptr -= 0.01f;
+	*ptr = float_step(*ptr, is_left_click, NEGATIVE);
 	if (*ptr < -1)
 		*ptr = -1.0f;
 }

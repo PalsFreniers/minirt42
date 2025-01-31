@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:07:03 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:10:30 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 15:29:25 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,28 @@
 # include <ui/numpad.h>
 
 # define BASE_LINE_Y 70
+
+enum e_mouse_buttons
+{
+	MOUSE_LEFT = 1,
+	MOUSE_MIDDLE,
+	MOUSE_RIGHT,
+};
+
+enum	e_key_codes
+{
+	KEY_ESCAPE = 41,
+	KEY_ENTER = 40,
+	KEY_W = 26,
+	KEY_A = 4,
+	KEY_S = 22,
+	KEY_D = 7,
+	KEY_Q = 20,
+	KEY_E = 8,
+	KEY_NUM_5 = 93,
+	KEY_NUM_MINUS = 86,
+	KEY_NUM_PLUS = 87,
+};
 
 struct s_window
 {

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 04:16:46 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/29 21:35:58 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:40:35 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <mlx/mmlx.h>
 # include <render/collision.h>
+
+# define EASE_OUT_ATTENUATION 0.01f
 
 typedef struct s_render_color
 {

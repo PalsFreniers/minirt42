@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:06:40 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:13:47 by maamine          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:07:32 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,16 @@ void	update_buttons_click(int e, struct s_mlx *mlx)
 {
 	int	x;
 
-	(void)e;
-	button_update(mlx->context, &(mlx->static_b[0]));
-	button_update(mlx->context, &(mlx->static_b[1]));
-	button_update(mlx->context, &(mlx->static_b[2]));
-	button_update(mlx->context, &(mlx->static_b[3]));
-	button_update(mlx->context, &(mlx->static_b[4]));
-	button_update(mlx->context, &(mlx->static_b[5]));
+	button_update(mlx->context, &(mlx->static_b[0]), e == MOUSE_LEFT);
+	button_update(mlx->context, &(mlx->static_b[1]), e == MOUSE_LEFT);
+	button_update(mlx->context, &(mlx->static_b[2]), e == MOUSE_LEFT);
+	button_update(mlx->context, &(mlx->static_b[3]), e == MOUSE_LEFT);
+	button_update(mlx->context, &(mlx->static_b[4]), e == MOUSE_LEFT);
+	button_update(mlx->context, &(mlx->static_b[5]), e == MOUSE_LEFT);
 	x = 0;
 	while (x < mlx->btn_count)
 	{
-		button_update(mlx->context, &(mlx->interface_buttons[x]));
+		button_update(mlx->context, &(mlx->interface_buttons[x]), e == MOUSE_LEFT);
 		x++;
 	}
 }
@@ -103,5 +102,6 @@ int	key_event(int key, struct s_mlx *mlx)
 	}
 	if (key == KEY_NUM_PLUS)
 		(mlx->down_sizing)++;
+	map_scene(&mlx->scene, mlx->scene.camera.position, mlx->scene.camera.transform);
 	return (0);
 }

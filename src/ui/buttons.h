@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:42:46 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:17:06 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/31 15:24:06 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define BORDER2C 0x2222FFFF
 # define TEXTC 0xDDDDDDFF
 
-typedef void			(*t_button_f)(void *);
-typedef void			(*t_button_i_f)(void *, int);
+typedef void			(*t_button_f)(void *, bool);
+typedef void			(*t_button_i_f)(void *, int, bool);
 
 struct					s_button
 {
@@ -41,9 +41,8 @@ struct					s_button
 	bool				has_idx;
 };
 
-void					button_update(void *mlx, struct s_button *b);
+void					button_update(void *mlx, struct s_button *b, bool is_left_click);
 void					button_draw(struct s_mlx *mlx, struct s_button *b);
-void					init_buttons_edit_ambiant_light(struct s_mlx *mlx);
 struct s_button			button_new(int x, int y, int width, int height);
 void					button_set(struct s_button *self, char *text,
 							void *data, t_button_f func);

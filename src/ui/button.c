@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:15:05 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:36:11 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/01/31 15:23:30 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static bool	collide(int a[4], int b[4])
 	return (true);
 }
 
-void	button_update(void *mlx, struct s_button *b)
+void	button_update(void *mlx, struct s_button *b, bool is_left_click)
 {
 	int	x;
 	int	y;
@@ -44,9 +44,9 @@ void	button_update(void *mlx, struct s_button *b)
 	{
 		b->is_clicked = true;
 		if (b->has_idx)
-			b->on_click_idx(b->data, b->data_index);
+			b->on_click_idx(b->data, b->data_index, is_left_click);
 		else
-			b->on_click(b->data);
+			b->on_click(b->data, is_left_click);
 	}
 }
 
