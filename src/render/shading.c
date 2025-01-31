@@ -24,15 +24,19 @@ static bool	is_lit(struct s_mlx *mlx, t_collision *starting_point,
 	size_t		i;
 
 	light_dist = vec3_lenght(light_dir);
-	ray.origin = starting_point->position;
 	ray.direction = vec3_normalise(light_dir);
+	ray.origin = vec3_add(starting_point->position,
+			vec3_scal_mul(starting_point->normal, NO_COLLIDE_DIST));
 	i = 0;
 	while (i < mlx->scene.len)
 	{
-		if (mlx->scene.map_objects[i] != starting_point->object
-			&& test_collision(mlx->scene.map_objects[i], &ray, &new_coll)
+		if (test_collision(mlx->scene.map_objects[i], &ray, &new_coll)
 			&& new_coll.dist > 0 && new_coll.dist < light_dist)
 			return (false);
+		// if (mlx->scene.map_objects[i] != starting_point->object
+		// 	&& test_collision(mlx->scene.map_objects[i], &ray, &new_coll)
+		// 	&& new_coll.dist > 0 && new_coll.dist < light_dist)
+		// 	return (false);
 		i++;
 	}
 	return (true);
