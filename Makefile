@@ -132,7 +132,7 @@ MLX = $(MLX_DIR)/libmlx.so
 
 ##========== FLAGS ==========##
 
-CFLAGS = -Wall -Wextra -Werror -I $(LIBFT_DIR) -I ./src/ -I $(MLX_DIR)/includes
+CFLAGS = -Wall -Wextra -Werror -I $(LIBFT_DIR) -I ./src/ -I $(MLX_DIR)/includes -O3
 LDFLAGS = -Wl,-rpath=$(MLX_DIR) $(LIBS) 
 LIBS = -lm -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -lSDL2
 
