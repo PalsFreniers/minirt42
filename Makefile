@@ -137,7 +137,7 @@ LDFLAGS = -Wl,-rpath=$(MLX_DIR) $(LIBS)
 LIBS = -lm -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -lSDL2
 
 ifndef DEBUG
-	CFLAGS += O3
+	CFLAGS += -O3
 endif
 
 ##========== MODES ==========##
