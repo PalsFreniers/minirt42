@@ -12,5 +12,5 @@ mlx
 *.ppm
 dfgh
 gmon.out
-!test/*.rt
+!maps/*.rt
 !src/mlx
