@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:41:00 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 20:28:07 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/03 00:56:22 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ t_vec3				vec3_zero(void);
 // vec3 math
 t_vec3				vec3_scal_mul(t_vec3 a, float f);
 t_vec3				vec3_normalise(t_vec3 a);
-float				vec3_lenght(t_vec3 a);
-float				vec3_lenght_sq(t_vec3 a);
+float				vec3_length(t_vec3 a);
+float				vec3_length_sq(t_vec3 a);
 float				vec3_sum(t_vec3 a);
 
 // vec3 vec3 basic math

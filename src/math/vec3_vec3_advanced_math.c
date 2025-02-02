@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:33:53 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:34:04 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/03 00:56:22 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 float	vec3_distance(t_vec3 a, t_vec3 b)
 {
-	return (vec3_lenght(vec3_sub(a, b)));
+	return (vec3_length(vec3_sub(a, b)));
 }
 
 float	vec3_dot(t_vec3 a, t_vec3 b)

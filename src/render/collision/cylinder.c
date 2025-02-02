@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:08:52 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/02 20:59:53 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/03 00:56:22 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static float	get_determinant(struct s_cylinder *cyl, t_vec3 ray_to_base,
 	determinant = vec3_dot(ray_to_base, away_from_axis);
 	determinant *= determinant;
 	radius = cyl->diameter / 2;
-	determinant = vec3_lenght_sq(away_from_axis) * radius * radius
+	determinant = vec3_length_sq(away_from_axis) * radius * radius
 		- determinant;
 	return (determinant);
 }
@@ -113,12 +113,12 @@ bool	cylinder_collide(struct s_ray *ray, struct s_cylinder *cylinder,
 	if (determinant < 0)
 		return (false);
 	dist = vec3_dot(away_from_axis, vec3_cross(ray_to_base, cylinder->axis));
-	dist = (dist - sqrtf(determinant)) / vec3_lenght_sq(away_from_axis);
+	dist = (dist - sqrtf(determinant)) / vec3_length_sq(away_from_axis);
 	height = vec3_dot(cylinder->axis,
 			vec3_sub(ray_collision(ray, dist), cylinder->base.position));
 	if (height < 0 || height > cylinder->height)
 	{
-		determinant = 2 * sqrtf(determinant) / vec3_lenght_sq(away_from_axis);
+		determinant = 2 * sqrtf(determinant) / vec3_length_sq(away_from_axis);
 		return (end_caps(vec3_new(dist, height, determinant), ray, cylinder,
 				coll));
 	}

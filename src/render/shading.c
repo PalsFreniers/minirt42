@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/03 00:10:10 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/03 00:56:22 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static bool	is_lit(struct s_mlx *mlx, t_collision *starting_point,
 	float		light_dist;
 	size_t		i;
 
-	light_dist = vec3_lenght(light_dir);
+	light_dist = vec3_length(light_dir);
 	ray.origin = starting_point->position;
 	ray.direction = vec3_normalise(light_dir);
 	i = 0;
@@ -69,7 +69,7 @@ t_render_color	lit_color(struct s_mlx *mlx, t_collision *collision,
 	coll_to_light = vec3_sub(light->base.position, collision->position);
 	if (!is_lit(mlx, collision, coll_to_light))
 		return (render_color_black());
-	dist_to_light_sq = vec3_lenght_sq(coll_to_light);
+	dist_to_light_sq = vec3_length_sq(coll_to_light);
 	coll_to_light = vec3_normalise(coll_to_light);
 	light_amount = lambert(collision, coll_to_light);
 	if (light_amount <= 0.0f)
