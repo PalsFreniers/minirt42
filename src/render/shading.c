@@ -6,13 +6,10 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 23:33:21 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/02 22:21:17 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math/la.h"
-#include <object/objects.h>
-#include <render/collision.h>
 #include <render/render.h>
 
 static bool	is_lit(struct s_mlx *mlx, t_collision *starting_point,
@@ -27,6 +24,9 @@ static bool	is_lit(struct s_mlx *mlx, t_collision *starting_point,
 	ray.origin = starting_point->position;
 	ray.direction = vec3_normalise(light_dir);
 	i = 0;
+	if (test_self_collision(starting_point->object, &ray, &new_coll)
+		&& new_coll.dist > 0 && new_coll.dist < light_dist)
+		return (false);
 	while (i < mlx->scene.len)
 	{
 		if (mlx->scene.map_objects[i] != starting_point->object
@@ -77,7 +77,9 @@ t_render_color	lit_color(struct s_mlx *mlx, t_collision *collision,
 	light_amount = lambert(collision, coll_to_light);
 	if (light_amount <= 0.0f)
 		return (render_color_black());
-	light_amount += blinn_phong(collision, coll_to_light) * 2;
+	light_amount += light_amount
+		* blinn_phong(collision, coll_to_light) * PHONG_COEFF;
 	light_amount /= dist_to_light_sq * LIGHT_ATTENUATION;
-	return (color_scal_mul(rgb_to_render_color(light->base.color), light_amount));
+	return (color_scal_mul(rgb_to_render_color(light->base.color),
+		light_amount));
 }

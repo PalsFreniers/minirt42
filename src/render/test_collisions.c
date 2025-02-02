@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <object/objects.h>
 #include <render/collision.h>
 
 bool	test_collision(struct s_object *object, struct s_ray *ray,

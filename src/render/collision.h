@@ -32,7 +32,6 @@ typedef struct s_collision
 	struct s_object	*object;
 }					t_collision;
 
-float				ft_abs(float val);
 bool				test_collision(struct s_object *object, struct s_ray *ray,
 						t_collision *collision);
 bool				sphere_collide(struct s_ray *ray,

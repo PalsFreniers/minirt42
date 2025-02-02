@@ -10,18 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "object/objects.h"
-#include <libft.h>
-#include <math.h>
-#include <math/la.h>
 #include <render/collision.h>
-
-float	ft_abs(float x)
-{
-	if (x < 0)
-		return (-x);
-	return (x);
-}
 
 bool	sphere_collide(struct s_ray *ray, struct s_sphere *sphere,
 		t_collision *coll)

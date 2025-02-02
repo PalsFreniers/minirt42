@@ -6,11 +6,10 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:41:13 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:49:59 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/02 20:35:47 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "la.h"
 #include <math/la.h>
 #include <object/objects.h>
 

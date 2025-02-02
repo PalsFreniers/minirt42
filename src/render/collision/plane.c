@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "object/objects.h"
-#include <libft.h>
-#include <math/la.h>
 #include <render/collision.h>
 
 bool	plane_collide(struct s_ray *ray, struct s_plane *plane,

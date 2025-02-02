@@ -6,14 +6,11 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 22:35:30 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/02 20:38:48 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <render/collision.h>
 #include <libft.h>
-#include <math.h>
-#include <math/la.h>
 #include <minirt.h>
 #include <mlx.h>
 #include <mlx/hooks.h>

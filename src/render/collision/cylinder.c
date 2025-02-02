@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math/la.h"
-#include <math.h>
 #include <render/collision.h>
 
 static float	get_determinant(struct s_cylinder *cyl, t_vec3 ray_to_base,

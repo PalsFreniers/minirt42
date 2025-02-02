@@ -6,12 +6,12 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:06:40 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 17:54:03 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/02 20:36:14 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math/la.h"
-#include "mlx.h"
+#include <mlx.h>
+#include <math/la.h>
 #include <mlx/hooks.h>
 #include <ui/buttons.h>
 #include <ui/vline.h>
