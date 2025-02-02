@@ -6,11 +6,16 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:58:01 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/29 18:37:40 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/02 20:32:31 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+t_vec3	ray_collision(t_ray *ray, float dist)
+{
+	return (vec3_add(ray->origin, vec3_scal_mul(ray->direction, dist)));
+}
 
 struct s_ray	shoot_ray(int x, int y, float screen_to_cam_factor)
 {
