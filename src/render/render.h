@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 04:16:46 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 23:33:09 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/02 22:17:02 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # define EASE_OUT_ATTENUATION 0.01f
 # define PHONG_EXPONENT 20
+# define PHONG_COEFF 3.0f
 # define LIGHT_ATTENUATION 0.004f
 # define MAX_DEPTH 25000.0f
 # define NO_COLLIDE_DIST 0.01f
