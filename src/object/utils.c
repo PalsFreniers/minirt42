@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 05:55:14 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/31 18:53:35 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:41:01 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,34 +39,26 @@ static size_t	object_size(struct s_object *object)
 
 bool	dup_objects(struct s_scene *scene)
 {
-	size_t	obj_size;
-	size_t	i;
-	size_t	x;
-
 	if (!scene->map_objects)
 		return (false);
-	i = 0;
-	while (i < scene->len)
+	for (size_t i = 0; i < scene->len; i++)
 	{
-		obj_size = object_size(scene->objects[i]);
+		size_t	obj_size = object_size(scene->objects[i]);
 		if (!scene->map_objects[i])
 		{
-			x = 0;
-			while (x < i)
-				ft_free("p", scene->map_objects[x++]);
+			for (size_t x = 0; x < i; x++)
+				ft_free("p", scene->map_objects[x]);
 			ft_free("p", scene->map_objects);
 			return (false);
 		}
 		ft_memcpy(scene->map_objects[i], scene->objects[i], obj_size);
-		i++;
 	}
 	return (true);
 }
 
-void	map_object(struct s_object *target, struct s_object *src,
-		t_vec3 translation, t_mat3 transform)
+void	map_object(struct s_object *target, struct s_object *src, t_vec3 translation, t_mat3 transform)
 {
-	int	obj_size;
+	size_t	obj_size;
 
 	if (target->type != src->type)
 		return ;
@@ -74,13 +66,9 @@ void	map_object(struct s_object *target, struct s_object *src,
 	ft_memcpy(target, src, obj_size);
 	target->position = map_vec3(src->position, translation, transform);
 	if (src->type == OBJ_PLANE)
-	{
-		((struct s_plane *)target)->normal = mat3_apply(transform,
-				vec3_normalise(((struct s_plane *)src)->normal));
-	}
+		((struct s_plane *)target)->normal
+			= mat3_apply(transform, vec3_normalise(((struct s_plane *)src)->normal));
 	else if (src->type == OBJ_CYLINDER)
-	{
-		((struct s_cylinder *)target)->axis = mat3_apply(transform,
-				vec3_normalise(((struct s_cylinder *)src)->axis));
-	}
+		((struct s_cylinder *)target)->axis
+			= mat3_apply(transform, vec3_normalise(((struct s_cylinder *)src)->axis));
 }

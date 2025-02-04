@@ -6,19 +6,18 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:57:26 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 23:47:09 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:37:57 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ui/axes.h>
 
-static void	line_low_draw(struct s_mlx *mlx, t_vec3 origin, t_vec3 axis, mlx_color color)
+static void		line_low_draw(struct s_mlx *mlx, t_vec3 origin, t_vec3 axis, mlx_color color)
 {
-	int	dy;
-	int	y_step;
-	int	d;
-	int	x;
-	int	y;
+	int		dy;
+	int		y_step;
+	int		d;
+	int		y;
 
 	dy = axis.y - origin.y;
 	y_step = 1;
@@ -29,24 +28,21 @@ static void	line_low_draw(struct s_mlx *mlx, t_vec3 origin, t_vec3 axis, mlx_col
 	}
 	d = 2 * dy - (axis.x - origin.x);
 	y = origin.y;
-	x = origin.x;
-	while (x < axis.x)
+	for (int x = origin.x; x < axis.x; x++)
 	{
 		mlx_pixel_put(mlx->context, mlx->ui.window.win, x, y, color);
 		if (d > 0)
 			y += y_step;
 		d += (2 * dy) - ((d > 0) * 2 * (axis.x - origin.x));
-		x++;
 	}
 }
 
-static void	line_high_draw(struct s_mlx *mlx, t_vec3 origin, t_vec3 axis, mlx_color color)
+static void		line_high_draw(struct s_mlx *mlx, t_vec3 origin, t_vec3 axis, mlx_color color)
 {
-	int	dx;
-	int	x_step;
-	int	d;
-	int	x;
-	int	y;
+	int		dx;
+	int		x_step;
+	int		d;
+	int		x;
 
 	dx = axis.x - origin.x;
 	x_step = 1;
@@ -57,18 +53,16 @@ static void	line_high_draw(struct s_mlx *mlx, t_vec3 origin, t_vec3 axis, mlx_co
 	}
 	d = 2 * dx - (axis.y - origin.y);
 	x = origin.x;
-	y = origin.y;
-	while (y < axis.y)
+	for (int y = origin.y; y < axis.y; y++)
 	{
 		mlx_pixel_put(mlx->context, mlx->ui.window.win, x, y, color);
 		if (d > 0)
 			x += x_step;
 		d += (2 * dx) - ((d > 0) * 2 * (axis.y - origin.y));
-		y++;
 	}
 }
 
-static void	line_draw(struct s_mlx *mlx, t_vec3 origin, t_vec3 axis, mlx_color color)
+static void		line_draw(struct s_mlx *mlx, t_vec3 origin, t_vec3 axis, mlx_color color)
 {
 	if (fabsf(axis.y - origin.y) < fabsf(axis.x - origin.x))
 	{
