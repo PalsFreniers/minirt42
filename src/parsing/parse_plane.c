@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:25:26 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 17:25:53 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 17:47:32 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ bool	parse_plane(struct s_string *parts, size_t count, struct s_scene *scene)
 		return (false);
 	if (!parse_color(parts[3], &(plane->base.color)))
 		return (false);
-	plane->normal.z += 0.0001f;
+	plane->normal.z += 0.00001f;
 	return (true);
 }

@@ -6,11 +6,12 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 01:59:45 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 01:59:57 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 17:53:33 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <logger/logger.h>
+#include <ft_printf.h>
 #include <stdio.h>
 
 static const char	*logger_preamble(enum e_logger_level lvl)
@@ -39,7 +40,7 @@ void	logger_log_v(enum e_logger_level lvl, const char *fmt, va_list ap)
 {
 	if (lvl == LOG_ERROR)
 		printf("Error\n");
-	printf("%s", logger_preamble(lvl));
-	vprintf(fmt, ap);
-	printf("\n");
+	ft_printf("%s", logger_preamble(lvl));
+	ft_vprintf(fmt, ap);
+	ft_printf("\n");
 }
