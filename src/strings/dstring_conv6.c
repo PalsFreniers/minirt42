@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:03:27 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 17:55:55 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:48:04 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 #include <math.h>
 #include <stddef.h>
 
-static void	reset_neg(int *neg)
+static void		reset_neg(int *neg)
 {
 	*neg *= -1;
 	if (*neg == 0)
 		*neg = 1;
 }
 
-static void	set_neg(int *neg, char c)
+static void		set_neg(int *neg, char c)
 {
 	*neg = 0;
 	if (c == '-')
 		*neg = 1;
 }
 
-int	num_zero_a_dot(struct s_string self, int off)
+int		num_zero_a_dot(struct s_string self, int off)
 {
 	int	i;
 
@@ -41,11 +41,11 @@ int	num_zero_a_dot(struct s_string self, int off)
 
 float	string_to_float(struct s_string self)
 {
-	int64_t	dec;
-	size_t	off;
-	size_t	dec2;
-	int		p;
-	int		neg;
+	int64_t		dec;
+	size_t		off;
+	size_t		dec2;
+	int			p;
+	int			neg;
 
 	if (!string_check(self) || self.len == 0)
 		return (0);

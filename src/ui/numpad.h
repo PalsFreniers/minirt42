@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   numpad.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:16:27 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:16:28 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:30:29 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ struct					s_numpad
 		float			*f;
 		unsigned char	*c;
 	};
-	int					x;
-	int					y;
-	bool				is_int;
+	int		x;
+	int		y;
+	bool	is_int;
 };
 
-struct s_numpad			numpad_new(void *value, bool is_int, int x, int y);
-void					numpad_draw(struct s_mlx *mlx, struct s_numpad *self);
+struct s_numpad		numpad_new(void *value, bool is_int, int x, int y);
+void				numpad_draw(struct s_mlx *mlx, struct s_numpad *self);
 
 #endif // NUMPAD_H

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   numpad.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:14:53 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:14:54 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:31:48 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 struct s_numpad	numpad_new(void *value, bool is_int, int x, int y)
 {
 	return ((struct s_numpad){
-		.c = value,
-		.is_int = is_int,
-		.x = x,
-		.y = y,
+		.c		= value,
+		.is_int	= is_int,
+		.x		= x,
+		.y		= y,
 	});
 }
 
@@ -41,10 +41,8 @@ void	numpad_draw(struct s_mlx *mlx, struct s_numpad *self)
 	ptr = string_to_cstr(s);
 	string_destroy(&s);
 	if (!ptr)
-		mlx_string_put(mlx->context, mlx->ui.win, self->x, self->y,
-			(mlx_color)TEXTC, "0000");
+		mlx_string_put(mlx->context, mlx->ui.window.win, self->x, self->y, (mlx_color)TEXTC, "0000");
 	else
-		mlx_string_put(mlx->context, mlx->ui.win, self->x, self->y,
-			(mlx_color)TEXTC, ptr);
+		mlx_string_put(mlx->context, mlx->ui.window.win, self->x, self->y, (mlx_color)TEXTC, ptr);
 	free(ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:03:33 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:03:34 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:46:30 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,15 @@ bool	string_is_negative(struct s_string self, size_t *off)
 
 int8_t	string_to_sbyte(struct s_string self)
 {
-	size_t	off;
-	bool	negative;
-	uint8_t	ret;
+	size_t		off;
+	bool		negative;
+	uint8_t		ret;
 
 	if (!string_check(self))
 		return (0);
 	off = string_conv_trimspaces(self);
 	negative = string_is_negative(self, &off);
-	ret = string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off),
-			256);
+	ret = string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off), MAX_U8 + 1);
 	if (string_error(false, 0) == STRING_CONVERSION_OVERFLOW)
 		return (ret);
 	if (ret > MAX_I8 + negative)
@@ -90,6 +89,5 @@ uint8_t	string_to_ubyte(struct s_string self)
 	if (!string_check(self))
 		return (0);
 	off = string_conv_trimspaces(self);
-	return (string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off),
-			256));
+	return (string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off), MAX_U8 + 1));
 }

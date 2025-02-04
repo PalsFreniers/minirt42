@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:21:25 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 16:44:33 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:58:53 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <math/la.h>
 # include <stddef.h>
 # include <stdint.h>
+
+# define OFFSET_SMALL		0.01f
+# define OFFSET_MINUSCULE	0.00001f
 
 typedef union u_color
 {

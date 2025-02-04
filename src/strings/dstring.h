@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dstring.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:00 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:19:57 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:52:19 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stddef.h>
 # include <stdint.h>
 
-typedef enum e_string_error
+typedef enum	e_string_error
 {
 	STRING_MALLOC_ERROR,
 	STRING_NO_FREE_UNOWNED,
@@ -32,17 +32,17 @@ typedef enum e_string_error
 	STRING_NOT_CONVERTIBLE,
 	STRING_NULL_FUNCTION,
 	STRING_SUCCESS,
-}					t_string_error;
+}				t_string_error;
 
-enum e_string_error	string_error(bool set, enum e_string_error value);
+enum e_string_error		string_error(bool set, enum e_string_error value);
 
-typedef struct s_string
+typedef struct	s_string
 {
-	char			*ptr;
-	size_t			len;
-	size_t			capacity;
-	bool			unowned;
-}					t_string;
+	char		*ptr;
+	size_t		len;
+	size_t		capacity;
+	bool		unowned;
+}				t_string;
 
 typedef bool		(*t_string_obey_f)(char);
 

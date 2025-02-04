@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 19:13:57 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/31 15:49:36 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:58:23 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 # include <mlx/mmlx.h>
 
-# define POSITIVE 1
-# define NEGATIVE -1
+# define POSITIVE			+1
+# define NEGATIVE			-1
 
-struct	s_vec2i
+struct		s_vec2i
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 };
 
 float	float_step(float val, bool is_left_click, int sign);

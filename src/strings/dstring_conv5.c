@@ -6,16 +6,16 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:03:05 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:03:06 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:47:31 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dstring.h"
 
-struct s_string	string_from_sdword(int32_t value)
+struct s_string		string_from_sdword(int32_t value)
 {
-	struct s_string	ret;
-	bool			negative;
+	struct s_string		ret;
+	bool				negative;
 
 	if (value == 0)
 		return (string_copy(string_new_u_from_cstr("0")));
@@ -29,9 +29,9 @@ struct s_string	string_from_sdword(int32_t value)
 	return (ret);
 }
 
-struct s_string	string_from_udword(uint32_t value)
+struct s_string		string_from_udword(uint32_t value)
 {
-	struct s_string	ret;
+	struct s_string		ret;
 
 	if (value == 0)
 		return (string_copy(string_new_u_from_cstr("0")));
@@ -46,10 +46,10 @@ struct s_string	string_from_udword(uint32_t value)
 	return (ret);
 }
 
-struct s_string	string_from_sqword(int64_t value)
+struct s_string		string_from_sqword(int64_t value)
 {
-	struct s_string	ret;
-	bool			negative;
+	struct s_string		ret;
+	bool				negative;
 
 	if (value == 0)
 		return (string_copy(string_new_u_from_cstr("0")));
@@ -63,9 +63,9 @@ struct s_string	string_from_sqword(int64_t value)
 	return (ret);
 }
 
-struct s_string	string_from_uqword(uint64_t value)
+struct s_string		string_from_uqword(uint64_t value)
 {
-	struct s_string	ret;
+	struct s_string		ret;
 
 	if (value == 0)
 		return (string_copy(string_new_u_from_cstr("0")));
@@ -80,7 +80,7 @@ struct s_string	string_from_uqword(uint64_t value)
 	return (ret);
 }
 
-struct s_string	string_from_bool(bool value)
+struct s_string		string_from_bool(bool value)
 {
 	if (value)
 		return (string_copy(string_new_u_from_cstr("true")));

@@ -6,16 +6,16 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:03:30 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:03:31 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:47:03 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dstring.h"
 
-struct s_string	string_from_sbyte(int8_t value)
+struct s_string		string_from_sbyte(int8_t value)
 {
-	struct s_string	ret;
-	bool			negative;
+	struct s_string		ret;
+	bool				negative;
 
 	if (value == 0)
 		return (string_copy(string_new_u_from_cstr("0")));
@@ -29,9 +29,9 @@ struct s_string	string_from_sbyte(int8_t value)
 	return (ret);
 }
 
-struct s_string	string_from_ubyte(uint8_t value)
+struct s_string		string_from_ubyte(uint8_t value)
 {
-	struct s_string	ret;
+	struct s_string		ret;
 
 	if (value == 0)
 		return (string_copy(string_new_u_from_cstr("0")));
@@ -46,10 +46,10 @@ struct s_string	string_from_ubyte(uint8_t value)
 	return (ret);
 }
 
-struct s_string	string_from_sword(int16_t value)
+struct s_string		string_from_sword(int16_t value)
 {
-	struct s_string	ret;
-	bool			negative;
+	struct s_string		ret;
+	bool				negative;
 
 	if (value == 0)
 		return (string_copy(string_new_u_from_cstr("0")));
@@ -63,9 +63,9 @@ struct s_string	string_from_sword(int16_t value)
 	return (ret);
 }
 
-struct s_string	string_from_uword(uint16_t value)
+struct s_string		string_from_uword(uint16_t value)
 {
-	struct s_string	ret;
+	struct s_string		ret;
 
 	if (value == 0)
 		return (string_copy(string_new_u_from_cstr("0")));

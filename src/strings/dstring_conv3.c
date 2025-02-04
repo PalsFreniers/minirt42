@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:02:56 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:02:57 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:45:51 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ uint64_t	string_to_uqword(struct s_string self)
 	if (!string_check(self))
 		return (0);
 	off = string_conv_trimspaces(self);
-	return (string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off),
-			0));
+	return (string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off), 0));
 }
 
 bool	string_to_bool(struct s_string self)

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:33:06 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 17:48:47 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:01:54 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	button_scene_modify_plane(struct s_mlx *mlx, int index)
 
 void	button_add_plane(struct s_mlx *mlx)
 {
-	struct s_object	*new;
+	struct s_plane	*new;
 
-	new = object_new(sizeof(struct s_plane), OBJ_PLANE);
+	new = (struct s_plane *)object_new(sizeof (*new), OBJ_PLANE);
 	if (!new)
 		return ;
 	scene_append(&(mlx->scene), new);
-	((struct s_plane *)new)->normal.z += 0.00001f;
+	new->normal.z += OFFSET_MINUSCULE;
 	button_scene_modify_plane(mlx, mlx->scene.len - 1);
 }

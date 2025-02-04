@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:03:15 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 17:55:50 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:48:30 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ float	str_fabs(float f)
 	return (f);
 }
 
-struct s_string	string_from_float(float value, int a_dot)
+struct s_string		string_from_float(float value, int a_dot)
 {
-	struct s_string	ret;
-	float			fpart;
-	struct s_string	dec;
+	struct s_string		ret;
+	float				fpart;
+	struct s_string		dec;
 
 	ret = string_from_sqword((int64_t)value);
 	if (string_error(false, 0) != STRING_SUCCESS)

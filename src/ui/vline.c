@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vline.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:14:23 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:14:23 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:29:50 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	vline_print(struct s_mlx *mlx, struct s_vline v, mlx_color color)
 	while (i < v.y2)
 	{
 		if (i < WIN_HEIGHT && i >= 0)
-			mlx_pixel_put(mlx->context, mlx->ui.win, v.x, i, color);
+			mlx_pixel_put(mlx->context, mlx->ui.window.win, v.x, i, color);
 		i++;
 	}
 }
@@ -49,7 +49,7 @@ void	hline_print(struct s_mlx *mlx, struct s_vline v, mlx_color color)
 	while (i < v.y2)
 	{
 		if (i < WIN_WIDTH && i >= 0)
-			mlx_pixel_put(mlx->context, mlx->ui.win, i, v.x, color);
+			mlx_pixel_put(mlx->context, mlx->ui.window.win, i, v.x, color);
 		i++;
 	}
 }

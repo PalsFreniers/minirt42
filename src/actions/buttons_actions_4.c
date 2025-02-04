@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:32:39 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 16:53:15 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:00:11 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ float	float_step(float val, bool is_left_click, int sign)
 {
 	float	step;
 
-	step = (0.01f);
+	step = (OFFSET_SMALL);
 	if (is_left_click)
 		step = 0.1f;
 	return (val + step * sign);

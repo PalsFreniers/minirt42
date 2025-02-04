@@ -3,40 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   dstring_new.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:49:45 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/01 04:50:08 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:49:45 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dstring.h"
 #include "dstring_utils.h"
 
-struct s_string	string_new_from_cstr(char *s)
+struct s_string		string_new_from_cstr(char *s)
 {
 	size_t	len;
 
 	len = ft_strlen(s);
 	return ((struct s_string){
-		.unowned = false,
-		.ptr = s,
-		.len = len,
-		.capacity = len,
+		.unowned	= false,
+		.ptr		= s,
+		.len		= len,
+		.capacity	= len,
 	});
 }
 
-struct s_string	string_new(char *s, size_t len)
+struct s_string		string_new(char *s, size_t len)
 {
 	return ((struct s_string){
-		.unowned = false,
-		.ptr = s,
-		.len = len,
-		.capacity = len,
+		.unowned	= false,
+		.ptr		= s,
+		.len		= len,
+		.capacity	= len,
 	});
 }
 
-struct s_string	string_new_with_capacity(size_t capa)
+struct s_string		string_new_with_capacity(size_t capa)
 {
 	char	*ptr;
 
@@ -48,32 +48,32 @@ struct s_string	string_new_with_capacity(size_t capa)
 		return ((struct s_string){0});
 	}
 	return ((struct s_string){
-		.unowned = false,
-		.ptr = ptr,
-		.len = 0,
-		.capacity = capa,
+		.unowned	= false,
+		.ptr		= ptr,
+		.len		= 0,
+		.capacity	= capa,
 	});
 }
 
-struct s_string	string_new_u_from_cstr(char *s)
+struct s_string		string_new_u_from_cstr(char *s)
 {
 	size_t	len;
 
 	len = ft_strlen(s);
 	return ((struct s_string){
-		.unowned = true,
-		.ptr = s,
-		.len = len,
-		.capacity = len,
+		.unowned	= true,
+		.ptr		= s,
+		.len		= len,
+		.capacity	= len,
 	});
 }
 
-struct s_string	string_new_u(char *s, size_t len)
+struct s_string		string_new_u(char *s, size_t len)
 {
 	return ((struct s_string){
-		.unowned = true,
-		.ptr = s,
-		.len = len,
-		.capacity = len,
+		.unowned	= true,
+		.ptr		= s,
+		.len		= len,
+		.capacity	= len,
 	});
 }

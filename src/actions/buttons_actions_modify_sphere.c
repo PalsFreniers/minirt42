@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:33:09 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 18:33:10 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:07:03 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	button_scene_modify_sphere(struct s_mlx *mlx, int index)
 {
 	button_scene_reset(mlx);
 	button_scene_modify_float(mlx, (struct s_vec2i){100, BASE_LINE_Y},
-		&(((struct s_sphere *)mlx->scene.objects[index])->diameter),
-		"diameter");
+		&(((struct s_sphere *)mlx->scene.objects[index])->diameter), "diameter");
 	button_scene_modify_color(mlx, (struct s_vec2i){240, BASE_LINE_Y},
 		&(mlx->scene.objects[index]->color));
 	button_scene_modify_vec3(mlx, (struct s_vec2i){380, BASE_LINE_Y},
@@ -29,12 +28,12 @@ void	button_scene_modify_sphere(struct s_mlx *mlx, int index)
 
 void	button_add_sphere(struct s_mlx *mlx)
 {
-	struct s_object	*new;
+	struct s_sphere	*new;
 
-	new = object_new(sizeof(struct s_sphere), OBJ_SPHERE);
+	new = (struct s_sphere *)object_new(sizeof(*new), OBJ_SPHERE);
 	if (!new)
 		return ;
 	scene_append(&(mlx->scene), new);
-	((struct s_sphere *)new)->diameter = 0.01f;
+	new->diameter = OFFSET_SMALL;
 	button_scene_modify_sphere(mlx, mlx->scene.len - 1);
 }

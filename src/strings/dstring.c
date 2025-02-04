@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dstring.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:49:57 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/04 22:46:43 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:51:29 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-enum e_string_error	string_error(bool set, enum e_string_error value)
+enum e_string_error		string_error(bool set, enum e_string_error value)
 {
 	static enum e_string_error	string_error = STRING_SUCCESS;
 
@@ -50,7 +50,7 @@ bool	string_check(struct s_string self)
 	return (true);
 }
 
-struct s_string	string_copy(struct s_string self)
+struct s_string		string_copy(struct s_string self)
 {
 	char	*ptr;
 
@@ -64,9 +64,9 @@ struct s_string	string_copy(struct s_string self)
 	}
 	ft_memcpy(ptr, self.ptr, self.len);
 	return ((struct s_string){
-		.unowned = false,
-		.ptr = ptr,
-		.capacity = self.len,
-		.len = self.len,
+		.unowned	= false,
+		.ptr		= ptr,
+		.capacity	= self.len,
+		.len		= self.len,
 	});
 }

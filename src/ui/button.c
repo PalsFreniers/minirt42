@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:15:05 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/31 17:55:45 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:04:41 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static bool	collide(int a[4], int b[4])
 	return (true);
 }
 
-void	button_update(void *mlx, struct s_button *b, bool is_left_click)
+void	button_update(struct s_mlx *mlx, struct s_button *b, bool is_left_click)
 {
 	int	x;
 	int	y;
@@ -55,38 +55,37 @@ void	button_draw(struct s_mlx *mlx, struct s_button *b)
 	int			y;
 	mlx_color	color;
 
-	color = (mlx_color)BORDERC;
+	color = BORDERC;
 	mlx_mouse_get_pos(mlx->context, &x, &y);
 	if (collide((int [4]){x, y, 0, 0}, (int *)b))
-		color = (mlx_color)(uint32_t)BORDER2C;
-	x = b->x + b->width / 2 - ((ft_strlen(b->text) * PPC) / 2);
-	y = b->y + b->height / 2 - (PPC / 2) + PPC - 2;
-	mlx_string_put(mlx->context, mlx->ui.win, x, y, (mlx_color)TEXTC, b->text);
-	vline_print(mlx, (struct s_vline){b->x, b->y, b->y + b->height}, color);
-	vline_print(mlx, (struct s_vline){b->x + b->width, b->y, b->y + b->height},
-		color);
-	hline_print(mlx, (struct s_vline){b->y, b->x, b->x + b->width}, color);
-	hline_print(mlx, (struct s_vline){b->y + b->height, b->x, b->x + b->width},
-		color);
+		color = BORDER2C;
+	x = b->rect.x + b->rect.width / 2 - ((ft_strlen(b->text) * PPC) / 2);
+	y = b->rect.y + b->rect.height / 2 - (PPC / 2) + PPC - 2;
+	mlx_string_put(mlx->context, mlx->ui.window.win, x, y, TEXTC, b->text);
+	vline_print(mlx, (struct s_vline){b->rect.x,					b->rect.y,	b->rect.y + b->rect.height}, color);
+	vline_print(mlx, (struct s_vline){b->rect.x + b->rect.width,	b->rect.y,	b->rect.y + b->rect.height}, color);
+	hline_print(mlx, (struct s_vline){b->rect.y,					b->rect.x,	b->rect.x + b->rect.width}, color);
+	hline_print(mlx, (struct s_vline){b->rect.y + b->rect.height,	b->rect.x,	b->rect.x + b->rect.width}, color);
 }
 
-struct s_button	button_new(int x, int y, int width, int height)
+struct s_button		button_new(int x, int y, int width, int height)
 {
 	return ((struct s_button){
-		.x = x,
-		.y = y,
-		.width = width,
-		.height = height,
-		.text = NULL,
-		.on_click = NULL,
-		.is_clicked = false,
-		.data_index = 0,
-		.has_idx = false,
+		(struct s_rect){
+			.x		= x,
+			.y		= y,
+			.width	= width,
+			.height	= height,
+		},
+		.text		= NULL,
+		.on_click	= NULL,
+		.is_clicked	= false,
+		.data_index	= 0,
+		.has_idx	= false,
 	});
 }
 
-void	button_set(struct s_button *self, char *text, void *data,
-		t_button_f func)
+void	button_set(struct s_button *self, char *text, void *data, t_button_f func)
 {
 	self->data = data;
 	self->text = text;

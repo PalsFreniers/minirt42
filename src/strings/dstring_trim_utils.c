@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dstring_trim_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:26 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/01 17:05:00 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:50:54 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ size_t	calculate_trim_len(struct s_string self, struct s_string chars)
 	return (self.len - i);
 }
 
-struct s_string	string_substr(struct s_string self, size_t start, size_t len)
+struct s_string		string_substr(struct s_string self, size_t start, size_t len)
 {
 	if (!string_check(self))
 		return ((struct s_string){0});

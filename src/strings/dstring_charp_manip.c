@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dstring_charp_manip.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:04 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/04 22:22:22 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:46:39 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	string_trim(struct s_string *self, struct s_string chars)
 	self->len = calculate_trim_len(*self, chars);
 }
 
-struct s_string	string_zero(void)
+struct s_string		string_zero(void)
 {
 	return ((struct s_string){0});
 }

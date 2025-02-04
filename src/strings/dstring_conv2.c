@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dstring_conv2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:19:30 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:19:32 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:45:41 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int16_t	string_to_sword(struct s_string self)
 		return (0);
 	off = string_conv_trimspaces(self);
 	negative = string_is_negative(self, &off);
-	ret = string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off),
-			MAX_U16 + 1);
+	ret = string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off), MAX_U16 + 1);
 	if (string_error(false, 0) == STRING_CONVERSION_OVERFLOW)
 		return (ret);
 	if (ret > MAX_I16 + negative)
@@ -45,8 +44,7 @@ uint16_t	string_to_uword(struct s_string self)
 	if (!string_check(self))
 		return (0);
 	off = string_conv_trimspaces(self);
-	return (string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off),
-			MAX_U16 + 1));
+	return (string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off), MAX_U16 + 1));
 }
 
 int32_t	string_to_sdword(struct s_string self)
@@ -59,8 +57,7 @@ int32_t	string_to_sdword(struct s_string self)
 		return (0);
 	off = string_conv_trimspaces(self);
 	negative = string_is_negative(self, &off);
-	ret = string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off),
-			MAX_U32 + 1);
+	ret = string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off), MAX_U32 + 1);
 	if (string_error(false, 0) == STRING_CONVERSION_OVERFLOW)
 		return (ret);
 	if (ret > (size_t)MAX_I32 + negative)
@@ -81,6 +78,5 @@ uint32_t	string_to_udword(struct s_string self)
 	if (!string_check(self))
 		return (0);
 	off = string_conv_trimspaces(self);
-	return (string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off),
-			MAX_U32 + 1));
+	return (string_to_uqword_ovf(string_new_u(self.ptr + off, self.len - off), MAX_U32 + 1));
 }

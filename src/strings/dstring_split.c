@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dstring_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:09 by tdelage           #+#    #+#             */
-/*   Updated: 2024/08/01 05:53:27 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 23:50:35 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ void	string_zero_split(size_t *s[4], bool *b)
 	*(s[3]) = 0;
 }
 
-void	actual_string_split(struct s_string hay, struct s_string needles,
-		struct s_string *ret)
+void	actual_string_split(struct s_string hay, struct s_string needles, struct s_string *ret)
 {
 	size_t	i;
 	bool	s;
@@ -96,10 +95,9 @@ void	actual_string_split(struct s_string hay, struct s_string needles,
 		ret[x] = string_new_u(hay.ptr + offset, len);
 }
 
-struct s_string	*string_split(struct s_string hay, struct s_string needles,
-		size_t *count)
+struct s_string		*string_split(struct s_string hay, struct s_string needles, size_t *count)
 {
-	struct s_string	*ret;
+	struct s_string		*ret;
 
 	if (!string_check(hay) || !string_check(needles))
 		return (NULL);
@@ -109,7 +107,7 @@ struct s_string	*string_split(struct s_string hay, struct s_string needles,
 		return (NULL);
 	}
 	*count = count_sub_string(hay, needles);
-	ret = ft_calloc(*count, sizeof(struct s_string));
+	ret = ft_calloc(*count, sizeof (ret));
 	if (!ret)
 	{
 		string_error(true, STRING_MALLOC_ERROR);

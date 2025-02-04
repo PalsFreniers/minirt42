@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:32:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 17:29:11 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:00:15 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ void	button_scene_modify_cylinder(struct s_mlx *mlx, int index)
 
 void	button_add_cylinder(struct s_mlx *mlx)
 {
-	struct s_object	*new;
+	struct s_cylinder	*new;
 
-	new = object_new(sizeof(struct s_cylinder), OBJ_CYLINDER);
+	new = (struct s_cylinder *)object_new(sizeof (*new), OBJ_CYLINDER);
 	if (!new)
 		return ;
 	scene_append(&(mlx->scene), new);
-	((struct s_cylinder *)new)->axis.z = 0.00001f;
-	((struct s_cylinder *)new)->diameter = 0.01f;
-	((struct s_cylinder *)new)->height = 0.01f;
+	new->axis.z = OFFSET_MINUSCULE;
+	new->diameter = OFFSET_SMALL;
+	new->height = OFFSET_SMALL;
 	button_scene_modify_cylinder(mlx, mlx->scene.len - 1);
 }
