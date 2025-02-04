@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:11:20 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 17:25:05 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 22:56:57 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	camera_move(int key, struct s_mlx *mlx)
 				camera->direction);
 	else if (key == KEY_Q)
 		camera->position = vec3_add(camera->position,
-				vec3_scal_mul(camera->direction, +0.5f));
+				vec3_scal(camera->direction, +0.5f));
 	else if (key == KEY_E)
 		camera->position = vec3_add(camera->position,
-				vec3_scal_mul(camera->direction, -0.5f));
+				vec3_scal(camera->direction, -0.5f));
 	if (key == KEY_W || key == KEY_S || key == KEY_A || key == KEY_D)
 		camera_create_transform(camera);
 	map_scene(&mlx->scene, camera->position, camera->transform);

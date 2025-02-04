@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:57:26 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 16:42:19 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 22:56:57 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	axes_draw(struct s_mlx *mlx)
 
 	axes = mat3_mul(mlx->scene.camera.inverse_transform, mat3_identity());
 	origin = mat3_apply(mlx->scene.camera.inverse_transform, vec3_zero());
-	origin = vec3_scal_mul(origin, AXIS_SIZE);
+	origin = vec3_scal(origin, AXIS_SIZE);
 	origin.x += AXIS_CENTER_X;
 	origin.y += AXIS_CENTER_Y;
 	axis = vec3_new(axes.m00 * AXIS_SIZE + AXIS_CENTER_X, axes.m01 * AXIS_SIZE

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:08:52 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 16:43:31 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 22:56:57 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	cylinder_get_collision_normal_position(t_vec3 heights_inside,
 	{
 		coll->dist = dist_front + (inside * height_front
 				/ (height_front - height_back));
-		coll->normal = vec3_scal_mul(cyl->axis, -1.0f);
+		coll->normal = vec3_scal(cyl->axis, -1.0f);
 	}
 	else
 	{
@@ -87,7 +87,7 @@ static void	body(float dist, struct s_cylinder *cylinder, struct s_ray *ray,
 	coll->dist = dist;
 	coll->position = ray_collision(ray, coll->dist);
 	base_to_coll = vec3_sub(coll->position, cylinder->base.position);
-	offset = vec3_scal_mul(cylinder->axis,
+	offset = vec3_scal(cylinder->axis,
 			vec3_dot(base_to_coll, cylinder->axis));
 	coll->normal = vec3_normalise(vec3_sub(base_to_coll, offset));
 }

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:27:05 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 02:53:14 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 22:57:18 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_mat3	mat3_mul(t_mat3 a, t_mat3 b)
 	});
 }
 
-t_mat3	mat3_scal_mul(t_mat3 a, float f)
+t_mat3	mat3_scal(t_mat3 a, float f)
 {
 	return ((t_mat3){
 		.m00 = a.m00 * f,

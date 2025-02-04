@@ -6,13 +6,13 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:32:23 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/03 00:56:22 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 22:56:57 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math/la.h>
 
-t_vec3	vec3_scal_mul(t_vec3 a, float f)
+t_vec3	vec3_scal(t_vec3 a, float f)
 {
 	return (vec3_new(f * a.x, f * a.y, f * a.z));
 }
@@ -24,9 +24,7 @@ float	vec3_sum(t_vec3 a)
 
 float	vec3_length_sq(t_vec3 a)
 {
-	const t_vec3	tmp = vec3_mul(a, a);
-
-	return (vec3_sum(tmp));
+	return (vec3_sum(vec3_mul(a, a)));
 }
 
 float	vec3_length(t_vec3 a)
