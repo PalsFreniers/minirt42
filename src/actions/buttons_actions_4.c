@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:32:39 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/05 00:00:11 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:14:57 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	button_screen(struct s_mlx *mlx)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			compute_color(mlx_get_image_pixel(mlx->context, mlx->img, x, y), c);
+			compute_color(mlx_get_image_pixel(mlx->context, mlx->renderer.img, x, y), c);
 			write(fd, c, 3);
 			x++;
 		}

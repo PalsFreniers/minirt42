@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 01:59:29 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 01:59:30 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:09:40 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static struct s_string	fmap_free_all(struct s_string *str, t_fd f)
 
 static struct s_string	fmap(const char *path)
 {
-	t_fd			f;
-	char			buf[FMAP_BUF_SIZE + 1];
-	int				tmp;
-	struct s_string	ret;
+	t_fd				f;
+	char				buf[FMAP_BUF_SIZE + 1];
+	int					tmp;
+	struct s_string		ret;
 
 	ret = string_new_with_capacity(FMAP_BUF_SIZE);
 	if (string_error(false, 0) != STRING_SUCCESS)

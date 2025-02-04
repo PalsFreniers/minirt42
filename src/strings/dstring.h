@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:00 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 23:52:19 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:09:02 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,20 @@ void				string_destroy(struct s_string *s);
 
 struct s_string		string_copy(struct s_string self);
 
-void				string_erase(struct s_string *self, size_t start,
-						size_t len);
+void				string_erase(struct s_string *self, size_t start, size_t len);
 void				string_append(struct s_string *self, struct s_string str);
-void				string_insert(struct s_string *self, struct s_string str,
-						size_t start);
+void				string_insert(struct s_string *self, struct s_string str, size_t start);
 void				string_push(struct s_string *self, char c);
 char				string_pop(struct s_string *self);
 void				string_push_front(struct s_string *self, char c);
 char				string_pop_front(struct s_string *self);
-struct s_string		*string_split(struct s_string hay, struct s_string needle,
-						size_t *count);
+struct s_string		*string_split(struct s_string hay, struct s_string needle, size_t *count);
 size_t				string_search(struct s_string hay, struct s_string needle);
 void				string_trim(struct s_string *self, struct s_string chars);
-struct s_string		string_substr(struct s_string self, size_t start,
-						size_t end);
+struct s_string		string_substr(struct s_string self, size_t start, size_t end);
 bool				string_contain(char c, struct s_string chars);
 bool				string_equal(struct s_string s1, struct s_string s2);
-void				string_count(struct s_string self, char c, size_t *of,
-						size_t *ofnt);
+void				string_count(struct s_string self, char c, size_t *of, size_t *ofnt);
 size_t				string_count_ofnt(struct s_string self, char c);
 size_t				string_count_of(struct s_string self, char c);
 bool				string_obey(struct s_string self, t_string_obey_f func);

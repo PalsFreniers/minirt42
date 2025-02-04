@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:41:00 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/03 00:56:22 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:16:50 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 # include <math.h>
 
-# define DEG2RAD 0.0174533f
+# define DEG2RAD	0.0174533f
 # ifndef M_PI
-#  define M_PI 3.14159265358979323846
+#  define M_PI		3.14159265358979323846
 # endif
 
 typedef struct s_vec3
 {
-	float			x;
-	float			y;
-	float			z;
-}					t_vec3;
+	float	x;
+	float	y;
+	float	z;
+}			t_vec3;
 
 # define MAT3_LEN 3
 
@@ -45,54 +45,53 @@ typedef struct s_mat3
 			float	m21;
 			float	m22;
 		};
-		float		m[9];
+		float	m[9];
 	};
-}					t_mat3;
+}				t_mat3;
 
 // vec3 new
-t_vec3				vec3_new(float x, float y, float z);
-t_vec3				vec3_new_from_one(float v);
-t_vec3				vec3_zero(void);
+t_vec3		vec3_new(float x, float y, float z);
+t_vec3		vec3_new_from_one(float v);
+t_vec3		vec3_zero(void);
 
 // vec3 math
-t_vec3				vec3_scal_mul(t_vec3 a, float f);
-t_vec3				vec3_normalise(t_vec3 a);
-float				vec3_length(t_vec3 a);
-float				vec3_length_sq(t_vec3 a);
-float				vec3_sum(t_vec3 a);
+t_vec3		vec3_scal_mul(t_vec3 a, float f);
+t_vec3		vec3_normalise(t_vec3 a);
+float		vec3_length(t_vec3 a);
+float		vec3_length_sq(t_vec3 a);
+float		vec3_sum(t_vec3 a);
 
 // vec3 vec3 basic math
-t_vec3				vec3_add(t_vec3 a, t_vec3 b);
-t_vec3				vec3_sub(t_vec3 a, t_vec3 b);
-t_vec3				vec3_mul(t_vec3 a, t_vec3 b);
-t_vec3				vec3_div(t_vec3 a, t_vec3 b);
+t_vec3		vec3_add(t_vec3 a, t_vec3 b);
+t_vec3		vec3_sub(t_vec3 a, t_vec3 b);
+t_vec3		vec3_mul(t_vec3 a, t_vec3 b);
+t_vec3		vec3_div(t_vec3 a, t_vec3 b);
 
 // vec3 vec3 advanced math
-t_vec3				vec3_cross(t_vec3 a, t_vec3 b);
-float				vec3_dot(t_vec3 a, t_vec3 b);
-float				vec3_distance(t_vec3 a, t_vec3 b);
+t_vec3		vec3_cross(t_vec3 a, t_vec3 b);
+float		vec3_dot(t_vec3 a, t_vec3 b);
+float		vec3_distance(t_vec3 a, t_vec3 b);
 
 // mat3 new
-t_mat3				mat3_zero(void);
-t_mat3				mat3_identity(void);
+t_mat3		mat3_zero(void);
+t_mat3		mat3_identity(void);
 
 // mat3 math
-t_mat3				mat3_add(t_mat3 a, t_mat3 b);
-t_mat3				mat3_mul(t_mat3 a, t_mat3 b);
-t_mat3				mat3_scal_mul(t_mat3 a, float f);
-t_mat3				mat3_inverse(t_mat3 a);
+t_mat3		mat3_add(t_mat3 a, t_mat3 b);
+t_mat3		mat3_mul(t_mat3 a, t_mat3 b);
+t_mat3		mat3_scal_mul(t_mat3 a, float f);
+t_mat3		mat3_inverse(t_mat3 a);
 
 // mat3 rotation
-t_mat3				rotation_matrix_x(float angle);
-t_mat3				rotation_matrix_y(float angle);
-t_mat3				rotation_matrix_z(float angle);
-t_mat3				get_rotation_matrix(t_vec3 angle);
+t_mat3		rotation_matrix_x(float angle);
+t_mat3		rotation_matrix_y(float angle);
+t_mat3		rotation_matrix_z(float angle);
+t_mat3		get_rotation_matrix(t_vec3 angle);
 
 // map math
-t_vec3				vec3_map_2pi(t_vec3 a);
-t_vec3				map_vec3(t_vec3 vec, t_vec3 translation, t_mat3 transform);
-t_vec3				unmap_vec3(t_vec3 vec, t_vec3 translation,
-						t_mat3 inverse_transform);
-t_vec3				mat3_apply(t_mat3 a, t_vec3 b);
+t_vec3		vec3_map_2pi(t_vec3 a);
+t_vec3		map_vec3(t_vec3 vec, t_vec3 translation, t_mat3 transform);
+t_vec3		unmap_vec3(t_vec3 vec, t_vec3 translation, t_mat3 inverse_transform);
+t_vec3		mat3_apply(t_mat3 a, t_vec3 b);
 
 #endif // LA_H

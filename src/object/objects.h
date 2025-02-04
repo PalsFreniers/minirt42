@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:21:25 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 23:58:53 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:25:51 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@
 
 typedef union u_color
 {
-	uint32_t			rgb;
+	uint32_t	rgb;
 	struct
 	{
-		uint8_t			r;
-		uint8_t			g;
-		uint8_t			b;
+		uint8_t		r;
+		uint8_t		g;
+		uint8_t		b;
 	};
-}						t_color;
+}				t_color;
 
-enum					e_object_type
+enum	e_object_type
 {
 	OBJ_LIGHT,
 	OBJ_SPHERE,
@@ -72,16 +72,15 @@ struct					s_cylinder
 	float				height;
 };
 
-struct s_object			*object_new(size_t size, int type);
-void					print_vec3(char *tabs, char *name, struct s_vec3 vec);
-void					print_color(char *tabs, union u_color c);
-void					print_float(char *tabs, char *name, float value);
-void					print_light(struct s_light *light);
-void					print_sphere(struct s_sphere *sphere);
-void					print_plane(struct s_plane *plane);
-void					print_cylinder(struct s_cylinder *cylinder);
-void					map_object(struct s_object *target,
-							struct s_object *src, t_vec3 translation,
-							t_mat3 transform);
+struct s_object
+			*object_new(size_t size, int type);
+void		print_vec3(char *tabs, char *name, struct s_vec3 vec);
+void		print_color(char *tabs, union u_color c);
+void		print_float(char *tabs, char *name, float value);
+void		print_light(struct s_light *light);
+void		print_sphere(struct s_sphere *sphere);
+void		print_plane(struct s_plane *plane);
+void		print_cylinder(struct s_cylinder *cylinder);
+void		map_object(struct s_object *target, struct s_object *src, t_vec3 translation, t_mat3 transform);
 
 #endif // OBJECTS_H

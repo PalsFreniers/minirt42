@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:32:33 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 18:32:33 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:11:27 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ void	set_list_button(struct s_mlx *mlx, int start, int base, int number)
 			type = -1;
 		else
 			type = mlx->scene.objects[i + start - base]->type;
-		mlx->interface_buttons[2 + i] = button_new(posx * 100 + ((posx - 1)
+		mlx->ui.interface_buttons[2 + i] = button_new(posx * 100 + ((posx - 1)
 					* 50), BASE_LINE_Y + posy * 60 + ((posy - 1) * 50), 100,
 				60);
-		button_set(&(mlx->interface_buttons[2 + i]), get_name_for_obj(type),
+		button_set(&(mlx->ui.interface_buttons[2 + i]), get_name_for_obj(type),
 			mlx, get_action_for_obj(type));
-		button_set_index(&(mlx->interface_buttons[2 + i]), start + i - base);
+		button_set_index(&(mlx->ui.interface_buttons[2 + i]), start + i - base);
 		posx = posx + 1;
 		if (posx > 4)
 		{

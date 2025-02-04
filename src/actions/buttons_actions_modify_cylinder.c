@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:32:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/05 00:00:15 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:15:15 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	button_scene_modify_cylinder(struct s_mlx *mlx, int index)
 	button_scene_modify_float_1_1(mlx, (struct s_vec2i){100, BASE_LINE_Y + 100},
 		&(((struct s_cylinder *)mlx->scene.objects[index])->axis.z), "axis z");
 	button_scene_modify_float(mlx, (struct s_vec2i){300, BASE_LINE_Y + 150},
-		&(((struct s_cylinder *)mlx->scene.objects[index])->diameter),
-		"diameter");
+		&(((struct s_cylinder *)mlx->scene.objects[index])->diameter), "diameter");
 	button_scene_modify_float(mlx, (struct s_vec2i){160, BASE_LINE_Y + 150},
 		&(((struct s_cylinder *)mlx->scene.objects[index])->height), "height");
 	button_scene_modify_color(mlx, (struct s_vec2i){240, BASE_LINE_Y},
