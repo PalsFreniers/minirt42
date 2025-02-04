@@ -21,7 +21,7 @@
 static bool	parse_file_error_split(struct s_string *file)
 {
 	logger_error("unable to allocate file split");
-	ft_free("s", &file);
+	ft_free("s", file);
 	return (false);
 }
 
