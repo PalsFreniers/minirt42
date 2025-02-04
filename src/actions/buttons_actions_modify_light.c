@@ -6,13 +6,14 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:33:03 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 18:33:04 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 20:38:51 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object/objects.h"
 #include "scene/scene.h"
 #include <actions/buttons_actions.h>
+#include <libft.h>
 #include <mlx/mmlx.h>
 
 void	button_scene_modify_light(struct s_mlx *mlx, int index)
@@ -33,6 +34,7 @@ void	button_add_light(struct s_mlx *mlx)
 	new = object_new(sizeof(struct s_light), OBJ_LIGHT);
 	if (!new)
 		return ;
+	ft_llist_push(&mlx->scene.map_lights, ft_llist_node_create(new));
 	scene_append(&(mlx->scene), new);
 	button_scene_modify_light(mlx, mlx->scene.len - 1);
 }
