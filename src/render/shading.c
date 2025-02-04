@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:30:16 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/03 00:56:22 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 16:45:11 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,5 @@ t_render_color	lit_color(struct s_mlx *mlx, t_collision *collision,
 		* blinn_phong(collision, coll_to_light) * PHONG_COEFF;
 	light_amount /= dist_to_light_sq * LIGHT_ATTENUATION;
 	return (color_scal_mul(rgb_to_render_color(light->base.color),
-		light_amount));
+			light_amount));
 }

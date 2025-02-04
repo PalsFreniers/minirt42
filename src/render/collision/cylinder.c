@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:08:52 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/03 00:56:22 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 16:43:31 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,6 @@ static bool	end_caps(t_vec3 values, struct s_ray *ray,
 	dist_front = values.x;
 	height_front = values.y;
 	inside = values.z;
-	// height_back = vec3_dot(cylinder->axis,
-	// 		vec3_add(
-	// 			vec3_sub(ray->origin, cylinder->base.position),
-	// 			vec3_scal_mul(ray->direction, dist_front + inside)));
 	height_back = vec3_dot(cylinder->axis, vec3_sub(
 				ray_collision(ray, dist_front + inside),
 				cylinder->base.position));
@@ -76,9 +72,7 @@ static bool	end_caps(t_vec3 values, struct s_ray *ray,
 	cylinder_get_collision_normal_position(
 		vec3_new(height_front, height_back, inside),
 		dist_front, cylinder, coll);
-		coll->position = ray_collision(ray, coll->dist);
-	// coll->position = vec3_add(ray->origin,
-	// 		vec3_add(vec3_scal_mul(ray->direction, coll->dist), ray->origin));
+	coll->position = ray_collision(ray, coll->dist);
 	return (true);
 }
 
