@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:52 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 19:41:54 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 20:28:35 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	camera_create_transform(struct s_camera *camera)
 	t_vec3	t_z;
 
 	t_z = vec3_normalise(camera->direction);
-	t_x = vec3_normalise(vec3_cross(vec3_normalise(vec3_new(t_z.x, t_z.y, 0)),
+	t_x = vec3_normalise(vec3_cross(vec3_new(t_z.x, t_z.y, 0),
 				vec3_new(0, 0, 1)));
-	t_y = vec3_normalise(vec3_cross(vec3_normalise(t_z), t_x));
+	t_y = vec3_normalise(vec3_cross(t_z, t_x));
 	camera->transform.m00 = t_x.x;
 	camera->transform.m01 = t_x.y;
 	camera->transform.m02 = t_x.z;
