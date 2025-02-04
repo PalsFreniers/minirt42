@@ -136,8 +136,9 @@ CFLAGS = -Wall -Wextra -Werror -I $(LIBFT_DIR) -I ./src/ -I $(MLX_DIR)/includes
 LDFLAGS = -Wl,-rpath=$(MLX_DIR) $(LIBS) 
 LIBS = -lm -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -lSDL2
 
-ifndef DEBUG
-	CFLAGS += -O3
+ifdef OFAST
+	CFLAGS += -Ofast
+	LDFLAGS += -flto
 endif
 
 ##========== MODES ==========##
