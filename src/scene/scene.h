@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:01:59 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 20:04:32 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 21:07:48 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_scene
 	struct s_object		**map_objects;
 	size_t				capacity;
 	size_t				len;
-	struct s_llist		map_lights;
 }						t_scene;
 
 void					print_scene(struct s_scene *scene);

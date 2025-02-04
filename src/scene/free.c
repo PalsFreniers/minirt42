@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:02:19 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 20:13:55 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 21:15:06 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	free_scene(struct s_scene *scene)
 {
 	size_t	i;
 
-	ft_llist_destroy(&scene->map_lights, NULL);
 	if (!scene->objects)
 	{
 		ft_bzero(scene, sizeof(struct s_scene));
