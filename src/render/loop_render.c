@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/02 20:38:48 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 20:01:42 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,22 +62,14 @@ static void	set_pixel(struct s_mlx *mlx, int x, int y, mlx_color color)
 
 mlx_color	get_pixel_color(struct s_mlx *mlx, t_collision *collision)
 {
-	struct s_light	*o_light;
 	t_render_color	ambient;
-	struct s_light	dum_light;
 
-	dum_light = (struct s_light){.base = {.type = OBJ_LIGHT, .position = {0},
-		.color = {.rgb = 0xFFFFFFFF}}, .ratio = 0};
-	o_light = (struct s_light *)get_map_light(&mlx->scene);
-	if (o_light == NULL)
-		o_light = &dum_light;
-	if (mlx->scene.ambient.ratio + o_light->ratio > 0)
+	if (mlx->scene.ambient.ratio + get_lights_ratio(mlx->scene.map_lights) > 0)
 	{
 		ambient = rgb_to_render_color(mlx->scene.ambient.color);
 		ambient = color_scal_mul(ambient, mlx->scene.ambient.ratio);
 		return (render_to_mlx_color(filter_color(color_add(ambient,
-						color_scal_mul(lit_color(mlx, collision, o_light),
-							o_light->ratio)),
+						get_lit_color(mlx, collision, mlx->scene.map_lights)),
 					rgb_to_render_color(collision->object->color))));
 	}
 	else
