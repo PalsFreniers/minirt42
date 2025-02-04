@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:35 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/31 18:52:48 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 17:26:19 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ bool	parse_cylinder(struct s_string *parts, size_t count,
 		return (false);
 	if (!parse_color(parts[5], &(cylinder->base.color)))
 		return (false);
+	cylinder->axis.z += 0.00001f;
 	return (true);
 }

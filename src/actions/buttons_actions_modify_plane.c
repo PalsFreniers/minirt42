@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:33:06 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/30 18:33:07 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/04 17:27:45 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ void	button_add_plane(struct s_mlx *mlx)
 	if (!new)
 		return ;
 	scene_append(&(mlx->scene), new);
+	((struct s_plane *)new)->normal.z += 0.0001f;
 	button_scene_modify_plane(mlx, mlx->scene.len - 1);
 }
