@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:21:54 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:22:15 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 17:20:43 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static bool	check_scene(struct s_scene *scene)
 	return (true);
 }
 
-bool	parse_file(const char *path, struct s_scene *scene, const char *prog)
+bool	parse_file(const char *path, struct s_scene *scene)
 {
 	struct s_string	file;
 	size_t			count;
@@ -70,10 +70,7 @@ bool	parse_file(const char *path, struct s_scene *scene, const char *prog)
 	count = 0;
 	ret = true;
 	if (!ft_strsufix((char *)path, ".rt"))
-	{
-		logger_info("usage: %s <path/to/file.rt>", prog);
 		return (false);
-	}
 	if (!get_file(&file, path))
 		return (false);
 	lines = string_split(file, string_new_u_from_cstr("\n"), &count);

@@ -6,7 +6,7 @@
 /*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:01 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:23:02 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/04 17:20:57 by tdelage          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdbool.h>
 # include <strings/dstring.h>
 
-bool	parse_file(const char *path, struct s_scene *scene, const char *prog);
+bool	parse_file(const char *path, struct s_scene *scene);
 bool	parse_line(struct s_string line, struct s_scene *scene);
 bool	parse_color(struct s_string rgb, union u_color *color);
 bool	parse_float(struct s_string sratio, float *ratio);
