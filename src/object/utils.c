@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 05:55:14 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/31 18:53:35 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 03:39:37 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	dup_objects(struct s_scene *scene)
 	size_t	x;
 
 	if (!scene->map_objects)
-		return (false);
+		return (true);
 	i = 0;
 	while (i < scene->len)
 	{
