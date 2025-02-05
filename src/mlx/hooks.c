@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:06:40 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/05 00:20:36 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:08:02 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void	update_buttons_click(int e, struct s_mlx *mlx)
 {
 	int		x;
 
-	button_update(mlx->context, &(mlx->ui.static_b[0]), e == MOUSE_LEFT);
-	button_update(mlx->context, &(mlx->ui.static_b[1]), e == MOUSE_LEFT);
-	button_update(mlx->context, &(mlx->ui.static_b[2]), e == MOUSE_LEFT);
-	button_update(mlx->context, &(mlx->ui.static_b[3]), e == MOUSE_LEFT);
-	button_update(mlx->context, &(mlx->ui.static_b[4]), e == MOUSE_LEFT);
-	button_update(mlx->context, &(mlx->ui.static_b[5]), e == MOUSE_LEFT);
+	button_update(mlx, &(mlx->ui.static_b[0]), e == MOUSE_LEFT);
+	button_update(mlx, &(mlx->ui.static_b[1]), e == MOUSE_LEFT);
+	button_update(mlx, &(mlx->ui.static_b[2]), e == MOUSE_LEFT);
+	button_update(mlx, &(mlx->ui.static_b[3]), e == MOUSE_LEFT);
+	button_update(mlx, &(mlx->ui.static_b[4]), e == MOUSE_LEFT);
+	button_update(mlx, &(mlx->ui.static_b[5]), e == MOUSE_LEFT);
 	x = 0;
 	while (x < mlx->ui.btn_count)
 	{
-		button_update(mlx->context, &(mlx->ui.interface_buttons[x]), e == MOUSE_LEFT);
+		button_update(mlx, &(mlx->ui.interface_buttons[x]), e == MOUSE_LEFT);
 		x++;
 	}
 }

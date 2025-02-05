@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:42:46 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 23:39:04 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:06:36 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include <mlx/mmlx_sd.h>
 # include <stdbool.h>
 # define PPC		7
-# define BORDERC	(mlx_color)0x8888FFFF
-# define BORDER2C	(mlx_color)0x2222FFFF
-# define TEXTC		(mlx_color)0xDDDDDDFF
+# define BORDERC	(mlx_color)				0x8888FFFF
+# define BORDER2C	(mlx_color)(uint32_t)	0x2222FFFF
+# define TEXTC		(mlx_color)				0xDDDDDDFF
 
 typedef void	(*t_button_f)	(void *, bool);
 typedef void	(*t_button_i_f)	(void *, int, bool);

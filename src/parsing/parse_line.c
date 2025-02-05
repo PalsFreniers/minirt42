@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:28 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:23:30 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:17:14 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static bool	parse_line_impl(struct s_string *parts, size_t count,
 
 bool	parse_line(struct s_string line, struct s_scene *scene)
 {
-	size_t			count;
-	struct s_string	*parts;
-	bool			ret;
+	size_t				count;
+	struct s_string		*parts;
+	bool				ret;
 
 	parts = string_split(line, string_new_u_from_cstr(" "), &count);
 	if (string_error(false, 0) != STRING_SUCCESS || count <= 0)

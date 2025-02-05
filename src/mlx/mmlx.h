@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:07:03 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/05 00:20:07 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 00:53:16 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ struct					s_render
 	struct s_window		window;
 	mlx_image			img;
 	enum e_render_mode	mode;
-	int					down_sizing
+	int					down_sizing;
 };
 
 struct				s_ui

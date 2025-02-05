@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:25:44 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:25:46 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:12:49 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static bool	get_byte(struct s_string byte, uint8_t *byt, struct s_string *parts)
 	if (string_error(false, 0) != STRING_SUCCESS)
 	{
 		logger_error("byte values should be in range 0-255");
-		logger_info("byte value is currently: %d (0x%x) with overflow", *byt,
-			*byt);
+		logger_info("byte value is currently: %d (0x%x) with overflow", *byt, *byt);
 		ft_free("p", parts);
 		return (false);
 	}

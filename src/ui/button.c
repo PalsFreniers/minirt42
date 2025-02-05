@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:15:05 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/05 00:04:41 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:06:56 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	button_update(struct s_mlx *mlx, struct s_button *b, bool is_left_click)
 
 	if (b->is_clicked)
 		return ;
-	mlx_mouse_get_pos(mlx, &x, &y);
+	mlx_mouse_get_pos(mlx->context, &x, &y);
 	if (b->on_click && collide((int [4]){x, y, 0, 0}, (int *)b))
 	{
 		b->is_clicked = true;

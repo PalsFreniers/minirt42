@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ambient_light.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:06 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:23:07 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:13:03 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include <parsing/obey.h>
 #include <parsing/parse.h>
 
-bool	parse_ambient_light(struct s_string *parts, size_t count,
-		struct s_ambient *light)
+bool	parse_ambient_light(struct s_string *parts, size_t count, struct s_ambient *light)
 {
 	if (light->exist)
 	{

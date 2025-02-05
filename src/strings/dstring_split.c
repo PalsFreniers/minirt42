@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:09 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 23:50:35 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:10:40 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ struct s_string		*string_split(struct s_string hay, struct s_string needles, siz
 		return (NULL);
 	}
 	*count = count_sub_string(hay, needles);
-	ret = ft_calloc(*count, sizeof (ret));
+	ret = ft_calloc(*count, sizeof (*ret));
 	if (!ret)
 	{
 		string_error(true, STRING_MALLOC_ERROR);

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:25:26 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 23:59:26 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:17:54 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	parse_plane(struct s_string *parts, size_t count, struct s_scene *scene)
 		logger_error("unable to parse plane");
 		return (false);
 	}
-	plane = (void *)object_new(sizeof(struct s_plane), OBJ_PLANE);
+	plane = (struct s_plane *)object_new(sizeof (*plane), OBJ_PLANE);
 	if (!scene_append(scene, (struct s_object *)plane))
 		return (false);
 	if (!parse_position(parts[1], &(plane->base.position)))

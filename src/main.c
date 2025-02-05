@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:30 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 23:28:59 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:25:23 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	register_mlx_hooks(struct s_mlx *mlx)
 	mlx_on_event(mlx->context, mlx->ui.window.win,			MLX_MOUSEUP,		(t_mlx_e_f)update_buttons_unclick, mlx);
 	mlx_on_event(mlx->context, mlx->ui.window.win,			MLX_KEYDOWN,		(t_mlx_e_f)key_event, mlx);
 	mlx_on_event(mlx->context, mlx->renderer.window.win,	MLX_KEYDOWN,		(t_mlx_e_f)key_event, mlx);
-	mlx_add_loop_hook(mlx->context,												(t_mlx_l_f)loop_render, mlx);
+	mlx_add_loop_hook(mlx->context, (t_mlx_l_f)loop_render, mlx);
 	mlx_loop(mlx->context);
 }
 

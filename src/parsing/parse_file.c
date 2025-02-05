@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:21:54 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 17:20:43 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:11:58 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,47 +25,38 @@ static bool	parse_file_error_split(struct s_string *file)
 	return (false);
 }
 
-static bool	parse_file_lines(struct s_string *lines, size_t count,
-		struct s_scene *scene)
+static bool	parse_file_lines(struct s_string *lines, size_t count, struct s_scene *scene)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < count)
-		if (!parse_line(lines[i++], scene))
+	for (size_t i = 0; i < count; i++)
+		if (!parse_line(lines[i], scene))
 			return (false);
 	return (true);
 }
 
 static bool	check_scene(struct s_scene *scene)
 {
-	size_t	i;
-	size_t	count;
+	// size_t	count;
 
 	if (!scene->ambient.exist || !scene->camera.exist)
 	{
 		logger_error("missing camera or ambient light");
 		return (false);
 	}
-	i = 0;
-	count = 0;
-	while (i < scene->len)
-	{
-		if (scene->objects[i]->type == OBJ_LIGHT)
-			count++;
-		i++;
-	}
-	if (count > 1)
-		return (false);
+	// count = 0;
+	// for (size_t i = 0; i < scene->len; i++)
+	// 	if (scene->objects[i]->type == OBJ_LIGHT)
+	// 		count++;
+	// if (count > 1)
+	// 	return (false);
 	return (true);
 }
 
 bool	parse_file(const char *path, struct s_scene *scene)
 {
-	struct s_string	file;
-	size_t			count;
-	struct s_string	*lines;
-	bool			ret;
+	struct s_string		file;
+	size_t				count;
+	struct s_string		*lines;
+	bool				ret;
 
 	count = 0;
 	ret = true;
@@ -76,6 +67,8 @@ bool	parse_file(const char *path, struct s_scene *scene)
 	lines = string_split(file, string_new_u_from_cstr("\n"), &count);
 	if (string_error(false, 0) != STRING_SUCCESS)
 		return (parse_file_error_split(&file));
+	// #include <stdio.h>
+	// printf("parse_file_lines\n");
 	if (!parse_file_lines(lines, count, scene))
 		ret = false;
 	ft_free("sp", &file, lines);

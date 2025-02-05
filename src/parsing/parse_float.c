@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_float.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:16 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:23:18 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:16:58 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 bool	parse_float(struct s_string sratio, float *ratio)
 {
-	if (!string_obey(sratio, float_obey) || string_count_of(sratio, '.') > 1
+	if (!string_obey(sratio, float_obey)
+		|| string_count_of(sratio, '.') > 1
 		|| string_count_of(sratio, '-') > 1)
 	{
 		logger_error("unable to parse floating point number");

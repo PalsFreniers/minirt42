@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/05 00:47:05 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:46:06 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,23 @@
 #include <render/render.h>
 #include <ui/window.h>
 
+void	print_obj(struct s_object *obj)
+{
+	switch (obj->type)
+	{
+	case OBJ_LIGHT:		printf("\tlight\n");
+		break;
+	case OBJ_SPHERE:	printf("\tsphere\n");
+		break;
+	case OBJ_PLANE:		printf("\tplane\n");
+		break;
+	case OBJ_CYLINDER:	printf("\tcylinder\n");
+		break;
+	default:			printf("\tnothing\n");
+		break;
+	}
+}
+
 void	get_collision(struct s_scene *scene, struct s_ray *ray, t_collision *collision)
 {
 	t_collision		tmp_collision;
@@ -24,9 +41,11 @@ void	get_collision(struct s_scene *scene, struct s_ray *ray, t_collision *collis
 	collision->object = NULL;
 	collision->dist = INFINITY;
 	for (size_t i_obj = 0; i_obj < scene->len; i_obj++)
-		if (test_collision(scene->map_objects[i_obj], ray, &tmp_collision))
-			if (tmp_collision.dist > 0 && tmp_collision.dist < collision->dist)
-				*collision = tmp_collision;
+	{
+		if (test_collision(scene->map_objects[i_obj], ray, &tmp_collision)
+		&& (tmp_collision.dist > 0 && tmp_collision.dist < collision->dist))
+			*collision = tmp_collision;
+	}
 }
 
 static void	set_pixel(struct s_mlx *mlx, int x, int y, mlx_color color)
@@ -38,7 +57,7 @@ static void	set_pixel(struct s_mlx *mlx, int x, int y, mlx_color color)
 		return ;
 	}
 	for (int yi = y; yi < WIN_HEIGHT && yi < y + mlx->renderer.down_sizing; yi++)
-		for (int xi = x; xi < WIN_WIDTH && xi < x + mlx->renderer.down_sizing; x++)
+		for (int xi = x; xi < WIN_WIDTH && xi < x + mlx->renderer.down_sizing; xi++)
 		{
 			mlx_pixel_put(mlx->context, mlx->renderer.window.win, xi, yi, color);
 			mlx_set_image_pixel(mlx->context, mlx->renderer.img, xi, yi, color);
@@ -74,7 +93,9 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 		set_pixel(mlx, x, y, color);
 	}
 	else
+	{
 		set_pixel(mlx, x, y, rgb_to_mlx_color(mlx->scene.ambient.color));
+	}
 }
 
 void	loop_render(struct s_mlx *mlx)
@@ -92,6 +113,7 @@ void	loop_render(struct s_mlx *mlx)
 			{
 				ray = shoot_ray(x, y, mlx->scene.camera.screen_to_cam_factor);
 				get_collision(&mlx->scene, &ray, &collision);
+				// printf("dist: %f\n", collision.dist);
 				draw_pixel(mlx, x, y, &collision);
 			}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_position.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:22:28 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:22:29 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:18:06 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include <parsing/obey.h>
 #include <parsing/parse.h>
 
-static bool	get_float(struct s_string sratio, float *ratio,
-		struct s_string *parts)
+static bool		get_float(struct s_string sratio, float *ratio, struct s_string *parts)
 {
 	if (!parse_float(sratio, ratio))
 	{

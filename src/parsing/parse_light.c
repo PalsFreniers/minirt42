@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:11 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:23:12 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:09:35 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	parse_light(struct s_string *parts, size_t count, struct s_scene *scene)
 		logger_error("unable to parse light");
 		return (false);
 	}
-	light = (struct s_light *)object_new(sizeof(struct s_light), OBJ_LIGHT);
+	light = (struct s_light *)object_new(sizeof (*light), OBJ_LIGHT);
 	if (!scene_append(scene, (struct s_object *)light))
 		return (false);
 	if (!parse_position(parts[1], &(light->base.position)))

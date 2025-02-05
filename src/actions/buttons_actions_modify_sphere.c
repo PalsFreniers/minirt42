@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:33:09 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/05 00:07:03 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:05:52 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	button_add_sphere(struct s_mlx *mlx)
 	new = (struct s_sphere *)object_new(sizeof(*new), OBJ_SPHERE);
 	if (!new)
 		return ;
-	scene_append(&(mlx->scene), new);
+	scene_append(&(mlx->scene), (struct s_object *)new);
 	new->diameter = OFFSET_SMALL;
 	button_scene_modify_sphere(mlx, mlx->scene.len - 1);
 }

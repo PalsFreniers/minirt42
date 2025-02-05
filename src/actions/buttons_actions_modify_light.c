@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:33:03 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/05 00:01:13 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:05:48 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ void	button_add_light(struct s_mlx *mlx)
 	new = (struct s_light *)object_new(sizeof (*new), OBJ_LIGHT);
 	if (!new)
 		return ;
-	scene_append(&(mlx->scene), new);
+	scene_append(&(mlx->scene), (struct s_object *)new);
 	button_scene_modify_light(mlx, mlx->scene.len - 1);
 }

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:35 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 23:59:26 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:12:34 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static bool	parse_cylinder_floats(struct s_string *parts,
 	return (true);
 }
 
-bool	parse_cylinder(struct s_string *parts, size_t count,
-		struct s_scene *scene)
+bool	parse_cylinder(struct s_string *parts, size_t count, struct s_scene *scene)
 {
 	struct s_cylinder	*cylinder;
 
@@ -44,7 +43,7 @@ bool	parse_cylinder(struct s_string *parts, size_t count,
 		logger_error("unable to parse cylinder");
 		return (false);
 	}
-	cylinder = (void *)object_new(sizeof(struct s_cylinder), OBJ_CYLINDER);
+	cylinder = (struct s_cylinder *)object_new(sizeof (*cylinder), OBJ_CYLINDER);
 	if (!scene_append(scene, (struct s_object *)cylinder))
 		return (false);
 	if (!parse_position(parts[1], &(cylinder->base.position)))

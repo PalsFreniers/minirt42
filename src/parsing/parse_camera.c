@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:52 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 20:36:51 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:13:22 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	camera_create_transform(struct s_camera *camera)
 	t_vec3	t_z;
 
 	t_z = vec3_normalise(camera->direction);
-	t_x = vec3_normalise(vec3_cross(vec3_new(t_z.x, t_z.y, 0),
-				vec3_new(0, 0, 1)));
+	t_x = vec3_normalise(vec3_cross(vec3_new(t_z.x, t_z.y, 0), vec3_new(0, 0, 1)));
 	t_y = vec3_normalise(vec3_cross(t_z, t_x));
 	camera->transform.m00 = t_x.x;
 	camera->transform.m01 = t_x.y;
@@ -54,20 +53,18 @@ static bool	parse_camera_impl(struct s_camera *camera, struct s_string *parts)
 	if (camera->direction.y == 0)
 		camera->direction.y -= 0.1;
 	camera_create_transform(camera);
-	camera->screen_to_cam_factor = (2 * sinf(camera->fov * DEG2RAD / 2))
-		/ WIN_WIDTH;
+	camera->screen_to_cam_factor = (2 * sinf(camera->fov * DEG2RAD / 2)) / WIN_WIDTH;
 	return (true);
 }
 
-bool	parse_camera(struct s_string *parts, size_t count,
-		struct s_camera *camera)
+bool	parse_camera(struct s_string *parts, size_t count, struct s_camera *camera)
 {
 	if (camera->exist)
 	{
 		logger_error("only one camera is able to exist at one time");
 		return (false);
 	}
-	ft_bzero(camera, sizeof(struct s_camera));
+	ft_bzero(camera, sizeof(*camera));
 	if (count != 4)
 	{
 		logger_error("unable to parse camera");

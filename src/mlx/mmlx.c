@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:07:00 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/05 00:22:46 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 01:44:18 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ mlx_window_create_info	create_info(mlx_image render_target, const char *title)
 
 bool	init_mlx(struct s_mlx *mlx)
 {
-	ft_bzero(mlx, sizeof(struct s_mlx));
 	mlx->context = mlx_init();
 	if (!mlx->context)
 		return (false);
