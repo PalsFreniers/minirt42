@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:32:33 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/05 00:11:27 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 04:01:01 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 t_button_f	get_action_for_obj(enum e_object_type type)
 {
-	if (type == OBJ_SPHERE)
-		return ((t_button_f)button_scene_modify_sphere);
-	if (type == OBJ_LIGHT)
-		return ((t_button_f)button_scene_modify_light);
-	if (type == OBJ_PLANE)
-		return ((t_button_f)button_scene_modify_plane);
-	if (type == OBJ_CYLINDER)
-		return ((t_button_f)button_scene_modify_cylinder);
-	return ((t_button_f)button_scene_modify_ambient);
+	switch (type)
+	{
+	case OBJ_SPHERE:	return ((t_button_f)button_scene_modify_sphere);
+	case OBJ_LIGHT:		return ((t_button_f)button_scene_modify_light);
+	case OBJ_PLANE:		return ((t_button_f)button_scene_modify_plane);
+	case OBJ_CYLINDER:	return ((t_button_f)button_scene_modify_cylinder);
+	default:			return ((t_button_f)button_scene_modify_ambient);
+	}
 }
 
 char	*get_name_for_obj(enum e_object_type type)
 {
-	if (type == OBJ_SPHERE)
-		return ("sphere");
-	if (type == OBJ_LIGHT)
-		return ("light");
-	if (type == OBJ_PLANE)
-		return ("plane");
-	if (type == OBJ_CYLINDER)
-		return ("cylinder");
-	return ("ambient");
+	switch (type)
+	{
+	case OBJ_SPHERE:	return ("sphere");
+	case OBJ_LIGHT:		return ("light");
+	case OBJ_PLANE:		return ("plane");
+	case OBJ_CYLINDER:	return ("cylinder");
+	default:			return ("ambient");
+	}
 }
 
 void	init_set_list_button(int *i, int *posx, int *posy)
@@ -59,11 +57,9 @@ void	set_list_button(struct s_mlx *mlx, int start, int base, int number)
 			type = -1;
 		else
 			type = mlx->scene.objects[i + start - base]->type;
-		mlx->ui.interface_buttons[2 + i] = button_new(posx * 100 + ((posx - 1)
-					* 50), BASE_LINE_Y + posy * 60 + ((posy - 1) * 50), 100,
-				60);
-		button_set(&(mlx->ui.interface_buttons[2 + i]), get_name_for_obj(type),
-			mlx, get_action_for_obj(type));
+		mlx->ui.interface_buttons[2 + i]
+			= button_new(posx * 100 + ((posx - 1) * 50), BASE_LINE_Y + posy * 60 + ((posy - 1) * 50), 100, 60);
+		button_set(&(mlx->ui.interface_buttons[2 + i]), get_name_for_obj(type), mlx, get_action_for_obj(type));
 		button_set_index(&(mlx->ui.interface_buttons[2 + i]), start + i - base);
 		posx = posx + 1;
 		if (posx > 4)

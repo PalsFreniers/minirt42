@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 01:59:45 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 17:53:33 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/05 04:03:25 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@
 
 static const char	*logger_preamble(enum e_logger_level lvl)
 {
-	if (lvl == LOG_DEBUG)
-		return ("[DEBUG] => ");
-	if (lvl == LOG_INFO)
-		return ("[INFO] => ");
-	if (lvl == LOG_WARNING)
-		return ("[WARNING] => ");
-	if (lvl == LOG_ERROR)
-		return ("[ERROR] => ");
-	return ("[LOG] => ");
+	switch (lvl)
+	{
+	case LOG_DEBUG:		return ("[DEBUG] => ");
+	case LOG_INFO:		return ("[INFO] => ");
+	case LOG_WARNING:	return ("[WARNING] => ");
+	case LOG_ERROR:		return ("[ERROR] => ");
+	default:			return ("[LOG] => ");
+	}
 }
 
 void	logger_log(enum e_logger_level lvl, const char *fmt, ...)
