@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:03:15 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 23:48:30 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 03:54:25 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ static struct s_string	destroy_zero(struct s_string *a)
 void	add_start_zero(struct s_string *ret, float fpart, int p)
 {
 	string_push(ret, '.');
-	while (fpart < (int)(p / 10) && string_error(false, 0) == STRING_SUCCESS)
-	{
-		fpart *= 10;
+	for (; fpart < (int)(p / 10) && string_error(false, 0) == STRING_SUCCESS; fpart *= 10)
 		string_push(ret, '0');
-	}
 }
 
 float	str_fabs(float f)

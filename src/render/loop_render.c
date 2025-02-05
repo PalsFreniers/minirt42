@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:53:57 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/05 01:46:06 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:46:57 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ mlx_color	get_pixel_color(struct s_mlx *mlx, t_collision *collision)
 
 	if (mlx->scene.ambient.ratio + get_lights_ratio(mlx) > 0)
 	{
-		ambient = rgb_to_render_color(mlx->scene.ambient.color);
-		ambient = color_scal_mul(ambient, mlx->scene.ambient.ratio);
+		ambient = color_scal_mul(rgb_to_render_color(mlx->scene.ambient.color), mlx->scene.ambient.ratio);
 		return (render_to_mlx_color(
 				filter_color(
 					color_add(
@@ -93,9 +92,7 @@ void	draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision)
 		set_pixel(mlx, x, y, color);
 	}
 	else
-	{
 		set_pixel(mlx, x, y, rgb_to_mlx_color(mlx->scene.ambient.color));
-	}
 }
 
 void	loop_render(struct s_mlx *mlx)
@@ -113,7 +110,6 @@ void	loop_render(struct s_mlx *mlx)
 			{
 				ray = shoot_ray(x, y, mlx->scene.camera.screen_to_cam_factor);
 				get_collision(&mlx->scene, &ray, &collision);
-				// printf("dist: %f\n", collision.dist);
 				draw_pixel(mlx, x, y, &collision);
 			}
 }

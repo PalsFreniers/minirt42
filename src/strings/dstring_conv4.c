@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:03:30 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 23:47:03 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 03:53:45 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ struct s_string		string_from_ubyte(uint8_t value)
 	ret = string_new_with_capacity(1);
 	if (string_error(false, 0) != STRING_SUCCESS)
 		return (ret);
-	while (value && string_error(false, 0) == STRING_SUCCESS)
-	{
+	for (; value && string_error(false, 0) == STRING_SUCCESS; value /= 10)
 		string_push_front(&ret, value % 10 + '0');
-		value /= 10;
-	}
+	// while (value && string_error(false, 0) == STRING_SUCCESS)
+	// {
+	// 	string_push_front(&ret, value % 10 + '0');
+	// 	value /= 10;
+	// }
 	return (ret);
 }
 
@@ -72,10 +74,12 @@ struct s_string		string_from_uword(uint16_t value)
 	ret = string_new_with_capacity(1);
 	if (string_error(false, 0) != STRING_SUCCESS)
 		return (ret);
-	while (value && string_error(false, 0) == STRING_SUCCESS)
-	{
+	for (; value && string_error(false, 0) == STRING_SUCCESS; value /= 10)
 		string_push_front(&ret, value % 10 + '0');
-		value /= 10;
-	}
+	// while (value && string_error(false, 0) == STRING_SUCCESS)
+	// {
+	// 	string_push_front(&ret, value % 10 + '0');
+	// 	value /= 10;
+	// }
 	return (ret);
 }

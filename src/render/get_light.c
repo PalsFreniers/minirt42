@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:27:35 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/05 00:42:44 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:46:01 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ t_render_color	get_lit_color(struct s_mlx *mlx, t_collision *coll)
 		struct s_light	*light = (struct s_light *)mlx->scene.map_objects[i];
 
 		if (light->base.type == OBJ_LIGHT)
-			color = color_add(color,
-					color_scal_mul(lit_color(mlx, coll, light), light->ratio));
+			color = color_add(color, color_scal_mul(lit_color(mlx, coll, light), light->ratio));
 	}
 	return (color);
 }

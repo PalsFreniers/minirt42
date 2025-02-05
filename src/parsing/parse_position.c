@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:22:28 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/05 01:18:06 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:26:49 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static bool		get_float(struct s_string sratio, float *ratio, struct s_string *pa
 
 bool	parse_position(struct s_string spos, struct s_vec3 *pos)
 {
-	struct s_string	*parts;
-	size_t			count;
+	struct s_string		*parts;
+	size_t				count;
 
 	parts = string_split(spos, string_new_u_from_cstr(","), &count);
 	if (string_error(false, 0) != STRING_SUCCESS)

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:35 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/05 01:12:34 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:21:35 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include <logger/logger.h>
 #include <parsing/parse.h>
 
-static bool	parse_cylinder_floats(struct s_string *parts,
-		struct s_cylinder *cylinder)
+static bool	parse_cylinder_floats(struct s_string *parts, struct s_cylinder *cylinder)
 {
 	if (!parse_float(parts[3], &(cylinder->diameter)))
 		return (false);

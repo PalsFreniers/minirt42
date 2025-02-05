@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:23:28 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/05 01:17:14 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:21:21 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include <logger/logger.h>
 #include <parsing/parse.h>
 
-static bool	parse_line_impl(struct s_string *parts, size_t count,
-		struct s_scene *scene)
+static bool	parse_line_impl(struct s_string *parts, size_t count, struct s_scene *scene)
 {
 	if (string_equal(parts[0], string_new_u_from_cstr("A")))
 		return (parse_ambient_light(parts, count, &(scene->ambient)));

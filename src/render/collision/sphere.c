@@ -6,20 +6,19 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:17:56 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/03 00:56:22 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:34:55 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <render/collision.h>
 
-bool	sphere_collide(struct s_ray *ray, struct s_sphere *sphere,
-		t_collision *coll)
+bool	sphere_collide(struct s_ray *ray, struct s_sphere *sphere, t_collision *coll)
 {
-	const float	radius = sphere->diameter / 2;
-	float		determinant;
-	t_vec3		ray_to_sphere;
-	float		rtsp_dist_sq;
-	float		middle_dist;
+	const float		radius = sphere->diameter / 2;
+	float			determinant;
+	t_vec3			ray_to_sphere;
+	float			rtsp_dist_sq;
+	float			middle_dist;
 
 	ray_to_sphere = vec3_sub(sphere->base.position, ray->origin);
 	rtsp_dist_sq = vec3_length_sq(ray_to_sphere);
@@ -32,8 +31,7 @@ bool	sphere_collide(struct s_ray *ray, struct s_sphere *sphere,
 	determinant = sqrtf(determinant);
 	coll->dist = middle_dist - determinant;
 	coll->position = ray_collision(ray, coll->dist);
-	coll->normal = vec3_normalise(vec3_sub(coll->position,
-				sphere->base.position));
+	coll->normal = vec3_normalise(vec3_sub(coll->position, sphere->base.position));
 	if (middle_dist < determinant)
 		coll->normal = vec3_scal_mul(coll->normal, -1.0f);
 	return (true);

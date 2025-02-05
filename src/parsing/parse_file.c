@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:21:54 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/05 02:11:58 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:21:14 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,11 @@ static bool	parse_file_lines(struct s_string *lines, size_t count, struct s_scen
 
 static bool	check_scene(struct s_scene *scene)
 {
-	// size_t	count;
-
 	if (!scene->ambient.exist || !scene->camera.exist)
 	{
 		logger_error("missing camera or ambient light");
 		return (false);
 	}
-	// count = 0;
-	// for (size_t i = 0; i < scene->len; i++)
-	// 	if (scene->objects[i]->type == OBJ_LIGHT)
-	// 		count++;
-	// if (count > 1)
-	// 	return (false);
 	return (true);
 }
 
@@ -67,8 +59,6 @@ bool	parse_file(const char *path, struct s_scene *scene)
 	lines = string_split(file, string_new_u_from_cstr("\n"), &count);
 	if (string_error(false, 0) != STRING_SUCCESS)
 		return (parse_file_error_split(&file));
-	// #include <stdio.h>
-	// printf("parse_file_lines\n");
 	if (!parse_file_lines(lines, count, scene))
 		ret = false;
 	ft_free("sp", &file, lines);

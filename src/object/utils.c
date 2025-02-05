@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 05:55:14 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/05 00:41:01 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:53:44 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,13 @@
 
 static size_t	object_size(struct s_object *object)
 {
-	if (object->type == OBJ_LIGHT)
+	switch (object->type)
 	{
-		return (sizeof(struct s_light));
-	}
-	else if (object->type == OBJ_SPHERE)
-	{
-		return (sizeof(struct s_sphere));
-	}
-	else if (object->type == OBJ_PLANE)
-	{
-		return (sizeof(struct s_plane));
-	}
-	else if (object->type == OBJ_CYLINDER)
-	{
-		return (sizeof(struct s_cylinder));
-	}
-	else
-	{
-		return (0);
+	case OBJ_LIGHT:		return (sizeof (struct s_light));
+	case OBJ_SPHERE:	return (sizeof (struct s_sphere));
+	case OBJ_PLANE:		return (sizeof (struct s_plane));
+	case OBJ_CYLINDER:	return (sizeof (struct s_cylinder));
+	default:			return (0);
 	}
 }
 
@@ -44,6 +32,7 @@ bool	dup_objects(struct s_scene *scene)
 	for (size_t i = 0; i < scene->len; i++)
 	{
 		size_t	obj_size = object_size(scene->objects[i]);
+
 		if (!scene->map_objects[i])
 		{
 			for (size_t x = 0; x < i; x++)

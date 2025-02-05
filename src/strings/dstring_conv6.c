@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:03:27 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 23:48:04 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 03:33:50 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ int		num_zero_a_dot(struct s_string self, int off)
 {
 	int	i;
 
-	i = 0;
-	while (self.ptr[off + i] == '0' && self.len > (size_t)off + i)
-		i++;
+	for (i = 0; self.ptr[off + i] == '0' && self.len > (size_t)off + i; i++)
+		;
 	return (i);
 }
 

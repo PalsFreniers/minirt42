@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:33:13 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/05 00:05:50 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 03:02:49 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,20 @@ void	button_add_scene(struct s_mlx *mlx)
 
 bool	save_obj(struct s_object *obj, int fd)
 {
-	if (obj->type == OBJ_SPHERE)
-		return (save_sphere((struct s_sphere *)obj, fd));
-	if (obj->type == OBJ_LIGHT)
-		return (save_light((struct s_light *)obj, fd));
-	if (obj->type == OBJ_PLANE)
-		return (save_plane((struct s_plane *)obj, fd));
-	if (obj->type == OBJ_CYLINDER)
-		return (save_cylinder((struct s_cylinder *)obj, fd));
-	return (false);
+	switch (obj->type)
+	{
+	case OBJ_SPHERE:	return (save_sphere((struct s_sphere *)obj, fd));
+	case OBJ_LIGHT:		return (save_light((struct s_light *)obj, fd));
+	case OBJ_PLANE:		return (save_plane((struct s_plane *)obj, fd));
+	case OBJ_CYLINDER:	return (save_cylinder((struct s_cylinder *)obj, fd));
+	default: 			return (false);
+	}
+	
 }
 
 void	button_save(struct s_scene *scene)
 {
 	int		fd;
-	size_t	i;
 
 	fd = open("map.rt", O_CREAT | O_TRUNC | O_WRONLY, 0666);
 	if (fd < 0)
@@ -69,12 +68,8 @@ void	button_save(struct s_scene *scene)
 	if (!save_camera(&(scene->camera), fd))
 		return ((void)close(fd));
 	write(fd, "\n", 1);
-	i = 0;
-	while (i < scene->len)
-	{
+	for (size_t i = 0; i < scene->len; i++)
 		if (!save_obj(scene->objects[i], fd))
 			return ((void)close(fd));
-		i++;
-	}
 	close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:32:39 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/05 00:14:57 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 03:54:48 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,17 @@ void	compute_color(mlx_color c, char ret[3])
 void	button_screen(struct s_mlx *mlx)
 {
 	int		fd;
-	int		y;
-	int		x;
 	char	c[3];
 
 	fd = open("screen.ppm", O_CREAT | O_TRUNC | O_WRONLY, 0666);
 	if (fd < 0)
 		return ;
 	write(fd, "P6\n900 600 255\n", 15);
-	y = 0;
-	while (y < WIN_HEIGHT)
-	{
-		x = 0;
-		while (x < WIN_WIDTH)
+	for (int y = 0; y < WIN_HEIGHT; y++)
+		for (int x = 0; x < WIN_WIDTH; x++)
 		{
 			compute_color(mlx_get_image_pixel(mlx->context, mlx->renderer.img, x, y), c);
 			write(fd, c, 3);
-			x++;
 		}
-		y++;
-	}
 	close(fd);
 }

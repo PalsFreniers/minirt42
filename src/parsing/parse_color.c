@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:25:44 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/05 01:12:49 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:25:41 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static bool	get_byte(struct s_string byte, uint8_t *byt, struct s_string *parts)
 
 bool	parse_color(struct s_string rgb, union u_color *color)
 {
-	struct s_string	*parts;
-	size_t			count;
+	struct s_string		*parts;
+	size_t				count;
 
 	parts = string_split(rgb, string_new_u_from_cstr(","), &count);
 	if (string_error(false, 0) != STRING_SUCCESS)

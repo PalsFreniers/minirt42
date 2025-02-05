@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:30:30 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/31 16:41:24 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:42:57 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,27 @@ t_render_color	render_color_black(void)
 
 t_render_color	filter_color(t_render_color color, t_render_color filter)
 {
-	t_render_color	ret_color;
-
-	ret_color.r = (color.r * filter.r) / MAX_U8;
-	ret_color.g = (color.g * filter.g) / MAX_U8;
-	ret_color.b = (color.b * filter.b) / MAX_U8;
-	return (ret_color);
+	return ((t_render_color){
+		.r = (color.r * filter.r) / MAX_U8,
+		.g = (color.g * filter.g) / MAX_U8,
+		.b = (color.b * filter.b) / MAX_U8,
+	});
 }
 
 t_render_color	color_scal_mul(t_render_color color, float f)
 {
-	t_render_color	ret_color;
-
-	ret_color.r = color.r * f;
-	ret_color.g = color.g * f;
-	ret_color.b = color.b * f;
-	return (ret_color);
+	return ((t_render_color){
+		.r = color.r * f,
+		.g = color.g * f,
+		.b = color.b * f,
+	});
 }
 
 t_render_color	color_add(t_render_color a, t_render_color b)
 {
-	t_render_color	color;
-
-	color.r = a.r + b.r;
-	color.g = a.g + b.g;
-	color.b = a.b + b.b;
-	return (color);
+	return ((t_render_color){
+		.r = a.r + b.r,
+		.g = a.g + b.g,
+		.b = a.b + b.b,
+	});
 }

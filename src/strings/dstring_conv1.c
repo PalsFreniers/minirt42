@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:03:33 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 23:46:30 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 03:53:21 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,17 @@
 uint64_t	string_to_uqword_ovf(struct s_string self, uint64_t ovf)
 {
 	uint64_t	ret;
-	size_t		i;
 	size_t		last;
 
 	ret = 0;
-	i = 0;
 	last = 0;
-	while (i < self.len && ft_isdigit(self.ptr[i]) && ret >= last)
+	for (size_t i = 0; i < self.len && ft_isdigit(self.ptr[i]) && ret >= last; i++)
 	{
 		last = ret;
 		ret *= 10;
 		ret += self.ptr[i] - '0';
 		if (ovf > 0)
 			ret %= ovf;
-		i++;
 	}
 	if (ret < last)
 		string_error(true, STRING_CONVERSION_OVERFLOW);
@@ -40,9 +37,8 @@ size_t	string_conv_trimspaces(struct s_string self)
 {
 	size_t	off;
 
-	off = 0;
-	while (off < self.len && ft_isspace(self.ptr[off]))
-		off++;
+	for (off = 0; off < self.len && ft_isspace(self.ptr[off]); off++)
+		;
 	return (off);
 }
 

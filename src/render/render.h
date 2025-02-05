@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 04:16:46 by maamine           #+#    #+#             */
-/*   Updated: 2025/02/04 21:15:50 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:47:38 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,10 @@ t_render_color	filter_color(t_render_color color, t_render_color filter);
 t_render_color	color_scal_mul(t_render_color color, float f);
 t_render_color	color_add(t_render_color a, t_render_color b);
 mlx_color		get_light_color(struct s_light *light);
-t_render_color	lit_color(struct s_mlx *mlx, t_collision *collision,
-					struct s_light *light);
+t_render_color	lit_color(struct s_mlx *mlx, t_collision *collision, struct s_light *light);
 float			get_lights_ratio(struct s_mlx *mlx);
 t_render_color	get_lit_color(struct s_mlx *mlx, t_collision *coll);
-void			draw_pixel(struct s_mlx *mlx, int x, int y,
-					t_collision *collision);
-void			get_collision(struct s_scene *scene, struct s_ray *ray,
-					t_collision *collision);
+void			draw_pixel(struct s_mlx *mlx, int x, int y, t_collision *collision);
+void			get_collision(struct s_scene *scene, struct s_ray *ray, t_collision *collision);
 
 #endif // RENDER_H

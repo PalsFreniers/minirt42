@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:09 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/05 01:10:40 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 03:43:54 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 size_t	string_search(struct s_string hay, struct s_string needle)
 {
-	size_t	i;
-
 	if (!string_check(hay) || !string_check(needle))
 		return (0);
 	if (needle.len > hay.len)
@@ -24,12 +22,10 @@ size_t	string_search(struct s_string hay, struct s_string needle)
 		string_error(true, STRING_NEEDLE_TOO_LONG);
 		return (0);
 	}
-	i = 0;
-	while (i < hay.len - needle.len)
+	for (size_t i = 0; i < hay.len - needle.len; i++)
 	{
 		if (ft_strncmp(hay.ptr + i, needle.ptr, needle.len) == 0)
 			return (i);
-		i++;
 	}
 	string_error(true, STRING_NEEDLE_NOT_FOUNDED);
 	return (0);
@@ -37,14 +33,12 @@ size_t	string_search(struct s_string hay, struct s_string needle)
 
 size_t	count_sub_string(struct s_string hay, struct s_string needle)
 {
-	size_t	i;
 	size_t	count;
 	bool	s;
 
 	s = true;
-	i = 0;
 	count = 0;
-	while (i < hay.len)
+	for (size_t i = 0; i < hay.len; i++)
 	{
 		if (!s && string_contain(hay.ptr[i], needle))
 			s = true;
@@ -53,7 +47,6 @@ size_t	count_sub_string(struct s_string hay, struct s_string needle)
 			count++;
 			s = false;
 		}
-		i++;
 	}
 	return (count);
 }
@@ -76,7 +69,7 @@ void	actual_string_split(struct s_string hay, struct s_string needles, struct s_
 	size_t	x;
 
 	string_zero_split((size_t *[4]){&i, &len, &offset, &x}, &s);
-	while (++i < hay.len)
+	for (++i; i < hay.len; i++)
 	{
 		if (!s && string_contain(hay.ptr[i], needles))
 		{

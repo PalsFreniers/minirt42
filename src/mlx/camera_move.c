@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 02:11:20 by maamine           #+#    #+#             */
-/*   Updated: 2025/01/31 17:25:05 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:52:51 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,23 @@ int	camera_move(int key, struct s_mlx *mlx)
 	struct s_camera	*camera;
 
 	camera = &mlx->scene.camera;
-	if (key == KEY_W)
-		camera->direction = rotate_camera_x(mlx, +0.1f);
-	else if (key == KEY_S)
-		camera->direction = rotate_camera_x(mlx, -0.1f);
-	else if (key == KEY_A)
-		camera->direction = mat3_apply(rotation_matrix_z(+0.1f),
-				camera->direction);
-	else if (key == KEY_D)
-		camera->direction = mat3_apply(rotation_matrix_z(-0.1f),
-				camera->direction);
-	else if (key == KEY_Q)
-		camera->position = vec3_add(camera->position,
-				vec3_scal_mul(camera->direction, +0.5f));
-	else if (key == KEY_E)
-		camera->position = vec3_add(camera->position,
-				vec3_scal_mul(camera->direction, -0.5f));
+	switch (key)
+	{
+	case KEY_W: camera->direction = rotate_camera_x(mlx, +0.1f);
+		break;
+	case KEY_S: camera->direction = rotate_camera_x(mlx, -0.1f);
+		break;
+	case KEY_A: camera->direction = mat3_apply(rotation_matrix_z(+0.1f), camera->direction);
+		break;
+	case KEY_D: camera->direction = mat3_apply(rotation_matrix_z(-0.1f), camera->direction);
+		break;
+	case KEY_Q: camera->position = vec3_add(camera->position, vec3_scal_mul(camera->direction, +0.5f));
+		break;
+	case KEY_E: camera->position = vec3_add(camera->position, vec3_scal_mul(camera->direction, -0.5f));
+		break;
+	default:
+		break;
+	}
 	if (key == KEY_W || key == KEY_S || key == KEY_A || key == KEY_D)
 		camera_create_transform(camera);
 	map_scene(&mlx->scene, camera->position, camera->transform);

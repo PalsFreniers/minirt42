@@ -6,7 +6,7 @@
 /*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:50:26 by tdelage           #+#    #+#             */
-/*   Updated: 2025/02/04 23:50:54 by maamine          ###   ########.fr       */
+/*   Updated: 2025/02/05 03:46:07 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,9 @@
 
 bool	string_contain(char c, struct s_string chars)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < chars.len)
-	{
+	for (size_t i = 0; i < chars.len; i++)
 		if (chars.ptr[i] == c)
 			return (true);
-		i++;
-	}
 	return (false);
 }
 
@@ -30,9 +24,8 @@ char	*calculate_trim(struct s_string self, struct s_string chars)
 {
 	size_t	len;
 
-	len = 0;
-	while (len < self.len && string_contain(self.ptr[len], chars))
-		len++;
+	for (len = 0; len < self.len && string_contain(self.ptr[len], chars); len++)
+		;
 	return (self.ptr + len);
 }
 
@@ -40,9 +33,8 @@ size_t	calculate_trim_len(struct s_string self, struct s_string chars)
 {
 	size_t	i;
 
-	i = 0;
-	while (i < self.len && string_contain(self.ptr[self.len - i - 1], chars))
-		i++;
+	for (i = 0; i < self.len && string_contain(self.ptr[self.len - i - 1], chars); i++)
+		;
 	return (self.len - i);
 }
 

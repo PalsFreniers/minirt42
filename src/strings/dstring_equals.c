@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dstring_equals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdelage <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maamine <maamine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 06:20:29 by tdelage           #+#    #+#             */
-/*   Updated: 2025/01/28 06:20:31 by tdelage          ###   ########.fr       */
+/*   Updated: 2025/02/05 03:37:54 by maamine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ bool	string_equal(struct s_string s1, struct s_string s2)
 
 void	string_count(struct s_string self, char c, size_t *of, size_t *ofnt)
 {
-	size_t	i;
 	size_t	tmp;
 
 	if (!string_check(self))
@@ -36,14 +35,12 @@ void	string_count(struct s_string self, char c, size_t *of, size_t *ofnt)
 		ofnt = &tmp;
 	*of = 0;
 	*ofnt = 0;
-	i = 0;
-	while (i < self.len)
+	for (size_t i = 0; i < self.len; i++)
 	{
 		if (self.ptr[i] == c)
 			(*of)++;
 		else
 			(*ofnt)++;
-		i++;
 	}
 }
 
@@ -65,8 +62,6 @@ size_t	string_count_ofnt(struct s_string self, char c)
 
 bool	string_obey(struct s_string self, t_string_obey_f func)
 {
-	size_t	i;
-
 	if (!string_check(self))
 		return (false);
 	if (func == NULL)
@@ -74,12 +69,10 @@ bool	string_obey(struct s_string self, t_string_obey_f func)
 		string_error(true, STRING_NULL_FUNCTION);
 		return (false);
 	}
-	i = 0;
-	while (i < self.len)
+	for (size_t i = 0; i < self.len; i++)
 	{
 		if (!func(self.ptr[i]))
 			return (false);
-		i++;
 	}
 	return (true);
 }
